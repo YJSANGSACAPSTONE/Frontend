@@ -1,6 +1,6 @@
 /* OPTIONS */
 *{ padding:0; margin:0; text-decoration:none; list-style:none; box-sizing:border-box; font-family:godlife; }
-
+a{ color:inherit; }
 @font-face{
   font-family:"godlife";
   src:url("godlife.ttf") format("truetype");
@@ -55,7 +55,7 @@ html, body{ width:100%; height:100%; }
 #planner_content{ padding:50px 0;  }
 #planner_content > div > div > ul{ display:flex; }
 .planner_profile{ width:20%; position: relative; }
-.planner_profile > div{ position:fixed; display:flex; background:#ededed; border-radius:10px; padding:10px; }
+.planner_profile > a > div{ position:fixed; display:flex; background:#ededed; border-radius:10px; padding:10px; }
 .planner_profile .pl_pro_img img{ width:140px; }
 .planner_profile .pl_pro_img p{ text-align: center; }
 .planner_profile .pl_pro_text > p{ padding:35px 10px; }

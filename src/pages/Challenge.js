@@ -34,10 +34,10 @@ function Challenge(props){
                                     </div>
                                     <div class="challenge_list">
                                         <ul>
-                                            <li><Link to="/challengeRead"><div><img src="./img/morning.png" alt="morning"/><p>미라클 모닝</p></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
+                                            <li><Link to="/challenge/1"><div><img src="./img/morning.png" alt="morning"/><p>미라클 모닝</p></div></Link></li>
+                                            <li><Link to="/challenge/2"><div></div></Link></li>
+                                            <li><Link to="/challenge/3"><div></div></Link></li>
+                                            <li><Link to="/challenge/4"><div></div></Link></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -48,10 +48,10 @@ function Challenge(props){
                                     </div>
                                     <div class="challenge_list">
                                         <ul>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
+                                            <li><Link to="/challenge/1"><div></div></Link></li>
+                                            <li><Link to="/challenge/2"><div></div></Link></li>
+                                            <li><Link to="/challenge/3"><div></div></Link></li>
+                                            <li><Link to="/challenge/4"><div></div></Link></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -62,10 +62,10 @@ function Challenge(props){
                                     </div>
                                     <div class="challenge_list">
                                         <ul>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
+                                            <li><Link to="/challenge/1"><div></div></Link></li>
+                                            <li><Link to="/challenge/2"><div></div></Link></li>
+                                            <li><Link to="/challenge/3"><div></div></Link></li>
+                                            <li><Link to="/challenge/4"><div></div></Link></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -76,10 +76,10 @@ function Challenge(props){
                                     </div>
                                     <div class="challenge_list">
                                         <ul>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
+                                            <li><Link to="/challenge/1"><div></div></Link></li>
+                                            <li><Link to="/challenge/2"><div></div></Link></li>
+                                            <li><Link to="/challenge/3"><div></div></Link></li>
+                                            <li><Link to="/challenge/4"><div></div></Link></li>
                                         </ul>
                                     </div>
                                 </div>

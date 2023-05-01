@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Footer(){
     return(
@@ -6,10 +7,10 @@ function Footer(){
             <div class="container_inner">
                 <div>
                     <ul>
-                        <li><a href="/planner"><img src="./img/home.png" alt="home"/></a></li>
-                        <li><a href="board.html"><img src="./img/list.png" alt="list"/></a></li>
-                        <li><a href="/challenge"><img src="./img/flag.png" alt="flag"/></a></li>
-                        <li><a href="profile.html"><img src="./img/user.png" alt="user"/></a></li>
+                        <li><Link to="/planner"><img src="/img/home.png" alt="home"/></Link></li>
+                        <li><Link to="/board"><img src="/img/list.png" alt="list"/></Link></li>
+                        <li><Link to="/challenge"><img src="/img/flag.png" alt="flag"/></Link></li>
+                        <li><Link to="/profile"><img src="/img/user.png" alt="user"/></Link></li>
                     </ul>
                 </div>
             </div>

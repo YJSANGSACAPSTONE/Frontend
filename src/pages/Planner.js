@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import Axios from "axios";
 
+
 function Planner(props){
     const [plans, setPlans]=useState([]);
     const [title, setTitle] = useState("");
@@ -20,7 +21,7 @@ function Planner(props){
 
     useEffect(() => {
 		// 첫 페이지 로딩 후 Axios를 통해서 오늘 날짜 plan 받아오는 것
-		Axios.get('/plan/api/dailyplan')
+		Axios.get('http://localhost:8080/plan/dailyplan')
 		.then(response => setPlans(response.data))
 		.catch(error => console.log(error));
 
@@ -159,7 +160,7 @@ function Planner(props){
 
 
 			$("#addTaskModal").css('display','none');
-			Axios.post("/plan/api/addplan", 
+			Axios.post("/api/plan/addplan", 
 			{
 				u_id : u_id,
 				p_title : p_title,
@@ -217,15 +218,43 @@ function Planner(props){
                             <li class="planner_inputArea">
                                 <div class="planner_ls">
                                     <ul>
-                                        <li class="list_no_12" onClick={handleClick}>
-                                            <div>04-19 <b>~</b> 04-19 </div>
-                                            <div>
-                                                <div class="time">17:48 ~ 20:00</div>
-                                                <div class="title">아침 8시에 기상하기</div>
-                                            </div>
-                                        </li>
+										{/* plan_list 테스트 */}
+										{/* <div>
+											<h1>Today's Plan List</h1>
+											{plans.length > 0 ? (
+												plans.map(plan => (
+												<div key={plan.p_id}>
+													<h2>{plan.p_title}</h2>
+													<p>{plan.p_content}</p>
+													<p>Start Date: {plan.p_startdate}</p>
+													<p>Start Time: {plan.p_starttime}</p>
+													<p>End Date: {plan.p_enddate}</p>
+													<p>End Time: {plan.p_endtime}</p>
+													<p>Category: {plan.p_category}</p>
+													<p>Remind: {plan.p_remindornot ? 'Yes' : 'No'}</p>
+												</div>
+												))
+											) : (
+												<p>Loading...</p>
+											)}
+										</div> */}
+										{/* plan_list 테스트 */}
+										{plans.length > 0 ? (
+											plans.map(plan => (
+												<li key={plan.p_id} onClick={handleClick}>
+													<div>{plan.p_startdate} <b>~</b> {plan.p_enddate} </div>
+													<div>
+														<div class="time">{plan.p_starttime} ~ {plan.p_endtime}</div>
+														<div class="title">{plan.p_content}</div>
+													</div>
+												</li>
+												))
+										) : (
+											<p>Loading...</p>
+										)}
+									
                                         
-                                        <li class="list_no_2" onClick={handleClick}>
+                                        {/* <li class="list_no_2" onClick={handleClick}>
                                             <div>04-19 <b>~</b> 04-19 </div>
                                             <div>
                                                 <div class="time">17:48 ~ 20:00</div>
@@ -239,7 +268,7 @@ function Planner(props){
                                                 <div class="time">17:48 ~ 20:00</div>
                                                 <div class="title">책 읽고 독후감 쓰기</div>
                                             </div>
-                                        </li>
+                                        </li> */}
                                         <div class="btn_li">
                                             <button id="addTaskBtn">할 일 추가 <span>+</span> </button>
                                         </div>
@@ -329,27 +358,7 @@ function Planner(props){
                                 </div>
                             </li>
                         </ul>
-                        {/* plan_list 테스트 */}
-                        <div>
-                            <h1>Today's Plan List</h1>
-                            {plans.length > 0 ? (
-                                plans.map(plan => (
-                                <div key={plan.p_id}>
-                                    <h2>{plan.p_title}</h2>
-                                    <p>{plan.p_content}</p>
-                                    <p>Start Date: {plan.p_startdate}</p>
-                                    <p>Start Time: {plan.p_starttime}</p>
-                                    <p>End Date: {plan.p_enddate}</p>
-                                    <p>End Time: {plan.p_endtime}</p>
-                                    <p>Category: {plan.p_category}</p>
-                                    <p>Remind: {plan.p_remindornot ? 'Yes' : 'No'}</p>
-                                </div>
-                                ))
-                            ) : (
-                                <p>Loading...</p>
-                            )}
-                        </div>
-                        {/* plan_list 테스트 */}
+                        
                     </div>
                 </div>
             </div>

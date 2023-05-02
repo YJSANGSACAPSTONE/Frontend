@@ -13,7 +13,7 @@ function ChallengeSignUp(props){
                                 <Link to="/profile">
                                     <div>
                                         <div class="pl_pro_img">
-                                            <img src="./img/profile.png" alt="profile"/>
+                                            <img src="/img/profile.png" alt="profile"/>
                                             <p>@sinsung test</p>
                                         </div>
                                         <div class="pl_pro_text">
@@ -24,20 +24,27 @@ function ChallengeSignUp(props){
                                 </Link>
                             </li>
                             <li class="challenge_pay">
-                                <div>
+                                <div class="challenge_info">
+                                    <h1>미라클 모닝</h1>
                                     <img src="/img/morning.png" alt="morning" />
-                                    <p>매일 아침 6시 기상</p>
-                                    <p>평일 매일 &nbsp;&nbsp; 00:00 ~ 24:00</p>
-                                    <p>09.30(화) 종료</p>
+                                    <div>
+                                        <p>매일 아침 6시 기상</p>
+                                        <p>평일 매일 &nbsp;&nbsp; 00:00 ~ 24:00</p>
+                                        <p>09.30(화) 종료</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p>참가비</p>
-                                    <input type="text" /> 만원
-                                    <p>참가비가 높을수록 받는 상금도 많아져요!</p>
-                                    <p>최소 1만원 ~ 최대 20만원</p>
+                                <div class="challenge_payment">
+                                    <div>
+                                        <p>참가비</p>
+                                    </div>
+                                    <div>
+                                        <input type="text" /> 만원
+                                        <p>참가비가 높을수록 받는 상금도 많아져요!</p>
+                                        <p>최소 1만원 ~ 최대 20만원</p>
+                                    </div>
                                 </div>
 
-                                <div>
+                                <div class="challenge_payback">
                                     <h3>예상 페이백 금액</h3>
 
                                     <p>챌린지 100% 성공</p><p>20,007 ~ 20,500</p> 

@@ -48,7 +48,7 @@ function ChallengeRead(props){
                                 </div>
                                 <div class="read_btn">
                                     <button class="toListBtn" onClick={() => window.location.href='/challenge'}>목록</button>
-                                    <button>참가신청</button>
+                                    <button onClick={()=>window.location.href='/challenge/1/signUp'}>참가신청</button>
                                     <button onClick={() => window.location.href='/challenge/1/verify'}>인증하기</button>
                                 </div>
                             </li>

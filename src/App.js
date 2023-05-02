@@ -7,6 +7,7 @@ import ChallengeAll from './pages/ChallengeAll';
 import ChallengeRead from './pages/ChallengeRead';
 import ChallengeWrite from './pages/ChallengeWrite';
 import ChallengeVerify from './pages/ChallengeVerify';
+import ChallengeSignUp from './pages/ChallengeSignUp';
 import Board from './pages/Board';
 import BoardRead from './pages/BoardRead';
 import BoardWrite from './pages/BoardWrite';
@@ -65,6 +66,8 @@ function App() {
 			<Route path="/challengeAll" element={<ChallengeAll header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/challengeWrite" element={<ChallengeWrite header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/challenge/:id/verify" element={<ChallengeVerify header={<Header/>} footer={<Footer/>} />} />
+			<Route path="/challenge/:id/signUp" element={<ChallengeSignUp header={<Header/>} footer={<Footer/>} />} />
+
 			<Route path="/profile" element={<Profile header={<Header/>} footer={<Footer/>} />} />
 
 			<Route path="/board" element={<Board header={<Header/>} footer={<Footer/>} />} />

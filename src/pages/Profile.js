@@ -1,7 +1,22 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
+import $ from 'jquery';
 
 function Profile(props){
+
+    useEffect(()=>{
+        function updateSubFooterPosition() {
+            var subFooter = $('#subFooter');
+            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                // 스크롤이 없는 경우
+                subFooter.css('position', 'fixed');
+            } else {
+                // 스크롤이 있는 경우
+                subFooter.css('position', 'sticky');
+            }
+        }
+        updateSubFooterPosition();
+    }, []);
     return(
         <>
             {props.header}
@@ -23,27 +38,14 @@ function Profile(props){
                                     </div>
                                 </Link>
                             </li>
-                            <li class="profile">
-                                <div class="profile_title"> 
-                                    <h2>내 정보 수정</h2>
-                                </div>
-                                <div class="profile_img">
-                                    <img src="" alt=""/>
-
-                                </div>
-                                <div class="form_area">
-                                    <form action="">
-                                        <label for="">사진</label> <img id="profile_thumbnail" src="./img/profile.png" alt="profile"/> <input type="file" id="profileImage"/>
-                                        <label for="">이메일</label><input type="text"/>
-                                        <label for="">아이디</label><input type="text"/>
-                                        <label for="">닉네임</label><input type="text"/>
-                                        <label for="">제페토아이디</label><input type="text"/>
-                                        <label for="">등급</label><input type="text"/>
-                                        <label for="">레벨</label><input type="text"/>
-                                        <label for="">예치금</label><input type="text"/>
-                                        <button>회원탈퇴</button>
-                                    </form>
-                                </div>
+                            <li class="profile_info">
+                                <Link to="/profile/1/info"><div>계정 정보</div></Link>
+                                <Link to="/profile/1/challenge"><div>마이 챌린지</div></Link>
+                                <Link to="/profile/1/alram"><div>알람</div></Link>
+                                <Link to="/profile/1/point"><div>포인트 충전</div></Link>
+                                <Link to="/profile/1/payList"><div>결제 내역</div></Link>
+                                <Link to="/profile/1/logout"><div>로그아웃</div></Link>
+                                <Link to="/profile/1/exit"><div>회원 탈퇴</div></Link>
                             </li>
                         </ul>
                     </div>

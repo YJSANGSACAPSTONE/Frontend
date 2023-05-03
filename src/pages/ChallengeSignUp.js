@@ -1,7 +1,18 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import Axios from "axios";
 
 function ChallengeSignUp(props){
+
+    const [challenge,setChallenge] = useState([]);
+    useState(()=>{
+        // axios 로 데이터 불러오기
+        Axios.get('http://localhost:8080/challenge/getChallenge')
+		.then(response => setChallenge(response.data))
+		.catch(error => console.log(error));
+
+
+    }, []);
     return(
         <>
             {props.header}
@@ -35,10 +46,10 @@ function ChallengeSignUp(props){
                                 </div>
                                 <div class="challenge_payment">
                                     <div>
-                                        <p>참가비</p>
+                                        <h2>참가비</h2>
                                     </div>
                                     <div>
-                                        <input type="text" /> 만원
+                                        <input type="readonly" value={challenge.pay} /> 만원
                                         <p>참가비가 높을수록 받는 상금도 많아져요!</p>
                                         <p>최소 1만원 ~ 최대 20만원</p>
                                     </div>
@@ -52,6 +63,7 @@ function ChallengeSignUp(props){
                                     <p>챌린지 85% 미만 성공</p><p>성공률에 따라 다름</p>
                                     
                                 </div>
+                                <button class="payBtn">결재하기</button>
                             </li>
                         </ul>
                     </div>

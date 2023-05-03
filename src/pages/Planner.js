@@ -12,13 +12,13 @@ function Planner(props){
 	const datePickerRef = useRef(null);
 
 	const handleClick = (e) => {
-		const id = e.currentTarget.classList[0].substr(8);
+		const id = e.currentTarget.key;
 		const title = e.currentTarget.querySelector(".title").textContent;
 		setTitle(title);
 		const listModal = document.getElementById("listModal");
 		listModal.style.display = "flex";
 	};
-
+	
     useEffect(() => {
 		// 첫 페이지 로딩 후 Axios를 통해서 오늘 날짜 plan 받아오는 것
 		Axios.get('http://localhost:8080/plan/dailyplan')
@@ -44,6 +44,20 @@ function Planner(props){
 			addTaskModal.style.display = "none";
 			// 추가할일 처리 로직 작성
 		});
+
+		function updateSubFooterPosition() {
+			var subFooter = $('#subFooter');
+			if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+				// 스크롤이 없는 경우
+				subFooter.css('position', 'fixed');
+			} else {
+				// 스크롤이 있는 경우
+				subFooter.css('position', 'sticky');
+			}
+		}
+		updateSubFooterPosition();
+	
+		
 
 		// Planner event------------------------------------------------------------
 		// div 요소에 datepicker 설정

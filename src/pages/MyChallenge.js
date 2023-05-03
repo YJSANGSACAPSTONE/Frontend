@@ -43,28 +43,28 @@ function MyChallenge(props){
                                             <img src="/img/morning_sun.png" alt="morning"/>
                                             <div>
                                                 Miracle Morning
-                                                <button class="myPageBtn">인증하기</button>
+                                                <button onClick={()=>window.location.href='/challenge/1/verify'} class="myPageBtn">인증하기</button>
                                             </div>
                                         </div>
                                         <div>
                                             <img src="/img/open-book.png" alt="open-book"/>
                                             <div>
                                                 Miracle Morning
-                                                <button class="myPageBtn">인증하기</button>
+                                                <button onClick={()=>window.location.href='/challenge/2/verify'} class="myPageBtn">인증하기</button>
                                             </div>
                                         </div>
                                         <div>
                                             <img src="/img/running.png" alt="running"/>
                                             <div>
                                                 Miracle Morning
-                                                <button class="myPageBtn">인증하기</button>
+                                                <button onClick={()=>window.location.href='/challenge/3/verify'} class="myPageBtn">인증하기</button>
                                             </div>
                                         </div>
                                         <div>
                                             <img src="/img/cooking.png" alt="cooking"/>
                                             <div>
                                                 Miracle Morning
-                                                <button class="myPageBtn">인증하기</button>
+                                                <button onClick={()=>window.location.href='/challenge/4/verify'} class="myPageBtn">인증하기</button>
                                             </div>
                                         </div>
                                     </div>

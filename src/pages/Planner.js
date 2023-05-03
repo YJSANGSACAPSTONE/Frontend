@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import Axios from "axios";
 import Profile from '../components/Profile';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function Planner(props){
     const [plans, setPlans]=useState([]);
@@ -11,6 +13,25 @@ function Planner(props){
 	const thumbnailRef = useRef(null);
 	const datePickerRef = useRef(null);
 
+	const [selectedDate, setSelectedDate] = useState(new Date());
+  	const [showDatePicker, setShowDatePicker] = useState(true);
+
+	const toggleDatePicker = () => setShowDatePicker(!showDatePicker);
+	// 달력 클릭했을 때 이벤트
+	const handleChange = (date) => {
+		setSelectedDate(date);
+
+		// 선택된 날짜를 yyyy-mm-dd 형식으로 변환하여 input 요소에 설정
+		const formattedDate = date ? date.toISOString().slice(0, 10) : ""; // ISO 형식 (yyyy-mm-dd)으로 변환
+		const inputEl = document.getElementById("date-input");
+		inputEl.value = formattedDate;
+		
+	};
+	const dateToString = (date) => {
+		return date.toLocaleDateString("en-US");
+	};
+	  
+	// 달력 보기 / 숨기기 클릭 이벤트
 	const handleClick = (e) => {
 		const id = e.currentTarget.key;
 		const title = e.currentTarget.querySelector(".title").textContent;
@@ -61,26 +82,26 @@ function Planner(props){
 
 		// Planner event------------------------------------------------------------
 		// div 요소에 datepicker 설정
-		$("#datepickerDiv").click(function() {
-			// Datepicker가 표시되어 있는지 체크
-			if ($(".ui-datepicker").is(":visible")) {
-				// 표시되어 있다면 숨김
-				$("#datepickerDiv").text("달력 보기");
-				$("#datepickerUI").hide();
-			} else {
-			// 표시되어 있지 않다면 표시
-				$("#datepickerDiv").text("달력 숨기기");
-				$("#datepickerUI").show();
-			}
+		// $("#datepickerDiv").click(function() {
+		// 	// Datepicker가 표시되어 있는지 체크
+		// 	if ($(".ui-datepicker").is(":visible")) {
+		// 		// 표시되어 있다면 숨김
+		// 		$("#datepickerDiv").text("달력 보기");
+		// 		$("#datepickerUI").hide();
+		// 	} else {
+		// 	// 표시되어 있지 않다면 표시
+		// 		$("#datepickerDiv").text("달력 숨기기");
+		// 		$("#datepickerUI").show();
+		// 	}
 
-			$("#datepickerUI").datepicker({
-				onSelect: function(dateText, inst) {
-				// 선택한 날짜를 input 요소에 설정
-				$("#selected-date-input").val(dateText);
-				},
-				dateFormat: "yy-mm-dd" // 날짜 형식 설정
-			});
-		});
+		// 	$("#datepickerUI").datepicker({
+		// 		onSelect: function(dateText, inst) {
+		// 		// 선택한 날짜를 input 요소에 설정
+		// 		$("#selected-date-input").val(dateText);
+		// 		},
+		// 		dateFormat: "yy-mm-dd" // 날짜 형식 설정
+		// 	});
+		// });
 
 		$("#listModal .confirmBtn button").click( () => {
 			$("#listModal").css('display','none');
@@ -210,11 +231,23 @@ function Planner(props){
                         <ul>
                             <Profile/>
                             <li class="planner_calendar">
-                                <div id="datepickerDiv">
-                                    달력 보기
-                                </div>
-                                <input type="text" id="selected-date-input"/>
-                                <div id="datepickerUI"></div>
+								
+								<div id="datepickerDiv" onClick={toggleDatePicker}>
+									{showDatePicker ? "달력 숨기기" : "달력 보기"} &nbsp;&nbsp; <input type="text" id="date-input" />
+								</div>
+								{showDatePicker && (
+									<DatePicker
+									selected={selectedDate}
+									onChange={(date) => {
+										setSelectedDate(date);
+										const formattedDate = date.toISOString().substring(0, 10);
+										document.getElementById("date-input").value = formattedDate;
+									  }}
+									  dateFormat="yyyy-MM-dd"
+									inline
+									/>
+								)}
+								
                             </li>
                             <li class="planner_inputArea">
                                 <div class="planner_ls">

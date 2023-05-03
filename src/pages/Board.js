@@ -1,9 +1,25 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
-
+import $ from 'jquery';
+import Profile from '../components/Profile';
 function Board(props){
 
-
+    useEffect(()=>{
+        function updateSubFooterPosition() {
+            console.log(123)
+            var subFooter = $('#subFooter');
+            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                // 스크롤이 없는 경우
+                subFooter.css('position', 'fixed');
+            } else {
+                // 스크롤이 있는 경우
+                subFooter.css('position', 'sticky');
+            }
+        }
+        updateSubFooterPosition();
+    
+        
+    }, []);
     return(
         <>
             {props.header}
@@ -11,49 +27,7 @@ function Board(props){
                 <div class="container_inner">
                     <div>
                         <ul>
-                            <li class="planner_profile">
-                                <Link to="/profile">
-									<div>
-										<div class="pl_pro_img">
-											<img src="./img/profile.png" alt="profile"/>
-											<p>@sinsung test</p>
-										</div>
-										<div class="pl_pro_text">
-											<p>영진상사</p>
-											<p>lv. 10</p>
-										</div>
-									</div>
-								</Link>
-                                <div class="hot_chart">
-                                    <h2>Hot 게시물</h2>
-                                    <ul>
-                                        <li>
-                                            <p>간단한 내용</p>
-                                            <p>04/12 16:32</p>
-                                        </li>
-                                        <li>
-                                            <p>간단한 내용</p>
-                                            <p>04/12 16:32</p>
-                                        </li>
-                                        <li>
-                                            <p>간단한 내용</p>
-                                            <p>04/12 16:32</p>
-                                        </li>
-                                        <li>
-                                            <p>간단한 내용</p>
-                                            <p>04/12 16:32</p>
-                                        </li>
-                                        <li>
-                                            <p>간단한 내용</p>
-                                            <p>04/12 16:32</p>
-                                        </li>
-                                        <li>
-                                            <p>간단한 내용</p>
-                                            <p>04/12 16:32</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
+                            <Profile/>
                             <li class="board_area">
                                 <div class="search_area">
                                     <form action="">

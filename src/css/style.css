@@ -157,6 +157,10 @@ html, body{ width:100%; height:100%; }
 
 #challenge{ padding:50px 0; }
 
+#challenge .myChallenge{ display:flex; flex-wrap:wrap; }
+#challenge .myChallenge > h1{ width:100%; }
+.myChallenge .attend_challenge{ display:flex; flex-wrap:wrap; }
+.myChallenge .attend_challenge > h3{ width:50%; }
 #challenge > div > div > ul{ display:flex; }
 #challenge .ch_lists{ padding-bottom:30px; }
 #challenge .ch_lists > div:first-child{ display:flex; justify-content:space-between; }

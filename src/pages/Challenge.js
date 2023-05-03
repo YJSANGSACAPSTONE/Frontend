@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import Profile from '../components/Profile';
 function Challenge(props){
     return(
         <>
@@ -9,20 +9,7 @@ function Challenge(props){
                 <div class="container_inner">
                     <div>
                         <ul>
-                            <li class="planner_profile">
-                                <Link to="/profile">
-                                    <div>
-                                        <div class="pl_pro_img">
-                                            <img src="./img/profile.png" alt="profile"/>
-                                            <p>@sinsung test</p>
-                                        </div>
-                                        <div class="pl_pro_text">
-                                            <p>영진상사</p>
-                                            <p>lv. 10</p>
-                                        </div>
-                                    </div>
-                                </Link>
-                            </li>
+                            <Profile/>
                             <li class="challenge_area">
                                 <div class="ch_lists">
                                     <Link to="/challengeAll"><button class="allChallenge">전체 챌린지 보기</button></Link>

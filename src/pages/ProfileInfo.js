@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Profile(props){
+function ProfileInfo(props){
     return(
         <>
             {props.header}
@@ -13,7 +13,7 @@ function Profile(props){
                                 <Link to="/profile">
                                     <div>
                                         <div class="pl_pro_img">
-                                            <img src="./img/profile.png" alt="profile"/>
+                                            <img src="/img/profile.png" alt="profile"/>
                                             <p>@sinsung test</p>
                                         </div>
                                         <div class="pl_pro_text">
@@ -33,7 +33,7 @@ function Profile(props){
                                 </div>
                                 <div class="form_area">
                                     <form action="">
-                                        <label for="">사진</label> <img id="profile_thumbnail" src="./img/profile.png" alt="profile"/> <input type="file" id="profileImage"/>
+                                        <label for="">사진</label> <img id="profile_thumbnail" src="/img/profile.png" alt="profile"/> <input type="file" id="profileImage"/>
                                         <label for="">이메일</label><input type="text"/>
                                         <label for="">아이디</label><input type="text"/>
                                         <label for="">닉네임</label><input type="text"/>
@@ -54,4 +54,4 @@ function Profile(props){
     )
 }
 
-export default Profile;
+export default ProfileInfo;

@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import Axios from "axios";
-
+import Profile from '../components/Profile';
 function ChallengeSignUp(props){
 
     const [challenge,setChallenge] = useState([]);
-    useState(()=>{
+    useEffect(()=>{
         // axios 로 데이터 불러오기
         Axios.get('http://localhost:8080/challenge/getChallenge')
 		.then(response => setChallenge(response.data))
@@ -20,20 +20,7 @@ function ChallengeSignUp(props){
                 <div class="container_inner">
                     <div>
                         <ul>
-                            <li class="planner_profile">
-                                <Link to="/profile">
-                                    <div>
-                                        <div class="pl_pro_img">
-                                            <img src="/img/profile.png" alt="profile"/>
-                                            <p>@sinsung test</p>
-                                        </div>
-                                        <div class="pl_pro_text">
-                                            <p>영진상사</p>
-                                            <p>lv. 10</p>
-                                        </div>
-                                    </div>
-                                </Link>
-                            </li>
+                            <Profile/>
                             <li class="challenge_pay">
                                 <div class="challenge_info">
                                     <h1>미라클 모닝</h1>

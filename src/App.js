@@ -13,8 +13,9 @@ import Board from './pages/Board';
 import BoardRead from './pages/BoardRead';
 import BoardWrite from './pages/BoardWrite';
 import BoardEdit from './pages/BoardEdit';
-import Profile from './pages/Profile';
+import UserProfile from './pages/UserProfile';
 import ProfileInfo from './pages/ProfileInfo';
+import MyChallenge from './pages/MyChallenge';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Axios from "axios";
@@ -72,8 +73,9 @@ function App() {
 			<Route path="/challenge/:id/verify" element={<ChallengeVerify header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/challenge/:id/signUp" element={<ChallengeSignUp header={<Header/>} footer={<Footer/>} />} />
 
-			<Route path="/profile" element={<Profile header={<Header/>} footer={<Footer/>} />} />
+			<Route path="/profile" element={<UserProfile header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/profile/:id/info" element={<ProfileInfo header={<Header/>} footer={<Footer/>} />} />
+			<Route path="/profile/:id/myChallenge" element={<MyChallenge header={<Header/>} footer={<Footer/>} />} />
 
 			<Route path="/board" element={<Board header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/board/:id" element={<BoardRead header={<Header/>} footer={<Footer/>} />} />

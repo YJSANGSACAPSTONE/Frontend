@@ -18,6 +18,7 @@ import ProfileInfo from './pages/ProfileInfo';
 import MyChallenge from './pages/MyChallenge';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import KakaoLogin from './components/KakaoLogin';
 import Axios from "axios";
 import $ from 'jquery';
 
@@ -65,7 +66,7 @@ function App() {
 			<Route path="/signUp" element={<SignUp header={<Header/>} footer={<Footer/>} />} />
 			
 			<Route path="/planner" element={<Planner header={<Header/>} footer={<Footer/>} />}/>
-
+			<Route path="/kakoLogin" element={<KakaoLogin/>} />
 			<Route path="/challenge" element={<Challenge header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/challenge/:id" element={<ChallengeRead header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/challengeAll" element={<ChallengeAll header={<Header/>} footer={<Footer/>} />} />

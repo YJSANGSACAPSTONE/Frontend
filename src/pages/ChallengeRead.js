@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import Profile from '../components/Profile';
 function ChallengeRead(props){
     return(
         <>
@@ -9,28 +9,15 @@ function ChallengeRead(props){
                 <div class="container_inner">
                     <div>
                         <ul>
-                            <li class="planner_profile">
-                                <Link to="/planner">
-                                <div>
-                                    <div class="pl_pro_img">
-                                        <img src="./img/profile.png" alt="profile" />
-                                        <p>@sinsung test</p>
-                                    </div>
-                                    <div class="pl_pro_text">
-                                        <p>영진상사</p>
-                                        <p>lv. 10</p>
-                                    </div>
-                                </div>
-                                </Link>
-                            </li>
+                            <Profile/>
                             <li class="challenge_read">
                                 <div class="read_title">
-                                    <img src="./img/flag.png" alt="flag"/>
+                                    <img src="/img/flag.png" alt="flag"/>
                                     <p>Miracle Morning</p>
                                 </div>
                                 <div class="read_info">
                                     <div class="info_img">
-                                        <img src="./img/morning.png" alt="morning"/>
+                                        <img src="/img/morning.png" alt="morning"/>
                                     </div>
                                     <div class="info_text">
                                         <p>참가 인원 : 10 / 3</p>
@@ -47,7 +34,9 @@ function ChallengeRead(props){
                                     <p>아침에 일어나서 사진 찍는게 어려운 일 일까요?! 일단 저는 어렵습니다...</p>
                                 </div>
                                 <div class="read_btn">
-                                    <button>참가신청</button>
+                                    <button class="toListBtn" onClick={() => window.location.href='/challenge'}>목록</button>
+                                    <button onClick={()=>window.location.href='/challenge/1/signUp'}>참가신청</button>
+                                    <button onClick={() => window.location.href='/challenge/1/verify'}>인증하기</button>
                                 </div>
                             </li>
                         </ul>

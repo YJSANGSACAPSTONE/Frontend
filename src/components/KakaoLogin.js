@@ -10,7 +10,7 @@ function KakaoLogin(){
         const url = new URL(window.location.href);
 
         const code = url.searchParams.get("code");
-
+        console.log(url);
         Axios.get(`http://localhost:8070/login?code=${code}`).then((res)=>{
             console.log(res.data)
         });

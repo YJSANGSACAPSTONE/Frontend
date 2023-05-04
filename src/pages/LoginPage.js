@@ -1,7 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+
 function LoginPage(){
+
+    const handleClick = (e) => {
+        const KakaoLoginAPI = 'https://kauth.kakao.com/oauth/authorize?client_id=87c054c34eca4ca3541ab083e086cd12&redirect_uri=http://localhost:3000/kakaoLogin&response_type=code';
+        window.open(KakaoLoginAPI, "_self");
+    }; 
+
     return (
         <div id="header" class="container">
             <div class="container_inner">
@@ -14,7 +21,7 @@ function LoginPage(){
                             <p>갓생플래너</p>
                         </li>
                         <li class="header_login">
-                            <a href="/planner"><img src="./img/kakao_login.png" alt="kakao" /></a>
+                            <img onClick={handleClick} src="./img/kakao_login.png" alt="kakao" />
                         </li>
                         <li>
                             <button class="signUpBtn" onClick={()=>window.location.href='/signUp'}>회원가입</button>

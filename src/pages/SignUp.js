@@ -1,13 +1,16 @@
 import React,{ useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import $ from 'jquery';
+import Axios from "axios";
 
 function SignUp(props){
 
     const location = useLocation();
     const userData = location.state?.userData;
     // axios 통신으로 넘어온 userData.userId를 매개변수로 controller 에서 db 접근해서 해당 아이디가 회원테이블에 존재여부에 따라 메인페이지 혹은 회원가입페이지로
-    
+    Axios.get(`http://localhost:8070/check?uid=${userData.userId}`).then((res)=>{
+        console.log(res.data);
+    });
     // axios 통신으로 넘어온 userData.userId를 매개변수로 controller 에서 db 접근해서 해당 아이디가 회원테이블에 존재여부에 따라 메인페이지 혹은 회원가입페이지로
     useEffect(()=>{
         console.log(userData);

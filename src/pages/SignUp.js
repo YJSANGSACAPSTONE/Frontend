@@ -1,10 +1,14 @@
 import React,{ useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import $ from 'jquery';
 
 function SignUp(props){
 
+    const location = useLocation();
+    const userData = location.state?.userData;
+
     useEffect(()=>{
+        console.log(userData);
         function updateSubFooterPosition() {
 			var subFooter = $('#subFooter');
 			if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
@@ -29,8 +33,9 @@ function SignUp(props){
                             </li>
                             <li class="sign_form">
                                 <form action="">
+                                    <img src={userData.profileImageUrl} alt="" />
                                     <label htmlFor="signId">카카오아이디</label>
-                                    <input type="text" id="signId" placeHolder="@abcdefg.com" />
+                                    <input type="text" id="signId" placeHolder="@abcdefg.com" value={userData.userId} />
                                     <label htmlFor="signPw">비밀번호</label>
                                     <input type="password" id="signPw" />
                                     <label htmlFor="signPwChk">비밀번호 확인</label>

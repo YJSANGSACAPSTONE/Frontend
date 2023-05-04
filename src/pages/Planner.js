@@ -9,6 +9,8 @@ import "react-datepicker/dist/react-datepicker.css";
 function Planner(props){
     const [plans, setPlans]=useState([]);
     const [title, setTitle] = useState("");
+	const [modalPId, setModalPId] = useState("");
+
 	const uploadInputRef = useRef(null);
 	const thumbnailRef = useRef(null);
 	const datePickerRef = useRef(null);
@@ -31,9 +33,35 @@ function Planner(props){
 		return date.toLocaleDateString("en-US");
 	};
 	  
-	// 달력 보기 / 숨기기 클릭 이벤트
+	
 	const handleClick = (e) => {
+		
 		const id = e.currentTarget.key;
+		console.log(id);
+		const {
+			uid,
+			pContent,
+			pStartdate,
+			pEndDate,
+			pEndTime,
+			pStartTime,
+			pCategory,
+			pRemind
+		  } = e.currentTarget.dataset;
+
+		  console.log(e.currentTarget.dataset);
+
+		  console.log(
+			uid+"그리고"+
+			pContent+"그리고"+
+			pStartdate+"그리고"+
+			pEndDate+"그리고"+
+			pEndTime+"그리고"+
+			pStartTime+"그리고"+
+			pCategory+"그리고"+
+			pRemind
+		  );
+
 		const title = e.currentTarget.querySelector(".title").textContent;
 		setTitle(title);
 		const listModal = document.getElementById("listModal");
@@ -77,31 +105,6 @@ function Planner(props){
 			}
 		}
 		updateSubFooterPosition();
-	
-		
-
-		// Planner event------------------------------------------------------------
-		// div 요소에 datepicker 설정
-		// $("#datepickerDiv").click(function() {
-		// 	// Datepicker가 표시되어 있는지 체크
-		// 	if ($(".ui-datepicker").is(":visible")) {
-		// 		// 표시되어 있다면 숨김
-		// 		$("#datepickerDiv").text("달력 보기");
-		// 		$("#datepickerUI").hide();
-		// 	} else {
-		// 	// 표시되어 있지 않다면 표시
-		// 		$("#datepickerDiv").text("달력 숨기기");
-		// 		$("#datepickerUI").show();
-		// 	}
-
-		// 	$("#datepickerUI").datepicker({
-		// 		onSelect: function(dateText, inst) {
-		// 		// 선택한 날짜를 input 요소에 설정
-		// 		$("#selected-date-input").val(dateText);
-		// 		},
-		// 		dateFormat: "yy-mm-dd" // 날짜 형식 설정
-		// 	});
-		// });
 
 		$("#listModal .confirmBtn button").click( () => {
 			$("#listModal").css('display','none');
@@ -182,7 +185,7 @@ function Planner(props){
 			// Planner Write------------------------------------------------------------
 
 		// 일정 입력 이벤트 트리거
-		const handleClick = () => {
+		const addPlan = () => {
 			let u_id = "sinsung@naver.com";
 			let p_title = $("input[name=p_title]").val();
 			let p_content = $("textarea[name=p_content]").val();
@@ -219,11 +222,11 @@ function Planner(props){
 			});
 		};
 		
-		$("#addTaskModal .confirmBtn button").on('click', handleClick);
+		$("#addTaskModal .confirmBtn button").on('click', addPlan);
 		
 		// 이 부분이 추가된 부분입니다.
 		return () => {
-			$("#addTaskModal .confirmBtn button").off('click', handleClick);
+			$("#addTaskModal .confirmBtn button").off('click', addPlan);
 		};
 	}, []);
     return (
@@ -279,7 +282,19 @@ function Planner(props){
 										{/* plan_list 테스트 */}
 										{plans.length > 0 ? (
 											plans.map(plan => (
-												<li key={plan.p_id} onClick={handleClick}>
+												<li 
+													key={plan.p_id} 
+													onClick={handleClick} 
+
+													data-uid={plan.u_id}
+													data-pContent={plan.p_content}
+													data-pStartdate={plan.p_startdate}
+													data-pEndDate={plan.p_enddate}
+													data-pEndTime={plan.p_endtime}
+													data-pStartTime={plan.p_starttime}
+													data-pCategory={plan.p_category}
+													data-pRemind={plan.p_remindornot}
+												>
 													<div>{plan.p_startdate} <b>~</b> {plan.p_enddate} </div>
 													<div>
 														<div class="time">{plan.p_starttime} ~ {plan.p_endtime}</div>
@@ -291,22 +306,6 @@ function Planner(props){
 											<p>Loading...</p>
 										)}
 									
-                                        
-                                        {/* <li class="list_no_2" onClick={handleClick}>
-                                            <div>04-19 <b>~</b> 04-19 </div>
-                                            <div>
-                                                <div class="time">17:48 ~ 20:00</div>
-                                                <div class="title">강아지 산책시키기</div>
-                                            </div>
-                                        </li>
-                                        
-                                        <li class="list_no_3" onClick={handleClick}>
-                                            <div>04-19 <b>~</b> 04-20 </div>
-                                            <div>
-                                                <div class="time">17:48 ~ 20:00</div>
-                                                <div class="title">책 읽고 독후감 쓰기</div>
-                                            </div>
-                                        </li> */}
                                         <div class="btn_li">
                                             <button id="addTaskBtn">할 일 추가 <span>+</span> </button>
                                         </div>

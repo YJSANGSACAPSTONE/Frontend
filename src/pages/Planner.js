@@ -42,7 +42,7 @@ function Planner(props){
 	
     useEffect(() => {
 		// 첫 페이지 로딩 후 Axios를 통해서 오늘 날짜 plan 받아오는 것
-		Axios.get('http://localhost:8080/plan/dailyplan')
+		Axios.get('http://localhost:8070/plan/dailyplan')
 		.then(response => setPlans(response.data))
 		.catch(error => console.log(error));
 
@@ -183,7 +183,7 @@ function Planner(props){
 
 		// 일정 입력 이벤트 트리거
 		const handleClick = () => {
-			let u_id = "sinsung";
+			let u_id = "sinsung@naver.com";
 			let p_title = $("input[name=p_title]").val();
 			let p_content = $("textarea[name=p_content]").val();
 			let p_category = $("select[name=p_category]").val();
@@ -191,11 +191,12 @@ function Planner(props){
 			let p_enddate = $("input[name=p_enddate]").val();
 			let p_starttime = $("input[name=p_starttime]").val();
 			let p_endtime = $("input[name=p_endtime]").val();
-			let p_remindornot = $("input[name=p_remindornot]").val();
+			let p_remindornot = $("input[name=p_remindornot]").val() == "on" ? 1 : 0;
+			
 
 
 			$("#addTaskModal").css('display','none');
-			Axios.post("/api/plan/addplan", 
+			Axios.post("http://localhost:8070/plan/addplan", 
 			{
 				u_id : u_id,
 				p_title : p_title,
@@ -209,6 +210,9 @@ function Planner(props){
 			})
 			.then(response=>{
 				alert(response);
+				Axios.get('http://localhost:8070/plan/dailyplan')
+				.then(response => setPlans(response.data))
+				.catch(error => console.log(error));
 			})
 			.catch(error => {
 				alert(error);
@@ -368,13 +372,13 @@ function Planner(props){
                                                         <label for="s_date">시작일 : </label>
                                                         <input type="date" id="s_date" name="p_startdate"/>
                                                         <label for="e_date">종료일 : </label>
-                                                        <input type="date" id="e_date" name="e_enddate"/>
+                                                        <input type="date" id="e_date" name="p_enddate"/>
                                                     </div>
                                                     <div class="add_time">
                                                         <label for="s_time">시작시간 : </label>
                                                         <input type="time" id="s_time" name="p_starttime"/>
                                                         <label for="e_time">종료시간 : </label>
-                                                        <input type="time" id="e_time" name="e_endtime"/>
+                                                        <input type="time" id="e_time" name="p_endtime"/>
                                                     </div>
                                                     <div class="editReminder">
                                                         <div class="confirmBtn">

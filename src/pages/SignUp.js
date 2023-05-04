@@ -6,7 +6,9 @@ function SignUp(props){
 
     const location = useLocation();
     const userData = location.state?.userData;
-
+    // axios 통신으로 넘어온 userData.userId를 매개변수로 controller 에서 db 접근해서 해당 아이디가 회원테이블에 존재여부에 따라 메인페이지 혹은 회원가입페이지로
+    
+    // axios 통신으로 넘어온 userData.userId를 매개변수로 controller 에서 db 접근해서 해당 아이디가 회원테이블에 존재여부에 따라 메인페이지 혹은 회원가입페이지로
     useEffect(()=>{
         console.log(userData);
         function updateSubFooterPosition() {

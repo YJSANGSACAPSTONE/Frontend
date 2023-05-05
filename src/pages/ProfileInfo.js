@@ -15,7 +15,7 @@ function ProfileInfo(props){
     const [u_content, setU_content] = useState("소개글입니다용 황주바보");
     
     const updateUser = () => {
-        Axios('http://localhost:8070/user/updateuser',{
+        Axios.post('http://localhost:8070/user/updateuser',{
             u_id : u_id,
             u_nickname : u_nickname,
             u_zepid : u_zepid,

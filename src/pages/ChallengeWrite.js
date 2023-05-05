@@ -135,7 +135,7 @@ function ChallengeWrite(props){
                                     <textarea name="c_content" id="" cols="30" rows="10" placeholder="내용을 작성하세요..." value={challenge.c_content} onChange={handleChange}/>
                                 </div>
                                 <div class="read_btn">
-                                    <button onClick={addChallenge(challenge)}>챌린지등록</button>
+                                    <button onClick={()=>addChallenge(challenge)}>챌린지등록</button>
                                 </div>
                             </li>
                         </ul>

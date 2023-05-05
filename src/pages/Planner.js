@@ -9,6 +9,16 @@ import "react-datepicker/dist/react-datepicker.css";
 function Planner(props){
     const [plans, setPlans]=useState([]);
     const [title, setTitle] = useState("");
+	const [pid,setPid] = useState("");
+	const [uid, setUid] = useState("");
+	const [content, setContent] = useState("");
+	const [startdate, setStartdate] = useState("");
+	const [enddate, setEnddate] = useState("");
+	const [endtime, setEndtime] = useState("");
+	const [starttime, setStarttime] = useState("");
+	const [category, setCategory] = useState("");
+	const [remind, setRemind] = useState("");
+
 	const uploadInputRef = useRef(null);
 	const thumbnailRef = useRef(null);
 	const datePickerRef = useRef(null);
@@ -31,21 +41,86 @@ function Planner(props){
 		return date.toLocaleDateString("en-US");
 	};
 	  
-	// 달력 보기 / 숨기기 클릭 이벤트
+	const deleteBtn = (e) => {
+		Axios.get(`http://localhost:8070/plan/deleteplan/${pid}`).then((res)=>{
+			Axios.get('http://localhost:8070/plan/dailyplan')
+			.then(response => setPlans(response.data))
+			.catch(error => console.log(error));
+		})
+
+	}
+	
 	const handleClick = (e) => {
 		const id = e.currentTarget.key;
-		const title = e.currentTarget.querySelector(".title").textContent;
+		const {
+			pid,
+			uid,
+			title,
+			content,
+			startdate,
+			enddate,
+			endtime,
+			starttime,
+			category,
+			remind
+		  } = e.currentTarget.dataset;
+		setPid(pid);
+		setUid(uid);
+		setContent(content);
+		setStartdate(startdate);
+		setEnddate(enddate);
+		setEndtime(endtime);
+		setStarttime(starttime);
+		setCategory(category);
+		setRemind(remind);
 		setTitle(title);
+		
 		const listModal = document.getElementById("listModal");
 		listModal.style.display = "flex";
 	};
+
+	// 일정 수정 이벤트 트리거
+	const updatePlan = () => {
+		let u_id = "sinsung@naver.com";
+		let u_title = $("input[name=u_title]").val();
+		let u_content = $("textarea[name=u_content]").val();
+		let u_category = $("select[name=u_category]").val();
+		let u_startdate = $("input[name=u_startdate]").val();
+		let u_enddate = $("input[name=u_enddate]").val();
+		let u_starttime = $("input[name=u_starttime]").val();
+		let u_endtime = $("input[name=u_endtime]").val();
+		let u_remindornot = $("input[name=u_remindornot]").val() == "on" ? 1 : 0;
+
+		$("#listModal").css('display','none');
+			Axios.post("http://localhost:8070/plan/updateplan", 
+			{
+				u_id : u_id,
+				p_id : pid,
+				p_title : u_title,
+				p_content : u_content,
+				p_category : u_category,
+				p_startdate : u_startdate,
+				p_enddate : u_enddate,
+				p_starttime : u_starttime,
+				p_endtime : u_endtime,
+				p_remindornot : u_remindornot
+			})
+			.then(response=>{
+				alert(response);
+				Axios.get('http://localhost:8070/plan/dailyplan')
+				.then(response => setPlans(response.data))
+				.catch(error => console.log(error));
+			})
+			.catch(error => {
+				alert(error);
+			});
+	}
 	
     useEffect(() => {
 		// 첫 페이지 로딩 후 Axios를 통해서 오늘 날짜 plan 받아오는 것
 		Axios.get('http://localhost:8070/plan/dailyplan')
 		.then(response => setPlans(response.data))
 		.catch(error => console.log(error));
-
 
 		const addTaskBtn = document.getElementById("addTaskBtn");
 		const addTaskModal = document.getElementById("addTaskModal");		
@@ -77,31 +152,6 @@ function Planner(props){
 			}
 		}
 		updateSubFooterPosition();
-	
-		
-
-		// Planner event------------------------------------------------------------
-		// div 요소에 datepicker 설정
-		// $("#datepickerDiv").click(function() {
-		// 	// Datepicker가 표시되어 있는지 체크
-		// 	if ($(".ui-datepicker").is(":visible")) {
-		// 		// 표시되어 있다면 숨김
-		// 		$("#datepickerDiv").text("달력 보기");
-		// 		$("#datepickerUI").hide();
-		// 	} else {
-		// 	// 표시되어 있지 않다면 표시
-		// 		$("#datepickerDiv").text("달력 숨기기");
-		// 		$("#datepickerUI").show();
-		// 	}
-
-		// 	$("#datepickerUI").datepicker({
-		// 		onSelect: function(dateText, inst) {
-		// 		// 선택한 날짜를 input 요소에 설정
-		// 		$("#selected-date-input").val(dateText);
-		// 		},
-		// 		dateFormat: "yy-mm-dd" // 날짜 형식 설정
-		// 	});
-		// });
 
 		$("#listModal .confirmBtn button").click( () => {
 			$("#listModal").css('display','none');
@@ -181,8 +231,10 @@ function Planner(props){
 			});
 			// Planner Write------------------------------------------------------------
 
+
+		
 		// 일정 입력 이벤트 트리거
-		const handleClick = () => {
+		const addPlan = () => {
 			let u_id = "sinsung@naver.com";
 			let p_title = $("input[name=p_title]").val();
 			let p_content = $("textarea[name=p_content]").val();
@@ -219,11 +271,11 @@ function Planner(props){
 			});
 		};
 		
-		$("#addTaskModal .confirmBtn button").on('click', handleClick);
+		$("#addTaskModal .confirmBtn button").on('click', addPlan);
 		
 		// 이 부분이 추가된 부분입니다.
 		return () => {
-			$("#addTaskModal .confirmBtn button").off('click', handleClick);
+			$("#addTaskModal .confirmBtn button").off('click', addPlan);
 		};
 	}, []);
     return (
@@ -279,7 +331,21 @@ function Planner(props){
 										{/* plan_list 테스트 */}
 										{plans.length > 0 ? (
 											plans.map(plan => (
-												<li key={plan.p_id} onClick={handleClick}>
+												<li 
+													key={plan.p_id} 
+													onClick={handleClick} 
+
+													data-pid={plan.p_id}
+													data-title={plan.p_title}
+													data-uid={plan.u_id}
+													data-content={plan.p_content}
+													data-startdate={plan.p_startdate}
+													data-enddate={plan.p_enddate}
+													data-endtime={plan.p_endtime}
+													data-startTime={plan.p_starttime}
+													data-category={plan.p_category}
+													data-remind={plan.p_remindornot}
+												>
 													<div>{plan.p_startdate} <b>~</b> {plan.p_enddate} </div>
 													<div>
 														<div class="time">{plan.p_starttime} ~ {plan.p_endtime}</div>
@@ -291,46 +357,45 @@ function Planner(props){
 											<p>Loading...</p>
 										)}
 									
-                                        
-                                        {/* <li class="list_no_2" onClick={handleClick}>
-                                            <div>04-19 <b>~</b> 04-19 </div>
-                                            <div>
-                                                <div class="time">17:48 ~ 20:00</div>
-                                                <div class="title">강아지 산책시키기</div>
-                                            </div>
-                                        </li>
-                                        
-                                        <li class="list_no_3" onClick={handleClick}>
-                                            <div>04-19 <b>~</b> 04-20 </div>
-                                            <div>
-                                                <div class="time">17:48 ~ 20:00</div>
-                                                <div class="title">책 읽고 독후감 쓰기</div>
-                                            </div>
-                                        </li> */}
                                         <div class="btn_li">
                                             <button id="addTaskBtn">할 일 추가 <span>+</span> </button>
                                         </div>
                                         <div class="modal" id="listModal">
                                             <div class="modal-content">
-                                                <h2>{title}</h2>
+                                                <h2><input type="text" name="u_title" value={title} onChange={(e)=>setTitle(e.target.value)} /></h2>
+												<select name="u_category" id="">
+													<option value="null">카테고리 선택</option>
+													<option value="일상">일상</option>
+													<option value="운동">운동</option>
+													<option value="공부">공부</option>
+													<option value="취미">취미</option>
+												</select>
                                                 <div class="btn_area">
                                                     <button class="editBtn"><img src="./img/edit.png" alt="edit"/>시간수정</button>
-                                                    <button><img src="./img/bin.png" alt="bin"/>삭제하기</button>
+                                                    <button onClick={deleteBtn}><img src="./img/bin.png" alt="bin"/>삭제하기</button>
                                                 </div>
                                                 <div class="text_area">
-                                                    <textarea name="" id="" >9시 수영 수업들으러 가야함!!</textarea>
+													<textarea name="u_content" id="" value={content} onChange={(e) => setContent(e.target.value)} />
                                                 </div>
-                                                <div class="etcClass">
-                                                    <p>기간 : 2023.04.15 ~ 2023.04.17</p>
-                                                    <p>시간 : 09:00 ~ 11:00</p>
-                                                </div>
+                                                <div class="add_date">
+													<label for="s_date">시작일 : </label>
+													<input type="date" id="s_date" name="u_startdate" value={startdate} onChange={(e) => setStartdate(e.target.value)} />
+													<label for="e_date">종료일 : </label>
+													<input type="date" id="e_date" name="u_enddate" value={enddate} onChange={(e) => setEnddate(e.target.value)}/>
+												</div>
+												<div class="add_time">
+													<label for="s_time">시작시간 : </label>
+													<input type="time" id="s_time" name="u_starttime" value={starttime} onChange={(e) => setStarttime(e.target.value)} />
+													<label for="e_time">종료시간 : </label>
+													<input type="time" id="e_time" name="u_endtime" value={endtime} onChange={(e) => setEndtime(e.target.value)} />
+												</div>
                                                 <div class="editReminder">
                                                     <div class="confirmBtn">
-                                                        <button id="listModalconfirmBtn">확인</button>
+                                                        <button onClick={updatePlan} id="listModalconfirmBtn">확인</button>
                                                     </div>
                                                     <div class="reminder_btn">
                                                         <label for="chk_reminder"><img src="./img/reminders.png" alt="reminders"/>리마인더 설정</label>
-                                                        <input type="checkbox" id="chk_reminder" name="chk_reminder" />
+                                                        <input type="checkbox" id="chk_reminder" name="u_remindornot" />
                                                     </div>
                                                 </div>
                                             </div>

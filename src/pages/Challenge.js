@@ -1,7 +1,28 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React,{ useState, useEffect, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Profile from '../components/Profile';
+import Axios from "axios";
 function Challenge(props){
+    // const [challenges, setChallenges] = useState([]);
+    const [mylist, setMylist] = useState([]);
+    const [popularlist, setPopularlist] = useState([]);
+    const [recentlist, setRecentlist] = useState([]);
+
+    const navigate = useNavigate();
+
+    const MvRead = (challenge) => {
+        navigate(`/challenge/${challenge.c_id}`, { state: { challenge } });
+    }
+
+    useEffect(()=>{
+        Axios.get('http://localhost:8070/challenge/list')
+		.then((res) => {
+            setMylist(res.data.mylist);
+            setPopularlist(res.data.popularlist);
+            setRecentlist(res.data.recentlist);
+        })
+		.catch(error => console.log(error));
+    }, [])
     return(
         <>
             {props.header}
@@ -17,14 +38,17 @@ function Challenge(props){
                                 <div class="popular_challenge ch_lists">
                                     <div class="title">
                                         <p>인기 챌린지</p>
-                                        <button class="btn">+</button>
+                                        <button class="btn" >+</button>
                                     </div>
                                     <div class="challenge_list">
                                         <ul>
-                                            <li><Link to="/challenge/1"><div><img src="./img/morning.png" alt="morning"/><p>미라클 모닝</p></div></Link></li>
-                                            <li><Link to="/challenge/2"><div></div></Link></li>
-                                            <li><Link to="/challenge/3"><div></div></Link></li>
-                                            <li><Link to="/challenge/4"><div></div></Link></li>
+                                            {Object.keys(popularlist).length > 0 ? (
+                                                popularlist.map(popularlist => (
+                                                    <li onClick={() => MvRead(popularlist)}><div><img src="./img/morning.png" alt="morning"/><p>{popularlist.c_name}</p></div></li>
+                                                ))
+                                            ) : (
+                                                <li><Link to="/challenge"><div></div></Link></li>
+                                            )}
                                         </ul>
                                     </div>
                                 </div>
@@ -35,10 +59,13 @@ function Challenge(props){
                                     </div>
                                     <div class="challenge_list">
                                         <ul>
-                                            <li><Link to="/challenge/1"><div></div></Link></li>
-                                            <li><Link to="/challenge/2"><div></div></Link></li>
-                                            <li><Link to="/challenge/3"><div></div></Link></li>
-                                            <li><Link to="/challenge/4"><div></div></Link></li>
+                                            {Object.keys(recentlist).length > 0 ? (
+                                                recentlist.map(recentlist => (
+                                                    <li onClick={() => MvRead(recentlist)}><div><img src="./img/morning.png" alt="morning"/><p>{recentlist.c_name}</p></div></li>
+                                                ))
+                                            ) : (
+                                                <li><Link to="/challenge"><div></div></Link></li>
+                                            )}
                                         </ul>
                                     </div>
                                 </div>
@@ -49,14 +76,17 @@ function Challenge(props){
                                     </div>
                                     <div class="challenge_list">
                                         <ul>
-                                            <li><Link to="/challenge/1"><div></div></Link></li>
-                                            <li><Link to="/challenge/2"><div></div></Link></li>
-                                            <li><Link to="/challenge/3"><div></div></Link></li>
-                                            <li><Link to="/challenge/4"><div></div></Link></li>
+                                            {Object.keys(mylist).length > 0 ? (
+                                                mylist.map(mylist => (
+                                                    <li onClick={() => MvRead(mylist)}><div><img src="./img/morning.png" alt="morning"/><p>{mylist.c_name}</p></div></li>
+                                                ))
+                                            ) : (
+                                                <li><Link to="/challenge"><div></div></Link></li>
+                                            )}
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="success_challenge ch_lists">
+                                {/* <div class="success_challenge ch_lists">
                                     <div class="title">
                                         <p>성공 챌린지</p>
                                         <button>+</button>
@@ -69,7 +99,7 @@ function Challenge(props){
                                             <li><Link to="/challenge/4"><div></div></Link></li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div class="ch_list">
                                     <Link to="/challengeWrite"><button>새로운 챌린지 생성</button></Link>
                                 </div>

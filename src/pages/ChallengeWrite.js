@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef }  from 'react';
 import $ from 'jquery';
 import Axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Profile from '../components/Profile';
 function ChallengeWrite(props){
+    const history = useNavigate();
+
     const [challenge, setChallenge] = useState({
         c_name: "",
         c_numberofparticipants: 1,
@@ -59,6 +61,7 @@ function ChallengeWrite(props){
         })
         .then((res)=>{
             console.log(res);
+            history('/challenge');
         })
         .catch((error)=>{
             console.log(error)

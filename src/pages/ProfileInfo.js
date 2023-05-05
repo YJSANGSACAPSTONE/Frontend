@@ -1,7 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef }  from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import $ from 'jquery';
+import Axios from "axios";
 
 function ProfileInfo(props){
+
+    const location = useLocation();
+    const userData = location.state?.userData;
+
+    const [u_id, setU_id] = useState("jujini31@gmail.com");
+    const [u_nickname, setU_nickname] = useState("유현초등학교");
+    const [u_zepid, setU_zepid] = useState("yuhyeonZep");
+    const [u_content, setU_content] = useState("소개글입니다용 황주바보");
+    
+    const updateUser = () => {
+        Axios('')
+    };
+
+    useEffect(()=>{
+
+    }, []);
+
     return(
         <>
             {props.header}
@@ -33,14 +52,27 @@ function ProfileInfo(props){
                                 </div>
                                 <div class="form_area">
                                     <form action="">
-                                        <label for="">사진</label> <img id="profile_thumbnail" src="/img/profile.png" alt="profile"/> <input type="file" id="profileImage"/>
-                                        <label for="">이메일</label><input type="text"/>
-                                        <label for="">아이디</label><input type="text"/>
-                                        <label for="">닉네임</label><input type="text"/>
-                                        <label for="">제페토아이디</label><input type="text"/>
-                                        <label for="">등급</label><input type="text"/>
-                                        <label for="">레벨</label><input type="text"/>
-                                        <label for="">예치금</label><input type="text"/>
+                                        <div>
+                                            <p>사진</p>
+                                            <img id="profile_thumbnail" src="/img/profile.png" alt="profile"/>
+                                        </div> 
+                                        <label for="">아이디</label><input type="text" name="u_id" value={u_id} onChange={(e)=>setU_id(e.target.value)} />
+                                        <label for="">닉네임</label><input type="text" name="u_nickname" value={u_nickname} onChange={(e)=>setU_nickname(e.target.value)} />
+                                        <label for="">제페토아이디</label><input type="text" name="u_zepid" value={u_zepid} onChange={(e)=>setU_zepid(e.target.value)}/>
+                                        <label for="">소개글</label><textarea name="u_content" id="" value={u_content} onChange={(e) => setU_content(e.target.value)} />
+                                        <div>
+                                            <p>등급</p>
+                                            <p>일반회원</p>
+                                        </div>
+                                        <div>
+                                            <p>레벨</p>
+                                            <p>10</p>
+                                        </div>
+                                        <div>
+                                            <p>예치금</p>
+                                            <p>10,000</p>
+                                        </div>
+                                        <button onClick={updateUser}>회원수정</button>
                                         <button>회원탈퇴</button>
                                     </form>
                                 </div>

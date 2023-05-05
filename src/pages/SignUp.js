@@ -23,7 +23,7 @@ function SignUp(props){
 
         console.log(u_id);
         console.log(u_nickname);
-        Axios.post("http://localhost:8070/save", 
+        Axios.post("http://localhost:8070/user/adduser", 
         {
             u_id : u_id,
             u_nickname : u_nickname,

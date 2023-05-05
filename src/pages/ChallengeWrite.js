@@ -34,8 +34,8 @@ function ChallengeWrite(props){
       
     const addChallenge = (challengeData) =>{
         const formData = new FormData();
-
-        formData.append('thumbnail', challengeData.thumbnailData);
+        
+        formData.append('thumbnail', challengeData.thumbnail);
         formData.append('c_name', challengeData.c_name);
         formData.append('c_content', challengeData.c_content);
         formData.append('c_startdate', challengeData.c_startdate);
@@ -49,6 +49,8 @@ function ChallengeWrite(props){
         formData.append('c_typeoffrequency', challengeData.c_typeoffrequency);
         formData.append('c_frequency', challengeData.c_frequency);
         formData.append('c_score', challengeData.c_score);
+
+        console.log(challengeData);
 
         Axios.post('http://localhost:8070/challenge/addchallenge',formData,{
             headers : {

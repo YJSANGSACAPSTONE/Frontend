@@ -1,19 +1,18 @@
 import React, { useState, useEffect, useRef }  from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import $ from 'jquery';
 import Axios from "axios";
 import Cookies from 'js-cookie';
 
 function ProfileInfo(props){
-
+    const history = useNavigate();
     const location = useLocation();
     const userData = location.state?.userData;
+    const userInfo = Cookies.get('userInfo');
 
-    const [u_id, setU_id] = useState(Cookies.get('userId'));
-    const [u_nickname, setU_nickname] = useState("유현초등학교");
-    const [u_zepid, setU_zepid] = useState("yuhyeonZep");
-    const [u_content, setU_content] = useState("소개글입니다용 황주바보");
-    
+    const [u_info, setU_info] = useState(JSON.parse(userInfo));
+
+    const {u_id, u_nickname, u_zepid, u_content} = u_info;
     const updateUser = () => {
         Axios.post('http://localhost:8070/user/updateuser',{
             u_id : u_id,
@@ -22,12 +21,30 @@ function ProfileInfo(props){
             u_content : u_content
         })
         .then((res)=>{
-            console.log(res)
+            const newUserInfo = {
+                u_id: u_id,
+                u_nickname: u_nickname,
+                u_zepid: u_zepid,
+                u_content: u_content
+            };
+            console.log(newUserInfo);
+            Cookies.set('userInfo', JSON.stringify(newUserInfo));
+            history('/profile');
         })
         .catch((err)=>{
             console.log(err)
         })
     };
+    
+    const deleteUser = () =>{
+        Axios.get(`http://localhost:8070/user/deleteuser?uid=${u_id}`)
+        .then((res) => {
+           console.log(res.data); // 처리 결과 출력
+        })
+        .catch((error) => {
+            console.log(error); // 오류 발생 시 출력
+        });
+    }
 
     useEffect(()=>{
 
@@ -69,9 +86,15 @@ function ProfileInfo(props){
                                             <img id="profile_thumbnail" src="/img/profile.png" alt="profile"/>
                                         </div> 
                                         <label for="">아이디</label><input type="text" name="u_id" value={u_id} />
-                                        <label for="">닉네임</label><input type="text" name="u_nickname" value={u_nickname} onChange={(e)=>setU_nickname(e.target.value)} />
-                                        <label for="">제페토아이디</label><input type="text" name="u_zepid" value={u_zepid} onChange={(e)=>setU_zepid(e.target.value)}/>
-                                        <label for="">소개글</label><textarea name="u_content" id="" value={u_content} onChange={(e) => setU_content(e.target.value)} />
+
+                                        <label for="">닉네임</label>
+                                        <input type="text" name="u_nickname" value={u_nickname} onChange={(e)=>setU_info({...u_info, u_nickname: e.target.value})} />
+
+                                        <label for="">ZEP아이디</label>
+                                        <input type="text" name="u_zepid" value={u_zepid} onChange={(e)=>setU_info({...u_info, u_zepid: e.target.value})}/>
+
+                                        <label for="">소개글</label>
+                                        <textarea name="u_content" id="" value={u_content} onChange={(e) => setU_info({...u_info, u_content: e.target.value})} />
                                         <div>
                                             <p>등급</p>
                                             <p>일반회원</p>
@@ -85,7 +108,7 @@ function ProfileInfo(props){
                                             <p>10,000</p>
                                         </div>
                                         <button type="button" onClick={updateUser}>회원수정</button>
-                                        <button>회원탈퇴</button>
+                                        <button type="button" onClick={deleteUser}>회원탈퇴</button>
                                     </form>
                                 </div>
                             </li>

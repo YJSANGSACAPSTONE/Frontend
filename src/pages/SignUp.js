@@ -32,6 +32,14 @@ function SignUp(props){
         })
         .then(response=>{
             console.log(response);
+            Axios.get(`http://localhost:8070/user/listuser?uid=${u_id}`).
+            then((res)=>{
+                console.log(res);
+                Cookies.set('userInfo',JSON.stringify(res.data));
+            })
+            .catch((err)=>{
+                console.log(err);
+            });
         })
         .catch(error => {
             console.log(error);

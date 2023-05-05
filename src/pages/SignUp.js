@@ -7,8 +7,11 @@ function SignUp(props){
 
     const location = useLocation();
     const userData = location.state?.userData;
+    console.log(userData);
     // axios 통신으로 넘어온 userData.userId를 매개변수로 controller 에서 db 접근해서 해당 아이디가 회원테이블에 존재여부에 따라 메인페이지 혹은 회원가입페이지로
-    
+    // Axios.get(`http://localhost:8070/check?uid=${userData.userId}`).then((res)=>{
+    //     console.log(res.data);
+    // });
     // axios 통신으로 넘어온 userData.userId를 매개변수로 controller 에서 db 접근해서 해당 아이디가 회원테이블에 존재여부에 따라 메인페이지 혹은 회원가입페이지로
 
     // addUser
@@ -16,9 +19,11 @@ function SignUp(props){
         let u_id = $("input[name=u_id]").val();
         let u_nickname = $("input[name=u_nickname]").val();
         let u_zepid = $("textarea[name=u_zepid]").val();
-        let u_content = $("select[name=u_content]").val();
+        let u_content = $("input[name=u_content]").val();
 
-        Axios.post("http://localhost:8070/user/adduser", 
+        console.log(u_id);
+        console.log(u_nickname);
+        Axios.post("http://localhost:8070/save", 
         {
             u_id : u_id,
             u_nickname : u_nickname,

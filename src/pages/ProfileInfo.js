@@ -14,7 +14,15 @@ function ProfileInfo(props){
     const [u_content, setU_content] = useState("소개글입니다용 황주바보");
     
     const updateUser = () => {
-        Axios('')
+        Axios('http://localhost:8070/user/updateuser',{
+            
+        })
+        .then((res)=>{
+            console.log(res)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
     };
 
     useEffect(()=>{

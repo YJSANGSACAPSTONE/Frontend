@@ -9,7 +9,6 @@ import "react-datepicker/dist/react-datepicker.css";
 function Planner(props){
     const [plans, setPlans]=useState([]);
     const [title, setTitle] = useState("");
-
 	const [pid,setPid] = useState("");
 	const [uid, setUid] = useState("");
 	const [content, setContent] = useState("");

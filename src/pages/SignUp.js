@@ -2,7 +2,7 @@ import React,{ useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import $ from 'jquery';
 import Axios from "axios";
-
+import Cookies from 'js-cookie';
 function SignUp(props){
 
     const location = useLocation();
@@ -39,7 +39,7 @@ function SignUp(props){
     };
     // addUser
     useEffect(()=>{
-        console.log(userData);
+        // console.log(userData);
         function updateSubFooterPosition() {
 			var subFooter = $('#subFooter');
 			if ($(window).scrollTop() + $(window).height() >= $(document).height()) {

@@ -14,7 +14,7 @@ function ProfileInfo(props){
 
     const [u_info, setU_info] = useState(JSON.parse(userInfo));
 
-    const {u_id, u_nickname, u_zepid, u_content, userImg} = u_info;
+    const {u_id, u_nickname, u_zepid, u_content, userImg, u_level, u_grade, u_img, u_successedchallenge,u_deposit} = u_info;
     const updateUser = () => {
         Axios.post('http://localhost:8070/user/updateuser',{
             u_id : u_id,
@@ -24,15 +24,8 @@ function ProfileInfo(props){
             userImg : userImg
         })
         .then((res)=>{
-            const newUserInfo = {
-                u_id: u_id,
-                u_nickname: u_nickname,
-                u_zepid: u_zepid,
-                u_content: u_content,
-                userImg : userImg
-            };
             
-            Cookies.set('userInfo', JSON.stringify(newUserInfo));
+            Cookies.set('userInfo', JSON.stringify(u_info));
             history('/profile');
         })
         .catch((err)=>{
@@ -41,14 +34,17 @@ function ProfileInfo(props){
     };
     
     const deleteUser = () =>{
-        Axios.get(`http://localhost:8070/user/deleteuser?uid=${u_id}`)
-        .then((res) => {
-           console.log(res.data); // 처리 결과 출력
-           history('/');
-        })
-        .catch((error) => {
-            console.log(error); // 오류 발생 시 출력
-        });
+        if(window.confirm("정말 탈퇴하시겠습니까?")){
+            Axios.get(`http://localhost:8070/user/deleteuser?uid=${u_id}`)
+            .then((res) => {
+            console.log(res.data); // 처리 결과 출력
+            history('/');
+            })
+            .catch((error) => {
+                console.log(error); // 오류 발생 시 출력
+            });
+        }
+        
     }
 
     useEffect(()=>{
@@ -93,14 +89,14 @@ function ProfileInfo(props){
                                         </div>
                                         <div>
                                             <p>레벨</p>
-                                            <p>10</p>
+                                            <p>{u_level}</p>
                                         </div>
                                         <div>
                                             <p>예치금</p>
-                                            <p>10,000</p>
+                                            <p>{u_deposit}</p>
                                         </div>
-                                        <button type="button" onClick={updateUser}>회원수정</button>
-                                        <button type="button" onClick={deleteUser}>회원탈퇴</button>
+                                        <button className="updateUser" type="button" onClick={updateUser}>회원수정</button>
+                                        <button className="deleteUser" type="button" onClick={deleteUser}>회원탈퇴</button>
                                     </form>
                                 </div>
                             </li>

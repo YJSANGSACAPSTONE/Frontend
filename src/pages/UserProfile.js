@@ -36,7 +36,6 @@ function UserProfile(props){
                                 <Link to="/profile/1/point"><div>포인트 충전</div></Link>
                                 <Link to="/profile/1/payList"><div>결제 내역</div></Link>
                                 <Link to="/profile/1/logout"><div onClick={handleLogout}>로그아웃</div></Link>
-                                <Link to="/profile/1/exit"><div>회원 탈퇴</div></Link>
                             </li>
                         </ul>
                     </div>

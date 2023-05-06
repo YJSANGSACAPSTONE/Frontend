@@ -1,9 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import $ from 'jquery';
 import Axios from "axios";
 import Profile from '../components/Profile';
 function ChallengeVerify(props){
+
+    const location = useLocation();
+    const challenge = location.state?.challenge;
+    const navigate = useNavigate();
+    
+    const MbChallenge = () => {
+        navigate(`/challenge/${challenge.c_id}`, { state: { challenge } });
+    }
     const verify = () =>{
         Axios.get('url')
 		.then(response => console.log(response.data))
@@ -59,7 +67,7 @@ function ChallengeVerify(props){
                                     <p>아침에 일어나서 사진 찍는게 어려운 일 일까요?! 일단 저는 어렵습니다...</p>
                                 </div>
                                 <div class="read_btn">
-                                    <button class="toListBtn" onClick={() => window.location.href='/challenge/1'}>이전</button>
+                                    <button class="toListBtn" onClick={MbChallenge}>이전</button>
                                     <button onClick={verify}>인증</button>
                                 </div>
                             </li>

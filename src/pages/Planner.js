@@ -112,8 +112,8 @@ function Planner(props){
 				p_remindornot : u_remindornot
 			})
 			.then(response=>{
-				alert(response);
-				Axios.get('http://localhost:8070/plan/dailyplan')
+				console.log(response);
+				Axios.get(`http://localhost:8070/plan/dailyplan?uid=${userInfo.u_id}`)
 				.then(response => setPlans(response.data))
 				.catch(error => console.log(error));
 			})
@@ -355,7 +355,7 @@ function Planner(props){
 													<div>{plan.p_startdate} <b>~</b> {plan.p_enddate} </div>
 													<div>
 														<div class="time">{plan.p_starttime} ~ {plan.p_endtime}</div>
-														<div class="title">{plan.p_content}</div>
+														<div class="title">{plan.p_title}</div>
 													</div>
 												</li>
 												))

@@ -2,8 +2,10 @@ import React,{ useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Profile from '../components/Profile';
 import Axios from "axios";
+import Cookies from 'js-cookie';
 function Challenge(props){
     // const [challenges, setChallenges] = useState([]);
+    const userInfo = JSON.parse(Cookies.get('userInfo'));
     const [mylist, setMylist] = useState([]);
     const [popularlist, setPopularlist] = useState([]);
     const [recentlist, setRecentlist] = useState([]);
@@ -15,7 +17,7 @@ function Challenge(props){
     }
 
     useEffect(()=>{
-        Axios.get('http://localhost:8070/challenge/list')
+        Axios.get(`http://localhost:8070/challenge/list?uid=${userInfo.u_id}`)
 		.then((res) => {
             console.log(res);
             setMylist(res.data.mylist);

@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 import $ from 'jquery';
 function MyChallenge(props){
     const uid = JSON.parse(Cookies.get('userInfo')).u_id;
-
+    const [mychallenge,setMychallenge] = useState([]);
     const now = 30;
     const now2 = 40;
     const now3 = 70;
@@ -29,7 +29,7 @@ function MyChallenge(props){
         
         Axios.get(`http://localhost:8070/challenge/mychallenge?uid=${uid}`)
         .then((res)=>{
-            console.log(res);
+            setMychallenge(res.data);
         })
         .catch((err)=>{
             console.log(err);
@@ -51,14 +51,34 @@ function MyChallenge(props){
                                     <h3>참가중인 챌린지</h3>
                                     <h3>진행 현황</h3>
                                     <div class="ac_list">
-                                        <div>
+                                    {mychallenge.length > 0 ? (
+											mychallenge.map(challenge => (
+												<div 
+													key={challenge.p_id} 
+
+													data-cid={challenge.cid}
+													data-cname={challenge.cname}
+													data-cstartdate={challenge.cstartdate}
+													data-cenddate={challenge.cendate}
+												>
+													<img src="/img/morning_sun.png" alt="morning"/>
+                                                    <div>
+                                                        {challenge.cname}
+                                                        <button onClick={()=>window.location.href=`/challenge/${challenge.cid}/verify`} class="myPageBtn">인증하기</button>
+                                                    </div>
+												</div>
+												))
+										) : (
+											<p>Loading...</p>
+										)}
+                                        {/* <div>
                                             <img src="/img/morning_sun.png" alt="morning"/>
                                             <div>
                                                 Miracle Morning
                                                 <button onClick={()=>window.location.href='/challenge/1/verify'} class="myPageBtn">인증하기</button>
                                             </div>
-                                        </div>
-                                        <div>
+                                        </div> */}
+                                        {/* <div>
                                             <img src="/img/open-book.png" alt="open-book"/>
                                             <div>
                                                 Miracle Morning
@@ -78,45 +98,32 @@ function MyChallenge(props){
                                                 Miracle Morning
                                                 <button onClick={()=>window.location.href='/challenge/4/verify'} class="myPageBtn">인증하기</button>
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div class="ac_progress">
-                                        <div>
-                                            {/* progress area */}
+                                        {mychallenge.length > 0 ? (
+											mychallenge.map(challenge => (
+												<div>
+                                                    {/* progress area */}
+                                                    <div class="progress_area">
+                                                        <p>0%</p>
+                                                        <ProgressBar now={challenge.cvsuccesscount/challenge.totalcount*100} label={`${challenge.cvsuccesscount/challenge.totalcount*100}%`} className="my-progress-bar" /> 
+                                                        <p>100%</p>
+                                                    </div>
+                                                    <p>{challenge.cstartdate} ~ {challenge.cenddate}</p>
+                                                </div>
+												))
+										) : (
+											<p>Loading...</p>
+										)}
+                                        {/* <div>
                                             <div class="progress_area">
                                                 <p>0%</p>
                                                 <ProgressBar now={now} label={`${now}%`} className="my-progress-bar" /> 
                                                 <p>100%</p>
                                             </div>
                                             <p>4/10 ~ 4/28</p>
-                                        </div>
-                                        <div>
-                                            {/* progress area */}
-                                            <div class="progress_area">
-                                                <p>0%</p>
-                                                <ProgressBar now={now2} label={`${now2}%`} className="my-progress-bar" />
-                                                <p>100%</p>
-                                            </div>
-                                            <p>4/10 ~ 4/28</p>
-                                        </div>
-                                        <div>
-                                            {/* progress area */}
-                                            <div class="progress_area">
-                                                <p>0%</p>
-                                                <ProgressBar now={now3} label={`${now3}%`} className="my-progress-bar" />
-                                                <p>100%</p>
-                                            </div>
-                                            <p>4/10 ~ 4/28</p>
-                                        </div>
-                                        <div>
-                                            {/* progress area */}
-                                            <div class="progress_area">
-                                                <p>0%</p>
-                                                <ProgressBar now={now4} label={`${now4}%`} className="my-progress-bar" />
-                                                <p>100%</p>
-                                            </div>
-                                            <p>4/10 ~ 4/28</p>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                                 <div></div>

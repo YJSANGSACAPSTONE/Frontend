@@ -2,15 +2,31 @@ import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import Axios from "axios";
 import Profile from '../components/Profile';
+import Cookies from 'js-cookie';
 function ChallengeSignUp(props){
 
     const [challenge,setChallenge] = useState({pay:"10,000"});
-    
+    const userInfo = JSON.parse(Cookies.get('userInfo'));
+    const challengePay = () => {
+        const kpamount = challenge.pay.replace(/,/g, ''); 
+        const u_id = userInfo.u_id;
+      
+        Axios.get(`http://localhost:8070/kakaopay/ready?uid=${u_id}&kpamount=${kpamount}`)
+          .then((res)=>{
+            console.log(res);
+            const win = window.open(res.data.nextRedirectPcUrl, '_blank');
+            win.focus();
+            const a = document.createElement('a');
+            a.href = res.data.nextRedirectPcUrl;
+            a.target = '_blank';
+            a.click();
+          })
+          .catch((err)=>{
+            console.log(err);
+          })
+      }
     useEffect(()=>{
         // axios 로 데이터 불러오기
-        Axios.get('http://localhost:8080/challenge/getChallenge')
-		.then(response => setChallenge(response.data))
-		.catch(error => console.log(error));
     }, []);
     return(
         <>
@@ -49,7 +65,7 @@ function ChallengeSignUp(props){
                                     <p>챌린지 85% 미만 성공</p><p>성공률에 따라 다름</p>
                                     
                                 </div>
-                                <button class="payBtn">결재하기</button>
+                                <button type="button" onClick={challengePay} class="payBtn">결재하기</button>
                             </li>
                         </ul>
                     </div>

@@ -34,7 +34,10 @@ function SignUp(props){
             const userInfo = {
                 u_id ,
                 u_nickname ,
-                u_content 
+                u_content,
+                userImg : userData.userImg,
+                u_level : 1,
+                u_deposit : 0
             };
             Cookies.set('userInfo',JSON.stringify(userInfo));
             history('/planner');

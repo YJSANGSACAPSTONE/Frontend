@@ -79,12 +79,12 @@ function ChallengeUpdate(props){
                             <Profile/>
                             <li class="challenge_read">
                                 <div class="read_title">
-                                    <img src="./img/flag.png" alt="flag"/>
+                                    <img src="/img/flag.png" alt="flag"/>
                                     <p>챌린지명 : <input type="text" name="c_name" value={challenge.c_name} onChange={handleChange} /></p>
                                 </div>
                                 <div class="read_info">
                                     <div class="info_img">
-                                        <img id="thumbnail" src={challenge.thumbnail ? URL.createObjectURL(challenge.thumbnail) : "./img/upload.png"} alt="morning"/>
+                                        <img id="thumbnail" src={challenge.c_thumbnails ? `http://localhost:8070${challenge.c_thumbnails}` : "./img/upload.png"} alt="morning"/>
                                         <input type="file" id="uploadInput" name="thumbnail" onChange={handleChange} />
                                     </div>
                                     <div class="info_text">

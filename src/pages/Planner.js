@@ -85,6 +85,10 @@ function Planner(props){
 		listModal.style.display = "flex";
 	};
 
+	const closePlan = () => {
+		const listModal = document.getElementById("listModal");
+		listModal.style.display = "none";
+	}
 	// 일정 수정 이벤트 트리거
 	const updatePlan = () => {
 		let u_id = userInfo.u_id;
@@ -398,6 +402,7 @@ function Planner(props){
                                                 <div class="editReminder">
                                                     <div class="confirmBtn">
                                                         <button onClick={updatePlan} id="listModalconfirmBtn">확인</button>
+														<button onClick={closePlan} id="listModalconfirmBtn">닫기</button>
                                                     </div>
                                                     <div class="reminder_btn">
                                                         <label for="chk_reminder"><img src="./img/reminders.png" alt="reminders"/>리마인더 설정</label>

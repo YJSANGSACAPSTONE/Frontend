@@ -35,7 +35,7 @@ function SignUp(props){
                 u_id ,
                 u_nickname ,
                 u_content,
-                userImg : userData.userImg,
+                userImg : userData.profileImageUrl,
                 u_level : 1,
                 u_deposit : 0
             };

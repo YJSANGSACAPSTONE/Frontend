@@ -3,13 +3,17 @@ import React,{useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import Profile from '../components/Profile';
 import { ProgressBar } from "react-bootstrap";
+import Axios from "axios";
+import Cookies from 'js-cookie';
 import $ from 'jquery';
 function MyChallenge(props){
+    const uid = JSON.parse(Cookies.get('userInfo')).u_id;
+
     const now = 30;
     const now2 = 40;
     const now3 = 70;
     const now4 = 10;
-    
+
     useEffect(()=>{
         function updateSubFooterPosition() {
             var subFooter = $('#subFooter');
@@ -22,8 +26,16 @@ function MyChallenge(props){
             }
         }
         updateSubFooterPosition();
-    
         
+        Axios.get(`http://localhost:8070/challenge/mychallenge?uid=${uid}`)
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
+
+
     }, []);
     return(
         <>

@@ -11,6 +11,13 @@ function ChallengeRead(props){
     const MvUpdate = () => {
         navigate(`/challenge/${challenge.c_id}/challengeUpdate`, { state: { challenge } });
     }
+    const MvList = () => {
+        navigate(`/challenge`);
+    }
+
+    const MvSignUp = () => {
+        navigate(`/challenge/${challenge.c_id}/signUp`, { state: { challenge } });
+    }
 
     const MvDelete = () => {
         Axios.get(`http://localhost:8070/challenge/deletechallenge?c_id=${challenge.c_id}`)
@@ -42,7 +49,7 @@ function ChallengeRead(props){
                                 </div>
                                 <div class="read_info">
                                     <div class="info_img">
-                                        <img src="/img/morning.png" alt="morning"/>
+                                        <img src={`http://localhost:8070${challenge.c_thumbnails}`} alt="morning"/>
                                     </div>
                                     <div class="info_text">
                                         <p>최대 참가 인원 : {challenge.c_numberofparticipants}</p>
@@ -67,10 +74,10 @@ function ChallengeRead(props){
                                     <p>{challenge.c_content}</p>
                                 </div>
                                 <div class="read_btn">
-                                    <button class="toListBtn" onClick={() => window.location.href='/challenge'}>목록</button>
-                                    <button onClick={()=>MvUpdate}>수정하기</button>
-                                    <button onClick={()=>MvDelete}>삭제하기</button>
-                                    <button onClick={()=>window.location.href=`/challenge/${challenge.c_id}/signUp`}>참가신청</button>
+                                    <button class="toListBtn" onClick={MvList}>목록</button>
+                                    <button onClick={MvUpdate}>수정하기</button>
+                                    <button onClick={MvDelete}>삭제하기</button>
+                                    <button onClick={MvSignUp}>참가신청</button>
                                     <button onClick={() => window.location.href=`/challenge/${challenge.c_id}/verify`}>인증하기</button>
                                 </div>
                             </li>

@@ -25,7 +25,10 @@ function KakaoLogin(){
                     });
                 }else{
                     // 회원가입이 되어있는 사용자일 경우 쿠키를 저장해주고 메인페이지로 이동한다.
-                    Cookies.set('userInfo',JSON.stringify(resInner.data));
+                    // 유저 사진까지 객체에 포함시키기
+                    const userInfo = resInner.data;
+                    userInfo.userImg = res.data.profileImageUrl;
+                    Cookies.set('userInfo',JSON.stringify(userInfo));
                     history('/planner');
                 }
             })

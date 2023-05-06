@@ -47,10 +47,13 @@ function Challenge(props){
                                         <ul>
                                             {Object.keys(popularlist).length > 0 ? (
                                                 popularlist.map(popularlist => (
-                                                    <li onClick={() => MvRead(popularlist)}><div><img src="./img/morning.png" alt="morning"/><p>{popularlist.c_name}</p></div></li>
+                                                    <li onClick={() => MvRead(popularlist)}><div><img src={`http://localhost:8070${popularlist.c_thumbnails}`} alt="morning"/><p>{popularlist.c_name}</p></div></li>
                                                 ))
                                             ) : (
+                                                <>
                                                 <li><Link to="/challenge"><div></div></Link></li>
+                                                <li><Link to="/challenge"><div></div></Link></li>
+                                                </>
                                             )}
                                         </ul>
                                     </div>
@@ -64,7 +67,7 @@ function Challenge(props){
                                         <ul>
                                             {Object.keys(recentlist).length > 0 ? (
                                                 recentlist.map(recentlist => (
-                                                    <li onClick={() => MvRead(recentlist)}><div><img src="./img/morning.png" alt="morning"/><p>{recentlist.c_name}</p></div></li>
+                                                    <li onClick={() => MvRead(recentlist)}><div><img src={`http://localhost:8070${recentlist.c_thumbnails}`} alt="morning"/><p>{recentlist.c_name}</p></div></li>
                                                 ))
                                             ) : (
                                                 <li><Link to="/challenge"><div></div></Link></li>
@@ -81,7 +84,7 @@ function Challenge(props){
                                         <ul>
                                             {Object.keys(mylist).length > 0 ? (
                                                 mylist.map(mylist => (
-                                                    <li onClick={() => MvRead(mylist)}><div><img src="./img/morning.png" alt="morning"/><p>{mylist.c_name}</p></div></li>
+                                                    <li onClick={() => MvRead(mylist)}><div><img src={`http://localhost:8070${mylist.c_thumbnails}`} alt="morning"/><p>{mylist.c_name}</p></div></li>
                                                 ))
                                             ) : (
                                                 <li><Link to="/challenge"><div></div></Link></li>

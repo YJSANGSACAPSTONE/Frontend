@@ -10,6 +10,8 @@ function ProfileInfo(props){
     const userData = location.state?.userData;
     const userInfo = Cookies.get('userInfo');
 
+    console.log(userInfo);
+
     const [u_info, setU_info] = useState(JSON.parse(userInfo));
 
     const {u_id, u_nickname, u_zepid, u_content} = u_info;

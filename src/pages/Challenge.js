@@ -17,6 +17,7 @@ function Challenge(props){
     useEffect(()=>{
         Axios.get('http://localhost:8070/challenge/list')
 		.then((res) => {
+            console.log(res);
             setMylist(res.data.mylist);
             setPopularlist(res.data.popularlist);
             setRecentlist(res.data.recentlist);

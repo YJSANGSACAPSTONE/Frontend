@@ -40,6 +40,7 @@ function ProfileInfo(props){
         Axios.get(`http://localhost:8070/user/deleteuser?uid=${u_id}`)
         .then((res) => {
            console.log(res.data); // 처리 결과 출력
+           history('/');
         })
         .catch((error) => {
             console.log(error); // 오류 발생 시 출력

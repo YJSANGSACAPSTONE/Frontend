@@ -19,6 +19,10 @@ function ChallengeRead(props){
         navigate(`/challenge/${challenge.c_id}/signUp`, { state: { challenge } });
     }
 
+    const MvVerify = () => {
+        navigate(`/challenge/${challenge.c_id}/verify`, { state: { challenge } });
+    }
+
     const MvDelete = () => {
         Axios.get(`http://localhost:8070/challenge/deletechallenge?c_id=${challenge.c_id}`)
         .then((res)=>{
@@ -78,7 +82,7 @@ function ChallengeRead(props){
                                     <button onClick={MvUpdate}>수정하기</button>
                                     <button onClick={MvDelete}>삭제하기</button>
                                     <button onClick={MvSignUp}>참가신청</button>
-                                    <button onClick={() => window.location.href=`/challenge/${challenge.c_id}/verify`}>인증하기</button>
+                                    <button onClick={MvVerify}>인증하기</button>
                                 </div>
                             </li>
                         </ul>

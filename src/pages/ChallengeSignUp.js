@@ -10,18 +10,19 @@ function ChallengeSignUp(props){
     const userInfo = JSON.parse(Cookies.get('userInfo'));
     const challengePay = () => {
         const u_id = userInfo.u_id;
-      
-        Axios.post(`http://localhost:8070/challenge/participate`,{
-            uid : u_id,
-            m : challenge
+        console.log(challenge);
+        Axios.post(`http://localhost:8070/challenge/participate?uid=${u_id}`,{
+            c_name : challenge.c_name,
+            c_id : challenge.c_id,
+            c_fee : challenge.c_fee
         })
-          .then((res)=>{
+        .then((res)=>{
             console.log(res);
-          })
-          .catch((err)=>{
+        })
+        .catch((err)=>{
             console.log(err);
-          })
-      }
+        })
+    }
     useEffect(()=>{
         // axios 로 데이터 불러오기
     }, []);

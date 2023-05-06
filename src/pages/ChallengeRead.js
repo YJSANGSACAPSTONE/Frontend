@@ -1,11 +1,28 @@
 import React,{ useEffect } from 'react';
-import { Link, useParams, useLocation } from 'react-router-dom';
+import Axios from "axios";
+import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import Profile from '../components/Profile';
 function ChallengeRead(props){
     const location = useLocation();
     const challenge = location.state.challenge;
+    const navigate = useNavigate();
     const {id} = useParams();
-    console.log(challenge);
+
+    const MvUpdate = () => {
+        navigate(`/challenge/${challenge.c_id}/challengeUpdate`, { state: { challenge } });
+    }
+
+    const MvDelete = () => {
+        Axios.get(`http://localhost:8070/challenge/deletechallenge?c_id=${challenge.c_id}`)
+        .then((res)=>{
+            console.log(res)
+            // navigate(`/challenge`);
+        })
+        .catch((error)=>{
+            console.log(error);
+        });
+        
+    }
     useEffect(()=>{
         
     }, [])
@@ -51,6 +68,8 @@ function ChallengeRead(props){
                                 </div>
                                 <div class="read_btn">
                                     <button class="toListBtn" onClick={() => window.location.href='/challenge'}>목록</button>
+                                    <button onClick={()=>MvUpdate}>수정하기</button>
+                                    <button onClick={()=>MvDelete}>삭제하기</button>
                                     <button onClick={()=>window.location.href=`/challenge/${challenge.c_id}/signUp`}>참가신청</button>
                                     <button onClick={() => window.location.href=`/challenge/${challenge.c_id}/verify`}>인증하기</button>
                                 </div>

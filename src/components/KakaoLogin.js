@@ -5,7 +5,6 @@ import Cookies from 'js-cookie';
 
 function KakaoLogin(){
 
-    const [user, setUser] = useState([]);
     const history = useNavigate();
 
     useEffect(()=>{
@@ -15,11 +14,25 @@ function KakaoLogin(){
         console.log(url);
         Axios.get(`http://localhost:8070/login?code=${code}`).then((res)=>{
             console.log(res.data);
-            setUser(res.data);
-            Cookies.set('userId', res.data.userId);
-            history('/signUp',{
-                state : {userData : res.data}
+            Axios.get(`http://localhost:8070/user/listuser?uid=${res.data.userId}`).
+            then((resInner)=>{
+                console.log(resInner);
+                
+                // 만약 첫 로그인일 경우 회원가입 페이지로 카카오 API 통신을 통해 받은 userId와 userProfileImg를 담아서 이동한다
+                if(resInner.data == null){
+                    history('/signUp',{
+                        state : {userData : res.data}
+                    });
+                }else{
+                    // 회원가입이 되어있는 사용자일 경우 쿠키를 저장해주고 메인페이지로 이동한다.
+                    Cookies.set('userInfo',JSON.stringify(res.data));
+                    history('/planner');
+                }
+            })
+            .catch((err)=>{
+                console.log(err);
             });
+            
         });
     }, []);
 

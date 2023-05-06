@@ -16,6 +16,7 @@ import BoardWrite from './pages/BoardWrite';
 import BoardEdit from './pages/BoardEdit';
 import UserProfile from './pages/UserProfile';
 import ProfileInfo from './pages/ProfileInfo';
+import Point from './pages/Point';
 import MyChallenge from './pages/MyChallenge';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -79,6 +80,7 @@ function App() {
 			<Route path="/profile" element={<UserProfile header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/profile/:id/info" element={<ProfileInfo header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/profile/:id/myChallenge" element={<MyChallenge header={<Header/>} footer={<Footer/>} />} />
+			<Route path="/profile/:id/point" element={<Point header={<Header/>} footer={<Footer/>} />} />
 
 			<Route path="/board" element={<Board header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/board/:id" element={<BoardRead header={<Header/>} footer={<Footer/>} />} />

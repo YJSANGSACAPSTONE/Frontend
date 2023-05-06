@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
+
 function Header(){
+    const userInfo = JSON.parse(Cookies.get('userInfo'));
+
     return (
         <div id="subHeader" class="container">
             <div class="container_inner">

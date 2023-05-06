@@ -1,19 +1,23 @@
+import React from 'react';
 import { Link, useLocation } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 export default function Profile(){
     const location = useLocation();
     const shouldRenderHotChart = location.pathname === "/board";
+    const userInfo = JSON.parse(Cookies.get('userInfo'));
+    
     return (
         <li className="planner_profile">
             <Link to="/planner">
                 <div>
                 <div className="pl_pro_img">
                     <img src="/img/profile.png" alt="profile" />
-                    <p>@sinsung test</p>
+                    <p>{userInfo.u_id}</p>
                 </div>
                 <div className="pl_pro_text">
-                    <p>영진상사</p>
-                    <p>lv. 10</p>
+                    <p>{userInfo.u_nickname}</p>
+                    <p>lv. {userInfo.u_level}</p>
                 </div>
                 </div>
             </Link>

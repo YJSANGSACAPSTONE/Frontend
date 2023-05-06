@@ -11,9 +11,10 @@ function ChallengeSignUp(props){
     const challengePay = () => {
         const u_id = userInfo.u_id;
       
-        Axios.post(`http://localhost:8070/challenge/participate`,{
-            uid : u_id,
-            m : challenge
+        Axios.post(`http://localhost:8070/challenge/participate?uid=${u_id}`,{
+            c_name : challenge.c_name,
+            c_id : challenge.c_id,
+            c_fee : challenge.c_fee
         })
           .then((res)=>{
             console.log(res);

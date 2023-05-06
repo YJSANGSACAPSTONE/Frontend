@@ -1,27 +1,30 @@
 import React, {useState, useEffect} from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation,useNavigate } from 'react-router-dom';
 import Axios from "axios";
 import Profile from '../components/Profile';
 import Cookies from 'js-cookie';
 function ChallengeSignUp(props){
 
     const location = useLocation();
+    const history = useNavigate();
     const challenge = location.state?.challenge;
     const userInfo = JSON.parse(Cookies.get('userInfo'));
     const challengePay = () => {
         const u_id = userInfo.u_id;
         console.log(challenge);
-        Axios.post(`http://localhost:8070/challenge/participate?uid=${u_id}`,{
-            c_name : challenge.c_name,
-            c_id : challenge.c_id,
-            c_fee : challenge.c_fee
-        })
-        .then((res)=>{
-            console.log(res);
-        })
-        .catch((err)=>{
-            console.log(err);
-        })
+        if(window.confirm("정말 참가하시겠습니까?")){
+            Axios.post(`http://localhost:8070/challenge/participate?uid=${u_id}`,{
+                c_name : challenge.c_name,
+                c_id : challenge.c_id,
+                c_fee : challenge.c_fee
+            })
+            .then((res)=>{
+                history(`/profile/${challenge.c_id}/myChallenge`);
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+        }
     }
     useEffect(()=>{
         // axios 로 데이터 불러오기

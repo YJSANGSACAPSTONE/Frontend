@@ -12,14 +12,14 @@ export default function Profile(){
         <li className="planner_profile">
             <Link to="/planner">
                 <div>
-                <div className="pl_pro_img">
-                    <img src={userInfo.userImg} alt="profile" />
-                    <p>{userInfo.u_id}</p>
-                </div>
-                <div className="pl_pro_text">
-                    <p>{userInfo.u_nickname}</p>
-                    <p>lv. {userInfo.u_level}</p>
-                </div>
+                    <div className="pl_pro_img">
+                        <img src={userInfo.userImg} alt="profile" />
+                        <p>{userInfo.u_id}</p>
+                    </div>
+                    <div className="pl_pro_text">
+                        <p>{userInfo.u_nickname}</p>
+                        <p>lv. {userInfo.u_level}</p>
+                    </div>
                 </div>
             </Link>
             {shouldRenderHotChart && (
@@ -53,6 +53,9 @@ export default function Profile(){
                     </ul>
                 </div>
             )}
+            <div class="pointArea">
+                <h3>보유 포인트 : {userInfo.u_deposit}</h3>
+            </div>
         </li>
     )
 }

@@ -5,6 +5,7 @@ import Axios from "axios";
 import Profile from '../components/Profile';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Cookies from 'js-cookie';
 
 function Planner(props){
     const [plans, setPlans]=useState([]);
@@ -18,6 +19,8 @@ function Planner(props){
 	const [starttime, setStarttime] = useState("");
 	const [category, setCategory] = useState("");
 	const [remind, setRemind] = useState("");
+	
+	const userInfo = JSON.parse(Cookies.get('userInfo'));
 
 	const uploadInputRef = useRef(null);
 	const thumbnailRef = useRef(null);
@@ -34,8 +37,7 @@ function Planner(props){
 		// 선택된 날짜를 yyyy-mm-dd 형식으로 변환하여 input 요소에 설정
 		const formattedDate = date ? date.toISOString().slice(0, 10) : ""; // ISO 형식 (yyyy-mm-dd)으로 변환
 		const inputEl = document.getElementById("date-input");
-		inputEl.value = formattedDate;
-		
+		inputEl.value = formattedDate;	
 	};
 	const dateToString = (date) => {
 		return date.toLocaleDateString("en-US");
@@ -43,8 +45,12 @@ function Planner(props){
 	  
 	const deleteBtn = (e) => {
 		Axios.get(`http://localhost:8070/plan/deleteplan/${pid}`).then((res)=>{
-			Axios.get('http://localhost:8070/plan/dailyplan')
-			.then(response => setPlans(response.data))
+			Axios.get(`http://localhost:8070/plan/dailyplan?uid=${userInfo.u_id}`)
+			.then((response) => {
+				console.log(response);
+				setPlans(response.data);
+				$("#listModal").css('display','none');
+			})
 			.catch(error => console.log(error));
 		})
 
@@ -81,7 +87,7 @@ function Planner(props){
 
 	// 일정 수정 이벤트 트리거
 	const updatePlan = () => {
-		let u_id = "sinsung@naver.com";
+		let u_id = userInfo.u_id;
 		let u_title = $("input[name=u_title]").val();
 		let u_content = $("textarea[name=u_content]").val();
 		let u_category = $("select[name=u_category]").val();
@@ -106,8 +112,8 @@ function Planner(props){
 				p_remindornot : u_remindornot
 			})
 			.then(response=>{
-				alert(response);
-				Axios.get('http://localhost:8070/plan/dailyplan')
+				console.log(response);
+				Axios.get(`http://localhost:8070/plan/dailyplan?uid=${userInfo.u_id}`)
 				.then(response => setPlans(response.data))
 				.catch(error => console.log(error));
 			})
@@ -118,7 +124,7 @@ function Planner(props){
 	
     useEffect(() => {
 		// 첫 페이지 로딩 후 Axios를 통해서 오늘 날짜 plan 받아오는 것
-		Axios.get('http://localhost:8070/plan/dailyplan')
+		Axios.get(`http://localhost:8070/plan/dailyplan?uid=${userInfo.u_id}`)
 		.then(response => setPlans(response.data))
 		.catch(error => console.log(error));
 
@@ -235,7 +241,7 @@ function Planner(props){
 		
 		// 일정 입력 이벤트 트리거
 		const addPlan = () => {
-			let u_id = "sinsung@naver.com";
+			let u_id = userInfo.u_id;
 			let p_title = $("input[name=p_title]").val();
 			let p_content = $("textarea[name=p_content]").val();
 			let p_category = $("select[name=p_category]").val();
@@ -261,13 +267,13 @@ function Planner(props){
 				p_remindornot : p_remindornot
 			})
 			.then(response=>{
-				alert(response);
-				Axios.get('http://localhost:8070/plan/dailyplan')
+				console.log(response);
+				Axios.get(`http://localhost:8070/plan/dailyplan?uid=${userInfo.u_id}`)
 				.then(response => setPlans(response.data))
 				.catch(error => console.log(error));
 			})
 			.catch(error => {
-				alert(error);
+				console.log(error);
 			});
 		};
 		
@@ -349,7 +355,7 @@ function Planner(props){
 													<div>{plan.p_startdate} <b>~</b> {plan.p_enddate} </div>
 													<div>
 														<div class="time">{plan.p_starttime} ~ {plan.p_endtime}</div>
-														<div class="title">{plan.p_content}</div>
+														<div class="title">{plan.p_title}</div>
 													</div>
 												</li>
 												))
@@ -426,10 +432,10 @@ function Planner(props){
                                                         <option value="공부">공부</option>
                                                         <option value="취미">취미</option>
                                                     </select>
-                                                    <div class="btn_area">
+                                                    {/* <div class="btn_area">
                                                         <button class="editBtn"><img src="./img/edit.png" alt="edit"/>시간수정</button>
                                                         <button><img src="./img/bin.png" alt="bin"/>삭제하기</button>
-                                                    </div>
+                                                    </div> */}
                                                     <div class="text_area">
                                                         <textarea name="p_content" id="" ></textarea>
                                                     </div>

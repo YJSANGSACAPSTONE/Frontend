@@ -18,12 +18,25 @@ function Point(props){
             const a = document.createElement('a');
             a.href = res.data.nextRedirectPcUrl;
             a.target = '_blank';
+            window.open('/JobComplete', '_blank')
             // a.click();
         })
         .catch((err)=>{
              console.log(err);
         })
     }
+
+    window.addEventListener('message', (event)=>{
+        if(event.origin !== window.location.origin){
+            console.log("확인되지 않은 origin으로부터의 메세지는 무시합니다.");
+            return;
+        }
+
+        if(event.data == '작업 완료'){
+            // 작업이 완료되면 이동할 경로를 설정합니다.
+            window.location.href='/planner';
+        }
+    })
     useEffect(()=>{
         function updateSubFooterPosition() {
             var subFooter = $('#subFooter');

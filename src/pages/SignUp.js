@@ -1,10 +1,11 @@
 import React,{ useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import $ from 'jquery';
 import Axios from "axios";
-
+import Cookies from 'js-cookie';
 function SignUp(props){
 
+    const history = useNavigate();
     const location = useLocation();
     const userData = location.state?.userData;
     console.log(userData);
@@ -18,7 +19,6 @@ function SignUp(props){
     const addUser = () => {
         let u_id = $("input[name=u_id]").val();
         let u_nickname = $("input[name=u_nickname]").val();
-        let u_zepid = $("textarea[name=u_zepid]").val();
         let u_content = $("input[name=u_content]").val();
 
         console.log(u_id);
@@ -27,11 +27,17 @@ function SignUp(props){
         {
             u_id : u_id,
             u_nickname : u_nickname,
-            u_zepid : u_zepid,
             u_content : u_content,
         })
         .then(response=>{
             console.log(response);
+            const userInfo = {
+                u_id ,
+                u_nickname ,
+                u_content 
+            };
+            Cookies.set('userInfo',JSON.stringify(userInfo));
+            history('/planner');
         })
         .catch(error => {
             console.log(error);
@@ -39,7 +45,7 @@ function SignUp(props){
     };
     // addUser
     useEffect(()=>{
-        console.log(userData);
+        // console.log(userData);
         function updateSubFooterPosition() {
 			var subFooter = $('#subFooter');
 			if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
@@ -69,8 +75,6 @@ function SignUp(props){
                                     <input type="text" id="signId" placeHolder="@abcdefg.com" value={userData.userId} name="u_id" />
                                     <label htmlFor="signName">닉네임</label>
                                     <input type="name" id="signName" name="u_nickname" />
-                                    <label htmlFor="signZep">ZEP ID</label>
-                                    <input type="text" id="signZep" name="u_zepid" />
                                     <label htmlFor="signContent">소개</label>
                                     <input type="text" id="signContent" name="u_content" />
 

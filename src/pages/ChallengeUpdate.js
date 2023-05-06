@@ -1,26 +1,13 @@
 import React, { useState, useEffect, useRef }  from 'react';
 import $ from 'jquery';
 import Axios from "axios";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Profile from '../components/Profile';
-function ChallengeWrite(props){
+function ChallengeUpdate(props){
+    const location = useLocation();
     const history = useNavigate();
 
-    const [challenge, setChallenge] = useState({
-        c_name: "",
-        c_numberofparticipants: 1,
-        c_startdate: "",
-        c_enddate: "",
-        c_category: 1,
-        c_fee: 0,
-        c_numberofphoto: 0,
-        c_typeofverify: 1,
-        c_typeoffrequency: 1,
-        c_frequency: "",
-        c_score: 0,
-        c_content: "",
-        thumbnail: null,
-      });
+    const [challenge, setChallenge] = useState(location.state.challenge);
       
       const handleChange = (e) => {
         const { name, value } = e.target;
@@ -34,7 +21,7 @@ function ChallengeWrite(props){
       };
 
       
-    const addChallenge = (challengeData) =>{
+    const updateChallenge = (challengeData) =>{
         const formData = new FormData();
         
         formData.append('thumbnail', challengeData.thumbnail);
@@ -54,7 +41,7 @@ function ChallengeWrite(props){
 
         console.log(challengeData);
 
-        Axios.post('http://localhost:8070/challenge/addchallenge',formData,{
+        Axios.post('http://localhost:8070/challenge/updatechallenge',formData,{
             headers : {
                 'Content-Type':'multipart/form-data'
             }
@@ -154,7 +141,7 @@ function ChallengeWrite(props){
                                     <textarea name="c_content" id="" cols="30" rows="10" placeholder="내용을 작성하세요..." value={challenge.c_content} onChange={handleChange}/>
                                 </div>
                                 <div class="read_btn">
-                                    <button onClick={()=>addChallenge(challenge)}>챌린지등록</button>
+                                    <button onClick={()=>updateChallenge(challenge)}>챌린지수정</button>
                                 </div>
                             </li>
                         </ul>
@@ -166,4 +153,4 @@ function ChallengeWrite(props){
     )
 }
 
-export default ChallengeWrite;
+export default ChallengeUpdate;

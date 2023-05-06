@@ -6,13 +6,14 @@ export default function Profile(){
     const location = useLocation();
     const shouldRenderHotChart = location.pathname === "/board";
     const userInfo = JSON.parse(Cookies.get('userInfo'));
+
     
     return (
         <li className="planner_profile">
             <Link to="/planner">
                 <div>
                 <div className="pl_pro_img">
-                    <img src="/img/profile.png" alt="profile" />
+                    <img src={userInfo.userImg} alt="profile" />
                     <p>{userInfo.u_id}</p>
                 </div>
                 <div className="pl_pro_text">

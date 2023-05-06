@@ -68,8 +68,8 @@ html, body, #root, .App{ width:100%; height:100%; }
 .planner_profile .hot_chart ul{ display:flex; border-radius:10px; border:solid 2px #dadada; flex-direction:column;  overflow:hidden; }
 .planner_profile .hot_chart li{ display:flex; width:100%; justify-content:space-between; padding:10px; border-bottom:solid 1px #dadada; }
 .planner_profile .hot_chart li:last-child{ border-bottom:none; }
-.planner_profile .pl_pro_img img{ width:140px; }
-.planner_profile .pl_pro_img p{ text-align: center; }
+.planner_profile .pl_pro_img img{ width:132px; height:132px; object-fit:cover; border-radius:50%; }
+.planner_profile .pl_pro_img p{ text-align: center; padding-top:10px; }
 .planner_profile .pl_pro_text > p{ padding:35px 10px; }
 
 
@@ -271,7 +271,7 @@ html, body, #root, .App{ width:100%; height:100%; }
 #challenge .ch_lists .title > p{ font-size:30px; color:#6b6b6b; font-weight:bold; }
 #challenge .ch_lists .title > button{ background:none; border:none; font-size:50px; cursor:pointer; color:#d2d2d2; }
 #challenge .challenge_list{ padding:20px 0; }
-#challenge .challenge_list > ul{ display:flex; justify-content: space-between; align-content: flex-start; flex-wrap: wrap; }
+#challenge .challenge_list > ul{ display: flex; flex-wrap: wrap; grid-gap: 20px; justify-content: flex-start; }
 #challenge .challenge_list > ul > li{ width:calc(25% - 20px); margin-bottom:20px; }
 
 #challenge .challenge_list div{ width:100%; height:180px; background:#b5b5b5; border-radius:10px; cursor:pointer; position: relative; }

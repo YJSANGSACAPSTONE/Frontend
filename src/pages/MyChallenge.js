@@ -29,6 +29,7 @@ function MyChallenge(props){
         
         Axios.get(`http://localhost:8070/challenge/mychallenge?uid=${uid}`)
         .then((res)=>{
+            console.log(res);
             setMychallenge(res.data);
         })
         .catch((err)=>{
@@ -61,7 +62,7 @@ function MyChallenge(props){
 													data-cstartdate={challenge.cstartdate}
 													data-cenddate={challenge.cendate}
 												>
-													<img src="/img/morning_sun.png" alt="morning"/>
+													<img src={`http://localhost:8070${challenge.cthumbnails}`} alt="morning"/>
                                                     <div>
                                                         {challenge.cname}
                                                         <button onClick={()=>window.location.href=`/challenge/${challenge.cid}/verify`} class="myPageBtn">인증하기</button>
@@ -114,12 +115,6 @@ function MyChallenge(props){
 										) : (
 											<p>Loading...</p>
 										)}
-                                        <div>
-                                            <div class="progress_area">
-                                                <ProgressBar now={now} label={`${now}%`} className="my-progress-bar" /> 
-                                            </div>
-                                            <p>4/10 ~ 4/28</p>
-                                        </div>
                                     </div>
                                 </div>
                                 <div></div>

@@ -23,6 +23,10 @@ import Footer from './components/Footer';
 import KakaoLogin from './components/KakaoLogin';
 import PaymentHistory from './pages/PaymentHistory';
 import JobComplete from './components/JobComplete';
+
+import NotFound from './components/NotFound';
+
+
 import Axios from "axios";
 import $ from 'jquery';
 
@@ -91,6 +95,9 @@ function App() {
 			<Route path="/board/:id" element={<BoardRead header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/board/:id/edit" element={<BoardEdit header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/board/write" element={<BoardWrite header={<Header/>} footer={<Footer/>} />} />
+
+
+			<Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
     </div>

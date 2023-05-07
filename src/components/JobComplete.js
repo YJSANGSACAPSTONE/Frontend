@@ -4,12 +4,12 @@ import Axios from "axios";
 import Cookies from 'js-cookie';
 
 function JobComplete(){
-    let payMoney = Cookies.get('payMoney');
-    let userInfo = JSON.parse(Cookies.get('userInfo'));
-    userInfo.u_deposit = userInfo.u_deposit + payMoney;
-
     const closeWindow = () => {
-        
+        let payMoney = Cookies.get('payMoney');
+        let userInfo = JSON.parse(Cookies.get('userInfo'));
+        userInfo.u_deposit = parseInt(userInfo.u_deposit) + parseInt(payMoney);
+        Cookies.set('userInfo', JSON.stringify(userInfo));
+
         window.opener.postMessage('작업 완료', window.location.origin);
         window.close();
     }

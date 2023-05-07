@@ -143,11 +143,19 @@ function Planner(props){
 			addTaskModal.style.display = "flex";
 		});		
 		closeModalBtn.addEventListener("click", () => {
-			addTaskModal.style.display = "none";
+			// addTaskModal.style.display = "none";
 		});
 		addTaskForm.addEventListener("submit", (event) => {
 			event.preventDefault();
 			addTaskModal.style.display = "none";
+			$("input[name=p_title]").val('');
+			$("textarea[name=p_content]").val('');
+			$("select[name=p_category]").val('');
+			$("input[name=p_startdate]").val('');
+			$("input[name=p_enddate]").val('');
+			$("input[name=p_starttime]").val('');
+			$("input[name=p_endtime]").val('');
+			$("input[name=p_remindornot]").prop('checked', false);
 			// 추가할일 처리 로직 작성
 		});
 

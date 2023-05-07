@@ -107,7 +107,7 @@ function MyChallenge(props){
 												<div>
                                                     {/* progress area */}
                                                     <div class="progress_area">
-                                                        <ProgressBar now={challenge.cvsuccesscount/challenge.totalcount*100} label={`${challenge.cvsuccesscount/challenge.totalcount*100}%`} className="my-progress-bar" /> 
+                                                        <ProgressBar now={Math.floor(challenge.cvsuccesscount / challenge.totalcount * 100)} label={`${Math.floor(challenge.cvsuccesscount / challenge.totalcount * 100)}%`} className="my-progress-bar" />
                                                     </div>
                                                     <p>{challenge.cstartdate} ~ {challenge.cenddate}</p>
                                                 </div>

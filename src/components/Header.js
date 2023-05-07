@@ -4,7 +4,13 @@ import Cookies from 'js-cookie';
 import $ from 'jquery';
 
 function Header(){
-    const userInfo = JSON.parse(Cookies.get('userInfo'));
+    let userInfo;
+    try {
+        userInfo = JSON.parse(Cookies.get('userInfo'));
+    } catch (e) {
+        console.error('Error parsing userInfo cookie:', e);
+    // 예외 처리 코드를 여기에 추가할 수 있습니다.
+    }
     useEffect(()=>{
         function updateSubFooterPosition() {
             console.log(123)

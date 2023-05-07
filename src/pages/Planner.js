@@ -273,7 +273,17 @@ function Planner(props){
 			.then(response=>{
 				console.log(response);
 				Axios.get(`http://localhost:8070/plan/dailyplan?uid=${userInfo.u_id}`)
-				.then(response => setPlans(response.data))
+				.then((response) => {
+					setPlans(response.data)
+					$("input[name=p_title]").val('');
+					$("textarea[name=p_content]").val('');
+					$("select[name=p_category]").val('');
+					$("input[name=p_startdate]").val('');
+					$("input[name=p_enddate]").val('');
+					$("input[name=p_starttime]").val('');
+					$("input[name=p_endtime]").val('');
+					$("input[name=p_remindornot]").prop('checked', false);
+				})
 				.catch(error => console.log(error));
 			})
 			.catch(error => {
@@ -281,11 +291,11 @@ function Planner(props){
 			});
 		};
 		
-		$("#addTaskModal .confirmBtn button").on('click', addPlan);
+		$("#addTaskModal .confirmBtn .addBtn").on('click', addPlan);
 		
 		// 이 부분이 추가된 부분입니다.
 		return () => {
-			$("#addTaskModal .confirmBtn button").off('click', addPlan);
+			$("#addTaskModal .confirmBtn .addBtn").off('click', addPlan);
 		};
 	}, []);
     return (
@@ -458,7 +468,8 @@ function Planner(props){
                                                     </div>
                                                     <div class="editReminder">
                                                         <div class="confirmBtn">
-                                                            <button id="closeModalBtn">확인</button>
+                                                            <button id="closeModalBtn" class="addBtn">확인</button>
+															<button id="closeModalBtn">닫기</button>
                                                         </div>
                                                         <div class="reminder_btn">
                                                             <label for="chk_reminder_w"><img src="./img/reminders.png" alt="reminders"/>리마인더 설정</label>

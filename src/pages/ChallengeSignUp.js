@@ -9,10 +9,9 @@ function ChallengeSignUp(props){
     const history = useNavigate();
     const challenge = location.state?.challenge;
     const userInfo = JSON.parse(Cookies.get('userInfo'));
+    console.log(challenge.c_fee);
     const challengePay = () => {
         const u_id = userInfo.u_id;
-      
-        console.log(challenge);
         if(window.confirm("정말 참가하시겠습니까?")){
             Axios.post(`http://localhost:8070/challenge/participate?uid=${u_id}`,{
                 c_name : challenge.c_name,
@@ -20,6 +19,8 @@ function ChallengeSignUp(props){
                 c_fee : challenge.c_fee
             })
             .then((res)=>{
+                userInfo.u_deposit = parseInt(userInfo.u_deposit) - parseInt(challenge.c_fee);
+                Cookies.set('userInfo',JSON.stringify(userInfo))
                 history(`/profile/${challenge.c_id}/myChallenge`);
             })
             .catch((err)=>{

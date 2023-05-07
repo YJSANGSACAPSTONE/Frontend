@@ -51,8 +51,7 @@ function Challenge(props){
                                                 ))
                                             ) : (
                                                 <>
-                                                <li><Link to="/challenge"><div></div></Link></li>
-                                                <li><Link to="/challenge"><div></div></Link></li>
+                                                <li><div><p>등록된 챌린지가 없습니다.</p></div></li>
                                                 </>
                                             )}
                                         </ul>
@@ -70,7 +69,7 @@ function Challenge(props){
                                                     <li onClick={() => MvRead(recentlist)}><div><img src={`http://localhost:8070${recentlist.c_thumbnails}`} alt="morning"/><p>{recentlist.c_name}</p></div></li>
                                                 ))
                                             ) : (
-                                                <li><Link to="/challenge"><div></div></Link></li>
+                                                <li><div><p>등록된 챌린지가 없습니다.</p></div></li>
                                             )}
                                         </ul>
                                     </div>
@@ -87,7 +86,7 @@ function Challenge(props){
                                                     <li onClick={() => MvRead(mylist)}><div><img src={`http://localhost:8070${mylist.c_thumbnails}`} alt="morning"/><p>{mylist.c_name}</p></div></li>
                                                 ))
                                             ) : (
-                                                <li><Link to="/challenge"><div></div></Link></li>
+                                                <li><div><p>참여중인 챌린지가 없습니다.</p></div></li>
                                             )}
                                         </ul>
                                     </div>

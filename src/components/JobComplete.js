@@ -5,6 +5,11 @@ import Cookies from 'js-cookie';
 
 function JobComplete(){
     const closeWindow = () => {
+        let payMoney = Cookies.get('payMoney');
+        let userInfo = JSON.parse(Cookies.get('userInfo'));
+        userInfo.u_deposit = parseInt(userInfo.u_deposit) + parseInt(payMoney);
+        Cookies.set('userInfo', JSON.stringify(userInfo));
+
         window.opener.postMessage('작업 완료', window.location.origin);
         window.close();
     }

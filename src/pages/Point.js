@@ -61,10 +61,15 @@ function Point(props){
                         <ul>
                             <Profile/>
                             <li className="point_area">
-                                유저이름 : {userInfo.u_id}
-                                <label htmlFor="">충전 금액 : </label>
-                                <input type="number" name="pay" value={pay} onChange={(e)=>setPay(e.target.value)} />
-                                <button type="button" onClick={pointpay}>충전하기</button>
+                                <div class="charge-point-container">
+                                    <h2 class="charge-point-title">포인트 충전</h2>
+                                    <p class="user-id">사용자 아이디: <span class="user-id-value">{userInfo.u_id}</span></p>
+                                    <form class="charge-point-form">
+                                        <label for="charge-amount">충전 금액:</label>
+                                        <input type="number" id="charge-amount" name="pay" value={pay} onChange={(e)=>setPay(e.target.value)} />
+                                        <button type="button" onClick={pointpay} class="charge-button">충전하기</button>
+                                    </form>
+                                </div>
                             </li>
                         </ul>
                     </div>

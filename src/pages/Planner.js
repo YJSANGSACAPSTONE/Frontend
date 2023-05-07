@@ -382,7 +382,7 @@ function Planner(props){
 												</li>
 												))
 										) : (
-											<p>Loading...</p>
+											<h3>새로운 일정을 만들어보세요!</h3>
 										)}
 									
                                         <div class="btn_li">

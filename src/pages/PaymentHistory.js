@@ -61,14 +61,13 @@ function PaymentHistory(props){
                                             </tr>
                                             ))
                                     ) : (
-                                        <h3>새로운 일정을 만들어보세요!</h3>
+                                        <tr>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td>-</td>
+                                            <td><span class="status-pending">-</span></td>
+                                        </tr>
                                     )}
-                                    <tr>
-                                        <td>2023-05-01</td>
-                                        <td>카카오페이</td>
-                                        <td>1500</td>
-                                        <td><span class="status-paid">성공</span></td>
-                                    </tr>
                                     {/* <tr>
                                         <td>2023-04-28</td>
                                         <td>카카오페이</td>

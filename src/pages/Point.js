@@ -10,7 +10,7 @@ function Point(props){
     const [pay, setPay] = useState(0);
     const pointpay = () => {
         const u_id = userInfo.u_id;
-        
+        Cookies.set('payMoney', pay);
         Axios.get(`http://localhost:8070/kakaopay/ready?uid=${u_id}&kpamount=${pay}`)
         .then((res)=>{
             const win = window.open(res.data.nextRedirectPcUrl, '_blank');
@@ -18,7 +18,7 @@ function Point(props){
             const a = document.createElement('a');
             a.href = res.data.nextRedirectPcUrl;
             a.target = '_blank';
-            window.open('/JobComplete', '_blank')
+            // window.open('/JobComplete', '_blank')
             // a.click();
         })
         .catch((err)=>{

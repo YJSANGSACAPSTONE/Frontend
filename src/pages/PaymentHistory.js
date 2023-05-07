@@ -53,10 +53,10 @@ function PaymentHistory(props){
                                     <tbody>
                                     {paylist.length > 0 ? (
                                         paylist.map(paylist => (
-                                            <tr key={paylist.kpid}>
-                                                <td>{paylist.kpdate}</td>
+                                            <tr key={paylist.kp_id}>
+                                                <td>{paylist.kp_date}</td>
                                                 <td>카카오페이</td>
-                                                <td>{paylist.kpa}</td>
+                                                <td>{paylist.kp_amount}</td>
                                                 <td><span class="status-paid">성공</span></td>
                                             </tr>
                                             ))

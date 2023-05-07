@@ -63,7 +63,7 @@ html, body, #root, .App{ width:100%; height:100%; }
 .planner_profile{ width:25%; position: relative; }
 .planner_profile > a > div{ position:fixed; display:flex; padding:10px; }
 .planner_profile > div{ position:fixed; display:flex; padding:10px; }
-.planner_profile > a > div:first-child{ background:#ededed; border-radius:10px; }
+.planner_profile > a > div:first-child{ box-shadow: 0 2px 5px rgba(0,0,0,0.3); background:#ededed; border-radius:10px; }
 .planner_profile  div.hot_chart{ top:430px; display:flex; flex-direction:column; grid-gap:20px; width:390px; }
 .planner_profile  div.pointArea{ top:390px; display:flex; flex-direction:column; grid-gap:20px; width:300px; }
 .planner_profile .hot_chart ul{ display:flex; border-radius:10px; border:solid 2px #dadada; flex-direction:column;  overflow:hidden; }
@@ -135,8 +135,8 @@ html, body, #root, .App{ width:100%; height:100%; }
 .planner_inputArea .planner_ls ul > li{ display:flex; flex-direction:column; }
 .planner_inputArea .planner_ls ul > li > div:first-child{ width:100%; padding-left:15px; }
 .planner_inputArea .planner_ls ul > li > div:last-child{ width:100%; margin:5px 0; cursor:pointer; display:flex; align-items:center; justify-content: space-between; }
-.planner_inputArea .planner_ls ul > li > div:last-child > .title{ width:70%; font-size:25px; border:solid 1px #e1e1e1; padding:15px; border-radius:40px; background:#eee; color:#999;  }
-.planner_inputArea .planner_ls ul > li > div:last-child > .time{ width:25%; text-align: center; border:solid 1px #e1e1e1; padding:15px; border-radius:40px; background:#eee; color:#999; }
+.planner_inputArea .planner_ls ul > li > div:last-child > .title{ box-shadow: 0 2px 5px rgba(0,0,0,0.1); width:70%; font-size:25px; border:solid 1px #e1e1e1; padding:15px; border-radius:40px; background:#eee; color:#999;  }
+.planner_inputArea .planner_ls ul > li > div:last-child > .time{ box-shadow: 0 2px 5px rgba(0,0,0,0.1); width:25%; text-align: center; border:solid 1px #e1e1e1; padding:15px; border-radius:40px; background:#eee; color:#999; }
 .planner_inputArea .planner_ls ul > .btn_li{ width:100%; border:solid 1px #e1e1e1; padding:10px 15px; margin:5px 0; border-radius:40px; background:#eee; color:#999; cursor:pointer; }
 .planner_inputArea .planner_ls ul > .btn_li{ text-align:center; background:none; border:none; }
 .planner_inputArea .planner_ls ul > .btn_li button{ padding:10px 20px; background:none; background:#868686; color:#cfcfcf; border:none; font-size:20px; border-radius:10px; cursor:pointer }
@@ -281,7 +281,7 @@ html, body, #root, .App{ width:100%; height:100%; }
 #challenge .challenge_list > ul{ display: flex; flex-wrap: wrap; grid-gap: 20px; justify-content: flex-start; }
 #challenge .challenge_list > ul > li{ width:calc(25% - 20px); margin-bottom:20px; }
 
-#challenge .challenge_list div{ width:100%; height:180px; background:#b5b5b5; border-radius:10px; cursor:pointer; position: relative; }
+#challenge .challenge_list div{ box-shadow: 0 2px 5px rgba(0,0,0,0.2); width:100%; height:180px; background:#b5b5b5; border-radius:10px; cursor:pointer; position: relative; }
 #challenge .challenge_list div:hover img{  }
 #challenge .challenge_list div:hover p{ background:rgba(255,255,255,0.6); opacity:1; }
 #challenge .challenge_list p{ position:absolute; width:100%; top:50%; transform:translateY(-50%); height:100%; justify-content: center; display:flex; align-items: center; opacity:0; transition:all .3s ease-in-out; font-weight:bold; font-size:18px; }
@@ -348,15 +348,114 @@ html, body, #root, .App{ width:100%; height:100%; }
 #profile_content .form_area input[type="file"]{ width:65%; }
 #profile_content .form_area textarea{ width:70%; margin-top:20px; }
 #profile_content .form_area input{ width:70%; margin-top:20px; }
-#profile_content .form_area button{ width:100%; margin-top:20px; border:none; padding:10px 0; border-radius:5px; }
-/* #profile_content .updateUser{ color: } */
-/* #profile_content .deleteUser{  } */
+#profile_content .form_area button{ width:100%; margin-top:20px; border:none; padding:10px 0; border-radius:5px; color: #333; font-size: 16px; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+
+#profile_content .updateUser{ background-color: ; }
+#profile_content .deleteUser{ background-color: #e74c3c; color:#fff !important; }
 
 #point{ padding:50px 0; }
 #point > div > div > ul{ display:flex;  flex-wrap:wrap; }
 #point .point_area{ width:75%; }
 
+.charge-point-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.charge-point-title {
+  margin-top: 0;
+}
+
+.user-id {
+  margin-bottom: 20px;
+}
+
+.user-id-value {
+  font-weight: bold;
+}
+
+.charge-point-form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.charge-point-form input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.charge-button {
+  background-color: #1a73e8;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.charge-button:hover {
+  background-color: #0d47a1;
+}
+
 #payment{ padding:50px 0; }
 #payment > div > div > ul{ display:flex; flex-wrap:wrap; }
 #payment .payment_list{ width:75%; }
 #board{ padding:50px 0; }
+
+/* payment */
+
+.payment-history {
+  font-family: Arial, sans-serif;
+}
+
+.payment-history h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.payment-history table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.payment-history th,
+.payment-history td {
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.payment-history th {
+  font-weight: bold;
+}
+
+.payment-history tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.payment-history .status-paid {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  color: #ffffff;
+  background-color: #00a86b;
+  border-radius: 0.25rem;
+}
+
+.payment-history .status-pending {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  color: #ffffff;
+  background-color: #ff7f50;
+  border-radius: 0.25rem;
+}
+
+/* payment */

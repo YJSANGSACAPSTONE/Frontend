@@ -8,7 +8,7 @@ function PaymentHistory(props){
     const [paylist, setPaylist] = useState([]);
     const u_id = JSON.parse(Cookies.get('userInfo')).u_id;
     console.log(u_id);
-    useEffect(()=>{
+    useEffect(()=>{        
 
         Axios.get(`http://localhost:8070/kakaopay/search?uid=${u_id}`)
         .then((res)=>{

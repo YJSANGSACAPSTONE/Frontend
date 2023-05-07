@@ -392,7 +392,7 @@ function Planner(props){
                                             <div class="modal-content">
                                                 <h2><input type="text" name="u_title" value={title} onChange={(e)=>setTitle(e.target.value)} /></h2>
 												<select name="u_category" id="">
-													<option value="null">카테고리 선택</option>
+													<option value="">카테고리 선택</option>
 													<option value="일상">일상</option>
 													<option value="운동">운동</option>
 													<option value="공부">공부</option>
@@ -449,7 +449,7 @@ function Planner(props){
                                                     <label for="plan_title">제목</label>
                                                     <input id="plan_title" type="text" name="p_title" />
                                                     <select name="p_category" id="">
-                                                        <option value="null">카테고리 선택</option>
+                                                        <option value="">카테고리 선택</option>
                                                         <option value="일상">일상</option>
                                                         <option value="운동">운동</option>
                                                         <option value="공부">공부</option>

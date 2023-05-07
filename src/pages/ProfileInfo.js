@@ -37,6 +37,7 @@ function ProfileInfo(props){
         if(window.confirm("정말 탈퇴하시겠습니까?")){
             Axios.get(`http://localhost:8070/user/deleteuser?uid=${u_id}`)
             .then((res) => {
+            Cookies.remove('userInfo');
             console.log(res.data); // 처리 결과 출력
             history('/');
             })

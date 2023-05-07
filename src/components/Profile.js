@@ -5,9 +5,7 @@ import Cookies from 'js-cookie';
 export default function Profile(){
     const location = useLocation();
     const shouldRenderHotChart = location.pathname === "/board";
-    const userInfo = JSON.parse(Cookies.get('userInfo'));
-
-    
+    const userInfo = JSON.parse(Cookies.get('userInfo'));    
     return (
         <li className="planner_profile">
             <Link to="/planner">
@@ -27,28 +25,16 @@ export default function Profile(){
                     <h2>Hot 게시물</h2>
                     <ul>
                         <li>
-                            <p>간단한 내용</p>
-                            <p>04/12 16:32</p>
+                            <p>풋살 다녀왔습니다 ㅋㅋ</p>
+                            <p>05/07 19:32</p>
                         </li>
                         <li>
-                            <p>간단한 내용</p>
-                            <p>04/12 16:32</p>
+                            <p>주식투자 챌린지 참가자 구함</p>
+                            <p>04/29 10:12</p>
                         </li>
                         <li>
-                            <p>간단한 내용</p>
-                            <p>04/12 16:32</p>
-                        </li>
-                        <li>
-                            <p>간단한 내용</p>
-                            <p>04/12 16:32</p>
-                        </li>
-                        <li>
-                            <p>간단한 내용</p>
-                            <p>04/12 16:32</p>
-                        </li>
-                        <li>
-                            <p>간단한 내용</p>
-                            <p>04/12 16:32</p>
+                            <p>매일 아침 코딩 챌린지해요</p>
+                            <p>05/07 10:32</p>
                         </li>
                     </ul>
                 </div>

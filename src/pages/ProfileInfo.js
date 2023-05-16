@@ -35,15 +35,17 @@ function ProfileInfo(props){
     
     const deleteUser = () =>{
         if(window.confirm("정말 탈퇴하시겠습니까?")){
-            Axios.get(`http://localhost:8070/user/deleteuser?uid=${u_id}`)
-            .then((res) => {
-            Cookies.remove('userInfo');
-            console.log(res.data); // 처리 결과 출력
-            history('/');
-            })
-            .catch((error) => {
-                console.log(error); // 오류 발생 시 출력
-            });
+            window.location.href='https://kauth.kakao.com/oauth/logout?client_id=87c054c34eca4ca3541ab083e086cd12&logout_redirect_uri=http://localhost:3000/quit';
+            
+            // Axios.get(`http://localhost:8070/user/deleteuser?uid=${u_id}`)
+            // .then((res) => {
+            // Cookies.remove('userInfo');
+            // console.log(res.data); // 처리 결과 출력
+            // history('/');
+            // })
+            // .catch((error) => {
+            //     console.log(error); // 오류 발생 시 출력
+            // });
         }
         
     }

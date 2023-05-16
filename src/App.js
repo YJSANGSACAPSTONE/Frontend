@@ -21,8 +21,10 @@ import MyChallenge from './pages/MyChallenge';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import KakaoLogin from './components/KakaoLogin';
+import Quit from './components/Quit';
 import PaymentHistory from './pages/PaymentHistory';
 import JobComplete from './components/JobComplete';
+import ZepVerify from './pages/ZepVerify';
 
 import NotFound from './components/NotFound';
 
@@ -84,12 +86,15 @@ function App() {
 			<Route path="/challenge/:id/signUp" element={<ChallengeSignUp header={<Header/>} footer={<Footer/>} />} />
 
 			<Route path="/profile" element={<UserProfile header={<Header/>} footer={<Footer/>} />} />
+			
+			<Route path="/profile/:id/zep" element={<ZepVerify header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/profile/:id/info" element={<ProfileInfo header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/profile/:id/myChallenge" element={<MyChallenge header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/profile/:id/point" element={<Point header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/profile/:id/payList" element={<PaymentHistory header={<Header/>} footer={<Footer/>}/> }  />
 			
 			<Route path="/JobComplete" element={<JobComplete/>} />
+			<Route path="/quit" element={<Quit header={<Header/>} footer={<Footer/>} />} />
 
 			<Route path="/board" element={<Board header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/board/:id" element={<BoardRead header={<Header/>} footer={<Footer/>} />} />

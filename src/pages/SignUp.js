@@ -18,7 +18,7 @@ function SignUp(props){
     const addUser = () => {
         let u_id = $("input[name=u_id]").val();
         let u_nickname = $("input[name=u_nickname]").val();
-        let u_zepid = $("input[name=u_zepid]").val();
+        let u_zepid = "";
         let u_content = $("input[name=u_content]").val();
 
         Axios.post("http://localhost:8070/user/adduser", 
@@ -76,8 +76,8 @@ function SignUp(props){
                                     <img src={userData.profileImageUrl} alt="" />
                                     <label htmlFor="signId">카카오아이디</label>
                                     <input type="text" id="signId" placeHolder="@abcdefg.com" value={userData.userId} name="u_id" />
-                                    <label htmlFor="signZep">ZEP 아이디</label>
-                                    <input type="name" id="signZep" name="u_zepid" />
+                                    {/* <label htmlFor="signZep">ZEP 아이디</label>
+                                    <input type="name" id="signZep" name="u_zepid" /> */}
                                     <label htmlFor="signName">닉네임</label>
                                     <input type="name" id="signName" name="u_nickname" />
                                     <label htmlFor="signContent">소개</label>

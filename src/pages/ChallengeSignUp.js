@@ -19,9 +19,14 @@ function ChallengeSignUp(props){
                 c_fee : challenge.c_fee
             })
             .then((res)=>{
-                userInfo.u_deposit = parseInt(userInfo.u_deposit) - parseInt(challenge.c_fee);
-                Cookies.set('userInfo',JSON.stringify(userInfo))
-                history(`/profile/${challenge.c_id}/myChallenge`);
+                if(res.data){
+                    userInfo.u_deposit = parseInt(userInfo.u_deposit) - parseInt(challenge.c_fee);
+                    Cookies.set('userInfo',JSON.stringify(userInfo))
+                    history(`/profile/${challenge.c_id}/myChallenge`);
+                }else{
+                    alert('예치금이 부족합니다. 충전페이지로 이동합니다.');
+                    history(`/profile/${challenge.c_id}/point`)
+                }                
             })
             .catch((err)=>{
                 console.log(err);

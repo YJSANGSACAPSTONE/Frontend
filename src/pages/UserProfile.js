@@ -31,6 +31,7 @@ function UserProfile(props){
                             <Profile/>
                             <li class="profile_info">
                                 <Link to="/profile/1/info"><div>계정 정보</div></Link>
+                                <Link to="/profile/1/zep"><div>ZEP ID 인증</div></Link>
                                 <Link to="/profile/1/myChallenge"><div>마이 챌린지</div></Link>
                                 <Link to="/profile/1/alram"><div>알람</div></Link>
                                 <Link to="/profile/1/point"><div>포인트 충전</div></Link>

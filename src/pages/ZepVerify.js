@@ -17,9 +17,10 @@ function ZepVerify(props){
     }
 
     useEffect(()=> {
-        Axios.get(`http://localhost:8070/challenge/zepidverify?uid=${userInfo.u_id}`)
+        Axios.get(`http://localhost:8070/user/zepidverify?uid=${userInfo.u_id}`)
 			.then((response) => {
-				setZep(response.data);
+                console.log(response);
+				// setZep(response.data);
 			})
 			.catch(error => console.log(error));
     }, []);

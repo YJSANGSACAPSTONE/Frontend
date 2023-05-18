@@ -10,6 +10,7 @@ function ZepVerify(props){
     let userInfo;
 
     const [zep, setZep] = useState("");
+    const [uverifiedornot, setUverifiedornot] = useState(0);
     try {
         userInfo = JSON.parse(Cookies.get('userInfo'));
     } catch (e) {
@@ -17,9 +18,10 @@ function ZepVerify(props){
     }
 
     useEffect(()=> {
-        Axios.get(`http://localhost:8070/challenge/zepidverify?uid=${userInfo.u_id}`)
-			.then((response) => {
-				setZep(response.data);
+        Axios.get(`http://localhost:8070/user/zepidverify?uid=${userInfo.u_id}`)
+			.then((res) => {
+                setUverifiedornot(res.data.uverifiedornot)
+				setZep(res.data.uzepid);
 			})
 			.catch(error => console.log(error));
     }, []);
@@ -57,31 +59,32 @@ function ZepVerify(props){
                             <Profile/>
                             <li class="zep_verify">
 
-
-                                <div class="step-container active copy-button">
-                                    <h2 class="step-title">고유 코드 발급</h2>
-                                    <div class="form-container ">
-                                        <p>
-                                            발급된 10자리 코드를 출력하거나 적어두시기 바랍니다.
-                                            <br/>
-                                            본 코드는 갓생플래너 사이트에서 zep id 인증을 위해서 사용됩니다.
-                                        </p>
-                                        <div class="code-container">
-                                            <input type="text" value={zep} id="codeInput" readonly /><button onClick={copyCode}>복사</button>
-                                            
+                                {uverifiedornot == 0 ? (
+                                    <div class="step-container active copy-button">
+                                        <h2 class="step-title">고유 코드 발급</h2>
+                                        <div class="form-container ">
+                                            <p>
+                                                발급된 10자리 코드를 출력하거나 적어두시기 바랍니다.
+                                                <br/>
+                                                본 코드는 갓생플래너 사이트에서 zep id 인증을 위해서 사용됩니다.
+                                            </p>
+                                            <div class="code-container">
+                                                <input type="text" value={zep} id="codeInput" readonly /><button onClick={copyCode}>복사</button>
+                                                
+                                            </div>
                                         </div>
+                                        <button class="verifySuccess" onclick="nextStep()">인증 완료</button>
                                     </div>
-                                    <button class="verifySuccess" onclick="nextStep()">인증 완료</button>
-                                </div>
-
-                                <div class="step-container active">
-                                    <h2 class="step-title">인증 완료</h2>
-                                    <div class="form-container">
-                                    <p>인증이 완료되었습니다.</p>
-                                    <div class="success-message">인증이 성공적으로 완료되었습니다!</div>
+                                ) : (
+                                    <div class="step-container active">
+                                        <h2 class="step-title">인증 완료</h2>
+                                        <div class="form-container">
+                                        <p>인증이 완료되었습니다.</p>
+                                        <div class="success-message">인증이 성공적으로 완료되었습니다!</div>
+                                        </div>
+                                        {/* <button onclick="prevStep()">이전 단계</button> */}
                                     </div>
-                                    {/* <button onclick="prevStep()">이전 단계</button> */}
-                                </div>
+                                )}
                             </li>
                         </ul>
                     </div>

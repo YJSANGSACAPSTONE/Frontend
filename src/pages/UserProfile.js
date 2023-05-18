@@ -35,6 +35,7 @@ function UserProfile(props){
                                 <Link to="/profile/1/myChallenge"><div>마이 챌린지</div></Link>
                                 <Link to="/profile/1/alram"><div>알람</div></Link>
                                 <Link to="/profile/1/point"><div>포인트 충전</div></Link>
+                                <Link to="/profile/1/PointPayList"><div>포인트 사용 내역</div></Link>
                                 <Link to="/profile/1/payList"><div>결제 내역</div></Link>
                                 <Link to="/profile/1/logout"><div onClick={handleLogout}>로그아웃</div></Link>
                             </li>

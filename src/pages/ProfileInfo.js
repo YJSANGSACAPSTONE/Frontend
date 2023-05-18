@@ -81,9 +81,6 @@ function ProfileInfo(props){
                                         <label for="">닉네임</label>
                                         <input type="text" name="u_nickname" value={u_nickname} onChange={(e)=>setU_info({...u_info, u_nickname: e.target.value})} />
 
-                                        <label for="">ZEP아이디</label>
-                                        <input type="text" name="u_zepid" value={u_zepid} onChange={(e)=>setU_info({...u_info, u_zepid: e.target.value})}/>
-
                                         <label for="">소개글</label>
                                         <textarea name="u_content" id="" value={u_content} onChange={(e) => setU_info({...u_info, u_content: e.target.value})} />
                                         <div>

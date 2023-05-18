@@ -21,7 +21,7 @@ function Planner(props){
 	const [remind, setRemind] = useState("");
 
 	// calendar
-	var e = 480;
+	var e = 100;
     var t = 2013;
     var n = 9;
     var r = [];
@@ -106,15 +106,17 @@ function Planner(props){
 
     function d() {
         var t;
-        var n = $("#calendar").css("width", e + "px");
-        n.find(t = "#calendar_weekdays, #calendar_content").css("width", e + "px").find("div").css({
-            width: e / 7 + "px",
-            height: e / 7 + "px",
-            "line-height": e / 7 + "px"
+        var n = $("#calendar").css("width", e + "%");
+		var calendarHeaderWidth = parseInt(n.find("#calendar_header").css("width"));
+        n.find(t = "#calendar_weekdays, #calendar_content").css("width", e + "%").find("div").css({
+            width: e / 7 + "%",
+            height: calendarHeaderWidth / 7 + "px",
+            "line-height": calendarHeaderWidth / 7 + "px"
         });
-        n.find("#calendar_header").css({
-            height: e * (1 / 7) + "px"
-        }).find('i[class^="icon-chevron"]').css("line-height", e * (1 / 7) + "px");
+
+		n.find("#calendar_header").css({
+			height: parseFloat(calendarHeaderWidth) * (1 / 7) + "%"
+		}).find('i[class^="icon-chevron"]').css("line-height", parseFloat(calendarHeaderWidth) * (1 / 7) + "%");
     }
 
     function v(e, t) {
@@ -435,11 +437,15 @@ function Planner(props){
                     <div>
                         <ul>
                             <Profile/>
+							<li class="planner_challenge">
+
+							</li>
+							{/* <li class="planner_space"></li> */}
                             <li class="planner_calendar">
 								
-								<div id="datepickerDiv" onClick={toggleDatePicker}>
+								{/* <div id="datepickerDiv" onClick={toggleDatePicker}>
 									{showDatePicker ? "달력 숨기기" : "달력 보기"} &nbsp;&nbsp; <input type="text" id="date-input" />
-								</div>
+								</div> */}
 								{/* {showDatePicker && (
 									<DatePicker
 									selected={selectedDate}

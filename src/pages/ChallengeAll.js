@@ -1,7 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Profile from '../components/Profile';
+import Axios from 'axios';
 function ChallengeAll(props){
+
+    const [recentlist, setRecentlist] = useState([]);
+
+    const navigate = useNavigate();
+
+    const MvRead = (challenge) => {
+        navigate(`/challenge/${challenge.c_id}`, { state: { challenge } });
+    }
+    useEffect(()=>{
+        Axios.get(`http://localhost:8070/challenge/list`).then((res)=>{
+            console.log(res);
+            setRecentlist(res.data.recentlist);
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
+    }, []);
+
     return(
         <>
             {props.header}
@@ -20,26 +39,13 @@ function ChallengeAll(props){
                                     </div>
                                     <div class="challenge_list">
                                         <ul>
-                                            <li><Link to="/challengeRead"><div><img src="./img/morning.png" alt="morning"/><p>미라클 모닝</p></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
-                                            <li><Link to="/challengeRead"><div></div></Link></li>
+                                            {Object.keys(recentlist).length > 0 ? (
+                                                recentlist.map(recentlist => (
+                                                    <li onClick={() => MvRead(recentlist)}><div><img src={`http://localhost:8070${recentlist.c_thumbnails}`} alt="morning"/><p>{recentlist.c_name}</p></div></li>
+                                                ))
+                                            ) : (
+                                                <li><div><p>등록된 챌린지가 없습니다.</p></div></li>
+                                            )}
                                         </ul>
                                     </div>
                                 </div>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import Axios from "axios";
 import Profile from '../components/Profile';
+import { ProgressBar } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Cookies from 'js-cookie';
@@ -438,7 +439,54 @@ function Planner(props){
                         <ul>
                             <Profile/>
 							<li class="planner_challenge">
-
+								<div class="challenge_list">
+									<ul>
+										<li>
+											<div class="p_cl_title"><p>Miracle Morning</p></div>
+											<div class="p_cl_progress">
+												<div class="progress_area">
+													<ProgressBar now={50} label={`50%`} className="my-progress-bar" />
+												</div>
+											</div>
+											<div class="p_cl_date">
+												<p>4/10 ~ 4/28</p>
+											</div>
+										</li>
+										<li>
+											<div class="p_cl_title"><p>Miracle Morning</p></div>
+											<div class="p_cl_progress">
+												<div class="progress_area">
+													<ProgressBar now={50} label={`50%`} className="my-progress-bar" />
+												</div>
+											</div>
+											<div class="p_cl_date">
+												<p>4/10 ~ 4/28</p>
+											</div>
+										</li>
+										<li>
+											<div class="p_cl_title"><p>Miracle Morning</p></div>
+											<div class="p_cl_progress">
+												<div class="progress_area">
+													<ProgressBar now={50} label={`50%`} className="my-progress-bar" />
+												</div>
+											</div>
+											<div class="p_cl_date">
+												<p>4/10 ~ 4/28</p>
+											</div>
+										</li>
+										<li>
+											<div class="p_cl_title"><p>Miracle Morning</p></div>
+											<div class="p_cl_progress">
+												<div class="progress_area">
+													<ProgressBar now={50} label={`50%`} className="my-progress-bar" />
+												</div>
+											</div>
+											<div class="p_cl_date">
+												<p>4/10 ~ 4/28</p>
+											</div>
+										</li>
+									</ul>
+								</div>
 							</li>
 							{/* <li class="planner_space"></li> */}
                             <li class="planner_calendar">

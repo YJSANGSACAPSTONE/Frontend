@@ -25,6 +25,7 @@ import Quit from './components/Quit';
 import PaymentHistory from './pages/PaymentHistory';
 import JobComplete from './components/JobComplete';
 import ZepVerify from './pages/ZepVerify';
+import PointPayList from './pages/PointPayList';
 
 import NotFound from './components/NotFound';
 
@@ -91,6 +92,7 @@ function App() {
 			<Route path="/profile/:id/info" element={<ProfileInfo header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/profile/:id/myChallenge" element={<MyChallenge header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/profile/:id/point" element={<Point header={<Header/>} footer={<Footer/>} />} />
+			<Route path="/profile/:id/PointPayList" element={<PointPayList header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/profile/:id/payList" element={<PaymentHistory header={<Header/>} footer={<Footer/>}/> }  />
 			
 			<Route path="/JobComplete" element={<JobComplete/>} />

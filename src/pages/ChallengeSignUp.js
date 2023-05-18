@@ -5,14 +5,24 @@ import Profile from '../components/Profile';
 import Cookies from 'js-cookie';
 function ChallengeSignUp(props){
 
+    const currentDate = new Date();
+
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    const hour = String(currentDate.getHours()).padStart(2, '0');
+    const minute = String(currentDate.getMinutes()).padStart(2, '0');
+
+    const formattedDateTime = `${year}-${month}-${day} ${hour}:${minute}`;
+
     const location = useLocation();
     const history = useNavigate();
     const challenge = location.state?.challenge;
     const userInfo = JSON.parse(Cookies.get('userInfo'));
-    console.log(challenge.c_fee);
     const challengePay = () => {
         const u_id = userInfo.u_id;
         if(window.confirm("정말 참가하시겠습니까?")){
+
             Axios.post(`http://localhost:8070/challenge/participate?uid=${u_id}`,{
                 c_name : challenge.c_name,
                 c_id : challenge.c_id,
@@ -20,9 +30,27 @@ function ChallengeSignUp(props){
             })
             .then((res)=>{
                 if(res.data){
-                    userInfo.u_deposit = parseInt(userInfo.u_deposit) - parseInt(challenge.c_fee);
-                    Cookies.set('userInfo',JSON.stringify(userInfo))
-                    history(`/profile/${challenge.c_id}/myChallenge`);
+                    
+                    Axios.post('http://localhost:8070/Usage/save',{
+                        uh_amount : challenge.c_fee,
+                        uh_user : userInfo.u_id,
+                        uh_challenge : challenge.c_id,
+                        uh_date : formattedDateTime
+                    })
+                    .then((res)=>{
+                        console.log(res);
+                        userInfo.u_deposit = parseInt(userInfo.u_deposit) - parseInt(challenge.c_fee);
+                        Cookies.set('userInfo',JSON.stringify(userInfo))
+                        history(`/profile/${challenge.c_id}/myChallenge`);
+                    })
+                    .catch((err)=>{
+                        console.log(err);
+                    })
+
+                            
+
+
+
                 }else{
                     alert('예치금이 부족합니다. 충전페이지로 이동합니다.');
                     history(`/profile/${challenge.c_id}/point`)

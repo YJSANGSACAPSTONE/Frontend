@@ -79,7 +79,7 @@ body::-webkit-scrollbar-track {
   z-index: 1;
 }
 
-#subHeader > div > div > ul{ display:flex; justify-content: space-between; align-items: center; }
+#subHeader > div > div > ul{ display:flex; justify-content: space-between; align-items: center; flex-wrap:wrap; }
 #subHeader > div > div > ul .sub_logo{ cursor:pointer; }
 #subHeader > div > div > ul .sub_logo > *{ display:inline-block; vertical-align: middle; }
 #subHeader > div > div > ul .sub_logo > p{ font-size:30px; color:#fff; font-weight:bold; }
@@ -302,7 +302,7 @@ body::-webkit-scrollbar-track {
 
 #challenge{ padding:50px 0; }
 
-#challenge .myChallenge{ display:flex; flex-wrap:wrap; width:75%; }
+#challenge .myChallenge{ display:flex; flex-wrap:wrap; width:75%; padding:0 40px; }
 #challenge .myChallenge > h1{ width:100%; }
 .myChallenge .attend_challenge{ display:flex; flex-wrap:wrap; width:100%; padding-top:30px; }
 .myChallenge .attend_challenge > h3{ width:50%; }
@@ -311,7 +311,7 @@ body::-webkit-scrollbar-track {
 .attend_challenge .ac_list > div{ width:100%; display:flex; flex-wrap:wrap; padding:20px; border:solid 1px #adadad; border-bottom:none; }
 .attend_challenge .ac_list > div:first-child{ border-top-right-radius: 5px; border-top-left-radius: 5px; }
 .attend_challenge .ac_list > div:last-child{ border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; border-bottom:solid 1px #adadad; }
-.ac_list > div > img{ width:20%; height:86.27px; border-radius:50%; object-fit:cover; }
+.ac_list > div > img{ width:20%; height:76.57px; border-radius:50%; object-fit:cover; }
 .ac_list > div > *{ width:80%; }
 .ac_list div{ font-size:20px; padding-left:20px; }
 .ac_list > div button{ display: inline-block; float:right; font-size:16px; }
@@ -604,11 +604,12 @@ body::-webkit-scrollbar-track {
   list-style: none;
   display: flex;
   align-items: center;
+  grid-gap:80px;
 }
 
 .mainMenu > li {
   position: relative;
-  margin-right: 20px;
+  display:flex;
 }
 
 .mainMenu > li > a {
@@ -619,30 +620,39 @@ body::-webkit-scrollbar-track {
 }
 
 .subMenu {
-  display: none;
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 100%;
   left: 0;
   background-color: #fff;
   min-width: 200px;
-  max-height: 300px;
-  overflow-y: auto;
+  height:0;
+  overflow-y: hidden;
   list-style: none;
-  padding: 10px;
+  padding: 0;
   margin: 0;
-  border: 1px solid #ccc;
-  z-index: 1;
+  border: none;
+  z-index: 999;
+  transition:all .3s ease-in-out;
 }
 
+.subMenu > li{ padding:10px; }
 .subMenu > li > a {
   display: block;
   padding: 5px 0;
   color: #333;
   text-decoration: none;
 }
+.subMenu > li > a:hover{
+  color:#2452b0;
+}
 
 .menuArea:hover .subMenu {
-  display: block;
+  /* display: block; */
+  height:200px;
+  /* padding:10px; */
+  border:1px solid #ccc;
 }
 
 /* menu */

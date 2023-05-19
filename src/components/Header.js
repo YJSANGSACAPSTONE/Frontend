@@ -30,10 +30,10 @@ function Header(){
                 <div>
                     <ul>
                         <Link to="/planner">
-                        <li class="sub_logo">
-                            <p>갓생플래너</p>
-                            <img src="/img/logo.png" alt="logo" />
-                        </li>
+                            <li class="sub_logo">
+                                <p>갓생플래너</p>
+                                <img src="/img/logo.png" alt="logo" />
+                            </li>
                         </Link>
                         <li class="menuArea">
                             <ul class="mainMenu">
@@ -41,13 +41,13 @@ function Header(){
                                     <Link to="/">홈</Link>
                                 </li>
                                 <li>
-                                    <Link to="/challenges">챌린지</Link>
+                                    <Link to="/challenge">챌린지</Link>
                                     <ul class="subMenu">
                                         <li>
-                                            <Link to="/challenges/all">전체 챌린지</Link>
+                                            <Link to="/challengeAll">전체 챌린지</Link>
                                         </li>
                                         <li>
-                                            <Link to="/challenges/completed">완료한 챌린지</Link>
+                                            <Link to={`/profile/${userInfo.uid}/myChallenge`}>완료한 챌린지</Link>
                                         </li>
                                         <li>
                                             <Link to="/challenges/my">마이 챌린지</Link>

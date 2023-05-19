@@ -18,6 +18,7 @@ function Planner(props){
 	const [enddate, setEnddate] = useState("");
 	const [endtime, setEndtime] = useState("");
 	const [starttime, setStarttime] = useState("");
+	const [mychallenge,setMychallenge] = useState([]);
 	function formatTime(time) {
 		const formattedTime = time.substr(0, 5); // 시간 형식이 hh:ii:ss라면 처음 5글자만 추출
 		return formattedTime;
@@ -256,6 +257,16 @@ function Planner(props){
 	}
 	
     useEffect(() => {
+
+		Axios.get(`http://localhost:8070/challenge/mychallenge?uid=${userInfo.u_id}`)
+        .then((res)=>{
+            console.log(res);
+            setMychallenge(res.data);
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
+
 		// 첫 페이지 로딩 후 Axios를 통해서 오늘 날짜 plan 받아오는 것
 		Axios.get(`http://localhost:8070/plan/dailyplan?uid=${userInfo.u_id}`)
 		.then(response => setPlans(response.data))
@@ -453,7 +464,25 @@ function Planner(props){
 							<li class="planner_challenge">
 								<div class="challenge_list">
 									<ul>
-										<li>
+										{mychallenge.length > 0 ? (
+											mychallenge.map(challenge => (
+												<li>
+													<div class="p_cl_title"><p>{challenge.cname}</p></div>
+													<div class="p_cl_progress">
+														<div class="progress_area">
+															<ProgressBar now={Math.floor(challenge.cvsuccesscount / challenge.totalcount * 100)} label={`${Math.floor(challenge.cvsuccesscount / challenge.totalcount * 100)}%`} className="my-progress-bar" />
+														</div>
+													</div>
+													<div class="p_cl_date">
+														<p>{challenge.cstartdate} ~ {challenge.cenddate}</p>
+													</div>
+												</li>
+												))
+										) : (
+											<p>Loading...</p>
+										)}
+										
+										{/* <li>
 											<div class="p_cl_title"><p>Miracle Morning</p></div>
 											<div class="p_cl_progress">
 												<div class="progress_area">
@@ -485,18 +514,7 @@ function Planner(props){
 											<div class="p_cl_date">
 												<p>4/10 ~ 4/28</p>
 											</div>
-										</li>
-										<li>
-											<div class="p_cl_title"><p>Miracle Morning</p></div>
-											<div class="p_cl_progress">
-												<div class="progress_area">
-													<ProgressBar now={50} label={`50%`} className="my-progress-bar" />
-												</div>
-											</div>
-											<div class="p_cl_date">
-												<p>4/10 ~ 4/28</p>
-											</div>
-										</li>
+										</li> */}
 									</ul>
 								</div>
 								<div class="planner_ls">

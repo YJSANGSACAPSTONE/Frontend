@@ -7,6 +7,7 @@ import Challenge from './pages/Challenge';
 import ChallengeAll from './pages/ChallengeAll';
 import ChallengeRead from './pages/ChallengeRead';
 import ChallengeWrite from './pages/ChallengeWrite';
+import ChallengeUpdate from './pages/ChallengeUpdate';
 import ChallengeVerify from './pages/ChallengeVerify';
 import ChallengeSignUp from './pages/ChallengeSignUp';
 import Board from './pages/Board';
@@ -15,10 +16,20 @@ import BoardWrite from './pages/BoardWrite';
 import BoardEdit from './pages/BoardEdit';
 import UserProfile from './pages/UserProfile';
 import ProfileInfo from './pages/ProfileInfo';
+import Point from './pages/Point';
 import MyChallenge from './pages/MyChallenge';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import KakaoLogin from './components/KakaoLogin';
+import Quit from './components/Quit';
+import PaymentHistory from './pages/PaymentHistory';
+import JobComplete from './components/JobComplete';
+import ZepVerify from './pages/ZepVerify';
+import PointPayList from './pages/PointPayList';
+
+import NotFound from './components/NotFound';
+
+
 import Axios from "axios";
 import $ from 'jquery';
 
@@ -71,17 +82,29 @@ function App() {
 			<Route path="/challenge/:id" element={<ChallengeRead header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/challengeAll" element={<ChallengeAll header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/challengeWrite" element={<ChallengeWrite header={<Header/>} footer={<Footer/>} />} />
+			<Route path="/challenge/:id/challengeUpdate" element={<ChallengeUpdate header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/challenge/:id/verify" element={<ChallengeVerify header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/challenge/:id/signUp" element={<ChallengeSignUp header={<Header/>} footer={<Footer/>} />} />
 
 			<Route path="/profile" element={<UserProfile header={<Header/>} footer={<Footer/>} />} />
+			
+			<Route path="/profile/:id/zep" element={<ZepVerify header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/profile/:id/info" element={<ProfileInfo header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/profile/:id/myChallenge" element={<MyChallenge header={<Header/>} footer={<Footer/>} />} />
+			<Route path="/profile/:id/point" element={<Point header={<Header/>} footer={<Footer/>} />} />
+			<Route path="/profile/:id/PointPayList" element={<PointPayList header={<Header/>} footer={<Footer/>} />} />
+			<Route path="/profile/:id/payList" element={<PaymentHistory header={<Header/>} footer={<Footer/>}/> }  />
+			
+			<Route path="/JobComplete" element={<JobComplete/>} />
+			<Route path="/quit" element={<Quit header={<Header/>} footer={<Footer/>} />} />
 
 			<Route path="/board" element={<Board header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/board/:id" element={<BoardRead header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/board/:id/edit" element={<BoardEdit header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/board/write" element={<BoardWrite header={<Header/>} footer={<Footer/>} />} />
+
+
+			<Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
     </div>

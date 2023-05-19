@@ -2,7 +2,7 @@
   "name": "my-app-front",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080",
+  "proxy": "http://localhost:8070",
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^37.1.0",
     "@ckeditor/ckeditor5-react": "^6.0.0",
@@ -14,6 +14,7 @@
     "http-proxy-middleware": "^2.0.6",
     "jquery": "^3.6.4",
     "jquery-ui": "^1.13.2",
+    "js-cookie": "^3.0.5",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-datepicker": "^4.11.0",

@@ -18,8 +18,13 @@ function Planner(props){
 	const [enddate, setEnddate] = useState("");
 	const [endtime, setEndtime] = useState("");
 	const [starttime, setStarttime] = useState("");
+	function formatTime(time) {
+		const formattedTime = time.substr(0, 5); // 시간 형식이 hh:ii:ss라면 처음 5글자만 추출
+		return formattedTime;
+	}
 	const [category, setCategory] = useState("");
 	const [remind, setRemind] = useState("");
+
 
 	// calendar
 	var e = 100;
@@ -438,6 +443,13 @@ function Planner(props){
                     <div>
                         <ul>
                             <Profile/>
+							<li class="planner_calendar">
+								<div id="calendar">
+									<div id="calendar_header"><i class="icon-chevron-left"></i>          <h1></h1><i class="icon-chevron-right"></i>         </div>
+									<div id="calendar_weekdays"></div>
+									<div id="calendar_content"></div>
+								</div>
+                            </li>
 							<li class="planner_challenge">
 								<div class="challenge_list">
 									<ul>
@@ -487,57 +499,8 @@ function Planner(props){
 										</li>
 									</ul>
 								</div>
-							</li>
-							{/* <li class="planner_space"></li> */}
-                            <li class="planner_calendar">
-								
-								{/* <div id="datepickerDiv" onClick={toggleDatePicker}>
-									{showDatePicker ? "달력 숨기기" : "달력 보기"} &nbsp;&nbsp; <input type="text" id="date-input" />
-								</div> */}
-								{/* {showDatePicker && (
-									<DatePicker
-									selected={selectedDate}
-									onChange={(date) => {
-										setSelectedDate(date);
-										const formattedDate = date.toISOString().substring(0, 10);
-										document.getElementById("date-input").value = formattedDate;
-									  }}
-									  dateFormat="yyyy-MM-dd"
-									inline
-									/>
-								)} */}
-
-								<div id="calendar">
-									<div id="calendar_header"><i class="icon-chevron-left"></i>          <h1></h1><i class="icon-chevron-right"></i>         </div>
-									<div id="calendar_weekdays"></div>
-									<div id="calendar_content"></div>
-								</div>
-								
-                            </li>
-                            <li class="planner_inputArea">
-                                <div class="planner_ls">
+								<div class="planner_ls">
                                     <ul>
-										{/* plan_list 테스트 */}
-										{/* <div>
-											<h1>Today's Plan List</h1>
-											{plans.length > 0 ? (
-												plans.map(plan => (
-												<div key={plan.p_id}>
-													<h2>{plan.p_title}</h2>
-													<p>{plan.p_content}</p>
-													<p>Start Date: {plan.p_startdate}</p>
-													<p>Start Time: {plan.p_starttime}</p>
-													<p>End Date: {plan.p_enddate}</p>
-													<p>End Time: {plan.p_endtime}</p>
-													<p>Category: {plan.p_category}</p>
-													<p>Remind: {plan.p_remindornot ? 'Yes' : 'No'}</p>
-												</div>
-												))
-											) : (
-												<p>Loading...</p>
-											)}
-										</div> */}
-										{/* plan_list 테스트 */}
 										{plans.length > 0 ? (
 											plans.map(plan => (
 												<li 
@@ -557,7 +520,7 @@ function Planner(props){
 												>
 													<div>{plan.p_startdate} <b>~</b> {plan.p_enddate} </div>
 													<div>
-														<div class="time">{plan.p_starttime} ~ {plan.p_endtime}</div>
+														<div class="time">{formatTime(plan.p_starttime)} ~ {formatTime(plan.p_endtime)}</div>
 														<div class="title">{plan.p_title}</div>
 													</div>
 												</li>
@@ -670,6 +633,9 @@ function Planner(props){
                                         </div>
                                     </ul>
                                 </div>
+							</li>
+                            <li class="planner_inputArea">
+                                
                             </li>
                         </ul>
                         

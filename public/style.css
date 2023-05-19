@@ -10,6 +10,39 @@ button{ cursor:pointer; }
 
 html, body, #root, .App{ width:100%; height:100%; }
 
+
+
+.planner_challenge .challenge_list::-webkit-scrollbar {
+  width: 8px;  /* 스크롤바의 너비 */
+}
+
+.planner_challenge .challenge_list::-webkit-scrollbar-thumb {
+  height: 30%; /* 스크롤바의 길이 */
+  background: #333; /* 스크롤바의 색상 */
+  
+  border-radius: 10px;
+}
+
+.planner_challenge .challenge_list::-webkit-scrollbar-track {
+  background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
+
+body::-webkit-scrollbar {
+  width: 8px;  /* 스크롤바의 너비 */
+}
+
+body::-webkit-scrollbar-thumb {
+  height: 30%; /* 스크롤바의 길이 */
+  background: #333; /* 스크롤바의 색상 */
+  
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
 .container{ width:100%; float:left; }
 .container_inner{ width:1400px; margin:0 auto; }
 .container_inner > div{ width:100%; float:left; }
@@ -61,7 +94,7 @@ html, body, #root, .App{ width:100%; height:100%; }
 #planner_content{ padding:50px 0;  }
 #planner_content > div > div > ul{ display:flex; flex-wrap:wrap; }
 .planner_profile{ width:25%; position: relative; }
-.planner_profile > a > div{ display:flex; padding:10px; width:65%; }
+.planner_profile > a > div{ display:flex; padding:10px; width:100%; justify-content:space-evenly; flex-wrap:wrap; }
 .planner_profile > div{ display:flex; padding:10px; }
 .planner_profile > a > div:first-child{ box-shadow: 0 2px 5px rgba(0,0,0,0.3); background:#ededed; border-radius:10px; }
 .planner_profile  div.hot_chart{ top:430px; display:flex; flex-direction:column; grid-gap:20px; width:390px; }
@@ -69,13 +102,14 @@ html, body, #root, .App{ width:100%; height:100%; }
 .planner_profile .hot_chart ul{ display:flex; border-radius:10px; border:solid 2px #dadada; flex-direction:column;  overflow:hidden; }
 .planner_profile .hot_chart li{ display:flex; width:100%; justify-content:space-between; padding:10px; border-bottom:solid 1px #dadada; }
 .planner_profile .hot_chart li:last-child{ border-bottom:none; }
-.planner_profile .pl_pro_img img{ width:132px; height:132px; object-fit:cover; border-radius:50%; }
+.planner_profile .pl_pro_img{ width:50%; display:flex; justify-content: center; align-items: center; }
+.planner_profile .pl_pro_text{ width:50%; }
+.planner_profile .pl_pro_img img{ width:90%; height:148.5px; object-fit:cover; border-radius:50%; }
 .planner_profile .pl_pro_img p{ text-align: center; padding-top:10px; }
-.planner_profile .pl_pro_text > p{ padding:35px 10px; }
-
+.planner_profile .pl_pro_text > p{ padding:13px 10px; }
 
 #board > div > div > ul{ display:flex; justify-content: space-between; }
-.board_area{ width:60%; }
+.board_area{ width:75%; padding:0 40px; }
 .boardlist_area{ width:80%; }
 .board_list{ padding-top:20px; }
 .board_list .toListBtn{ padding:10px 20px; margin-bottom:10px; background: #4c6ef5; border: none; color: #fff; border-radius: 5px; }
@@ -123,7 +157,7 @@ html, body, #root, .App{ width:100%; height:100%; }
 .search_area button{ width:28%; border-radius:5px; background:none; display:flex; align-items: center; justify-content: center; font-size:20px; padding:10px; border:solid 2px #d5d5d5; }
 .search_area img{ width:30px; }
 
-.planner_challenge{ width:75%; height:300px; }
+.planner_challenge{ width:40%; display:flex; flex-direction: column; grid-gap:40px; }
 
 .planner_challenge .challenge_list{ border-radius:10px; background:#f7f7f7; border:solid 2px #d7d7d7; width:100%; float:right; overflow-y: auto; max-height: 196px; }
 
@@ -156,23 +190,24 @@ html, body, #root, .App{ width:100%; height:100%; }
 /* planner progressbar */
 
 .planner_space{ width:25%; }
-.planner_calendar{ width:70%; height:250px; }
+.planner_calendar{ width:35%; height:250px; padding:0 20px; }
 .planner_calendar #datepickerDiv{ margin-top:50px; padding-bottom:20px; }
 #selected-date-input{ padding:10px; font-size:20px; }
 
 .planner_inputArea{ width:30%; padding:20px; }
-.planner_inputArea .planner_ls{ width:100%; }
-.planner_inputArea  ul{ display:flex; flex-direction:column; }
-.planner_inputArea  ul > li{ display:flex; justify-content: space-between; align-items:center; }
-.planner_inputArea .planner_ls ul > li{ display:flex; flex-direction:column; }
-.planner_inputArea .planner_ls ul > li > div:first-child{ width:100%; padding-left:15px; }
-.planner_inputArea .planner_ls ul > li > div:last-child{ width:100%; margin:5px 0; cursor:pointer; display:flex; align-items:center; justify-content: space-between; }
-.planner_inputArea .planner_ls ul > li > div:last-child > .title{ box-shadow: 0 2px 5px rgba(0,0,0,0.1); width:70%; font-size:25px; border:solid 1px #e1e1e1; padding:15px; border-radius:40px; background:#eee; color:#999;  }
-.planner_inputArea .planner_ls ul > li > div:last-child > .time{ box-shadow: 0 2px 5px rgba(0,0,0,0.1); width:25%; text-align: center; border:solid 1px #e1e1e1; padding:15px; border-radius:40px; background:#eee; color:#999; }
-.planner_inputArea .planner_ls ul > .btn_li{ width:100%; border:solid 1px #e1e1e1; padding:10px 15px; margin:5px 0; border-radius:40px; background:#eee; color:#999; cursor:pointer; }
-.planner_inputArea .planner_ls ul > .btn_li{ text-align:center; background:none; border:none; }
-.planner_inputArea .planner_ls ul > .btn_li button{ padding:10px 20px; background:none; background:#868686; color:#cfcfcf; border:none; font-size:20px; border-radius:10px; cursor:pointer }
-.planner_inputArea .planner_ls button span{ display:inline-block; border-radius:50%; width:20px; height:20px; background:#dadada; color:#868686; text-align: center; vertical-align:middle; }
+.planner_challenge .planner_ls{ width:100%; }
+.planner_challenge  ul{ display:flex; flex-direction:column; }
+.planner_challenge  ul > li{ display:flex; justify-content: space-between; align-items:center; }
+.planner_challenge .planner_ls ul > li{ display:flex; flex-direction:column; }
+.planner_challenge .planner_ls ul > li > div:first-child{ width:100%; padding-left:15px; }
+.planner_challenge .planner_ls ul > li > div:last-child{ width:100%; margin:5px 0; cursor:pointer; display:flex; align-items:center; justify-content: space-between; }
+.planner_challenge .planner_ls ul > li > div:last-child > div{ display:flex; height:50px; align-items:center; }
+.planner_challenge .planner_ls ul > li > div:last-child > .title{ box-shadow: 0 2px 5px rgba(0,0,0,0.1); width:70%; font-size:25px; border:solid 1px #e1e1e1; padding:15px; border-radius:40px; background:#eee; color:#999;  }
+.planner_challenge .planner_ls ul > li > div:last-child > .time{ justify-content:center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); width:25%; text-align: center; border:solid 1px #e1e1e1; padding:15px; border-radius:40px; background:#eee; color:#999; }
+.planner_challenge .planner_ls ul > .btn_li{ width:100%; border:solid 1px #e1e1e1; padding:10px 15px; margin:5px 0; border-radius:40px; background:#eee; color:#999; cursor:pointer; }
+.planner_challenge .planner_ls ul > .btn_li{ text-align:center; background:none; border:none; }
+.planner_challenge .planner_ls ul > .btn_li button{ padding:10px 20px; background:none; background:#868686; color:#cfcfcf; border:none; font-size:20px; border-radius:10px; cursor:pointer }
+.planner_challenge .planner_ls button span{ display:inline-block; border-radius:50%; width:20px; height:20px; background:#dadada; color:#868686; text-align: center; vertical-align:middle; }
 
 
 .modal {
@@ -319,7 +354,7 @@ html, body, #root, .App{ width:100%; height:100%; }
 #challenge .challenge_list p{ position:absolute; width:100%; top:50%; transform:translateY(-50%); height:100%; justify-content: center; display:flex; align-items: center; opacity:0; transition:all .3s ease-in-out; font-weight:bold; font-size:18px; }
 #challenge .challenge_list img{ width:100%; height:100%; object-fit:cover; border-radius:10px;  transition:all .3s ease-in-out; }
 
-#challenge .challenge_area{ width:75%; padding:20px 40px; }
+#challenge .challenge_area{ width:75%; padding:0 40px; }
 
 #challenge .challenge_read{ width:75%; padding:20px 40px; }
 
@@ -370,7 +405,7 @@ html, body, #root, .App{ width:100%; height:100%; }
 #profile_content{ padding:50px 0; }
 #profile_content > div > div  > ul{ display:flex;  flex-wrap:wrap; }
 #profile_content .profile{ width:75%; padding-left:20px; }
-#profile_content .profile_info{ width:60%; display:flex; flex-wrap:wrap; grid-gap:20px; }
+#profile_content .profile_info{ width:75%; display:flex; flex-wrap:wrap; grid-gap:20px; padding:0 40px; }
 #profile_content .profile_info > a{ width:100%; font-size:20px; border-bottom:2px solid #d2d2d2; padding-left:10px; padding-bottom:10px;}
 #profile_content .form_area > form{ display:flex; flex-wrap:wrap;  }
 #profile_content .form_area div{ width:100%; display:flex; flex-wrap:wrap; align-items:center; padding-top:20px; }
@@ -580,7 +615,7 @@ html, body, #root, .App{ width:100%; height:100%; }
   display: block;
   padding: 10px;
   text-decoration: none;
-  color: #333;
+  color: #fff;
 }
 
 .subMenu {

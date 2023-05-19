@@ -12,11 +12,12 @@ export default function Profile(){
                 <div>
                     <div className="pl_pro_img">
                         <img src={userInfo.userImg} alt="profile" />
-                        <p>{userInfo.u_id}</p>
                     </div>
                     <div className="pl_pro_text">
+                        <p>{userInfo.u_id}</p>
                         <p>{userInfo.u_nickname}</p>
                         <p>lv. {userInfo.u_level}</p>
+                        <p><h3>보유 포인트 : {userInfo.u_deposit}</h3></p>
                     </div>
                 </div>
             </Link>
@@ -39,9 +40,6 @@ export default function Profile(){
                     </ul>
                 </div>
             )}
-            <div class="pointArea">
-                <h3>보유 포인트 : {userInfo.u_deposit}</h3>
-            </div>
         </li>
     )
 }

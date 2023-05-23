@@ -56,7 +56,7 @@ function PointPayList(props){
                                     {paylist.length > 0 ? (
                                         paylist.map(paylist => (
                                             <tr key={paylist.uh_id}>
-                                                <td>{paylist.uh_challenge}</td>
+                                                <td>{paylist.uh_challengeName}</td>
                                                 <td>{paylist.uh_amount}</td>
                                                 <td>{paylist.uh_date}</td>
                                                 <td><span class="status-paid">성공</span></td>

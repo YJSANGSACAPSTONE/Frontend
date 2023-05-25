@@ -1,24 +1,29 @@
 import React,{useEffect, useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import $ from 'jquery';
 import Profile from '../components/Profile';
+import Axios from 'axios';
+import Cookies from 'js-cookie';
+
 function Board(props){
 
+    const [boards, setBoards]=useState([]);
+    const navigate = useNavigate();
+    const userInfo = JSON.parse(Cookies.get('userInfo'));
+
+    const MvRead = (board) => {
+        navigate(`/board/${board.b_id}`, { state: { board } });
+    }
+
     useEffect(()=>{
-        function updateSubFooterPosition() {
-            console.log(123)
-            var subFooter = $('#subFooter');
-            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-                // 스크롤이 없는 경우
-                subFooter.css('position', 'fixed');
-            } else {
-                // 스크롤이 있는 경우
-                subFooter.css('position', 'sticky');
-            }
-        }
-        updateSubFooterPosition();
-    
-        
+        Axios.get(`http://localhost:8070/post/list`)
+        .then((res)=>{
+            console.log(res);
+            setBoards(res.data.dtoList);
+        }) 
+        .catch((err)=>{
+            console.log(err);
+        });
     }, []);
     return(
         <>
@@ -40,15 +45,36 @@ function Board(props){
                                             <option value="006">산책위드망고</option>
                                         </select>
                                         <input type="text" placeholder="게시글 Search . . ." />
-                                        <button type="button" onClick={()=> window.location.href='/board/write'}>
+                                        
+                                        <button type="button" onClick={()=>navigate(`/board/write`)}>
                                             게시글 작성하기 
                                             <img src="./img/edit.png" alt="edit"/>
                                         </button>
+                                        
                                     </form>
                                 </div>
                                 <div class="board_list">
                                     <ul>
-                                        <li onClick={() => window.location.href=`/board/1`}>
+                                        {Object.keys(boards).length > 0 ? (
+                                            boards.map(boards => (
+                                                
+                                                <li onClick={() => MvRead(boards)}>
+                                                    <p><h3>{boards.po_title}</h3></p>
+                                                    <p>{boards.po_content}</p>
+                                                    <div>1시간 전 &nbsp;&nbsp;&nbsp; 조회수 : {boards.po_hitCount}</div>
+                                                    <div>
+                                                        <img src="./img/message-icon.png" alt=""/>31
+                                                        &nbsp;&nbsp;&nbsp; 
+                                                        {boards.u_id}
+                                                    </div>
+                                                </li>
+                                            ))
+                                        ) : (
+                                            <>
+                                            <li><div><p>등록된 게시글이 없습니다.</p></div></li>
+                                            </>
+                                        )}
+                                        <li onClick={() => MvRead(boards)}>
                                             <p class="list_title"><h3>챌린지 세개 완료했다 ㅎㅎ 갓생 사는 중</h3></p>
                                             <p>ㅈㄱㄴ 요즘 챌린지 완전 부시고 댕겨ㅎㅎㅎ 똑같은 하루라도 알차게 사는 기분들어서 진짜 갓생러됨 ㅠㅠ 재밌는 거 있으면 추천해주랑</p>
                                             <div>6분 전 &nbsp;&nbsp;&nbsp; 조회수 : 16</div>
@@ -58,7 +84,7 @@ function Board(props){
                                                 @yeoungjin
                                             </div>
                                         </li>
-                                        <li onClick={() => window.location.href=`/board/2`}>
+                                        {/* <li onClick={() => window.location.href=`/board/2`}>
                                             <p><h3>풋살 다녀왔습니다 ㅋㅋ</h3></p>
                                             <p>상대팀 다 고수여서 힘들었네요. 율하 플랩풋볼 가실분 구함 ㅎㅎ</p>
                                             <div>1시간 전 &nbsp;&nbsp;&nbsp; 조회수 : 200</div>
@@ -77,7 +103,7 @@ function Board(props){
                                                 &nbsp;&nbsp;&nbsp; 
                                                 @sanghee@naver.com
                                             </div>
-                                        </li>
+                                        </li> */}
                                     </ul>
                                 </div>
                             </li>

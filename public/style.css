@@ -124,7 +124,7 @@ body::-webkit-scrollbar-track {
 .boardlist_area > div > ul > li{ cursor:default; }
 .boardlist_area .board_list .list_title{ display:flex; width:100%; }
 .boardlist_area .board_list > ul > li > p{ padding:10px; font-size:18px; line-height:35px; }
-.boardlist_area .list_title .title_pro{ width:20%; }
+.boardlist_area .list_title .title_pro{ width:11%; display: flex; flex-direction: column; align-items: center; }
 .boardlist_area .write_cate { width:100%; }
 .boardlist_area .write_cate > select{ width:100%; height:50px; font-size:20px; }
 .boardlist_area .title_pro img{ width:55px; }

@@ -3,19 +3,38 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import $ from 'jquery';
 import Axios from "axios";
 import Profile from '../components/Profile';
+import Cookies from 'js-cookie';
 function ChallengeVerify(props){
 
+    const userInfo = JSON.parse(Cookies.get('userInfo'));
     const location = useLocation();
     const challenge = location.state?.challenge;
     const navigate = useNavigate();
+    const [challengeverify, setChallengeverify] = useState({
+        c_id : challenge.c_id,
+        u_id : userInfo.u_id,
+        verifyPhoto : null
+      });
+
+      const handleChange = (e) => {
+        const { name, value } = e.target;
+        if (name === "verifyPhoto") {
+          setChallengeverify(prevState => ({ ...prevState, [name]: e.target.files[0] }));
+        }
+      };
     
     const MbChallenge = () => {
         navigate(`/challenge/${challenge.c_id}`, { state: { challenge } });
     }
     const verify = () =>{
-        Axios.get('url')
-		.then(response => console.log(response.data))
-		.catch(error => console.log(error));
+        const formData = new FormData();
+        formData.append('c_id',challengeverify.c_id);
+        formData.append('u_id',challengeverify.u_id);
+        formData.append('verifyPhoto',challengeverify.verifyPhoto);
+        console.log(challengeverify);
+        // Axios.post('url')
+		// .then(response => console.log(response.data))
+		// .catch(error => console.log(error));
     }; 
     useEffect(()=>{
         $("#verifyImg").click(function() {
@@ -53,8 +72,8 @@ function ChallengeVerify(props){
                                         </h3>
                                     </div>
                                     <div class="verify_img">
-                                        <img src="/img/camera.png" alt="camera" id="verifyImg"/>
-                                        <input id="verifyInput" type="file"/>
+                                        <img src={challengeverify.verifyPhoto ? URL.createObjectURL(challengeverify.verifyPhoto) : "/img/camera.png"} alt="camera" id="verifyImg"/>
+                                        <input id="verifyInput" name="verifyPhoto" type="file" onChange={handleChange} />
                                     </div>
                                     <div class="verify_text">
                                         <h3>올바른 촬영 Tip</h3>

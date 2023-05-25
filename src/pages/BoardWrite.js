@@ -6,6 +6,7 @@ import Axios from 'axios';
 
 function BoardWrite(props){
     const userInfo = JSON.parse(Cookies.get('userInfo'));
+
     const [board,setBoard] = useState({
         // 입력받을 데이터
         b_id : 1,
@@ -36,7 +37,7 @@ function BoardWrite(props){
         Axios.post('http://localhost:8070/post/register',board)
         .then((res)=>{
             console.log(res);
-            // history('/board');
+            navigate('/board');
         })
         .catch((error)=>{
             console.log(error)

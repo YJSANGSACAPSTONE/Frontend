@@ -60,8 +60,8 @@ function Board(props){
                                                 
                                                 <li onClick={() => MvRead(boards)}>
                                                     <p><h3>{boards.po_title}</h3></p>
-                                                    <p>{boards.po_content}</p>
-                                                    <div>1시간 전 &nbsp;&nbsp;&nbsp; 조회수 : {boards.po_hitCount}</div>
+                                                    {/* <p>{boards.po_content}</p> */}
+                                                    <div>1시간 전 &nbsp;&nbsp;&nbsp; 조회수 : {boards.po_hitcount}</div>
                                                     <div>
                                                         <img src="./img/message-icon.png" alt=""/>31
                                                         &nbsp;&nbsp;&nbsp; 
@@ -74,7 +74,7 @@ function Board(props){
                                             <li><div><p>등록된 게시글이 없습니다.</p></div></li>
                                             </>
                                         )}
-                                        <li onClick={() => MvRead(boards)}>
+                                        {/* <li onClick={() => MvRead(boards)}>
                                             <p class="list_title"><h3>챌린지 세개 완료했다 ㅎㅎ 갓생 사는 중</h3></p>
                                             <p>ㅈㄱㄴ 요즘 챌린지 완전 부시고 댕겨ㅎㅎㅎ 똑같은 하루라도 알차게 사는 기분들어서 진짜 갓생러됨 ㅠㅠ 재밌는 거 있으면 추천해주랑</p>
                                             <div>6분 전 &nbsp;&nbsp;&nbsp; 조회수 : 16</div>
@@ -83,7 +83,7 @@ function Board(props){
                                                 &nbsp;&nbsp;&nbsp; 
                                                 @yeoungjin
                                             </div>
-                                        </li>
+                                        </li> */}
                                         {/* <li onClick={() => window.location.href=`/board/2`}>
                                             <p><h3>풋살 다녀왔습니다 ㅋㅋ</h3></p>
                                             <p>상대팀 다 고수여서 힘들었네요. 율하 플랩풋볼 가실분 구함 ㅎㅎ</p>

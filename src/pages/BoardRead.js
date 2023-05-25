@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 function BoardRead(props){
     const location = useLocation();
     const board = location.state.board;
-    
+    console.log(board);
     const userInfo = JSON.parse(Cookies.get('userInfo'));
     const navigate = useNavigate();
     function toBoard(e){
@@ -28,12 +28,12 @@ function BoardRead(props){
                                             <div class="list_title">
                                                 <div class="title_pro">
                                                     <img src="/img/profile.png" alt="profile" />
-                                                    <h3>@youngjin</h3>
-                                                    <p>04/17 16:59</p>
+                                                    <h5>{board.u_id}</h5>
+                                                    <p>{board.po_regDate}</p>
                                                 </div>
-                                                <h1>챌린지 세개 완료했다 ㅎㅎ 갓생 사는 중</h1>
+                                                <h1>{board.po_title}</h1>
                                             </div>
-                                            <p>ㅈㄱㄴ 요즘 챌린지 완전 부시고 댕겨ㅎㅎㅎ 똑같은 하루라도 알차게 사는 기분들어서 진짜 갓생러됨 ㅠㅠ 재밌는 거 있으면 추천해주랑</p>
+                                            <p>{board.po_content}</p>
                                             <div>추천 : n &nbsp;&nbsp;&nbsp; <img src="/img/message-icon.png" alt="message-icon" />13 &nbsp;&nbsp;&nbsp; 6분 전 &nbsp;&nbsp;&nbsp; 조회수 : 16</div>
                                             {board.u_id == userInfo.u_id ? (
                                                 <div>

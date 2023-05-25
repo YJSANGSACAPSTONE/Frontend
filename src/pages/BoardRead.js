@@ -1,11 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate,useLocation } from 'react-router-dom';
 import Profile from '../components/Profile';
+import Cookies from 'js-cookie';
 function BoardRead(props){
-
+    const location = useLocation();
+    const board = location.state.board;
+    
+    const userInfo = JSON.parse(Cookies.get('userInfo'));
+    const navigate = useNavigate();
     function toBoard(e){
-        window.location.href="/board";
-        
+        navigate('/board');
     }
 
     return(
@@ -31,9 +35,14 @@ function BoardRead(props){
                                             </div>
                                             <p>ㅈㄱㄴ 요즘 챌린지 완전 부시고 댕겨ㅎㅎㅎ 똑같은 하루라도 알차게 사는 기분들어서 진짜 갓생러됨 ㅠㅠ 재밌는 거 있으면 추천해주랑</p>
                                             <div>추천 : n &nbsp;&nbsp;&nbsp; <img src="/img/message-icon.png" alt="message-icon" />13 &nbsp;&nbsp;&nbsp; 6분 전 &nbsp;&nbsp;&nbsp; 조회수 : 16</div>
-                                            <div>
-                                                <a href="">삭제</a> &nbsp;&nbsp;&nbsp; <a href="/board/1/edit">수정</a>
-                                            </div>
+                                            {board.u_id == userInfo.u_id ? (
+                                                <div>
+                                                    <a href="">삭제</a> &nbsp;&nbsp;&nbsp; <a href="/board/1/edit">수정</a>
+                                                </div>
+                                            ) : (
+                                                <></>
+                                            )}
+                                            
                                         </li>
                                         <li class="list_comment">
                                             <img src="/img/profile.png" alt="profile"/>

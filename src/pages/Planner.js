@@ -298,19 +298,6 @@ function Planner(props){
 			$("input[name=p_remindornot]").prop('checked', false);
 			// 추가할일 처리 로직 작성
 		});
-
-		function updateSubFooterPosition() {
-			var subFooter = $('#subFooter');
-			if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-				// 스크롤이 없는 경우
-				subFooter.css('position', 'fixed');
-			} else {
-				// 스크롤이 있는 경우
-				subFooter.css('position', 'sticky');
-			}
-		}
-		updateSubFooterPosition();
-
 		$("#listModal .confirmBtn button").click( () => {
 			$("#listModal").css('display','none');
 		});

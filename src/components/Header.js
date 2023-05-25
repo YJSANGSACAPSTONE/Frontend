@@ -4,26 +4,20 @@ import Cookies from 'js-cookie';
 import $ from 'jquery';
 
 function Header(){
-    let userInfo;
-    try {
-        userInfo = JSON.parse(Cookies.get('userInfo'));
-    } catch (e) {
-        console.error('Error parsing userInfo cookie:', e);
-    // 예외 처리 코드를 여기에 추가할 수 있습니다.
-    }
-    useEffect(()=>{
-        function updateSubFooterPosition() {
-            var subFooter = $('#subFooter');
-            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-                // 스크롤이 없는 경우
-                subFooter.css('position', 'fixed');
-            } else {
-                // 스크롤이 있는 경우
-                subFooter.css('position', 'sticky');
-            }
-        }
-        updateSubFooterPosition();
-    }, []);
+    const userInfo = JSON.parse(Cookies.get('userInfo'));
+    // useEffect(()=>{
+    //     function updateSubFooterPosition() {
+    //         var subFooter = $('#subFooter');
+    //         if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+    //             // 스크롤이 없는 경우
+    //             subFooter.css('position', 'fixed');
+    //         } else {
+    //             // 스크롤이 있는 경우
+    //             subFooter.css('position', 'sticky');
+    //         }
+    //     }
+    //     updateSubFooterPosition();
+    // }, []);
     return (
         <div id="subHeader" class="container">
             <div class="container_inner">
@@ -38,7 +32,7 @@ function Header(){
                         <li class="menuArea">
                             <ul class="mainMenu">
                                 <li>
-                                    <Link to="/">홈</Link>
+                                    <Link to="/planner">홈</Link>
                                 </li>
                                 <li>
                                     <Link to="/challenge">챌린지</Link>
@@ -47,21 +41,18 @@ function Header(){
                                             <Link to="/challengeAll">전체 챌린지</Link>
                                         </li>
                                         <li>
-                                            <Link to={`/profile/${userInfo.uid}/myChallenge`}>완료한 챌린지</Link>
+                                            <Link to={`/profile/${userInfo.u_id}/myChallenge`}>완료한 챌린지</Link>
                                         </li>
                                         <li>
-                                            <Link to="/challenges/my">마이 챌린지</Link>
+                                            <Link to={`/profile/${userInfo.u_id}/myChallenge`}>마이 챌린지</Link>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <Link to="/boards">게시판</Link>
+                                    <Link to="/board">게시판</Link>
                                     <ul class="subMenu">
                                         <li>
-                                           <Link to="/boards/free">자유 게시판</Link>
-                                        </li>
-                                        <li>
-                                           <Link to="/boards/challenges">챌린지 게시판</Link>
+                                           <Link to="/board">전체 게시판</Link>
                                         </li>
                                     </ul>
                                 </li>
@@ -80,36 +71,16 @@ function Header(){
                                     </ul>
                                 </li>
                                 <li>
-                                    <Link to="/notices">공지사항</Link>
+                                    <Link to="/profile">마이페이지</Link>
                                     <ul class="subMenu">
                                         <li>
-                                            <Link to="/notices/notice">공지사항</Link>
+                                            <Link to={`/profile/${userInfo.u_id}/info`}>계정 정보</Link>
                                         </li>
                                         <li>
-                                            <Link to="/notices/contact">문의 및 고객센터</Link>
+                                            <Link to={`/profile/${userInfo.u_id}/PointPayList`}>포인트 사용 내역</Link>
                                         </li>
                                         <li>
-                                            <Link to="/notices/help">도움말</Link>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <Link to="/mypage">마이페이지</Link>
-                                    <ul class="subMenu">
-                                        <li>
-                                            <Link to="/mypage/account">계정 정보</Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/mypage/point">포인트 충전</Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/mypage/payment">결제 내역</Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/logout">로그아웃</Link>
-                                        </li>
-                                        <li>
-                                            <Link to="/mypage/withdraw">회원 탈퇴</Link>
+                                            <Link to={`/profile/${userInfo.u_id}/payList`}>결제 내역</Link>
                                         </li>
                                     </ul>
                                 </li>

@@ -91,13 +91,13 @@ body::-webkit-scrollbar-track {
 #sign_content .sign_form img{ width:100px; height: 100px; border-radius:50%; }
 #sign_content .sign_form input{ margin-bottom:10px;}
 
-#planner_content{ padding:50px 0;  }
+#planner_content{ padding:50px 0; margin-bottom:125px; }
 #planner_content > div > div > ul{ display:flex; flex-wrap:wrap; }
 .planner_profile{ width:25%; position: relative; }
 .planner_profile > a > div{ display:flex; padding:10px; width:100%; justify-content:space-evenly; flex-wrap:wrap; }
 .planner_profile > div{ display:flex; padding:10px; }
 .planner_profile > a > div:first-child{ box-shadow: 0 2px 5px rgba(0,0,0,0.3); background:#ededed; border-radius:10px; }
-.planner_profile  div.hot_chart{ top:430px; display:flex; flex-direction:column; grid-gap:20px; width:390px; }
+.planner_profile  div.hot_chart{ top:430px; display:flex; flex-direction:column; grid-gap:20px; width:350px; }
 .planner_profile  div.pointArea{ top:390px; display:flex; flex-direction:column; grid-gap:20px; width:300px; }
 .planner_profile .hot_chart ul{ display:flex; border-radius:10px; border:solid 2px #dadada; flex-direction:column;  overflow:hidden; }
 .planner_profile .hot_chart li{ display:flex; width:100%; justify-content:space-between; padding:10px; border-bottom:solid 1px #dadada; }
@@ -110,11 +110,11 @@ body::-webkit-scrollbar-track {
 
 #board > div > div > ul{ display:flex; justify-content: space-between; }
 .board_area{ width:75%; padding:0 40px; }
-.boardlist_area{ width:80%; }
+.boardlist_area{ width:75%; padding:0 40px; }
 .board_list{ padding-top:20px; }
 .board_list .toListBtn{ padding:10px 20px; margin-bottom:10px; background: #4c6ef5; border: none; color: #fff; border-radius: 5px; }
 .signUpBtn{ padding:15px; margin-bottom:10px; background: #fff; border: none; color: #333; border-radius: 5px; width:250px; font-size:20px; }
-.myPageBtn{ padding:5px 20px; background: #4c6ef5; border: none; color: #fff; border-radius: 5px; margin-top: 40px; }
+.myPageBtn{ padding:5px 20px; background: #4c6ef5; border: none; color: #fff; border-radius: 5px; margin-top: 40px; margin-left:15px; }
 .board_list ul{ display:flex; flex-direction: column; border:solid 2px #d5d5d5; }
 .board_list ul > li{ display:flex; flex-wrap:wrap; justify-content:space-between; grid-gap:10px; padding:15px 10px; border-bottom:solid 1px #d5d5d5; cursor:pointer; }
 .board_list ul > li:last-child{ border:none; }
@@ -190,7 +190,7 @@ body::-webkit-scrollbar-track {
 /* planner progressbar */
 
 .planner_space{ width:25%; }
-.planner_calendar{ width:35%; height:250px; padding:0 20px; }
+.planner_calendar{ width:35%; height:250px; padding:0 40px; }
 .planner_calendar #datepickerDiv{ margin-top:50px; padding-bottom:20px; }
 #selected-date-input{ padding:10px; font-size:20px; }
 
@@ -294,13 +294,15 @@ body::-webkit-scrollbar-track {
 #addTaskModal .editReminder .reminder_btn{ text-align: right; }
 
 
-#subFooter{ padding:30px 0; position:sticky; bottom:0; background:#fff; border-top:solid 3px #e1e1e1; z-index:999; }
+#subFooter{ padding:70px 0; background:#363636; color:#fff; }
 
-#subFooter ul{ display:flex; justify-content:space-around; }
+#subFooter ul{ display:flex; justify-content:space-around; line-height:26px; }
 
 #subFooter img{ width:40px; }
 
-#challenge{ padding:50px 0; }
+#subFooter .social_area{ display:flex; grid-gap:20px; align-items: flex-start; }
+
+#challenge{ padding:50px 0; margin-bottom:150px; }
 
 #challenge .myChallenge{ display:flex; flex-wrap:wrap; width:75%; padding:0 40px; }
 #challenge .myChallenge > h1{ width:100%; }
@@ -381,7 +383,7 @@ body::-webkit-scrollbar-track {
 #challenge .read_btn button{ background:#999; border:solid 1px #d4d4d4; border-radius:5px; width:100px; padding:10px 0; font-size:20px; cursor:pointer; color:#fff; }
 #challenge .read_btn button:last-child{ background:#4c6ef5; }
 
-.challenge_pay{ width:40%; display:flex; flex-wrap:wrap; }
+.challenge_pay{ width:50%; display:flex; flex-wrap:wrap; padding:0 40px; }
 .challenge_pay > div{ display:flex; padding-top:20px; width:100%; margin:15px 0; }
 .challenge_pay .challenge_info{ flex-wrap:wrap; grid-gap:15px; }
 .challenge_pay .challenge_payment{ justify-content:space-between; padding-top:40px; }
@@ -402,9 +404,9 @@ body::-webkit-scrollbar-track {
 #uploadInput{ display:none; }
 #thumbnail{ cursor:pointer; }
 
-#profile_content{ padding:50px 0; }
+#profile_content{ padding:50px 0; margin-bottom:200px; }
 #profile_content > div > div  > ul{ display:flex;  flex-wrap:wrap; }
-#profile_content .profile{ width:75%; padding-left:20px; }
+#profile_content .profile{ width:75%; padding-left:40px; }
 #profile_content .profile_info{ width:75%; display:flex; flex-wrap:wrap; grid-gap:20px; padding:0 40px; }
 #profile_content .profile_info > a{ width:100%; font-size:20px; border-bottom:2px solid #d2d2d2; padding-left:10px; padding-bottom:10px;}
 #profile_content .form_area > form{ display:flex; flex-wrap:wrap;  }
@@ -420,9 +422,9 @@ body::-webkit-scrollbar-track {
 #profile_content .updateUser{ background-color: ; }
 #profile_content .deleteUser{ background-color: #e74c3c; color:#fff !important; }
 
-#point{ padding:50px 0; }
+#point{ padding:50px 0; margin-bottom:200px; }
 #point > div > div > ul{ display:flex;  flex-wrap:wrap; }
-#point .point_area{ width:75%; }
+#point .point_area{ width:75%; padding:0 40px; }
 
 .charge-point-container {
   max-width: 100%;
@@ -473,10 +475,10 @@ body::-webkit-scrollbar-track {
   background-color: #0d47a1;
 }
 
-#payment{ padding:50px 0; }
+#payment{ padding:50px 0; margin-bottom:200px; }
 #payment > div > div > ul{ display:flex; flex-wrap:wrap; }
-#payment .payment_list{ width:75%; }
-#board{ padding:50px 0; }
+#payment .payment_list{ width:75%; padding:0 40px; }
+#board{ padding:50px 0; margin-bottom:150px; }
 
 /* payment */
 
@@ -528,10 +530,10 @@ body::-webkit-scrollbar-track {
 /* payment */
 
 /* zep verify */
-#zep{ padding:50px 0; }
+#zep{ padding:50px 0; margin-bottom:200px; }
 
 #zep > div > div > ul{ display:flex; flex-wrap:wrap; }
-#zep .zep_verify{ width:75%; }
+#zep .zep_verify{ width:75%; padding:0 40px; }
 
 .step-container {
   display: none;
@@ -732,8 +734,8 @@ i[class^=icon-chevron]{
 
 /* point pay list */
 
-#pointPayList{ padding:50px 0; }
+#pointPayList{ padding:50px 0; margin-bottom:200px; }
 #pointPayList > div > div > ul{ display:flex; flex-wrap:wrap; }
-#pointPayList .payment_list{ width:75%; }
+#pointPayList .payment_list{ width:75%; padding:0 40px; }
 
 /* point pay list */

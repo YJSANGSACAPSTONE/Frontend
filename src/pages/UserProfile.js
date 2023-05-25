@@ -9,17 +9,17 @@ function UserProfile(props){
         window.location.href='https://kauth.kakao.com/oauth/logout?client_id=87c054c34eca4ca3541ab083e086cd12&logout_redirect_uri=http://localhost:3000';
     }
     useEffect(()=>{
-        function updateSubFooterPosition() {
-            var subFooter = $('#subFooter');
-            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-                // 스크롤이 없는 경우
-                subFooter.css('position', 'fixed');
-            } else {
-                // 스크롤이 있는 경우
-                subFooter.css('position', 'sticky');
-            }
-        }
-        updateSubFooterPosition();
+        // function updateSubFooterPosition() {
+        //     var subFooter = $('#subFooter');
+        //     if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+        //         // 스크롤이 없는 경우
+        //         subFooter.css('position', 'fixed');
+        //     } else {
+        //         // 스크롤이 있는 경우
+        //         subFooter.css('position', 'sticky');
+        //     }
+        // }
+        // updateSubFooterPosition();
     }, []);
     return(
         <>

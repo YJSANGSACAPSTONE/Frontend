@@ -39,19 +39,19 @@ function App() {
 
 	useEffect(()=>{
 			// subFooter
-			$(window).on('resize', updateSubFooterPosition);
+			// $(window).on('resize', updateSubFooterPosition);
 
-			function updateSubFooterPosition() {
-				var subFooter = $('#subFooter');
-				if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-					// 스크롤이 없는 경우
-					subFooter.css('position', 'fixed');
-				} else {
-					// 스크롤이 있는 경우
-					subFooter.css('position', 'sticky');
-				}
-			}
-			updateSubFooterPosition();
+			// function updateSubFooterPosition() {
+			// 	var subFooter = $('#subFooter');
+			// 	if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+			// 		// 스크롤이 없는 경우
+			// 		subFooter.css('position', 'sticky');
+			// 	} else {
+			// 		// 스크롤이 있는 경우
+			// 		subFooter.css('position', 'fixed');
+			// 	}
+			// }
+			// updateSubFooterPosition();
 
 			$("#thumbnail").click(function() {
 				$("#uploadInput").trigger("click");

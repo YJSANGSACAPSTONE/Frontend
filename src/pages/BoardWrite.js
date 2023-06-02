@@ -14,14 +14,19 @@ function BoardWrite(props){
         po_title : "",
         po_content : "",
         po_secret : true,
-        imageDTOList : []
+        imageDTOList : [],
+        uploadFiles: null
     });
+    
 
     const handleChange = (e) => {
-        const {name, value} = e.target;
+        const {name, value, files} = e.target;
 
         if(name === "po_secret" ){
             setBoard(prevState => ({...prevState, [name] : parseInt(value)}))
+        }else if(name === "uploadFiles"){
+            const fileList = Array.from(files); // 파일 배열로 변환
+            setBoard((prevState) => ({ ...prevState, [name]: fileList }));
         }else{
             setBoard(prevState => ({...prevState, [name] : value}))
         }
@@ -32,18 +37,57 @@ function BoardWrite(props){
         navigate('/board');
     }
     
-
     const boardSubmit = () =>{
-        Axios.post('http://localhost:8070/post/register',board)
+        const formData = new FormData();
+        console.log(board.uploadFiles);
+        // formData.append('uploadFiles', board.uploadFiles);
+        for (let i = 0; i < board.uploadFiles.length; i++) {
+            formData.append("uploadFiles", board.uploadFiles[i]);
+        }
+        
+        
+        Axios.post('http://localhost:8070/uploadAjax',formData)
         .then((res)=>{
             console.log(res);
-            navigate('/board');
+            const path = "/img/boardimgtemp/" + res.data[0].folderPath;
+            const unifiedPath = path.replace(/\\/g, "/");
+            const uuid = res.data[0].uuid;
+            const fileName = uuid+"_"+res.data[0].fileName;
+            
+
+            setBoard(prevState => ({
+                ...prevState,
+                imageDTOList: [...prevState.imageDTOList, { path: unifiedPath, imgName: fileName, uuid:uuid }]
+            }));
+
         })
-        .catch((error)=>{
-            console.log(error)
-        });
+        .catch((err)=>{
+            console.log(err);
+        })
     }
+
+    const handleRemoveFile = (index) => {
+        setBoard((prevState) => {
+            const updatedFiles = [...prevState.uploadFiles];
+            updatedFiles.splice(index, 1);
+            return { ...prevState, uploadFiles: updatedFiles };
+        });
+    };
     
+    useEffect(()=>{
+        console.log(board); // 업데이트된 상태 출력
+
+        if (board.imageDTOList.length > 0) {
+          Axios.post('http://localhost:8070/post/register', board)
+            .then((res) => {
+              navigate('/board');
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+    },[board])
+
     return(
         <>
             {props.header}
@@ -72,25 +116,36 @@ function BoardWrite(props){
                                                     <img src="/img/profile.png" alt="profile"/>
                                                     <h3>@youngjin</h3>
                                                 </div>
-                                                <input type="text" name="po_title" value={board.po_title} onChange={handleChange} />
+                                                <input type="text" name="po_title" value={board.po_title} onChange={handleChange} placeHolder="제목" />
                                             </div>
-                                            <textarea name="po_content" id="po_content" cols="30" rows="10" value={board.po_content} onChange={handleChange} />
+                                            <textarea name="po_content" id="po_content" cols="30" rows="10" value={board.po_content} onChange={handleChange} placeHolder="내용" />
                                             <div>
-                                                <label for="open">공개</label><input type="radio" id="open" name="po_secret" value="1" checked={board.po_secret === 1} onChange={handleChange} />
-                                                <label for="close">비공개</label><input type="radio" id="close" name="po_secret" value="0" checked={board.po_secret === 0} onChange={handleChange} />
+                                                <label for="open">공개</label><input type="radio" id="open" name="po_secret" value="1" checked={board.po_secret === true} onChange={handleChange} />
+                                                <label for="close">비공개</label><input type="radio" id="close" name="po_secret" value="0" checked={board.po_secret === false} onChange={handleChange} />
+                                            </div>
+                                            <div>
+                                                <input type="file" name="uploadFiles" onChange={handleChange} multiple  />
                                             </div>
                                             <div>
                                                 <button class="toListBtn" onClick={()=>boardSubmit()}>등록</button>
                                             </div>
+                                            <div className="thumb">
+                                                {board.uploadFiles && Array.from(board.uploadFiles).map((file, index) => (
+                                                    <div className="thumb_area" key={index}>
+                                                        <img className="thumbnail" src={URL.createObjectURL(file)} alt="" />
+                                                        <button onClick={() => handleRemoveFile(index)}>X</button>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            
                                         </li>
-                                    
                                     </ul>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div>  
             {props.footer}
         </>
     )

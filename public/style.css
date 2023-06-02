@@ -91,7 +91,7 @@ body::-webkit-scrollbar-track {
 #sign_content .sign_form img{ width:100px; height: 100px; border-radius:50%; }
 #sign_content .sign_form input{ margin-bottom:10px;}
 
-#planner_content{ padding:50px 0; margin-bottom:125px; }
+#planner_content{ padding:50px 0; margin-bottom:200px; }
 #planner_content > div > div > ul{ display:flex; flex-wrap:wrap; }
 .planner_profile{ width:25%; position: relative; }
 .planner_profile > a > div{ display:flex; padding:10px; width:100%; justify-content:space-evenly; flex-wrap:wrap; }
@@ -113,13 +113,17 @@ body::-webkit-scrollbar-track {
 .boardlist_area{ width:75%; padding:0 40px; }
 .board_list{ padding-top:20px; }
 .board_list .toListBtn{ padding:10px 20px; margin-bottom:10px; background: #4c6ef5; border: none; color: #fff; border-radius: 5px; }
+.board_list .boardReadImg{ width:100%; }
+.board_list .thumbnail{ width:100px; }
+.board_list .thumb{ width: 100%; display: flex; grid-gap: 20px; flex-wrap:wrap; }
+.board_list .thumb_area{  display: flex; grid-gap: 20px; }
 .signUpBtn{ padding:15px; margin-bottom:10px; background: #fff; border: none; color: #333; border-radius: 5px; width:250px; font-size:20px; }
 .myPageBtn{ padding:5px 20px; background: #4c6ef5; border: none; color: #fff; border-radius: 5px; margin-top: 40px; margin-left:15px; }
 .board_list ul{ display:flex; flex-direction: column; border:solid 2px #d5d5d5; }
 .board_list ul > li{ display:flex; flex-wrap:wrap; justify-content:space-between; grid-gap:10px; padding:15px 10px; border-bottom:solid 1px #d5d5d5; cursor:pointer; }
 .board_list ul > li:last-child{ border:none; }
 .board_list ul > li > p{ width:100%; }
-.board_list > ul > li > textarea{ width:100%; padding: 10px; font-size: 18px; line-height: 35px; }
+.board_list > ul > li > textarea{ width:100%; padding: 10px; font-size: 18px; line-height: 30px; }
 /*게시물 상세보기 페이지*/
 .boardlist_area > div > ul > li{ cursor:default; }
 .boardlist_area .board_list .list_title{ display:flex; width:100%; }

@@ -126,7 +126,7 @@ body::-webkit-scrollbar-track {
 .board_list > ul > li > textarea{ width:100%; padding: 10px; font-size: 18px; line-height: 30px; }
 /*게시물 상세보기 페이지*/
 .boardlist_area > div > ul > li{ cursor:default; }
-.boardlist_area .board_list .list_title{ display:flex; width:100%; }
+.boardlist_area .board_list .list_title{ display:flex; width:100%; align-items:center; }
 .boardlist_area .board_list > ul > li > p{ padding:10px; font-size:18px; line-height:35px; }
 .boardlist_area .list_title .title_pro{ width:11%; display: flex; flex-direction: column; align-items: center; }
 .boardlist_area .write_cate { width:100%; }
@@ -134,7 +134,7 @@ body::-webkit-scrollbar-track {
 .boardlist_area .title_pro img{ width:55px; }
 .boardlist_area .title_pro * { float:left; }
 .boardlist_area .title_pro p{ padding-top:10px; }
-.boardlist_area .list_title h1{ width:80%;  }
+.boardlist_area .list_title h1{ width:80%; padding-left:40px; }
 .boardlist_area .list_title input{ width:80%; font-size:30px; padding-left:15px; }
 /*게시물 상세보기 페이지 (댓글) */
 .boardlist_area .list_comment{ grid-gap:0; }

@@ -111,7 +111,12 @@ function BoardRead(props){
                                                     <h5>{board.u_id}</h5>
                                                     {/* <p>{board.po_regDate}</p> */}
                                                 </div>
-                                                <h1>{board.po_title}</h1>
+                                                <h1>
+                                                    {board.po_title}
+                                                </h1>
+                                                <div>
+                                                    <img src="/img/like.png" alt="like"/>
+                                                </div>
                                             </div>
                                             <p>
                                                 {board.po_content}
@@ -122,7 +127,7 @@ function BoardRead(props){
                                             <div>추천 : {read.likeCnt} &nbsp;&nbsp;&nbsp; <img src="/img/message-icon.png" alt="message-icon" />13 &nbsp;&nbsp;&nbsp; {formattedTimeDiff} &nbsp;&nbsp;&nbsp; 조회수 : {read.po_hitcount}</div>
                                             
                                         </li>
-                                        <li class="list_comment">
+                                        {/* <li class="list_comment">
                                             <img src="/img/profile.png" alt="profile"/>
                                             <div class="comment_content">
                                                 <p>@youngjin</p>
@@ -132,11 +137,11 @@ function BoardRead(props){
                                                 <p><a href="">삭제</a> &nbsp; <a href="">수정</a> </p>
                                                 <p>04/12 &nbsp; 16:32</p>
                                             </div>
-                                        </li>
+                                        </li> */}
                                         <li class="comment_write">
                                             <img src="/img/profile.png" alt="profile" />
                                             <div class="comment_content">
-                                                <p>@youngjin</p>
+                                                <p>{userInfo.u_id} <br/><br/></p>
                                                 <textarea name="" id="" cols="30" rows="10"></textarea>
                                             </div>
                                             <div class="comment_btn">

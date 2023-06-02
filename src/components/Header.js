@@ -4,7 +4,17 @@ import Cookies from 'js-cookie';
 import $ from 'jquery';
 
 function Header(){
-    const userInfo = JSON.parse(Cookies.get('userInfo'));
+    let userInfo;
+
+    try {
+    userInfo = JSON.parse(Cookies.get('userInfo'));
+    } catch (error) {
+    // 예외 처리 코드
+    console.error('userInfo가 존재하지 않거나 파싱할 수 없습니다.', error);
+    // userInfo를 기본값으로 설정하거나 다른 처리를 수행할 수 있습니다.
+    // 예를 들어, userInfo를 빈 객체로 초기화하려면 다음과 같이 할 수 있습니다.
+    userInfo = {};
+    }
     // useEffect(()=>{
     //     function updateSubFooterPosition() {
     //         var subFooter = $('#subFooter');

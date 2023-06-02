@@ -15,18 +15,6 @@ function MyChallenge(props){
     const now4 = 10;
 
     useEffect(()=>{
-        function updateSubFooterPosition() {
-            var subFooter = $('#subFooter');
-            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-                // 스크롤이 없는 경우
-                subFooter.css('position', 'fixed');
-            } else {
-                // 스크롤이 있는 경우
-                subFooter.css('position', 'sticky');
-            }
-        }
-        updateSubFooterPosition();
-        
         Axios.get(`http://localhost:8070/challenge/mychallenge?uid=${uid}`)
         .then((res)=>{
             console.log(res);
@@ -35,8 +23,6 @@ function MyChallenge(props){
         .catch((err)=>{
             console.log(err);
         });
-
-
     }, []);
     return(
         <>
@@ -65,6 +51,7 @@ function MyChallenge(props){
 													<img src={`http://localhost:8070${challenge.cthumbnails}`} alt="morning"/>
                                                     <div>
                                                         {challenge.cname}
+                                                        <button class="myPageBtn">참가취소</button>
                                                         <button onClick={()=>window.location.href=`/challenge/${challenge.cid}/verify`} class="myPageBtn">인증하기</button>
                                                     </div>
 												</div>

@@ -12,7 +12,7 @@ function Board(props){
     const userInfo = JSON.parse(Cookies.get('userInfo'));
 
     const MvRead = (board) => {
-        navigate(`/board/${board.b_id}`, { state: { board } });
+        navigate(`/board/${board.po_id}`, { state: { board } });
     }
 
     useEffect(()=>{

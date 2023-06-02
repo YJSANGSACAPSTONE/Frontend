@@ -17,7 +17,7 @@ function Footer(){
                             <p>대구광역시 북구 복현로 35</p>
                             <p>사업자 등록번호 : 000-0000</p>
                             <p>통신판매업신고 : 0000-xxxx-000000</p>
-                            <p>대표 : 심상희 | 개인정보책입자 : 이민화</p>
+                            <p>대표 : 심상희 | 개인정보책임자 : 이민화</p>
                             <p>이메일 : yeungjin@naver.com</p>
                             <br/>
                             <p>copyright 2023. yeungjinsangsa. All rights reserved.</p>

@@ -8,8 +8,10 @@ function BoardRead(props){
     const location = useLocation();
     const board = location.state.board;
     const userInfo = JSON.parse(Cookies.get('userInfo'));
+    console.log(userInfo);
 
     const [formattedTimeDiff, setFormattedTimeDiff] = useState("");
+    const [commentText, setCommentText] = useState("");
 
     const navigate = useNavigate();
     function toBoard(e){
@@ -30,7 +32,8 @@ function BoardRead(props){
         u_id:""
     });
 
-    useEffect(()=>{
+
+    const readPost = () => {
         Axios.get(`http://localhost:8070/post/read?poid=${board.po_id}`)
         .then((res)=>{
             setRead(res.data);
@@ -39,7 +42,25 @@ function BoardRead(props){
         .catch((err)=>{
             console.log(err);
         })
+    }
+    
+    useEffect(()=>{
+        readPost();
     }, []);
+
+    const commentWrite = (postId) => {
+        console.log("post ID : " + postId + " comm_text : " + commentText);
+        Axios.post(`http://localhost:8070/comments/${postId}`, {
+            u_id : userInfo.u_id,
+            comm_text : commentText
+        })
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }
 
     const deletePost = (postId) => {
         if(window.confirm("게시글을 삭제하시겠습니까?")){
@@ -54,6 +75,20 @@ function BoardRead(props){
             });
         }  
     };
+
+    const likeBtn = (postId) => {
+        console.log("postID : " + postId + " uid : " + userInfo.u_id);
+        Axios.post(`http://localhost:8070/post/like/${postId}`, {
+            uid : userInfo.u_id
+        })
+        .then((res)=>{
+            console.log(res);
+            readPost();
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }
 
     const editPost = (postId) => {
         if(window.confirm("게시글을 수정하시겠습니까?")){
@@ -114,8 +149,8 @@ function BoardRead(props){
                                                 <h1>
                                                     {board.po_title}
                                                 </h1>
-                                                <div>
-                                                    <img src="/img/like.png" alt="like"/>
+                                                <div className="readLike">
+                                                    <img onClick={()=>likeBtn(read.po_id)} src="/img/like.png" alt="like"/>
                                                 </div>
                                             </div>
                                             <p>
@@ -124,7 +159,7 @@ function BoardRead(props){
                                                     <img className="boardReadImg" src={`http://localhost:8070`+read.imageDTOList[0].path + "/" + read.imageDTOList[0].imgName} alt="" />
                                                 )}
                                             </p>
-                                            <div>추천 : {read.likeCnt} &nbsp;&nbsp;&nbsp; <img src="/img/message-icon.png" alt="message-icon" />13 &nbsp;&nbsp;&nbsp; {formattedTimeDiff} &nbsp;&nbsp;&nbsp; 조회수 : {read.po_hitcount}</div>
+                                            <div>추천 : {read.likeCnt} &nbsp;&nbsp;&nbsp; <img src="/img/message-icon.png" alt="message-icon" /> {read.commentCnt} &nbsp;&nbsp;&nbsp; {formattedTimeDiff} &nbsp;&nbsp;&nbsp; 조회수 : {read.po_hitcount-2}</div>
                                             
                                         </li>
                                         {/* <li class="list_comment">
@@ -142,10 +177,10 @@ function BoardRead(props){
                                             <img src="/img/profile.png" alt="profile" />
                                             <div class="comment_content">
                                                 <p>{userInfo.u_id} <br/><br/></p>
-                                                <textarea name="" id="" cols="30" rows="10"></textarea>
+                                                <textarea name="commentText" id="commentText" value={commentText} onChange={(e)=>setCommentText(e.target.value)} cols="30" rows="10"></textarea>
                                             </div>
                                             <div class="comment_btn">
-                                                <button>작성</button>
+                                                <button onClick={()=>commentWrite(read.po_id)}>작성</button>
                                             </div>
                                         </li>
                                     </ul>

@@ -8,10 +8,11 @@ function BoardRead(props){
     const location = useLocation();
     const board = location.state.board;
     const userInfo = JSON.parse(Cookies.get('userInfo'));
-    console.log(userInfo);
+    
 
     const [formattedTimeDiff, setFormattedTimeDiff] = useState("");
     const [commentText, setCommentText] = useState("");
+    const [liked, setLiked] = useState(false); // 좋아요 상태를 관리하는 변수
 
     const navigate = useNavigate();
     function toBoard(e){
@@ -37,7 +38,7 @@ function BoardRead(props){
         Axios.get(`http://localhost:8070/post/read?poid=${board.po_id}`)
         .then((res)=>{
             setRead(res.data);
-            console.log(res.data);
+            // console.log(res.data);
         })
         .catch((err)=>{
             console.log(err);
@@ -46,6 +47,9 @@ function BoardRead(props){
     
     useEffect(()=>{
         readPost();
+        Axios.get(`http://localhost:8070/post/liked/${board.po_id}/${userInfo.u_id}`)
+        .then((res)=>{setLiked(res.data)})
+        .catch((err)=>{console.log(err)});
     }, []);
 
     const commentWrite = (postId) => {
@@ -82,7 +86,7 @@ function BoardRead(props){
             uid : userInfo.u_id
         })
         .then((res)=>{
-            console.log(res);
+            setLiked(res.data);
             readPost();
         })
         .catch((err)=>{
@@ -150,7 +154,11 @@ function BoardRead(props){
                                                     {board.po_title}
                                                 </h1>
                                                 <div className="readLike">
-                                                    <img onClick={()=>likeBtn(read.po_id)} src="/img/like.png" alt="like"/>
+                                                    <img
+                                                        onClick={() => likeBtn(read.po_id)}
+                                                        src={liked ? "/img/like-active.png" : "/img/like.png"}
+                                                        alt="like"
+                                                    />
                                                 </div>
                                             </div>
                                             <p>

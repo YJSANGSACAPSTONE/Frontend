@@ -136,6 +136,8 @@ body::-webkit-scrollbar-track {
 .boardlist_area .title_pro p{ padding-top:10px; }
 .boardlist_area .list_title h1{ width:80%; padding-left:40px; }
 .boardlist_area .list_title input{ width:80%; font-size:30px; padding-left:15px; }
+.boardlist_area .list_title .readLike{ width:9%; display:flex; justify-content: center;  }
+.boardlist_area .list_title .readLike img{ cursor:pointer; }
 /*게시물 상세보기 페이지 (댓글) */
 .boardlist_area .list_comment{ grid-gap:0; }
 .boardlist_area .list_comment > *{ padding:5px 10px; }

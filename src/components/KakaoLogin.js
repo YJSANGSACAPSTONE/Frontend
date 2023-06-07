@@ -13,8 +13,8 @@ function KakaoLogin(){
         const code = url.searchParams.get("code");
         
         // console.log(url);
-        Axios.get(`http://localhost:8070/oauth2/authorize/kakao`).then((res)=>{
-            console.log(res);
+        Axios.get(`http://localhost:8070/login?code=${code}`).then((res)=>{
+            console.log(res.data);
             Axios.get(`http://localhost:8070/user/listuser?uid=${res.data.userId}`).
             then((resInner)=>{
                 console.log(resInner);

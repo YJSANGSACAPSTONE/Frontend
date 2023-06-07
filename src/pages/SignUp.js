@@ -35,7 +35,7 @@ function SignUp(props){
                 u_nickname ,
                 u_content,
                 u_zepid,
-                userImg : userData.profileImageUrl,
+                // userImg : userData.profileImageUrl,
                 u_level : 1,
                 u_deposit : 0
             };
@@ -73,9 +73,9 @@ function SignUp(props){
                             </li>
                             <li class="sign_form">
                                 <form action="">
-                                    <img src={userData.profileImageUrl} alt="" />
+                                    {/* <img src={userData.profileImageUrl} alt="" /> */}
                                     <label htmlFor="signId">카카오아이디</label>
-                                    <input type="text" id="signId" placeHolder="@abcdefg.com" value={userData.userId} name="u_id" />
+                                    <input type="text" id="signId" placeHolder="@abcdefg.com"  name="u_id" />
                                     {/* <label htmlFor="signZep">ZEP 아이디</label>
                                     <input type="name" id="signZep" name="u_zepid" /> */}
                                     <label htmlFor="signName">닉네임</label>

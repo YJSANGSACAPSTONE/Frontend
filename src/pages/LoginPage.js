@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function LoginPage(){
 
     const handleClick = (e) => {
-        const KakaoLoginAPI = 'https://kauth.kakao.com/oauth/authorize?client_id=87c054c34eca4ca3541ab083e086cd12&redirect_uri=http://localhost:3000/kakaoLogin&response_type=code';
+        const KakaoLoginAPI = 'http://localhost:8070/oauth2/authorize/kakao';
         window.open(KakaoLoginAPI, "_self");
     }; 
 

@@ -22,7 +22,8 @@ function SignUp(props){
 
     // addUser
     const addUser = () => {
-        let u_id = $("input[name=u_id]").val();
+        // let u_id = $("input[name=u_id]").val();
+        let u_id = jwtToken;
         let u_nickname = $("input[name=u_nickname]").val();
         let u_zepid = "";
         let u_content = $("input[name=u_content]").val();
@@ -34,7 +35,7 @@ function SignUp(props){
         
         Axios.post("http://localhost:8070/user/adduser",
         {
-            // u_id : u_id,
+            u_id : u_id,
             u_nickname : u_nickname,
             u_zepid : u_zepid,
             u_content : u_content,

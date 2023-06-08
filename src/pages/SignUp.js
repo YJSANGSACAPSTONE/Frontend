@@ -3,13 +3,17 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import $ from 'jquery';
 import Axios from "axios";
 import Cookies from 'js-cookie';
+import jwt_decode from 'jwt-decode';
+
+
 function SignUp(props){
     const jwtToken = Cookies.get("accessTokenCookie");
     const refreshToken = Cookies.get("refreshTokenCookie");
 
-    console.log(jwtToken);
-    console.log(refreshToken);
+    const decodedAccToken = jwt_decode(jwtToken);
 
+    let u_id = decodedAccToken.userId;
+    let role = decodedAccToken.role;
 
     const history = useNavigate();
     const location = useLocation();
@@ -22,8 +26,6 @@ function SignUp(props){
 
     // addUser
     const addUser = () => {
-        // let u_id = $("input[name=u_id]").val();
-        let u_id = jwtToken;
         let u_nickname = $("input[name=u_nickname]").val();
         let u_zepid = "";
         let u_content = $("input[name=u_content]").val();

@@ -280,7 +280,6 @@ function Planner(props){
 		.then((resInner)=>{
 			setUserInfo(resInner.data);
 			resInner.data.userImg = profile_image;
-			console.log(resInner);
 			Cookies.set('userInfo',JSON.stringify(resInner.data));
 		})
 		.catch((err)=>{

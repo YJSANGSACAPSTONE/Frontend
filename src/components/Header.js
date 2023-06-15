@@ -46,8 +46,8 @@ function Header(){
         .catch((err)=>{
             console.log(err);
         });
-    });
-    
+    },[]);
+
     return (
         <div id="subHeader" class="container">
             <div class="container_inner">

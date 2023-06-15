@@ -27,15 +27,6 @@ function Header(){
     // 현재 URL 이 planner 일 때만 이 axios 통신 해서 쿠키에 사용자 관련 정보들을 집어넣을 수 있게 if 문으로 설정
     const currentURL = window.location.pathname;
     
-        Axios.get(`http://localhost:8070/user/listuser?uid=${u_id}`)
-        .then((resInner)=>{
-            setUserInfo(resInner.data);
-            Cookies.set('userInfo',JSON.stringify(resInner.data));
-        })
-        .catch((err)=>{
-            console.log(err);
-        });
-    
     // try {
     //     userInfo = JSON.parse(Cookies.get('userInfo'));
     // } catch (error) {
@@ -45,6 +36,18 @@ function Header(){
     //     // 예를 들어, userInfo를 빈 객체로 초기화하려면 다음과 같이 할 수 있습니다.
     //     userInfo = {};
     // }
+
+    useEffect(()=>{
+        Axios.get(`http://localhost:8070/user/listuser?uid=${u_id}`)
+        .then((resInner)=>{
+            setUserInfo(resInner.data);
+            Cookies.set('userInfo',JSON.stringify(resInner.data));
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
+    });
+    
     return (
         <div id="subHeader" class="container">
             <div class="container_inner">

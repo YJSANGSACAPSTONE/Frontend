@@ -21,6 +21,7 @@ function ProfileInfo(props){
     const {u_id, u_nickname, u_zepid, u_content, userImg, u_level, u_grade, u_img, u_successedchallenge,u_deposit} = u_info;
 
     const updateUser = () => {
+        console.log(123);
         Axios.post('http://localhost:8070/user/updateuser',{
             u_id : u_id,
             u_nickname : u_nickname,

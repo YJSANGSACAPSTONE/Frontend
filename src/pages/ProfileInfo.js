@@ -22,16 +22,15 @@ function ProfileInfo(props){
 
     const updateUser = () => {
         Axios.post('http://localhost:8070/user/updateuser',{
-            headers : {
-                'Authorization': `Bearer ${jwtToken}`,
-                'Refresh-Token': refreshToken
-            }
-        },{
             u_id : u_id,
             u_nickname : u_nickname,
             u_zepid : u_zepid,
             u_content : u_content,
             profile_image : profile_image
+        },{
+            headers : {
+                'Authorization': `Bearer ${jwtToken}`
+            }
         })
         .then((res)=>{
             Cookies.set('userInfo', JSON.stringify(u_info));

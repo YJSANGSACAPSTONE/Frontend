@@ -31,7 +31,7 @@ function ProfileInfo(props){
             u_nickname : u_nickname,
             u_zepid : u_zepid,
             u_content : u_content,
-            userImg : userImg
+            profile_image : profile_image
         })
         .then((res)=>{
             Cookies.set('userInfo', JSON.stringify(u_info));

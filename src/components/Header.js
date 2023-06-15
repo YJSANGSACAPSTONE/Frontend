@@ -8,6 +8,7 @@ function Header(){
 
     try {
     userInfo = JSON.parse(Cookies.get('userInfo'));
+    let profile_image = Cookies.get('profile_image');
     } catch (error) {
     // 예외 처리 코드
     console.error('userInfo가 존재하지 않거나 파싱할 수 없습니다.', error);

@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import Axios from "axios";
 import Cookies from 'js-cookie';
 
+
+// 현재 KakaoLogin.js 사용하지 않고있음 Loginpage 에서 바로 SignUp.js 로 넘어감
 function KakaoLogin(){
 
     const history = useNavigate();

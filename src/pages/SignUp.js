@@ -13,18 +13,24 @@ function SignUp(props){
     const decodedAccToken = jwt_decode(jwtToken);
 
     let u_id = decodedAccToken.userId;
-    let role = decodedAccToken.role;
+    let userRole = decodedAccToken.role;
+    let profile_img = decodedAccToken.profile_image;
+
+    Cookies.set("userId",u_id);
+    Cookies.set("userRole",userRole);
 
     const history = useNavigate();
     const location = useLocation();
-    const userData = location.state?.userData;
+
+
+    // const userData = location.state?.userData;
     // axios 통신으로 넘어온 userData.userId를 매개변수로 controller 에서 db 접근해서 해당 아이디가 회원테이블에 존재여부에 따라 메인페이지 혹은 회원가입페이지로
     // Axios.get(`http://localhost:8070/check?uid=${userData.userId}`).then((res)=>{
     //     console.log(res.data);
     // });
     // axios 통신으로 넘어온 userData.userId를 매개변수로 controller 에서 db 접근해서 해당 아이디가 회원테이블에 존재여부에 따라 메인페이지 혹은 회원가입페이지로
 
-    // addUser
+    // addUser 회원가입
     const addUser = () => {
         let u_nickname = $("input[name=u_nickname]").val();
         let u_zepid = "";
@@ -40,6 +46,7 @@ function SignUp(props){
             u_id : u_id,
             u_nickname : u_nickname,
             u_zepid : u_zepid,
+            profile_image : profile_img,
             u_content : u_content,
         },{
             headers: {
@@ -58,6 +65,7 @@ function SignUp(props){
                 u_deposit : 0
             };
             Cookies.set('userInfo',JSON.stringify(userInfo));
+            Cookies.set("profile_image", profile_img);
             history('/planner');
         })
         .catch(error => {

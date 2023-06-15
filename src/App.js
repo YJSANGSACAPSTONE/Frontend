@@ -10,14 +10,14 @@ import ChallengeWrite from './pages/ChallengeWrite';
 import ChallengeUpdate from './pages/ChallengeUpdate';
 import ChallengeVerify from './pages/ChallengeVerify';
 import ChallengeSignUp from './pages/ChallengeSignUp';
+import MyChallenge from './pages/MyChallenge';
 import Board from './pages/Board';
 import BoardRead from './pages/BoardRead';
 import BoardWrite from './pages/BoardWrite';
 import BoardEdit from './pages/BoardEdit';
+import Point from './pages/Point';
 import UserProfile from './pages/UserProfile';
 import ProfileInfo from './pages/ProfileInfo';
-import Point from './pages/Point';
-import MyChallenge from './pages/MyChallenge';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import KakaoLogin from './components/KakaoLogin';
@@ -26,6 +26,7 @@ import PaymentHistory from './pages/PaymentHistory';
 import JobComplete from './components/JobComplete';
 import ZepVerify from './pages/ZepVerify';
 import PointPayList from './pages/PointPayList';
+import AdminPage from './pages/AdminPage';
 
 import NotFound from './components/NotFound';
 
@@ -73,6 +74,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LoginPage/>} />
+
+			<Route path="/adminPage" element={<AdminPage/>} />
 
 			<Route path="/signUp" element={<SignUp header={<Header/>} footer={<Footer/>} />} />
 			

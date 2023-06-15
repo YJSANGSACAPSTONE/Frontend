@@ -14,10 +14,11 @@ function SignUp(props){
 
     let u_id = decodedAccToken.userId;
     let userRole = decodedAccToken.role;
-    let profile_img = decodedAccToken.profile_image;
+    let profile_image = decodedAccToken.profile_image;
 
     Cookies.set("userId",u_id);
     Cookies.set("userRole",userRole);
+    Cookies.set("profile_image", profile_image);
 
     const history = useNavigate();
     const location = useLocation();
@@ -46,7 +47,7 @@ function SignUp(props){
             u_id : u_id,
             u_nickname : u_nickname,
             u_zepid : u_zepid,
-            profile_image : profile_img,
+            profile_image : profile_image,
             u_content : u_content,
         },{
             headers: {
@@ -60,12 +61,11 @@ function SignUp(props){
                 u_nickname ,
                 u_content,
                 u_zepid,
-                // userImg : userData.profileImageUrl,
+                userImg : profile_image,
                 u_level : 1,
                 u_deposit : 0
             };
             Cookies.set('userInfo',JSON.stringify(userInfo));
-            Cookies.set("profile_image", profile_img);
             history('/planner');
         })
         .catch(error => {

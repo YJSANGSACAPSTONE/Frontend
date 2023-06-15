@@ -7,6 +7,7 @@ import { ProgressBar } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Cookies from 'js-cookie';
+import jwt_decode from 'jwt-decode';
 
 function Planner(props){
     const [plans, setPlans]=useState([]);
@@ -150,7 +151,21 @@ function Planner(props){
 
 	// calendar
 	
-	const userInfo = JSON.parse(Cookies.get('userInfo'));
+	// const userInfo = JSON.parse(Cookies.get('userInfo'));
+	const jwtToken = Cookies.get("accessTokenCookie");
+	const decodedAccToken = jwt_decode(jwtToken);
+	let u_id = decodedAccToken.userId;
+	const [userInfo, setUserInfo] = useState({
+        u_id : "",
+        u_nickname : "" ,
+        u_content : "",
+        u_zepid : "",
+        userImg : "",
+        u_level : 1,
+        u_deposit : 0
+    });
+
+	
 
 	const uploadInputRef = useRef(null);
 	const thumbnailRef = useRef(null);
@@ -257,10 +272,24 @@ function Planner(props){
 	}
 	
     useEffect(() => {
+		const jwtToken = Cookies.get("accessTokenCookie");
+		const decodedAccToken = jwt_decode(jwtToken);
+		let profile_image = decodedAccToken.profile_image;
+
+		Axios.get(`http://localhost:8070/user/listuser?uid=${u_id}`)
+		.then((resInner)=>{
+			setUserInfo(resInner.data);
+			resInner.data.userImg = profile_image;
+			console.log(resInner);
+			Cookies.set('userInfo',JSON.stringify(resInner.data));
+		})
+		.catch((err)=>{
+			console.log(err);
+		});
 
 		Axios.get(`http://localhost:8070/challenge/mychallenge?uid=${userInfo.u_id}`)
         .then((res)=>{
-            console.log(res);
+            // console.log(res);
             setMychallenge(res.data);
         })
         .catch((err)=>{

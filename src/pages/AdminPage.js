@@ -63,7 +63,11 @@ function AdminPage(props){
                             </li>
                             <li className="admin_main">
                                 <div className="main_top">
-                                    <p></p>
+                                    <p>김유현</p>
+                                    <div>
+                                        <button>연장/업그레이드</button>
+                                        <button>나가기</button>
+                                    </div>
                                 </div>
                                 <div className="main_middle">
                                     <div className="admin_graph">

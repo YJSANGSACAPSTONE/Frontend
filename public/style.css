@@ -747,18 +747,22 @@ i[class^=icon-chevron]{
 /* point pay list */
 
 /* admin page */
-#adminPage{
-  background:#eeeeee;
-}
-
-#adminPage{ height:100%; }
+#adminPage{ height:100%; background:#eeeeee; position:relative; }
 #adminPage > div{ width:100%; height:100%; }
 #adminPage > div > div{ width:100%; height:100%; }
 #adminPage > div > div > ul{ display:flex; flex-wrap:wrap; height:100%; }
-#adminPage .admin_menu{ width:20%; height:100%; background:#333; color:#fff; }
+#adminPage .admin_menu{ width:15%; height:100%; background:#333; color:#fff; }
 #adminPage .admin_menu .menu_top{ font-size:40px; display:flex; padding:10px 30px; justify-content: space-between; }
 #adminPage .admin_menu .middle_main{ display:flex; flex-direction:column; }
 .admin_menu .menu_middle img{ width:35px; }
-#adminPage .admin_main{ width:80% }
+.admin_menu .menu_middle .middle_top > div{ display:flex; }
+.middle_main .main_title{ display:flex; }
+.middle_main > div{ display:flex; flex-direction:column; }
+
+#adminPage .admin_main{ width:85%; display:flex; flex-direction:column; }
+.admin_main .main_top{ width:100%; padding:15px 40px; display:flex; justify-content: space-between; background:#fff; box-shadow: -8px -2px 5px #333; }
+.admin_main .main_middle{ width:100%; padding:40px; display:flex; grid-gap:15px; flex-wrap:wrap; }
+.admin_main .main_middle > .admin_graph{ width:calc(100% - 15px); }
+.admin_main .main_middle > div{ width:calc(50% - 15px); height:calc(50% - 15px); background:#fff; box-shadow: 0px 0px 6px #b5b5b5; }
 #adminPage .menu_top img{ width:35px;}
 /* admin page */

@@ -190,7 +190,7 @@ function Planner(props){
 	  
 	const deleteBtn = (e) => {
 		Axios.get(`http://localhost:8070/plan/deleteplan/${pid}`).then((res)=>{
-			Axios.get(`http://localhost:8070/plan/dailyplan?uid=${userInfo.u_id}`)
+			Axios.get(`http://localhost:8070/plan/dailyplan?uid=${u_id}`)
 			.then((response) => {
 				console.log(response);
 				setPlans(response.data);
@@ -236,7 +236,7 @@ function Planner(props){
 	}
 	// 일정 수정 이벤트 트리거
 	const updatePlan = () => {
-		let u_id = userInfo.u_id;
+		let u_id = u_id;
 		let u_title = $("input[name=u_title]").val();
 		let u_content = $("textarea[name=u_content]").val();
 		let u_category = $("select[name=u_category]").val();
@@ -262,7 +262,7 @@ function Planner(props){
 			})
 			.then(response=>{
 				console.log(response);
-				Axios.get(`http://localhost:8070/plan/dailyplan?uid=${userInfo.u_id}`)
+				Axios.get(`http://localhost:8070/plan/dailyplan?uid=${u_id}`)
 				.then(response => setPlans(response.data))
 				.catch(error => console.log(error));
 			})
@@ -286,9 +286,9 @@ function Planner(props){
 			console.log(err);
 		});
 
-		Axios.get(`http://localhost:8070/challenge/mychallenge?uid=${userInfo.u_id}`)
+		Axios.get(`http://localhost:8070/challenge/mychallenge?uid=${u_id}`)
         .then((res)=>{
-            // console.log(res);
+            console.log(res);
             setMychallenge(res.data);
         })
         .catch((err)=>{
@@ -296,7 +296,7 @@ function Planner(props){
         });
 
 		// 첫 페이지 로딩 후 Axios를 통해서 오늘 날짜 plan 받아오는 것
-		Axios.get(`http://localhost:8070/plan/dailyplan?uid=${userInfo.u_id}`)
+		Axios.get(`http://localhost:8070/plan/dailyplan?uid=${u_id}`)
 		.then(response => setPlans(response.data))
 		.catch(error => console.log(error));
 
@@ -408,7 +408,7 @@ function Planner(props){
 		
 		// 일정 입력 이벤트 트리거
 		const addPlan = () => {
-			let u_id = userInfo.u_id;
+			let u_id = u_id;
 			let p_title = $("input[name=p_title]").val();
 			let p_content = $("textarea[name=p_content]").val();
 			let p_category = $("select[name=p_category]").val();
@@ -435,7 +435,7 @@ function Planner(props){
 			})
 			.then(response=>{
 				console.log(response);
-				Axios.get(`http://localhost:8070/plan/dailyplan?uid=${userInfo.u_id}`)
+				Axios.get(`http://localhost:8070/plan/dailyplan?uid=${u_id}`)
 				.then((response) => {
 					setPlans(response.data)
 					$("input[name=p_title]").val('');

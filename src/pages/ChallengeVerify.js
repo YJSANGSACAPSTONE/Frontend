@@ -32,9 +32,13 @@ function ChallengeVerify(props){
         formData.append('u_id',challengeverify.u_id);
         formData.append('verifyPhoto',challengeverify.verifyPhoto);
         console.log(challengeverify);
-        // Axios.post('url')
-		// .then(response => console.log(response.data))
-		// .catch(error => console.log(error));
+        Axios.post('http://localhost:8070/challenge/verify',formData,{
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+		.then(response => console.log(response.data))
+		.catch(error => console.log(error));
     }; 
     useEffect(()=>{
         $("#verifyImg").click(function() {

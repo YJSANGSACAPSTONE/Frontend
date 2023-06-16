@@ -51,7 +51,7 @@ function MyChallenge(props){
 												>
 													<img src={`http://localhost:8070${challenge.cthumbnails}`} alt="morning"/>
                                                     <div>
-                                                        {challenge.cname}
+                                                        <p>{challenge.cname}</p>
                                                         <button class="myPageBtn">참가취소</button>
                                                         <button onClick={()=>navigate(`/challenge/${challenge.cid}/verify`, { state: { challenge } })} class="myPageBtn">인증하기</button>
                                                     </div>
@@ -60,6 +60,14 @@ function MyChallenge(props){
 										) : (
 											<p>Loading...</p>
 										)}
+                                        {/* <div>
+                                            <img src={`http://localhost:8070/img/challengeimg/hi.jpg`} alt="morning"/>
+                                            <div>
+                                                <p></p>
+                                                <button class="myPageBtn">참가취소</button>
+                                                <button class="myPageBtn">인증하기</button>
+                                            </div>
+                                        </div> */}
                                         {/* <div>
                                             <img src="/img/morning_sun.png" alt="morning"/>
                                             <div>

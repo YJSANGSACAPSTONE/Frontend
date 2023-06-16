@@ -12,18 +12,21 @@ html, body, #root, .App{ width:100%; height:100%; }
 
 
 
-.planner_challenge .challenge_list::-webkit-scrollbar {
+.planner_challenge .challenge_list::-webkit-scrollbar,
+#adminPage .admin_main::-webkit-scrollbar {
   width: 8px;  /* 스크롤바의 너비 */
 }
 
-.planner_challenge .challenge_list::-webkit-scrollbar-thumb {
+.planner_challenge .challenge_list::-webkit-scrollbar-thumb,
+#adminPage .admin_main::-webkit-scrollbar-thumb {
   height: 30%; /* 스크롤바의 길이 */
   background: #333; /* 스크롤바의 색상 */
   
   border-radius: 10px;
 }
 
-.planner_challenge .challenge_list::-webkit-scrollbar-track {
+.planner_challenge .challenge_list::-webkit-scrollbar-track,
+#adminPage .admin_main::-webkit-scrollbar-track {
   background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
 }
 
@@ -747,11 +750,11 @@ i[class^=icon-chevron]{
 /* point pay list */
 
 /* admin page */
-#adminPage{ height:100%; background:#eeeeee; position:relative; }
-#adminPage > div{ width:100%; height:100%; }
+#adminPage{ height: 250vh; background:#eeeeee; display:flex; }
+#adminPage > div{ width:100%; height:100%; display:flex; }
 #adminPage > div > div{ width:100%; height:100%; }
 #adminPage > div > div > ul{ display:flex; flex-wrap:wrap; height:100%; }
-#adminPage .admin_menu{ width:15%; height:100%; background:#333; color:#fff; }
+#adminPage .admin_menu{ width:15%; height:100%; background:#333; color:#fff; display:flex; flex-direction:column; }
 #adminPage .admin_menu .menu_top{ font-size:40px; display:flex; padding:10px 30px; justify-content: space-between; }
 #adminPage .admin_menu .middle_main{ display:flex; flex-direction:column; }
 .admin_menu .menu_middle img{ width:35px; }
@@ -761,8 +764,30 @@ i[class^=icon-chevron]{
 
 #adminPage .admin_main{ width:85%; display:flex; flex-direction:column; }
 .admin_main .main_top{ width:100%; padding:15px 40px; display:flex; justify-content: space-between; background:#fff; box-shadow: -8px -2px 5px #333; }
-.admin_main .main_middle{ width:100%; padding:40px; display:flex; grid-gap:15px; flex-wrap:wrap; }
-.admin_main .main_middle > .admin_graph{ width:calc(100% - 15px); }
-.admin_main .main_middle > div{ width:calc(50% - 15px); height:calc(50% - 15px); background:#fff; box-shadow: 0px 0px 6px #b5b5b5; }
+.admin_main .main_middle{ width:100%; padding:40px; display:flex; grid-gap:30px; flex-wrap:wrap; }
+.admin_main .main_middle > .admin_graph{ width:calc(100% - 30px); height:calc(78% - 15px); display:flex; flex-wrap:wrap; padding:40px; }
+.graph_area{ width:70%; }
+.graph_info{ width:30%; display: flex; flex-direction: column; font-size:18px; grid-gap:50px; padding-left:20px; }
+
+.graph_area #chart{ height:500px; }
+.graph_area #chart svg{ font-size:16px; } 
+.graph_title{ font-size:30px; padding-bottom:20px; }
+
+
+.admin_main .main_middle > div{ width:calc(50% - 30px); height:calc(60% - 30px); background:#fff; box-shadow: 0px 0px 6px #b5b5b5; }
 #adminPage .menu_top img{ width:35px;}
+.graph_info .graph_btn{ display:flex; flex-direction:column; grid-gap:25px; }
+.graph_info .info_title{ font-size:25px; }
+.graph_info .graph_btn button{ background:#4c6ef5; border:none; color:#fff; padding:15px 20px; font-size:20px; border-radius:5px;  }
+
+.main_middle .admin_title{ display:flex; justify-content:space-between; padding:20px 30px; font-size:20px; border-bottom:solid 1px #eee; }
+.main_middle .admin_text > ul{ display:flex; flex-wrap:wrap; width:100%; }
+.main_middle .admin_body > ul{ display:flex; flex-wrap:wrap; width:100%; }
+.admin_body > ul > li{ padding:10px 0; text-align:center;  }
+.admin_text > ul > li{ padding:10px 0; text-align:center; border-top:solid 1px #eee; }
+.ch_num{ width:15%; }
+.ch_name{ width:25%; }
+.ch_count{ width:20%; }
+.ch_all_count{ width:30%; }
+.ch_btn{ width:10%; }
 /* admin page */

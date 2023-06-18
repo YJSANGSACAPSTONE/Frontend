@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import Cookies from 'js-cookie';
+import jwt_decode from 'jwt-decode';
 
 export default function Profile(){
     const location = useLocation();
     const shouldRenderHotChart = location.pathname === "/board";
-    const userInfo = JSON.parse(Cookies.get('userInfo'));    
-    const profile_image = Cookies.get('profile_image');
+
+    const [userInfo, setUserInfo] = useState({
+        u_id : "",
+        u_nickname: "",
+        u_level : "",
+        u_deposit : ""
+    });
+    
+    const [profile_image,setProfile_image] = useState("");
+    useEffect(()=>{
+        const jwtToken = Cookies.get("accessTokenCookie");
+		const decodedAccToken = jwt_decode(jwtToken);
+        setUserInfo(JSON.parse(Cookies.get('userInfo')));
+        setProfile_image(decodedAccToken.profile_image);
+        // console.log(userInfo);
+    },[]);
     return (
         <li className="planner_profile">
             <Link to="/planner">

@@ -49,6 +49,7 @@ function SignUp(props){
             u_zepid : u_zepid,
             profile_image : profile_image,
             u_content : u_content,
+
         },{
             headers: {
                 Authorization : `Bearer ${jwtToken}` 
@@ -57,7 +58,7 @@ function SignUp(props){
         .then(response=>{
             console.log(response);
             const userInfo = {
-                u_id ,
+                // u_id ,
                 u_nickname ,
                 u_content,
                 u_zepid,
@@ -66,6 +67,7 @@ function SignUp(props){
                 u_deposit : 0
             };
             Cookies.set('userInfo',JSON.stringify(userInfo));
+            Cookies.set('profile_image',profile_image);
             history('/planner');
         })
         .catch(error => {

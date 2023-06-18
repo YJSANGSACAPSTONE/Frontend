@@ -9,6 +9,9 @@ function ChallengeVerify(props){
     const userInfo = JSON.parse(Cookies.get('userInfo'));
     const location = useLocation();
     const challenge = location.state?.challenge;
+    if(!challenge.c_id){
+        challenge.c_id = challenge.cid;
+    }
     const navigate = useNavigate();
     const [challengeverify, setChallengeverify] = useState({
         c_id : challenge.c_id,
@@ -28,13 +31,17 @@ function ChallengeVerify(props){
     }
     const verify = () =>{
         const formData = new FormData();
-        formData.append('c_id',challengeverify.c_id);
-        formData.append('u_id',challengeverify.u_id);
+        formData.append('cid',challengeverify.c_id);
+        formData.append('uid',challengeverify.u_id);
         formData.append('verifyPhoto',challengeverify.verifyPhoto);
         console.log(challengeverify);
-        // Axios.post('url')
-		// .then(response => console.log(response.data))
-		// .catch(error => console.log(error));
+        Axios.post('http://localhost:8070/challenge/verify',formData,{
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+		.then(response => console.log(response.data))
+		.catch(error => console.log(error));
     }; 
     useEffect(()=>{
         $("#verifyImg").click(function() {

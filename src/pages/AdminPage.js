@@ -125,35 +125,35 @@ function AdminPage(props){
                                         </div>
                                         <div className="main_menu">
                                             <p>
-                                                <img src="" alt="" />
+                                                <img src="/img/user.png" alt="user" />
                                                 사용자 관리
                                             </p>
                                             <p>
-                                                <img src="" alt="" />
+                                                <img src="/img/studying.png" alt="studying" />
                                                 챌린지 인증관리
                                             </p>
                                             <p>
-                                                <img src="" alt="" />
+                                                <img src="/img/list.png" alt="list" />
                                                 게시판 관리
                                             </p>
-                                            <p>
-                                                <img src="" alt="" />
+                                            {/* <p>
+                                                <img src="/img/open-book.png" alt="" />
                                                 트래픽 관리
-                                            </p>
+                                            </p> */}
                                             <p>
-                                                <img src="" alt="" />
+                                                <img src="/img/open-book.png" alt="open-book" />
                                                 도서관 관리
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="menu_footer">
-                                    <p>(전화이미지) 문의하기 : 010-1234-5678</p>
+                                    <p><img src="/img/bell.png" alt="bell" /> 문의하기 : 010-1234-5678</p>
                                 </div>
                             </li>
                             <li className="admin_main">
                                 <div className="main_top">
-                                    <p>김유현</p>
+                                    <p className="top_title">갓생플래너</p>
                                     <div>
                                         <button>연장/업그레이드</button>
                                         <button>나가기</button>
@@ -206,6 +206,42 @@ function AdminPage(props){
                                                 <li className="ch_btn"><button>인증하기</button></li>   
                                             </ul>
                                         </div>
+                                        <div className="admin_text">
+                                            <ul>
+                                                <li className="ch_num">1</li>
+                                                <li className="ch_name">미라클모닝</li>
+                                                <li className="ch_count">20명</li>
+                                                <li className="ch_all_count">10/20</li>
+                                                <li className="ch_btn"><button>인증하기</button></li>   
+                                            </ul>
+                                        </div>
+                                        <div className="admin_text">
+                                            <ul>
+                                                <li className="ch_num">1</li>
+                                                <li className="ch_name">미라클모닝</li>
+                                                <li className="ch_count">20명</li>
+                                                <li className="ch_all_count">10/20</li>
+                                                <li className="ch_btn"><button>인증하기</button></li>   
+                                            </ul>
+                                        </div>
+                                        <div className="admin_text">
+                                            <ul>
+                                                <li className="ch_num">1</li>
+                                                <li className="ch_name">미라클모닝</li>
+                                                <li className="ch_count">20명</li>
+                                                <li className="ch_all_count">10/20</li>
+                                                <li className="ch_btn"><button>인증하기</button></li>   
+                                            </ul>
+                                        </div>
+                                        <div className="admin_text">
+                                            <ul>
+                                                <li className="ch_num">1</li>
+                                                <li className="ch_name">미라클모닝</li>
+                                                <li className="ch_count">20명</li>
+                                                <li className="ch_all_count">10/20</li>
+                                                <li className="ch_btn"><button>인증하기</button></li>   
+                                            </ul>
+                                        </div>
                                     </div>
                                     <div className="admin_post">
                                         <div className="admin_title">
@@ -214,20 +250,48 @@ function AdminPage(props){
                                         </div>
                                         <div className="admin_body">
                                             <ul>
-                                                <li>메뉴1</li>
-                                                <li>메뉴2</li>
-                                                <li>메뉴3</li>
-                                                <li>메뉴4</li>
-                                                <li>메뉴5</li>
+                                                <li className="ch_num">게시글 번호</li>
+                                                <li className="ch_name">게시글명</li>
+                                                <li className="ch_count">게시글내용</li>
+                                                <li className="ch_all_count">작성일자</li>
+                                                <li className="ch_btn">조회수</li>
                                             </ul>
                                         </div>
                                         <div className="admin_text">
                                             <ul>
-                                                <li>내용1</li>
-                                                <li>내용2</li>
-                                                <li>내용3</li>
-                                                <li>내용4</li>
-                                                <li>내용5</li>   
+                                                <li className="ch_num">1</li>
+                                                <li className="ch_name">충격이망고 근황</li>
+                                                <li className="ch_count">살찜 5kg 강아지...최초</li>
+                                                <li className="ch_all_count">2023-06-18</li>
+                                                <li className="ch_btn">28</li>   
+                                            </ul>
+                                            <ul>
+                                                <li className="ch_num">1</li>
+                                                <li className="ch_name">충격이망고 근황</li>
+                                                <li className="ch_count">살찜 5kg 강아지...최초</li>
+                                                <li className="ch_all_count">2023-06-18</li>
+                                                <li className="ch_btn">28</li>   
+                                            </ul>
+                                            <ul>
+                                                <li className="ch_num">1</li>
+                                                <li className="ch_name">충격이망고 근황</li>
+                                                <li className="ch_count">살찜 5kg 강아지...최초</li>
+                                                <li className="ch_all_count">2023-06-18</li>
+                                                <li className="ch_btn">28</li>   
+                                            </ul>
+                                            <ul>
+                                                <li className="ch_num">1</li>
+                                                <li className="ch_name">충격이망고 근황</li>
+                                                <li className="ch_count">살찜 5kg 강아지...최초</li>
+                                                <li className="ch_all_count">2023-06-18</li>
+                                                <li className="ch_btn">28</li>   
+                                            </ul>
+                                            <ul>
+                                                <li className="ch_num">1</li>
+                                                <li className="ch_name">충격이망고 근황</li>
+                                                <li className="ch_count">살찜 5kg 강아지...최초</li>
+                                                <li className="ch_all_count">2023-06-18</li>
+                                                <li className="ch_btn">28</li>   
                                             </ul>
                                         </div>
                                     </div>

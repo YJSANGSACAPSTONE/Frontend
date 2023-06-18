@@ -26,7 +26,9 @@ import PaymentHistory from './pages/PaymentHistory';
 import JobComplete from './components/JobComplete';
 import ZepVerify from './pages/ZepVerify';
 import PointPayList from './pages/PointPayList';
+
 import AdminPage from './pages/AdminPage';
+import AdminChallenge from './pages/AdminChallenge';
 
 import NotFound from './components/NotFound';
 
@@ -76,6 +78,7 @@ function App() {
             <Route path="/" element={<LoginPage/>} />
 
 			<Route path="/adminPage" element={<AdminPage/>} />
+			<Route path="/adminChallenge" element={<AdminChallenge/>} />
 
 			<Route path="/signUp" element={<SignUp header={<Header/>} footer={<Footer/>} />} />
 			

@@ -80,8 +80,48 @@ export default function Profile(){
             )}
 
             {shouldRenderPlannerChart && (
-                <div class="planner_chart">
-                    
+                <div className="planner_chart">
+                    <div className="pc_top">
+                        <ul>
+                            <li className="pc_user"><p>All User Performance</p></li>
+                            <li className="pc_score"><p>점수</p></li>
+                            <li className="pc_active"><p>마지막 활동일</p></li>
+                        </ul>
+                    </div>
+                    <div className="pc_middle">
+                        <ul>
+                            <li className="pc_user">
+                                1.<img src="/img/user.png" alt="user" />
+                                <p>Yuhyeon Kim</p>
+                            </li>
+                            <li className="pc_score"><p>120</p></li>
+                            <li className="pc_active"><p>2023-06-19</p></li>
+                        </ul>
+                        <ul>
+                            <li className="pc_user">
+                                2.<img src="/img/user.png" alt="user" />
+                                <p>조황주</p>
+                            </li>
+                            <li className="pc_score"><p>60</p></li>
+                            <li className="pc_active"><p>2023-06-19</p></li>
+                        </ul>
+                        <ul>
+                            <li className="pc_user">
+                                3.<img src="/img/user.png" alt="user" />
+                                <p>임덕성</p>
+                            </li>
+                            <li className="pc_score"><p>50</p></li>
+                            <li className="pc_active"><p>2023-06-19</p></li>
+                        </ul>
+                        <ul>
+                            <li className="pc_user">
+                                4.<img src="/img/user.png" alt="user" />
+                                <p>이강인</p>
+                            </li>
+                            <li className="pc_score"><p>20</p></li>
+                            <li className="pc_active"><p>2023-06-19</p></li>
+                        </ul>
+                    </div>
                 </div>
             )}
         </li>

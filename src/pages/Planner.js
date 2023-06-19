@@ -236,7 +236,6 @@ function Planner(props){
 	}
 	// 일정 수정 이벤트 트리거
 	const updatePlan = () => {
-		let u_id = u_id;
 		let u_title = $("input[name=u_title]").val();
 		let u_content = $("textarea[name=u_content]").val();
 		let u_category = $("select[name=u_category]").val();
@@ -413,7 +412,6 @@ function Planner(props){
 		
 		// 일정 입력 이벤트 트리거
 		const addPlan = () => {
-			let u_id = u_id;
 			let p_title = $("input[name=p_title]").val();
 			let p_content = $("textarea[name=p_content]").val();
 			let p_category = $("select[name=p_category]").val();

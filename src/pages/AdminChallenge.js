@@ -72,7 +72,9 @@ function AdminChallenge(props){
                                     </div>
                                 </div>
                                 <div className="main_challenge">
-                                    
+                                    <div>
+                                        
+                                    </div>
                                 </div>
                             </li>
                         </ul>

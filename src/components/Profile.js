@@ -7,6 +7,7 @@ import Axios from "axios";
 export default function Profile(){
     const location = useLocation();
     const shouldRenderHotChart = location.pathname === "/board";
+    const shouldRenderPlannerChart = location.pathname === "/planner";
 
     const [userInfo, setUserInfo] = useState({
         u_id : "",
@@ -75,6 +76,12 @@ export default function Profile(){
                             <p>05/07 10:32</p>
                         </li>
                     </ul>
+                </div>
+            )}
+
+            {shouldRenderPlannerChart && (
+                <div class="planner_chart">
+                    
                 </div>
             )}
         </li>

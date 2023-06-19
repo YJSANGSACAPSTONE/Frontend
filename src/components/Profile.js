@@ -6,6 +6,7 @@ import jwt_decode from 'jwt-decode';
 export default function Profile(){
     const location = useLocation();
     const shouldRenderHotChart = location.pathname === "/board";
+
     const [userInfo, setUserInfo] = useState({
         u_id : "",
         u_nickname: "",

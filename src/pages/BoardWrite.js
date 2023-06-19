@@ -39,13 +39,12 @@ function BoardWrite(props){
     
     const boardSubmit = () =>{
         const formData = new FormData();
-        console.log(board.uploadFiles);
         // formData.append('uploadFiles', board.uploadFiles);
         for (let i = 0; i < board.uploadFiles.length; i++) {
             formData.append("uploadFiles", board.uploadFiles[i]);
         }
         
-        
+        console.log(board.uploadFiles);
         Axios.post('http://localhost:8070/uploadAjax',formData)
         .then((res)=>{
             console.log(res);

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import Cookies from 'js-cookie';
 import jwt_decode from 'jwt-decode';
+import Axios from "axios";
 
 export default function Profile(){
     const location = useLocation();
@@ -18,8 +19,28 @@ export default function Profile(){
     useEffect(()=>{
         const jwtToken = Cookies.get("accessTokenCookie");
 		const decodedAccToken = jwt_decode(jwtToken);
-        setUserInfo(JSON.parse(Cookies.get('userInfo')));
+        const userInfoCookie = Cookies.get('userInfo');
         setProfile_image(decodedAccToken.profile_image);
+
+        if (userInfoCookie) {
+            setUserInfo(JSON.parse(userInfoCookie));
+        } else {
+            // 쿠키 값 없을 때 예외처리
+            Axios.get(`http://localhost:8070/user/readuser`,{
+                headers : {
+                    'Authorization': `Bearer ${jwtToken}`
+                }
+            })
+            .then((resInner)=>{
+                setUserInfo(resInner.data);
+                resInner.data.userImg = profile_image;
+                Cookies.set('userInfo',JSON.stringify(resInner.data));
+            })
+            .catch((err)=>{
+                console.log(err);
+            });
+        }
+        
         // console.log(userInfo);
     },[]);
     return (

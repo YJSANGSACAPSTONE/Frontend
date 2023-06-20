@@ -29,8 +29,10 @@ function AdminChallenge(props){
                         <ul>
                             <li className="admin_menu">
                                 <div className="menu_top">
-                                    <p>GODSAENG</p>
-                                    <img src="/img/logo.png" alt="logo" />
+                                    <Link to="/planner">
+                                        <p>GODSAENG</p>
+                                        <img src="/img/logo.png" alt="logo" />
+                                    </Link>
                                 </div>
                                 <hr />
                                 <div className="menu_middle">

@@ -192,7 +192,11 @@ function Planner(props){
 	  
 	const deleteBtn = (e) => {
 		Axios.get(`http://localhost:8070/plan/deleteplan/${pid}`).then((res)=>{
-			Axios.get(`http://localhost:8070/plan/dailyplan?uid=${u_id}`)
+			Axios.get(`http://localhost:8070/plan/dailyplan`,{
+				headers : {
+					'Authorization': `Bearer ${jwtToken}`
+				}
+			})
 			.then((response) => {
 				console.log(response);
 				setPlans(response.data.list);

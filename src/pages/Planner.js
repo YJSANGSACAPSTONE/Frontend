@@ -283,7 +283,7 @@ function Planner(props){
             }
 		})
 		.then((resInner)=>{
-			console.log(resInner);
+			// console.log(resInner.data);
 			setUserInfo(resInner.data);
 			resInner.data.userImg = profile_image;
 			Cookies.set('userInfo',JSON.stringify(resInner.data));
@@ -294,7 +294,7 @@ function Planner(props){
 
 		Axios.get(`http://localhost:8070/challenge/mychallenge?uid=${u_id}`)
         .then((res)=>{
-            console.log(res);
+            // console.log(res);
             setMychallenge(res.data);
         })
         .catch((err)=>{
@@ -309,7 +309,8 @@ function Planner(props){
 		})
 		.then((response) => {
 			console.log(response.data);
-			setPlans(response.data)
+			setPlans(response.data.list);
+			setRanks(response.data.ranklist);
 			
 		})
 		.catch(error => console.log(error));

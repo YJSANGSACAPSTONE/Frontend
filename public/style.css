@@ -221,7 +221,7 @@ body::-webkit-scrollbar-track {
 
 
 .planner_chart{ display:flex; border:solid 2px #eee; border-radius:5px; margin-top:30px; flex-direction:column; padding:0 !important; }
-.planner_chart > div > ul{ display:flex; flex-wrap:wrap; text-align: center; align-items: center; } 
+.planner_chart > div > ul{ display:flex; flex-wrap:wrap; text-align: center; align-items: center; justify-content: space-between; } 
 .planner_chart .pc_top{ padding:10px 15px; border-bottom:solid 2px #eee; }
 .planner_chart .pc_middle > ul{ padding:10px 15px; }
 .planner_chart .pc_user{ width:50%; text-align: left; }

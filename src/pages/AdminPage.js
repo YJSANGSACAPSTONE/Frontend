@@ -33,6 +33,27 @@ function AdminPage(props){
       },
     });
   };
+
+    // 차트 그리기 ----------------------원본 양식
+    // const drawChart = (data) => {
+    //     c3.generate({
+    //       bindto: '#chart',
+    //       data: {
+    //         x:'x',
+    //         columns: data
+    //       },
+    //       axis: {
+    //         x: {
+    //           type: 'timeseries',
+    //           tick: {
+    //             format: '%Y-%m-%d',
+    //           },
+    //         },
+    //       },
+    //     });
+    //   };
+
+    
 //   오늘 날짜에서 시간별 인증 횟수 통계 차트
   const drawChartToTime = (data) => {
     c3.generate({
@@ -72,6 +93,47 @@ function AdminPage(props){
       const totalCount = 100; // 전체 인증 수 (실제 데이터로 대체해야 함)
       updateSummary(totalCount);
       drawChart(getTotalData());
+    };
+
+    // 전체 데이터 반환
+    const getTotalData = () => {
+
+        Axios.get(`http://localhost:8070/admin/statistic`).then((res)=>{
+            // console.log(res.data); 
+            const monthlyList = res.data.monthlyList; // spring에서 받아온 월별 데이터
+
+            const data = [];
+            const dateData = ['x'];
+            const randData = ['data1'];
+
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            for (const month of months) {
+                dateData.push(month);
+                randData.push(monthlyList[month] || 0);
+            }
+
+            // 더미데이터 테스트용
+            const startDate = new Date('2023-01-01');
+            for (let i = 0; i < 12; i++) {
+                const date = new Date(startDate);
+                date.setMonth(date.getMonth() + i); // 한 달 뒤의 일자로 설정
+                date.setDate(1); // 해당 월의 첫째 날로 설정
+                const formattedDate = formatDate(date, 'YYYY-MM-DD'); // 날짜를 원하는 형식으로 포맷
+                // dateData.push(formattedDate); // x축 데이터를 담는 배열에 날짜를 push
+                // randData.push(getRandomCount()); // 실제 차트 데이터에도 날짜와 랜덤한 인증 횟수를 push
+            }
+            
+            data.push(dateData);
+            data.push(randData);
+            console.log(data);
+
+            return data;
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
+
+        
     };
   
     // 오늘 데이터 반환
@@ -124,46 +186,6 @@ function AdminPage(props){
             return data;
         };
 
-        // 전체 데이터 반환
-        const getTotalData = () => {
-
-            Axios.get(`http://localhost:8070/admin/statistic`).then((res)=>{
-                console.log(res.data); 
-                const monthlyList = res.data.monthlyList; // spring에서 받아온 월별 데이터
-
-                const data = [];
-                const dateData = ['x'];
-                const randData = ['data1'];
-
-                const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-                for (const month of months) {
-                    dateData.push(month);
-                    randData.push(monthlyList[month] || 0);
-                }
-
-                // 더미데이터 테스트용
-                const startDate = new Date('2013-01-01');
-                for (let i = 0; i < 12; i++) {
-                    const date = new Date(startDate);
-                    date.setMonth(date.getMonth() + i); // 한 달 뒤의 일자로 설정
-                    date.setDate(1); // 해당 월의 첫째 날로 설정
-                    const formattedDate = formatDate(date, 'YYYY-MM-DD'); // 날짜를 원하는 형식으로 포맷
-                    // dateData.push(formattedDate); // x축 데이터를 담는 배열에 날짜를 push
-                    // randData.push(getRandomCount()); // 실제 차트 데이터에도 날짜와 랜덤한 인증 횟수를 push
-                }
-                
-                data.push(dateData);
-                data.push(randData);
-                console.log(data);
-                
-                return data;
-            })
-            .catch((err)=>{
-                console.log(err);
-            });
-
-            
-        };
 
         // 날짜를 원하는 형식으로 변환
         const formatDate = (date, format) => {

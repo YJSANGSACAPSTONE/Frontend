@@ -13,15 +13,10 @@ function AdminChallengeDetail(props){
 
     const {id} = useParams();
     
+
+
     useEffect(() => {
-      Axios.get(`http://localhost:8070/admin/verifylist/${id}`)
-      .then((res)=>{
-        setChallengeDetailList(res.data);
-        console.log(res.data);
-      })
-      .catch((err)=>{
-        console.log(err);
-      });
+        verifyList();
     }, []);
     
     // 팝업 열기
@@ -30,11 +25,24 @@ function AdminChallengeDetail(props){
         setShowPopup(true);
     };
     
+    const verifyList = () => {
+        Axios.get(`http://localhost:8070/admin/verifylist/${id}`)
+        .then((res)=>{
+            setChallengeDetailList(res.data);
+            console.log(res.data);
+        })
+        .catch((err)=>{
+            // 임시로 데이터가 없어 500에러 났을 때 리스트 비워주기
+            setChallengeDetailList([]);
+            console.log(err);
+        });
+    }
     const verifyButton = (cvid) => {
         Axios.get(`http://localhost:8070/admin/verifythischallenge/${cvid}`)
         .then((res)=>{
             console.log(res.data);
             setShowPopup(false);
+            verifyList();
         })
         .catch((err)=>{
             console.log(err);

@@ -58,7 +58,7 @@ function SignUp(props){
         .then(response=>{
             console.log(response);
             const userInfo = {
-                // u_id ,
+                u_id ,
                 u_nickname ,
                 u_content,
                 u_zepid,

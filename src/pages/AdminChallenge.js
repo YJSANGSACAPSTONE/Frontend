@@ -110,19 +110,21 @@ function AdminChallenge(props){
                                                 <li className="c_uname">김유현</li>
                                                 <li>
                                                     <button>인증</button>
-                                                    <button>삭제</button>
+                                                    <button>반려</button>
+                                                    <button>상세보기</button>
                                                 </li>
                                             </ul>
                                             <ul>
-                                                <li>1</li>
-                                                <li>미완료</li>
-                                                <li>1주1풋</li>
-                                                <li>2023-06-10 ~ 2023-06-20</li>
-                                                <li>2023-06-12</li>
-                                                <li>김유현</li>
+                                                <li className="c_num">1</li>
+                                                <li className="c_status">미완료</li>
+                                                <li className="c_name">1주1풋</li>
+                                                <li className="c_date">2023-06-10 ~ 2023-06-20</li>
+                                                <li className="c_verify">2023-06-12</li>
+                                                <li className="c_uname">김유현</li>
                                                 <li>
                                                     <button>인증</button>
-                                                    <button>삭제</button>
+                                                    <button>반려</button>
+                                                    <button>상세보기</button>
                                                 </li>
                                             </ul>
                                         </div>

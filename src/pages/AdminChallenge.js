@@ -3,11 +3,19 @@ import { Link } from 'react-router-dom';
 import Profile from '../components/Profile';
 import $ from 'jquery';
 import c3 from 'c3';
+import Axios from "axios";
+
 function AdminChallenge(props){
     
 
     useEffect(() => {
-      
+      Axios.get("http://localhost:8070/admin/challengelist")
+      .then((res)=>{
+        console.log(res);
+      })
+      .catch((err)=>{
+        console.log(err);
+      });
     }, []);
     return(
         <>

@@ -105,24 +105,29 @@ function Board(props){
                                         )}
                                     </ul>
                                 </div>
+                                <div class="pagination">
+                                    {pageInfo.prev && (
+                                        <button onClick={() => handlePageChange(pageInfo.page - 1)}>
+                                        이전
+                                        </button>
+                                    )}
+                                    {pageInfo.pageList.map((page) => (
+                                    <button
+                                        key={page}
+                                        onClick={() => handlePageChange(page)}
+                                        className={page === pageInfo.page ? 'active' : ''}
+                                    >
+                                        {page}
+                                    </button>
+                                    ))}
+                                    {pageInfo.next && (
+                                        <button onClick={() => handlePageChange(pageInfo.page + 1)}>
+                                        다음
+                                        </button>
+                                    )}
+                                </div>
                             </li>
-                            <div class="pagination">
-                                <button disabled={!pageInfo.prev} onClick={() => handlePageChange(pageInfo.page - 1)}>
-                                이전
-                                </button>
-                                {pageInfo.pageList.map((page) => (
-                                <button
-                                    key={page}
-                                    onClick={() => handlePageChange(page)}
-                                    className={page === pageInfo.page ? 'active' : ''}
-                                >
-                                    {page}
-                                </button>
-                                ))}
-                                <button disabled={!pageInfo.next} onClick={() => handlePageChange(pageInfo.page + 1)}>
-                                다음
-                                </button>
-                            </div>
+                            
                         </ul>
                     </div>
                     

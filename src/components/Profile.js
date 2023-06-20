@@ -107,7 +107,7 @@ export default function Profile(){
                             ranks.map(rank => (
                                 <ul>
                                     <li className="pc_user">
-                                        1.<img src="/img/user.png" alt="user" />
+                                        1.<img src={rank.uphoto} alt="user" />
                                         <p>{rank.unickname}</p>
                                     </li>
                                     <li className="pc_score"><p>{rank.ulevel}</p></li>

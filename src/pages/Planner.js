@@ -302,7 +302,11 @@ function Planner(props){
         });
 
 		// 첫 페이지 로딩 후 Axios를 통해서 오늘 날짜 plan 받아오는 것
-		Axios.get(`http://localhost:8070/plan/dailyplan?uid=${u_id}`)
+		Axios.get(`http://localhost:8070/plan/dailyplan`,{
+			headers : {
+                'Authorization': `Bearer ${jwtToken}`
+            }
+		})
 		.then((response) => {
 			console.log(response.data);
 			setPlans(response.data)

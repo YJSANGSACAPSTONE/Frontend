@@ -52,7 +52,7 @@ export default function Profile(){
             }
 		})
 		.then((response) => {
-			console.log(response.data);
+			// console.log(response.data);
 			setRanks(response.data.ranklist);
 			
 		})

@@ -10,21 +10,50 @@ function Board(props){
     const [boards, setBoards]=useState([]);
     const navigate = useNavigate();
     const userInfo = JSON.parse(Cookies.get('userInfo'));
+    const [selectedCategory, setSelectedCategory] = useState('1');
+
+    const [pageInfo, setPageInfo] = useState({
+        totalPage: 1,
+        page: 1,
+        size: 10,
+        start: 1,
+        end: 1,
+        prev: false,
+        next: false,
+        pageList: [1],
+      });
+
 
     const MvRead = (board) => {
         navigate(`/board/${board.po_id}`, { state: { board } });
     }
+    const handleCategoryChange = (e) => {
+        setSelectedCategory(e.target.value);
+    };
 
-    useEffect(()=>{
-        Axios.get(`http://localhost:8070/post/list`)
-        .then((res)=>{
+    const handlePageChange = (page) => {
+        Axios.get(`http://localhost:8070/post/list/${selectedCategory}?page=${page}`)
+        .then((res) => {
             console.log(res);
             setBoards(res.data.dtoList);
-        }) 
-        .catch((err)=>{
+            setPageInfo(res.data);
+        })
+        .catch((err) => {
             console.log(err);
         });
-    }, []);
+  };
+
+  useEffect(() => {
+    Axios.get(`http://localhost:8070/post/list/${selectedCategory}`)
+      .then((res) => {
+        console.log(res);
+        setBoards(res.data.dtoList);
+        setPageInfo(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [selectedCategory]);
     return(
         <>
             {props.header}
@@ -36,14 +65,14 @@ function Board(props){
                             <li class="board_area">
                                 <div class="search_area">
                                     <form action="">
-                                        <select name="" id="">
-                                            <option value="001">자유게시판</option>
-                                            <option value="002">익명게시판</option>
-                                            <option value="003">공지사항</option>
-                                            <option value="004">미라클모닝</option>
-                                            <option value="005">1일 20계단</option>
-                                            <option value="006">산책위드망고</option>
-                                        </select>
+                                    <select name="" id="" onChange={handleCategoryChange} value={selectedCategory}>
+                                        <option value="1">자유게시판</option>
+                                        <option value="2">익명게시판</option>
+                                        <option value="3">공지사항</option>
+                                        <option value="4">미라클모닝</option>
+                                        <option value="5">1일 20계단</option>
+                                        <option value="6">산책위드망고</option>
+                                    </select>
                                         <input type="text" placeholder="게시글 Search . . ." />
                                         
                                         <button type="button" onClick={()=>navigate(`/board/write`)}>
@@ -74,41 +103,29 @@ function Board(props){
                                             <li><div><p>등록된 게시글이 없습니다.</p></div></li>
                                             </>
                                         )}
-                                        {/* <li onClick={() => MvRead(boards)}>
-                                            <p class="list_title"><h3>챌린지 세개 완료했다 ㅎㅎ 갓생 사는 중</h3></p>
-                                            <p>ㅈㄱㄴ 요즘 챌린지 완전 부시고 댕겨ㅎㅎㅎ 똑같은 하루라도 알차게 사는 기분들어서 진짜 갓생러됨 ㅠㅠ 재밌는 거 있으면 추천해주랑</p>
-                                            <div>6분 전 &nbsp;&nbsp;&nbsp; 조회수 : 16</div>
-                                            <div>
-                                                <img src="./img/message-icon.png" alt=""/>13
-                                                &nbsp;&nbsp;&nbsp; 
-                                                @yeoungjin
-                                            </div>
-                                        </li> */}
-                                        {/* <li onClick={() => window.location.href=`/board/2`}>
-                                            <p><h3>풋살 다녀왔습니다 ㅋㅋ</h3></p>
-                                            <p>상대팀 다 고수여서 힘들었네요. 율하 플랩풋볼 가실분 구함 ㅎㅎ</p>
-                                            <div>1시간 전 &nbsp;&nbsp;&nbsp; 조회수 : 200</div>
-                                            <div>
-                                                <img src="./img/message-icon.png" alt=""/>31
-                                                &nbsp;&nbsp;&nbsp; 
-                                                @yuhyeon
-                                            </div>
-                                        </li>
-                                        <li onClick={() => window.location.href=`/board/3`}>
-                                            <p><h3>황주와 함께 주식투자 챌린지 참가중입니다.</h3></p>
-                                            <p>매일 실력 올라가는 것 같아서 보람찹니다. 같이 참여하실 분 매일 오후 10시 zep 회의실 3번방으로 오세요</p>
-                                            <div>1일 전 &nbsp;&nbsp;&nbsp; 조회수 : 20</div>
-                                            <div>
-                                                <img src="./img/message-icon.png" alt=""/>22
-                                                &nbsp;&nbsp;&nbsp; 
-                                                @sanghee@naver.com
-                                            </div>
-                                        </li> */}
                                     </ul>
                                 </div>
                             </li>
+                            <div class="pagination">
+                                <button disabled={!pageInfo.prev} onClick={() => handlePageChange(pageInfo.page - 1)}>
+                                이전
+                                </button>
+                                {pageInfo.pageList.map((page) => (
+                                <button
+                                    key={page}
+                                    onClick={() => handlePageChange(page)}
+                                    className={page === pageInfo.page ? 'active' : ''}
+                                >
+                                    {page}
+                                </button>
+                                ))}
+                                <button disabled={!pageInfo.next} onClick={() => handlePageChange(pageInfo.page + 1)}>
+                                다음
+                                </button>
+                            </div>
                         </ul>
                     </div>
+                    
                 </div>
             </div>
             {props.footer}

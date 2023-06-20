@@ -38,7 +38,7 @@ function BoardRead(props){
         Axios.get(`http://localhost:8070/post/read?poid=${board.po_id}`)
         .then((res)=>{
             setRead(res.data);
-            // console.log(res.data);
+            console.log(res.data);
         })
         .catch((err)=>{
             console.log(err);
@@ -163,9 +163,14 @@ function BoardRead(props){
                                             </div>
                                             <p>
                                                 {board.po_content}
-                                                {read.imageDTOList && read.imageDTOList.length > 0 && (
-                                                    <img className="boardReadImg" src={`http://localhost:8070`+read.imageDTOList[0].path + "/" + read.imageDTOList[0].imgName} alt="" />
-                                                )}
+                                                {read.imageDTOList && read.imageDTOList.length > 0 ? (
+                                                <img
+                                                    className="boardReadImg"
+                                                    src={`http://localhost:8070${read.imageDTOList[0]?.path}/${read.imageDTOList[0]?.imgName}`}
+                                                    alt=""
+                                                />
+                                                ) : null}
+
                                             </p>
                                             <div>추천 : {read.likeCnt} &nbsp;&nbsp;&nbsp; <img src="/img/message-icon.png" alt="message-icon" /> {read.commentCnt} &nbsp;&nbsp;&nbsp; {formattedTimeDiff} &nbsp;&nbsp;&nbsp; 조회수 : {read.po_hitcount-2}</div>
                                             

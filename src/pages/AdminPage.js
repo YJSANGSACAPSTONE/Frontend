@@ -131,7 +131,7 @@ function AdminPage(props){
         const getTotalData = () => {
 
             Axios.get(`http://localhost:8070/admin/statistic/monthly`).then((res)=>{
-                console.log(res); 
+                // console.log(res); 
             })
             .catch((err)=>{
                 console.log(err);
@@ -181,8 +181,10 @@ function AdminPage(props){
                         <ul>
                             <li className="admin_menu">
                                 <div className="menu_top">
-                                    <p>GODSAENG</p>
-                                    <img src="/img/logo.png" alt="logo" />
+                                    <Link>
+                                        <p>GODSAENG</p>
+                                        <img src="/img/logo.png" alt="logo" />
+                                    </Link>
                                 </div>
                                 <hr />
                                 <div className="menu_middle">

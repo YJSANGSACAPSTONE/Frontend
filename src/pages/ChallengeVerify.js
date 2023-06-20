@@ -40,7 +40,10 @@ function ChallengeVerify(props){
                 'Content-Type': 'multipart/form-data'
             }
         })
-		.then(response => console.log(response.data))
+		.then((res) => {
+            console.log(res.data);
+            navigate(`/profile/${userInfo.u_id}/myChallenge`);
+        })
 		.catch(error => console.log(error));
     }; 
     useEffect(()=>{

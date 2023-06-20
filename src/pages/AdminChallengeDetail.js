@@ -5,7 +5,7 @@ import $ from 'jquery';
 import c3 from 'c3';
 import Axios from "axios";
 
-function AdminChallenge(props){
+function AdminChallengeDetail(props){
     
     const [challengeList, setChallengeList] = useState([]);
     useEffect(() => {
@@ -175,4 +175,4 @@ function AdminChallenge(props){
     )
 }
 
-export default AdminChallenge;
+export default AdminChallengeDetail;

@@ -11,6 +11,8 @@ import jwt_decode from 'jwt-decode';
 
 function Planner(props){
     const [plans, setPlans]=useState([]);
+	const [ranks, setRanks] = useState([]);
+
     const [title, setTitle] = useState("");
 	const [pid,setPid] = useState("");
 	const [uid, setUid] = useState("");
@@ -300,8 +302,16 @@ function Planner(props){
         });
 
 		// 첫 페이지 로딩 후 Axios를 통해서 오늘 날짜 plan 받아오는 것
-		Axios.get(`http://localhost:8070/plan/dailyplan?uid=${u_id}`)
-		.then(response => setPlans(response.data))
+		Axios.get(`http://localhost:8070/plan/dailyplan`,{
+			headers : {
+                'Authorization': `Bearer ${jwtToken}`
+            }
+		})
+		.then((response) => {
+			console.log(response.data);
+			setPlans(response.data)
+			
+		})
 		.catch(error => console.log(error));
 
 		const addTaskBtn = document.getElementById("addTaskBtn");

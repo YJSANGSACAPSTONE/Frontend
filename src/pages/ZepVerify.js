@@ -4,6 +4,7 @@ import Profile from '../components/Profile';
 import $ from 'jquery';
 import Axios from 'axios';
 import Cookies from 'js-cookie';
+import jwt_decode from 'jwt-decode';
 
 function ZepVerify(props){
 
@@ -18,7 +19,14 @@ function ZepVerify(props){
     }
 
     useEffect(()=> {
-        Axios.get(`http://localhost:8070/user/zepidverify?uid=${userInfo.u_id}`)
+        const jwtToken = Cookies.get("accessTokenCookie");
+		const decodedAccToken = jwt_decode(jwtToken);
+
+        Axios.get(`http://localhost:8070/user/zepidverify`,{
+            headers : {
+                'Authorization': `Bearer ${jwtToken}`
+            }
+        })
 			.then((res) => {
                 setUverifiedornot(res.data.uverifiedornot)
 				setZep(res.data.uzepid);

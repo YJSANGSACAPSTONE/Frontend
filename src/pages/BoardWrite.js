@@ -37,52 +37,59 @@ function BoardWrite(props){
         navigate('/board');
     }
     
-    const boardSubmit = () =>{
+    const boardSubmit = () => {
         const formData = new FormData();
-        // formData.append('uploadFiles', board.uploadFiles);
-        if(board.uploadFiles != null){
-            for (let i = 0; i < board.uploadFiles.length; i++) {
-                formData.append("uploadFiles", board.uploadFiles[i]);
-            }
-            
-            console.log(board);
-            Axios.post('http://localhost:8070/uploadAjax',formData)
-            .then((res)=>{
-                console.log(res);
-                const path = "/img/boardimgtemp/" + res.data[0].folderPath;
-                const unifiedPath = path.replace(/\\/g, "/");
-                const uuid = res.data[0].uuid;
-                const fileName = uuid+"_"+res.data[0].fileName;
+      
+        if (board.uploadFiles != null) {
+          for (let i = 0; i < board.uploadFiles.length; i++) {
+            formData.append("uploadFiles", board.uploadFiles[i]);
+          }
+      
+          Axios.post('http://localhost:8070/uploadAjax', formData)
+            .then((res) => {
+              console.log(res);
+              const path = "/img/boardimgtemp/" + res.data[0].folderPath;
+              const unifiedPath = path.replace(/\\/g, "/");
+              const uuid = res.data[0].uuid;
+              const fileName = uuid + "_" + res.data[0].fileName;
+      
+              setBoard(prevState => {
+                const updatedImageDTOList = [...prevState.imageDTOList, { path: unifiedPath, imgName: fileName, uuid: uuid }];
                 
-    
-                setBoard(prevState => ({
-                    ...prevState,
-                    imageDTOList: [...prevState.imageDTOList, { path: unifiedPath, imgName: fileName, uuid:uuid }]
-                }));
-
                 // 사진 업로드가 완료된 후에 아래 코드 실행
-                performAdditionalActions();
+                performAdditionalActions(updatedImageDTOList);
+      
+                return {
+                  ...prevState,
+                  imageDTOList: updatedImageDTOList
+                };
+              });
             })
-            .catch((err)=>{
-                console.log(err);
-            });    
-        }else{
-            // 사진이 없는 경우 바로 아래 코드 실행
-            performAdditionalActions();
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          // 사진이 없는 경우 바로 아래 코드 실행
+          performAdditionalActions([]);
         }
-        
-    }
+      };
 
     // 사진 업로드 이후에 실행할 추가 작업을 수행하는 함수
-    const performAdditionalActions = () => {
-        Axios.post("http://localhost:8070/post/register", board)
-        .then((res) => {
-            navigate("/board");
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+const performAdditionalActions = (updatedImageDTOList) => {
+  
+    const postData = {
+      ...board,
+      imageDTOList: updatedImageDTOList.length > 0 ? updatedImageDTOList : null
     };
+  
+    Axios.post("http://localhost:8070/post/register", postData)
+      .then((res) => {
+        navigate("/board");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
     const handleRemoveFile = (index) => {
         setBoard((prevState) => {
@@ -93,11 +100,11 @@ function BoardWrite(props){
     };
     
     useEffect(()=>{
-        console.log(board); // 업데이트된 상태 출력
+        // console.log(board); // 업데이트된 상태 출력
 
-        if (board.imageDTOList.length > 0) {
+        // if (board.imageDTOList.length > 0) {
           
-        }
+        // }
     },[board])
 
     return(

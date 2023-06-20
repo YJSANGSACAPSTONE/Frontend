@@ -12,6 +12,7 @@ function BoardRead(props){
 
     const [formattedTimeDiff, setFormattedTimeDiff] = useState("");
     const [commentText, setCommentText] = useState("");
+    const [commentList, setCommentList] = useState([]);
     const [liked, setLiked] = useState(false); // 좋아요 상태를 관리하는 변수
 
     const navigate = useNavigate();
@@ -50,16 +51,33 @@ function BoardRead(props){
         Axios.get(`http://localhost:8070/post/liked/${board.po_id}/${userInfo.u_id}`)
         .then((res)=>{setLiked(res.data)})
         .catch((err)=>{console.log(err)});
+
+        // 댓글 불러오기
+        commentLoading();
     }, []);
 
+    const commentLoading = () => {
+        Axios.get(`http://localhost:8070/comments/${board.po_id}/all`)
+        .then((res)=>{
+            console.log(res.data);
+            setCommentList(res.data);
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }
+
     const commentWrite = (postId) => {
-        console.log("post ID : " + postId + " comm_text : " + commentText);
+        console.log("post ID : " + postId + ", comm_text : " + commentText + ", u_id : " + userInfo.u_id);
         Axios.post(`http://localhost:8070/comments/${postId}`, {
             u_id : userInfo.u_id,
-            comm_text : commentText
+            comm_text : commentText,
+            po_id: postId
         })
         .then((res)=>{
             console.log(res);
+            setCommentText("");
+            commentLoading();
         })
         .catch((err)=>{
             console.log(err);
@@ -99,6 +117,58 @@ function BoardRead(props){
             navigate(`/board/${postId}/edit`);
         }
     }
+
+    const formatDate = (dateString) => {
+        const dateObj = new Date(dateString);
+
+        const month = ("0" + (dateObj.getMonth() + 1)).slice(-2);
+        const day = ("0" + dateObj.getDate()).slice(-2);
+        const hours = ("0" + dateObj.getHours()).slice(-2);
+        const minutes = ("0" + dateObj.getMinutes()).slice(-2);
+
+        const formattedDate = `${day}/${month}   ${hours}:${minutes}`;
+        return formattedDate;
+    }
+
+    const commentDelete = (commId) => {
+        if(window.confirm("정말 삭제하시겠습니까?")){
+            Axios.delete(`http://localhost:8070/comments/${board.po_id}/${commId}`)
+            .then((res)=>{
+                commentLoading();
+            })
+            .catch((err)=>{
+                console.log(err);
+            });
+        }
+    }
+
+    const [editingCommentId, setEditingCommentId] = useState(null);
+    const [editedCommentText, setEditedCommentText] = useState('');
+
+    const toggleEditComment = (commentId, currentText) => {
+        if (editingCommentId === commentId) {
+        // 완료 버튼을 클릭한 경우
+        if (editedCommentText.trim() !== '') {
+            // 수정된 댓글 내용이 비어 있지 않은 경우
+            Axios.put(`http://localhost:8070/comments/${board.po_id}/${commentId}`, {
+            comm_text: editedCommentText
+            })
+            .then((res) => {
+                console.log(res);
+                commentLoading();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        }
+        setEditingCommentId(null);
+        setEditedCommentText('');
+        } else {
+        // 수정 버튼을 클릭한 경우
+        setEditingCommentId(commentId);
+        setEditedCommentText(currentText);
+        }
+    };
 
     useEffect(()=>{
         const getFormattedTimeDiff = (timeDiff) => {
@@ -163,24 +233,18 @@ function BoardRead(props){
                                             </div>
                                             <p>
                                                 {board.po_content}
-                                                {read.imageDTOList && read.imageDTOList.length > 0 && (
-                                                    <img className="boardReadImg" src={`http://localhost:8070`+read.imageDTOList[0].path + "/" + read.imageDTOList[0].imgName} alt="" />
-                                                )}
+                                                {read.imageDTOList && read.imageDTOList.length > 0 ? (
+                                                <img
+                                                    className="boardReadImg"
+                                                    src={`http://localhost:8070${read.imageDTOList[0]?.path}/${read.imageDTOList[0]?.imgName}`}
+                                                    alt=""
+                                                />
+                                                ) : null}
+
                                             </p>
                                             <div>추천 : {read.likeCnt} &nbsp;&nbsp;&nbsp; <img src="/img/message-icon.png" alt="message-icon" /> {read.commentCnt} &nbsp;&nbsp;&nbsp; {formattedTimeDiff} &nbsp;&nbsp;&nbsp; 조회수 : {read.po_hitcount-2}</div>
                                             
                                         </li>
-                                        {/* <li class="list_comment">
-                                            <img src="/img/profile.png" alt="profile"/>
-                                            <div class="comment_content">
-                                                <p>@youngjin</p>
-                                                <p>간단한 댓글 내용</p>
-                                            </div>
-                                            <div class="comment_info">
-                                                <p><a href="">삭제</a> &nbsp; <a href="">수정</a> </p>
-                                                <p>04/12 &nbsp; 16:32</p>
-                                            </div>
-                                        </li> */}
                                         <li class="comment_write">
                                             <img src="/img/profile.png" alt="profile" />
                                             <div class="comment_content">
@@ -191,6 +255,55 @@ function BoardRead(props){
                                                 <button onClick={()=>commentWrite(read.po_id)}>작성</button>
                                             </div>
                                         </li>
+                                        {commentList.length > 0 ?(
+                                            commentList.map(commentList => (
+                                                <li class="list_comment" key={commentList.comm_id}>
+                                                    <img src="/img/profile.png" alt="profile"/>
+                                                    <div class="comment_content">
+                                                        <p>{commentList.u_id}</p>
+                                                        {editingCommentId === commentList.comm_id ? (
+                                                            <textarea
+                                                            value={editedCommentText}
+                                                            onChange={(e) => setEditedCommentText(e.target.value)}
+                                                            cols="30"
+                                                            rows="10"
+                                                            ></textarea>
+                                                        ) : (
+                                                            <p>{commentList.comm_text}</p>
+                                                        )}
+                                                    </div>
+                                                    
+                                                    <div class="comment_info">
+                                                        
+                                                    <p>
+                                                        {commentList.u_id === userInfo.u_id ? (
+                                                        <>
+                                                            {editingCommentId === commentList.comm_id ? (
+                                                            <a href="#" onClick={(e) => { e.preventDefault(); toggleEditComment(commentList.comm_id, commentList.comm_text)}}>
+                                                                완료
+                                                            </a>
+                                                            ) : (
+                                                            <a href="#" onClick={(e) => {e.preventDefault(); toggleEditComment(commentList.comm_id, commentList.comm_text)}}>
+                                                                수정
+                                                            </a>
+                                                            )}
+                                                            &nbsp;
+                                                            <a href="#" onClick={(e) => { e.preventDefault(); commentDelete(commentList.comm_id); }}>
+                                                            삭제
+                                                            </a>
+                                                        </>
+                                                        ) : (
+                                                        <></>
+                                                        )}
+                                                    </p>
+                                                        <p>{formatDate(commentList.regDate)}</p>
+                                                    </div>
+                                                </li>
+                                            ))
+                                        ) : (
+                                            <p>댓글을 작성해보세요</p>
+                                        )}
+                                        
                                     </ul>
                                 </div>
                             </li>

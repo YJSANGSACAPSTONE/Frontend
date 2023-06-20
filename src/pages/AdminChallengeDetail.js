@@ -1,25 +1,59 @@
 import React,{useEffect, useState} from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Profile from '../components/Profile';
 import $ from 'jquery';
 import c3 from 'c3';
 import Axios from "axios";
 
-function AdminChallenge(props){
-
-    const navigate = useNavigate();
+function AdminChallengeDetail(props){
     
-    const [challengeList, setChallengeList] = useState([]);
+    const [challengeDetailList, setChallengeDetailList] = useState([]);
+    const [showPopup, setShowPopup] = useState(false); // 팝업 표시 여부
+    const [selectedChallenge, setSelectedChallenge] = useState(null); // 선택된 챌린지
+
+    const {id} = useParams();
+    
+
+
     useEffect(() => {
-      Axios.get("http://localhost:8070/admin/challengelist")
-      .then((res)=>{
-        setChallengeList(res.data);
-        console.log(res.data);
-      })
-      .catch((err)=>{
-        console.log(err);
-      });
+        verifyList();
     }, []);
+    
+    // 팝업 열기
+    const openPopup = (challenge) => {
+        setSelectedChallenge(challenge);
+        setShowPopup(true);
+    };
+    
+    const verifyList = () => {
+        Axios.get(`http://localhost:8070/admin/verifylist/${id}`)
+        .then((res)=>{
+            setChallengeDetailList(res.data);
+            console.log(res.data);
+        })
+        .catch((err)=>{
+            // 임시로 데이터가 없어 500에러 났을 때 리스트 비워주기
+            setChallengeDetailList([]);
+            console.log(err);
+        });
+    }
+    const verifyButton = (cvid) => {
+        Axios.get(`http://localhost:8070/admin/verifythischallenge/${cvid}`)
+        .then((res)=>{
+            console.log(res.data);
+            setShowPopup(false);
+            verifyList();
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
+    }
+
+    // 팝업 닫기
+    const closePopup = () => {
+        setShowPopup(false);
+    };
+
     return(
         <>
             {props.header}
@@ -84,8 +118,8 @@ function AdminChallenge(props){
                                 </div>
                                 <div className="main_challenge">
                                     <div className="challenge_title">
-                                        <p>챌린지 목록</p>
-                                        <p>본 챌린지 목록에 등록된 챌린지에서 발생한 인증들을 확인하고 승인할 수 있습니다.</p>
+                                        <p>미라클 모닝</p>
+                                        <p>미라클 모닝에 참가한 참가자들의 인증 정보를 확인 및 승인/반려 할 수 있습니다.</p>
                                     </div>
 
                                     {/* <div className="challenge_search">
@@ -97,37 +131,40 @@ function AdminChallenge(props){
                                     </div> */}
                                     <div className="challenge_list">
                                         <div className="list_title">
-                                            <p>현재 챌린지 개수 <span>{challengeList.length}</span></p>
+                                            <p>현재 인증 개수 <span>{challengeDetailList.length}</span></p>
                                             <p>+</p>
                                         </div>
                                         <div className="list_top">
                                             <ul>
                                                 <li className="c_num">챌린지 번호</li>
-                                                <li className="c_name">챌린지명</li>
-                                                <li className="c_cnt">참가 인원</li>
-                                                <li className="c_type">인증 타입</li>
-                                                <li className="c_date">챌린지기간</li>
+                                                <li className="c_name">챌린지 인증번호</li>
+                                                <li className="c_cnt">챌린지 인증시간</li>
+                                                <li className="c_type">유저 아이디</li>
+                                                <li className="c_date">썸네일</li>
                                                 
                                             </ul>
                                         </div>
                                         <div className="list_middle">
 
-                                            {challengeList.length > 0 ? (
-                                                challengeList.map(challengeList => (
-                                                    <ul key={challengeList.c_id}>
-                                                        <li className="c_num">{challengeList.c_id}</li>
-                                                        <li className="c_name">{challengeList.c_name}</li>
-                                                        <li className="c_cnt">{challengeList.c_numberofparticipants}</li>
-                                                        <li className="c_type">{challengeList.c_typeofverify == 1 ? "메타버스 챌린지" : "일반 사진인증 챌린지"}</li>
-                                                        <li className="c_date">{challengeList.c_startdate} ~ {challengeList.c_enddate}</li>
+                                            {challengeDetailList.length > 0 ? (
+                                                challengeDetailList.map(challengeDetailList => (
+                                                    <ul key={challengeDetailList.cid}>
+                                                        <li className="c_num">{challengeDetailList.cid}</li>
+                                                        <li className="c_name">{challengeDetailList.cvid}</li>
+                                                        <li className="c_cnt">{challengeDetailList.cvtime}</li>
+                                                        <li className="c_type">{challengeDetailList.uid}</li>
+                                                        <li className="c_date">
+                                                            <img src={`http://localhost:8070${challengeDetailList.cvphoto}`} alt="cvphoto"/>
+                                                        </li>
                                                         <li>
-                                                            <button onClick={()=>navigate(`/adminChallengeDetail/${challengeList.c_id}`)}>관리</button>
-                                                            <button>상세보기</button>
+                                                            <button>인증</button>
+                                                            <button>반려</button>
+                                                            <button onClick={() => openPopup(challengeDetailList)}>상세보기</button>
                                                         </li>
                                                     </ul>
                                                     ))
                                             ) : (
-                                                <h3>새로운 일정을 만들어보세요!</h3>
+                                                <h3>...</h3>
                                             )}
                                             {/* <ul>
                                                 <li className="c_num">챌린지 번호</li>
@@ -149,6 +186,24 @@ function AdminChallenge(props){
                                                 <li>4</li>
                                                 <li>5</li>
                                             </ul>
+                                        </div>
+                                    </div>
+                                    <div className="admin_popup" style={{ display: showPopup ? 'flex' : 'none' }}>
+                                        <div className="popup_inner">
+                                        <div className="popup_header">
+                                            <h3>상세보기</h3>
+                                            <button className="close_button" onClick={closePopup}>닫기</button>
+                                        </div>
+                                        <div className="popup_content">
+                                            <h4>인증이름</h4>
+                                            {/* <img src={selectedChallenge?.c_verificationphoto} alt="인증사진" /> */}
+                                            <img src={`http://localhost:8070${selectedChallenge?.cvphoto}`} alt="cvphoto"/>
+                                            {/* 기타 정보들 */}
+                                        </div>
+                                        <div className="popup_footer">
+                                            <button onClick={()=> verifyButton(selectedChallenge?.cvid)}>승인</button>
+                                            <button>반려</button>
+                                        </div>
                                         </div>
                                     </div>
                                     <div className="admin_copyright">
@@ -177,4 +232,4 @@ function AdminChallenge(props){
     )
 }
 
-export default AdminChallenge;
+export default AdminChallengeDetail;

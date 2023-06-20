@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Profile from '../components/Profile';
 import $ from 'jquery';
 import c3 from 'c3';
+import Axios from "axios";
+
 function AdminPage(props){
     const [chartData, setChartData] = useState([]); // 차트 데이터 상태 변수
 
@@ -17,23 +19,41 @@ function AdminPage(props){
     }, []);
   
     // 차트 그리기
-  const drawChart = (data) => {
-    c3.generate({
-      bindto: '#chart',
-      data: {
-        x:'x',
-        columns: data
-      },
-      axis: {
-        x: {
-          type: 'timeseries',
-          tick: {
-            format: '%Y-%m-%d',
+//   const drawChart = (data) => {
+//     c3.generate({
+//       bindto: '#chart',
+//       data: {
+//         x:'x',
+//         columns: data
+//       },
+//       axis: {
+//         x: {
+//             type: 'category',
+//         },
+//       },
+//     });
+//   };
+
+    // 차트 그리기 ----------------------원본 양식
+    const drawChart = (data) => {
+        c3.generate({
+          bindto: '#chart',
+          data: {
+            x:'x',
+            columns: data
           },
-        },
-      },
-    });
-  };
+          axis: {
+            x: {
+              type: 'timeseries',
+              tick: {
+                format: '%Y-%m-%d',
+              },
+            },
+          },
+        });
+      };
+
+    
 //   오늘 날짜에서 시간별 인증 횟수 통계 차트
   const drawChartToTime = (data) => {
     c3.generate({
@@ -58,7 +78,7 @@ function AdminPage(props){
     const handleTodayClick = () => {
       const todayCount = 10; // 오늘 인증 수 (실제 데이터로 대체해야 함)
       updateSummary(todayCount);
-      drawChartToTime(getTodayData());
+      drawChart(getTodayData());
     };
   
     // 주간 평균 수 클릭 이벤트 핸들러
@@ -74,28 +94,135 @@ function AdminPage(props){
       updateSummary(totalCount);
       drawChart(getTotalData());
     };
+
+    // 전체 데이터 반환
+    const getTotalData = () => {
+        const data = [];
+        const dateData = ['x'];
+        const randData = ['data1'];
+
+        // 더미데이터 테스트용
+        const startDate = new Date('2023-01-01');
+        for (let i = 0; i < 12; i++) {
+            const date = new Date(startDate);
+            date.setMonth(date.getMonth() + i); // 한 달 뒤의 일자로 설정
+            date.setDate(1); // 해당 월의 첫째 날로 설정
+            const formattedDate = formatDate(date, 'YYYY-MM-DD'); // 날짜를 원하는 형식으로 포맷
+            dateData.push(formattedDate); // x축 데이터를 담는 배열에 날짜를 push
+            randData.push(getRandomCount()); // 실제 차트 데이터에도 날짜와 랜덤한 인증 횟수를 push
+        }
+        
+        data.push(dateData);
+        data.push(randData);
+        console.log(data);
+
+        return data;
+        Axios.get(`http://localhost:8070/admin/statistic`).then((res)=>{
+            // console.log(res.data); 
+            
+
+            // const data = [];
+            // const dateData = ['x'];
+            // const randData = ['data1'];
+
+            // // 수정할 실제 사용 데이터가공
+            // // const monthlyList = res.data.monthlyList; // spring에서 받아온 월별 데이터
+            // // const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            // // for (const month of months) {
+            // //     dateData.push(month);
+            // //     randData.push(monthlyList[month] || 0);
+            // // }
+
+            // // 더미데이터 테스트용
+            // const startDate = new Date('2023-01-01');
+            // for (let i = 0; i < 12; i++) {
+            //     const date = new Date(startDate);
+            //     date.setMonth(date.getMonth() + i); // 한 달 뒤의 일자로 설정
+            //     date.setDate(1); // 해당 월의 첫째 날로 설정
+            //     const formattedDate = formatDate(date, 'YYYY-MM-DD'); // 날짜를 원하는 형식으로 포맷
+            //     dateData.push(formattedDate); // x축 데이터를 담는 배열에 날짜를 push
+            //     randData.push(getRandomCount()); // 실제 차트 데이터에도 날짜와 랜덤한 인증 횟수를 push
+            // }
+            
+            // data.push(dateData);
+            // data.push(randData);
+            // console.log(data);
+
+            // return data;
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
+
+        
+    };
   
     // 오늘 데이터 반환
     const getTodayData = () => {
-      return [
-        ['인증횟수', 0, 20,30, 40,45, 50,55, 60,65, 70,76,80,90,110, 120,200, 240, 260, 270, 280, 340, 350,370, 380, 400],
-      ];
+        const data = [];
+        const dateData = ['x'];
+        const randData = ['data1'];
+
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+
+        const startDate = new Date(year, month - 1, 1); // 현재 달의 1일로 시작
+        const endDate = new Date(year, month, 0); // 현재 달의 마지막 날로 종료
+
+        for (let i = startDate.getDate(); i <= endDate.getDate(); i++) {
+            const currentDate = new Date(year, month - 1, i);
+            const formattedDate = formatDate(currentDate, 'YYYY-MM-DD'); // 날짜를 원하는 형식으로 포맷
+            dateData.push(formattedDate); // x축 데이터를 담는 배열에 날짜를 push
+            randData.push(getRandomCount()); // 실제 차트 데이터에도 날짜와 랜덤한 인증 횟수를 push
+        }
+
+        data.push(dateData);
+        data.push(randData);
+
+        return data;
     };
-  
-    // 주간 데이터 반환
-    const getWeeklyData = () => {
-      return [
-        ['x', '2013-01-01', '2013-01-07', '2013-01-14', '2013-01-21', '2013-01-28', '2013-01-31'],
-        ['인증횟수', 30, 200, 100, 400, 150, 250],
-      ];
-    };
-  
-    // 전체 데이터 반환
-    const getTotalData = () => {
-      return [
-        ['x', '2013-01-01', '2013-02-01', '2013-03-01', '2013-04-01', '2013-05-01', '2013-06-01', '2013-07-01', '2013-08-01', '2013-09-01', '2013-10-01', '2013-11-01', '2013-12-01'],
-        ['인증횟수', 30, 200, 100, 400, 150, 250, 30, 200, 100, 400, 150, 250],
-      ];
+
+        // 주간 데이터 반환
+        const getWeeklyData = () => {
+            const data = [];
+            const dateData = ['x'];
+            const randData = ['data1'];
+            
+            const currentDate = new Date(); // 현재 날짜
+            const endDate = new Date(currentDate); // 현재 날짜를 기준으로 7일 전
+            endDate.setDate(endDate.getDate() - 6);
+
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(endDate);
+                date.setDate(date.getDate() + i);
+                const formattedDate = formatDate(date, 'YYYY-MM-DD'); // 날짜를 원하는 형식으로 포맷
+                dateData.push(formattedDate); // x축 데이터를 담는 배열에 날짜를 push
+                randData.push(getRandomCount()); // 실제 차트 데이터에도 날짜와 랜덤한 인증 횟수를 push
+            }
+
+            data.push(dateData);
+            data.push(randData);
+            return data;
+        };
+
+
+        // 날짜를 원하는 형식으로 변환
+        const formatDate = (date, format) => {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+
+            // 원하는 형식으로 날짜를 조합
+            let formattedDate = format.replace('YYYY', year).replace('MM', month).replace('DD', day);
+
+            return formattedDate;
+        };
+    
+    // 1부터 500까지의 랜덤한 수 반환
+    const getRandomCount = () => {
+        return Math.floor(Math.random() * 500) + 1;
     };
     return(
         <>
@@ -106,8 +233,10 @@ function AdminPage(props){
                         <ul>
                             <li className="admin_menu">
                                 <div className="menu_top">
-                                    <p>GODSAENG</p>
-                                    <img src="/img/logo.png" alt="logo" />
+                                    <Link>
+                                        <p>GODSAENG</p>
+                                        <img src="/img/logo.png" alt="logo" />
+                                    </Link>
                                 </div>
                                 <hr />
                                 <div className="menu_middle">
@@ -142,10 +271,12 @@ function AdminPage(props){
                                                   게시판 관리
                                               </p>
                                             </Link>
-                                            {/* <p>
-                                                <img src="/img/open-book.png" alt="" />
-                                                트래픽 관리
-                                            </p> */}
+                                            <Link to="/adminTraffic">
+                                                <p>
+                                                    <img src="/img/open-book.png" alt="" />
+                                                    트래픽 관리
+                                                </p>
+                                            </Link>
                                             <Link to="/adminLibrary">
                                               <p>
                                                   <img src="/img/open-book.png" alt="open-book" />
@@ -179,15 +310,16 @@ function AdminPage(props){
                                             <p className="info_text">주간 평균 수: </p>
                                             <p className="info_text">전체 인증 수: </p>
                                             <div className="graph_btn">
+                                                <button id="total-btn" onClick={() => handleTotalClick(chartData)}>
+                                                    월별 인증 수
+                                                </button>
                                                 <button id="today-btn" onClick={() => handleTodayClick(chartData)}>
-                                                    오늘 인증 수
+                                                    일간 인증 수
                                                 </button>
                                                 <button id="weekly-btn" onClick={() => handleWeeklyClick(chartData)}>
-                                                    주간 평균 수
+                                                    월별 매출
                                                 </button>
-                                                <button id="total-btn" onClick={() => handleTotalClick(chartData)}>
-                                                    전체 인증 수
-                                                </button>
+                                                
                                             </div>
                                         </div>
                                     </div>

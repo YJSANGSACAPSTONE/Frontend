@@ -38,8 +38,13 @@ function Header(){
     // }
 
     useEffect(()=>{
-        Axios.get(`http://localhost:8070/user/listuser?uid=${u_id}`)
+        Axios.get(`http://localhost:8070/user/readuser`,{
+            headers : {
+                'Authorization': `Bearer ${jwtToken}`
+            }
+        })
         .then((resInner)=>{
+            // console.log(resInner);
             setUserInfo(resInner.data);
             Cookies.set('userInfo',JSON.stringify(resInner.data));
         })

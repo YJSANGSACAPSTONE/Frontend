@@ -51,17 +51,21 @@ function ProfileInfo(props){
     const deleteUser = () =>{
         if(window.confirm("정말 탈퇴하시겠습니까?")){
             window.location.href='https://kauth.kakao.com/oauth/logout?client_id=87c054c34eca4ca3541ab083e086cd12&logout_redirect_uri=http://localhost:3000/quit';
-            
+            const jwtToken = Cookies.get("accessTokenCookie");
             // 탈퇴는 현재 백엔드에서 준비중인 기능입니다
-            // Axios.get(`http://localhost:8070/user/deleteuser?uid=${u_id}`)
-            // .then((res) => {
-            // Cookies.remove('userInfo');
-            // console.log(res.data); // 처리 결과 출력
-            // history('/');
-            // })
-            // .catch((error) => {
-            //     console.log(error); // 오류 발생 시 출력
-            // });
+            Axios.get(`http://localhost:8070/user/deleteuser`,{
+                headers : {
+                    'Authorization': `Bearer ${jwtToken}`
+                }
+            })
+            .then((res) => {
+            Cookies.remove('userInfo');
+            console.log(res.data); // 처리 결과 출력
+            history('/');
+            })
+            .catch((error) => {
+                console.log(error); // 오류 발생 시 출력
+            });
         }
         
     }

@@ -12,7 +12,7 @@ function AdminChallengeDetail(props){
     const [selectedChallenge, setSelectedChallenge] = useState(null); // 선택된 챌린지
 
     const {id} = useParams();
-
+    
     useEffect(() => {
       Axios.get(`http://localhost:8070/admin/verifylist/${id}`)
       .then((res)=>{
@@ -29,6 +29,16 @@ function AdminChallengeDetail(props){
         setSelectedChallenge(challenge);
         setShowPopup(true);
     };
+    
+    const verifyButton = (cvid) => {
+        Axios.get(`http://localhost:8070/admin/verifythischallenge/${cvid}`)
+        .then((res)=>{
+            console.log(res.data);
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
+    }
 
     // 팝업 닫기
     const closePopup = () => {
@@ -118,10 +128,10 @@ function AdminChallengeDetail(props){
                                         <div className="list_top">
                                             <ul>
                                                 <li className="c_num">챌린지 번호</li>
-                                                <li className="c_name">챌린지명</li>
-                                                <li className="c_cnt">참가 인원</li>
-                                                <li className="c_type">인증 타입</li>
-                                                <li className="c_date">챌린지기간</li>
+                                                <li className="c_name">챌린지 인증번호</li>
+                                                <li className="c_cnt">챌린지 인증시간</li>
+                                                <li className="c_type">유저 아이디</li>
+                                                <li className="c_date">썸네일</li>
                                                 
                                             </ul>
                                         </div>
@@ -129,12 +139,14 @@ function AdminChallengeDetail(props){
 
                                             {challengeDetailList.length > 0 ? (
                                                 challengeDetailList.map(challengeDetailList => (
-                                                    <ul key={challengeDetailList.c_id}>
-                                                        <li className="c_num">{challengeDetailList.c_id}</li>
-                                                        <li className="c_name">{challengeDetailList.c_name}</li>
-                                                        <li className="c_cnt">{challengeDetailList.c_numberofparticipants}</li>
-                                                        <li className="c_type">{challengeDetailList.c_typeofverify == 0 ? "메타버스 챌린지" : "일반 사진인증 챌린지"}</li>
-                                                        <li className="c_date">{challengeDetailList.c_startdate} ~ {challengeDetailList.c_enddate}</li>
+                                                    <ul key={challengeDetailList.cid}>
+                                                        <li className="c_num">{challengeDetailList.cid}</li>
+                                                        <li className="c_name">{challengeDetailList.cvid}</li>
+                                                        <li className="c_cnt">{challengeDetailList.cvtime}</li>
+                                                        <li className="c_type">{challengeDetailList.uid}</li>
+                                                        <li className="c_date">
+                                                            <img src={`http://localhost:8070${challengeDetailList.cvphoto}`} alt="cvphoto"/>
+                                                        </li>
                                                         <li>
                                                             <button>인증</button>
                                                             <button>반려</button>
@@ -174,13 +186,13 @@ function AdminChallengeDetail(props){
                                             <button className="close_button" onClick={closePopup}>닫기</button>
                                         </div>
                                         <div className="popup_content">
-                                            <h4>{selectedChallenge?.c_name}</h4>
+                                            <h4>인증이름</h4>
                                             {/* <img src={selectedChallenge?.c_verificationphoto} alt="인증사진" /> */}
                                             <img src="/img/morning.png" alt="인증사진" />
                                             {/* 기타 정보들 */}
                                         </div>
                                         <div className="popup_footer">
-                                            <button>승인</button>
+                                            <button onClick={()=> verifyButton(selectedChallenge?.cvid)}>승인</button>
                                             <button>반려</button>
                                         </div>
                                         </div>

@@ -833,6 +833,8 @@ i[class^=icon-chevron]{
   .challenge_list .list_middle{ display:flex; flex-direction:column; }
   .challenge_list .list_middle > ul{ display:flex; padding:7px 30px; flex-wrap:wrap; border-bottom:solid 1px #eee; align-items: center; text-align: center; }
 
+  .challenge_list .list_middle img{ width:70px; }
+
   .challenge_list .list_middle button{ background:none; padding:15px; border:solid 1px #eee; border-right:none; }
   .challenge_list .list_middle button:last-child{ border-right:solid 1px #eee; }
 

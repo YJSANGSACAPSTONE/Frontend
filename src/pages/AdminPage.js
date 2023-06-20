@@ -131,7 +131,7 @@ function AdminPage(props){
         const getTotalData = () => {
 
             Axios.get(`http://localhost:8070/admin/statistic/monthly`).then((res)=>{
-                console.log(res); 
+                // console.log(res); 
             })
             .catch((err)=>{
                 console.log(err);

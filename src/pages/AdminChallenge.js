@@ -72,8 +72,80 @@ function AdminChallenge(props){
                                     </div>
                                 </div>
                                 <div className="main_challenge">
-                                    <div>
-                                        
+                                    <div className="challenge_title">
+                                        <p>챌린지 목록</p>
+                                        <p>본 챌린지 목록에 등록된 챌린지에서 발생한 인증들을 확인하고 승인할 수 있습니다.</p>
+                                    </div>
+
+                                    {/* <div className="challenge_search">
+                                        <div>
+                                            <select name="" id="">
+                                                <option value="">모든 챌린지</option>
+                                            </select>
+                                        </div>
+                                    </div> */}
+                                    <div className="challenge_list">
+                                        <div className="list_title">
+                                            <p>검색된 사이트 <span>2</span></p>
+                                            <p>+</p>
+                                        </div>
+                                        <div className="list_top">
+                                            <ul>
+                                                <li className="c_num">인증 번호</li>
+                                                <li className="c_status">인증 상태</li>
+                                                <li className="c_name">챌린지명</li>
+                                                <li className="c_date">챌린지기간</li>
+                                                <li className="c_verify">인증일자</li>
+                                                <li className="c_uname">회원명</li>
+                                                
+                                            </ul>
+                                        </div>
+                                        <div className="list_middle">
+                                            <ul>
+                                                <li className="c_num">1</li>
+                                                <li className="c_status">완료</li>
+                                                <li className="c_name">1주1풋</li>
+                                                <li className="c_date">2023-06-10 ~ 2023-06-20</li>
+                                                <li className="c_verify">2023-06-12</li>
+                                                <li className="c_uname">김유현</li>
+                                                <li>
+                                                    <button>인증</button>
+                                                    <button>삭제</button>
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li>1</li>
+                                                <li>미완료</li>
+                                                <li>1주1풋</li>
+                                                <li>2023-06-10 ~ 2023-06-20</li>
+                                                <li>2023-06-12</li>
+                                                <li>김유현</li>
+                                                <li>
+                                                    <button>인증</button>
+                                                    <button>삭제</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div className="list_paging">
+                                            <ul>
+                                                <li>1</li>
+                                                <li>2</li>
+                                                <li>3</li>
+                                                <li>4</li>
+                                                <li>5</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div className="admin_copyright">
+                                        <p>(주)영진상사 | 010-1234-1234 | 대구광역시 북구 복현로 35 | 사업자 등록번호 : 000-0000 | 통신판매업신고 : 0000-xxxx-000000</p>
+                                        <p>대표 : 심상희 | 개인정보책임자 : 김유현 이메일 : yeungjin@naver.com</p>
+                                        <p>Made by 👨‍💻 Yuhyeon Kim</p>
+                                        <div className="copy_use">
+                                            <p>갓생플래너 이용약관</p>
+                                            <p>이용약관</p>
+                                            <p>개인정보 수집 및 이용동의</p>
+                                            <p>도움말</p>
+                                        </div>
                                     </div>
                                 </div>
                             </li>

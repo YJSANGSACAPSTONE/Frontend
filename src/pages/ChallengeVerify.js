@@ -9,6 +9,7 @@ function ChallengeVerify(props){
     const userInfo = JSON.parse(Cookies.get('userInfo'));
     const location = useLocation();
     const challenge = location.state?.challenge;
+    console.log(challenge);
     if(!challenge.c_id){
         challenge.c_id = challenge.cid;
     }
@@ -71,7 +72,7 @@ function ChallengeVerify(props){
                             <li class="challenge_read">
                                 <div class="read_title">
                                     <img src="/img/flag.png" alt="flag" />
-                                    <p>Miracle Morning</p>
+                                    <p>{challenge.c_name}</p>
                                 </div>
                                 <div class="read_info">
                                     <div class="verify_title">
@@ -93,7 +94,7 @@ function ChallengeVerify(props){
                                     </div>
                                 </div>
                                 <div class="read_content">
-                                    <p>아침에 일어나서 사진 찍는게 어려운 일 일까요?! 일단 저는 어렵습니다...</p>
+                                    <p>{challenge.c_content}</p>
                                 </div>
                                 <div class="read_btn">
                                     <button class="toListBtn" onClick={MbChallenge}>이전</button>

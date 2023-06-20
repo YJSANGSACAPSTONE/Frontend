@@ -45,7 +45,7 @@ function BoardWrite(props){
                 formData.append("uploadFiles", board.uploadFiles[i]);
             }
             
-            console.log(board.uploadFiles);
+            console.log(board);
             Axios.post('http://localhost:8070/uploadAjax',formData)
             .then((res)=>{
                 console.log(res);

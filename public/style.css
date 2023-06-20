@@ -95,7 +95,7 @@ body::-webkit-scrollbar-track {
 #sign_content .sign_form img{ width:100px; height: 100px; border-radius:50%; }
 #sign_content .sign_form input{ margin-bottom:10px;}
 
-#planner_content{ padding:50px 0; margin-bottom:200px; }
+#planner_content{ padding:50px 0; margin-bottom:100px; }
 #planner_content > div > div > ul{ display:flex; flex-wrap:wrap; }
 .planner_profile{ width:25%; position: relative; }
 .planner_profile > a > div{ display:flex; padding:10px; width:100%; justify-content:space-evenly; flex-wrap:wrap; }

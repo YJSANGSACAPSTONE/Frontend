@@ -29,6 +29,7 @@ import PointPayList from './pages/PointPayList';
 
 import AdminPage from './pages/AdminPage';
 import AdminChallenge from './pages/AdminChallenge';
+import AdminChallengeDetail from './pages/AdminChallengeDetail';
 
 import NotFound from './components/NotFound';
 
@@ -79,6 +80,7 @@ function App() {
 
 			<Route path="/adminPage" element={<AdminPage/>} />
 			<Route path="/adminChallenge" element={<AdminChallenge/>} />
+			<Route path="/adminChallengeDetail/:id" element={<AdminChallengeDetail/>} />
 
 			<Route path="/signUp" element={<SignUp header={<Header/>} footer={<Footer/>} />} />
 			

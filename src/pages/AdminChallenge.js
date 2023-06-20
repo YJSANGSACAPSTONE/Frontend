@@ -1,11 +1,13 @@
 import React,{useEffect, useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Profile from '../components/Profile';
 import $ from 'jquery';
 import c3 from 'c3';
 import Axios from "axios";
 
 function AdminChallenge(props){
+
+    const navigate = useNavigate();
     
     const [challengeList, setChallengeList] = useState([]);
     useEffect(() => {
@@ -119,7 +121,7 @@ function AdminChallenge(props){
                                                         <li className="c_type">{challengeList.c_typeofverify == 0 ? "메타버스 챌린지" : "일반 사진인증 챌린지"}</li>
                                                         <li className="c_date">{challengeList.c_startdate} ~ {challengeList.c_enddate}</li>
                                                         <li>
-                                                            <button>관리</button>
+                                                            <button onClick={()=>navigate(`/adminChallengeDetail/${challengeList.c_id}`)}>관리</button>
                                                             <button>상세보기</button>
                                                         </li>
                                                     </ul>

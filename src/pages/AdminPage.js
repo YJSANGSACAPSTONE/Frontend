@@ -130,8 +130,8 @@ function AdminPage(props){
         // 전체 데이터 반환
         const getTotalData = () => {
 
-            Axios.get(`http://localhost:8070/admin/statistic/monthly`).then((res)=>{
-                // console.log(res); 
+            Axios.get(`http://localhost:8070/admin/statistic`).then((res)=>{
+                console.log(res.data.length); 
             })
             .catch((err)=>{
                 console.log(err);
@@ -143,7 +143,6 @@ function AdminPage(props){
             const startDate = new Date('2013-01-01');
             for (let i = 0; i < 12; i++) {
                 const date = new Date(startDate);
-                console.log(i);
                 date.setMonth(date.getMonth() + i); // 한 달 뒤의 일자로 설정
                 date.setDate(1); // 해당 월의 첫째 날로 설정
                 const formattedDate = formatDate(date, 'YYYY-MM-DD'); // 날짜를 원하는 형식으로 포맷
@@ -258,15 +257,16 @@ function AdminPage(props){
                                             <p className="info_text">주간 평균 수: </p>
                                             <p className="info_text">전체 인증 수: </p>
                                             <div className="graph_btn">
+                                                <button id="total-btn" onClick={() => handleTotalClick(chartData)}>
+                                                    월별 인증 수
+                                                </button>
                                                 <button id="today-btn" onClick={() => handleTodayClick(chartData)}>
-                                                    오늘 인증 수
+                                                    일간 인증 수
                                                 </button>
                                                 <button id="weekly-btn" onClick={() => handleWeeklyClick(chartData)}>
-                                                    주간 평균 수
+                                                    월별 매출
                                                 </button>
-                                                <button id="total-btn" onClick={() => handleTotalClick(chartData)}>
-                                                    전체 인증 수
-                                                </button>
+                                                
                                             </div>
                                         </div>
                                     </div>

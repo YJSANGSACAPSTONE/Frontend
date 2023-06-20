@@ -53,7 +53,7 @@ function BoardRead(props){
     }, []);
 
     const commentWrite = (postId) => {
-        console.log("post ID : " + postId + " comm_text : " + commentText);
+        console.log("post ID : " + postId + ", comm_text : " + commentText + ", u_id : " + userInfo.u_id);
         Axios.post(`http://localhost:8070/comments/${postId}`, {
             u_id : userInfo.u_id,
             comm_text : commentText

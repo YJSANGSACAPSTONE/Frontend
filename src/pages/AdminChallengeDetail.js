@@ -34,6 +34,7 @@ function AdminChallengeDetail(props){
         Axios.get(`http://localhost:8070/admin/verifythischallenge/${cvid}`)
         .then((res)=>{
             console.log(res.data);
+            setShowPopup(false);
         })
         .catch((err)=>{
             console.log(err);

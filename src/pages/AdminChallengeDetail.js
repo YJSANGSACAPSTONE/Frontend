@@ -12,7 +12,6 @@ function AdminChallengeDetail(props){
     const [selectedChallenge, setSelectedChallenge] = useState(null); // 선택된 챌린지
 
     const {id} = useParams();
-    
 
 
     useEffect(() => {
@@ -69,10 +68,10 @@ function AdminChallengeDetail(props){
                                 <hr />
                                 <div className="menu_middle">
                                     <div className="middle_top">
-                                        <div>
-                                            <img src="/img/edit1.png" alt="edit1" />
-                                            <p>사이트 바로가기</p>
-                                        </div>
+                                        <Link to="/planner">
+                                            <p>GODSAENG</p>
+                                            <img src="/img/logo.png" alt="logo" />
+                                        </Link>
                                     </div>
                                     
                                     <div className="middle_main">

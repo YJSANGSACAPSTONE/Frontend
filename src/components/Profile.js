@@ -104,15 +104,15 @@ export default function Profile(){
                     </div>
                     <div className="pc_middle">
                         {ranks.length > 0 ? (
-                            ranks.map(rank => (
+                            ranks.map((rank, index) => (
                                 <ul>
-                                    <li className="pc_user">
-                                        1.<img src={rank.uphoto} alt="user" />
-                                        <p>{rank.unickname}</p>
-                                    </li>
-                                    <li className="pc_score"><p>{rank.ulevel}</p></li>
+                                  <li className="pc_user">
+                                    {index + 1} &nbsp; <img src={rank.uphoto} alt="user" />
+                                    <p>{rank.unickname}</p>
+                                  </li>
+                                  <li className="pc_score"><p>{rank.ulevel}</p></li>
                                 </ul>
-                            ))
+                              ))
                         ) : (
                             <p>랭킹이 없습니다.</p>
                         )}

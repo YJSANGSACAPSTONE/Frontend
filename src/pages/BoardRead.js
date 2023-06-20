@@ -78,6 +78,7 @@ function BoardRead(props){
             console.log(res);
             setCommentText("");
             commentLoading();
+            readPost();
         })
         .catch((err)=>{
             console.log(err);
@@ -135,6 +136,7 @@ function BoardRead(props){
             Axios.delete(`http://localhost:8070/comments/${board.po_id}/${commId}`)
             .then((res)=>{
                 commentLoading();
+                readPost();
             })
             .catch((err)=>{
                 console.log(err);

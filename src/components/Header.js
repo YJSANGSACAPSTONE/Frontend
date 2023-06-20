@@ -75,9 +75,9 @@ function Header(){
                                         <li>
                                             <Link to="/challengeAll">전체 챌린지</Link>
                                         </li>
-                                        <li>
+                                        {/* <li>
                                             <Link to={`/profile/${userInfo.u_id}/myChallenge`}>완료한 챌린지</Link>
-                                        </li>
+                                        </li> */}
                                         <li>
                                             <Link to={`/profile/${userInfo.u_id}/myChallenge`}>마이 챌린지</Link>
                                         </li>

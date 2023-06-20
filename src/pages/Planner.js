@@ -192,10 +192,14 @@ function Planner(props){
 	  
 	const deleteBtn = (e) => {
 		Axios.get(`http://localhost:8070/plan/deleteplan/${pid}`).then((res)=>{
-			Axios.get(`http://localhost:8070/plan/dailyplan?uid=${u_id}`)
+			Axios.get(`http://localhost:8070/plan/dailyplan`,{
+				headers : {
+					'Authorization': `Bearer ${jwtToken}`
+				}
+			})
 			.then((response) => {
 				console.log(response);
-				setPlans(response.data);
+				setPlans(response.data.list);
 				$("#listModal").css('display','none');
 			})
 			.catch(error => console.log(error));
@@ -263,8 +267,12 @@ function Planner(props){
 			})
 			.then(response=>{
 				console.log(response);
-				Axios.get(`http://localhost:8070/plan/dailyplan?uid=${u_id}`)
-				.then(response => setPlans(response.data))
+				Axios.get(`http://localhost:8070/plan/dailyplan`,{
+					headers : {
+						'Authorization': `Bearer ${jwtToken}`
+					}
+				})
+				.then(response => setPlans(response.data.list))
 				.catch(error => console.log(error));
 			})
 			.catch(error => {
@@ -449,9 +457,13 @@ function Planner(props){
 			})
 			.then(response=>{
 				console.log(response);
-				Axios.get(`http://localhost:8070/plan/dailyplan?uid=${u_id}`)
+				Axios.get(`http://localhost:8070/plan/dailyplan`,{
+					headers : {
+						'Authorization': `Bearer ${jwtToken}`
+					}
+				})
 				.then((response) => {
-					setPlans(response.data)
+					setPlans(response.data.list)
 					$("input[name=p_title]").val('');
 					$("textarea[name=p_content]").val('');
 					$("select[name=p_category]").val('');

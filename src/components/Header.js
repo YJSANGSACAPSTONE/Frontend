@@ -44,7 +44,7 @@ function Header(){
             }
         })
         .then((resInner)=>{
-            console.log(resInner);
+            // console.log(resInner);
             setUserInfo(resInner.data);
             Cookies.set('userInfo',JSON.stringify(resInner.data));
         })

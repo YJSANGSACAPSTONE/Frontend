@@ -12,6 +12,7 @@ function ProfileInfo(props){
     const userData = location.state?.userData;
     const [profile_image,setProfile_image] = useState("");
     const userInfo = Cookies.get('userInfo');
+    const userRole = Cookies.get('userRole');
 
     const jwtToken = Cookies.get("accessTokenCookie");
     const refreshToken = Cookies.get("refreshTokenCookie");
@@ -50,7 +51,7 @@ function ProfileInfo(props){
     
     const deleteUser = () =>{
         if(window.confirm("정말 탈퇴하시겠습니까?")){
-            window.location.href='https://kauth.kakao.com/oauth/logout?client_id=87c054c34eca4ca3541ab083e086cd12&logout_redirect_uri=http://localhost:3000/quit';
+            // window.location.href='https://kauth.kakao.com/oauth/logout?client_id=87c054c34eca4ca3541ab083e086cd12&logout_redirect_uri=http://localhost:3000/quit';
             const jwtToken = Cookies.get("accessTokenCookie");
             // 탈퇴는 현재 백엔드에서 준비중인 기능입니다
             Axios.get(`http://localhost:8070/user/deleteuser`,{

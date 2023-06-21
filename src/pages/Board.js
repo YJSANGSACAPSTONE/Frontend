@@ -92,7 +92,7 @@ function Board(props){
                                                     {/* <p>{boards.po_content}</p> */}
                                                     <div>1시간 전 &nbsp;&nbsp;&nbsp; 조회수 : {boards.po_hitcount}</div>
                                                     <div>
-                                                        <img src="./img/message-icon.png" alt=""/>31
+                                                        <img src="./img/message-icon.png" alt=""/> {boards.commentCnt}
                                                         &nbsp;&nbsp;&nbsp; 
                                                         {boards.u_id}
                                                     </div>

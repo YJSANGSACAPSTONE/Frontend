@@ -62,16 +62,18 @@ function AdminChallengeDetail(props){
                         <ul>
                             <li className="admin_menu">
                                 <div className="menu_top">
-                                    <p>GODSAENG</p>
-                                    <img src="/img/logo.png" alt="logo" />
+                                    <Link to="/planner">
+                                        <p>GODSAENG</p>
+                                        <img src="/img/logo.png" alt="logo" />
+                                    </Link>
                                 </div>
                                 <hr />
                                 <div className="menu_middle">
                                     <div className="middle_top">
-                                        <Link to="/planner">
-                                            <p>GODSAENG</p>
-                                            <img src="/img/logo.png" alt="logo" />
-                                        </Link>
+                                        <div>
+                                            <img src="/img/edit1.png" alt="edit1" />
+                                            <p>사이트 바로가기</p>
+                                        </div>
                                     </div>
                                     
                                     <div className="middle_main">
@@ -163,7 +165,9 @@ function AdminChallengeDetail(props){
                                                     </ul>
                                                     ))
                                             ) : (
-                                                <h3>...</h3>
+                                                <ul>
+                                                    <li>...</li>
+                                                </ul>
                                             )}
                                             {/* <ul>
                                                 <li className="c_num">챌린지 번호</li>

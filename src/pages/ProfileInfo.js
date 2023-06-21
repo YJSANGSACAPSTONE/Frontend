@@ -4,27 +4,42 @@ import $ from 'jquery';
 import Axios from "axios";
 import Cookies from 'js-cookie';
 import Profile from '../components/Profile';
+import jwt_decode from 'jwt-decode';
 
 function ProfileInfo(props){
     const history = useNavigate();
     const location = useLocation();
     const userData = location.state?.userData;
+    const [profile_image,setProfile_image] = useState("");
     const userInfo = Cookies.get('userInfo');
 
+    const jwtToken = Cookies.get("accessTokenCookie");
+    const refreshToken = Cookies.get("refreshTokenCookie");
+    const decodedAccToken = jwt_decode(jwtToken);
 
     const [u_info, setU_info] = useState(JSON.parse(userInfo));
-
     const {u_id, u_nickname, u_zepid, u_content, userImg, u_level, u_grade, u_img, u_successedchallenge,u_deposit} = u_info;
+
     const updateUser = () => {
+        console.log({
+            u_id : u_id,
+            u_nickname : u_nickname,
+            u_zepid : u_zepid,
+            u_content : u_content,
+            profile_image : profile_image
+        });
         Axios.post('http://localhost:8070/user/updateuser',{
             u_id : u_id,
             u_nickname : u_nickname,
             u_zepid : u_zepid,
             u_content : u_content,
-            userImg : userImg
+            profile_image : profile_image
+        },{
+            headers : {
+                'Authorization': `Bearer ${jwtToken}`
+            }
         })
         .then((res)=>{
-            
             Cookies.set('userInfo', JSON.stringify(u_info));
             history('/profile');
         })
@@ -36,21 +51,29 @@ function ProfileInfo(props){
     const deleteUser = () =>{
         if(window.confirm("정말 탈퇴하시겠습니까?")){
             window.location.href='https://kauth.kakao.com/oauth/logout?client_id=87c054c34eca4ca3541ab083e086cd12&logout_redirect_uri=http://localhost:3000/quit';
-            
-            // Axios.get(`http://localhost:8070/user/deleteuser?uid=${u_id}`)
-            // .then((res) => {
-            // Cookies.remove('userInfo');
-            // console.log(res.data); // 처리 결과 출력
-            // history('/');
-            // })
-            // .catch((error) => {
-            //     console.log(error); // 오류 발생 시 출력
-            // });
+            const jwtToken = Cookies.get("accessTokenCookie");
+            // 탈퇴는 현재 백엔드에서 준비중인 기능입니다
+            Axios.get(`http://localhost:8070/user/deleteuser`,{
+                headers : {
+                    'Authorization': `Bearer ${jwtToken}`
+                }
+            })
+            .then((res) => {
+            Cookies.remove('userInfo');
+            console.log(res.data); // 처리 결과 출력
+            history('/');
+            })
+            .catch((error) => {
+                console.log(error); // 오류 발생 시 출력
+            });
         }
         
     }
+    
 
     useEffect(()=>{
+        
+        setProfile_image(decodedAccToken.profile_image);
 
     }, []);
 
@@ -74,7 +97,7 @@ function ProfileInfo(props){
                                     <form>
                                         <div>
                                             <p>사진</p>
-                                            <img id="profile_thumbnail" src={userImg} alt="profile"/>
+                                            <img id="profile_thumbnail" src={profile_image} alt="profile"/>
                                         </div> 
                                         <label for="">아이디</label><input type="text" name="u_id" value={u_id} />
 

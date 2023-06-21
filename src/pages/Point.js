@@ -4,14 +4,21 @@ import Profile from '../components/Profile';
 import $ from 'jquery';
 import Axios from "axios";
 import Cookies from 'js-cookie';
+import jwt_decode from 'jwt-decode';
+
 function Point(props){
 
     const userInfo = JSON.parse(Cookies.get('userInfo'));
     const [pay, setPay] = useState(0);
+    const jwtToken = Cookies.get("accessTokenCookie");
     const pointpay = () => {
         const u_id = userInfo.u_id;
         Cookies.set('payMoney', pay);
-        Axios.get(`http://localhost:8070/kakaopay/ready?uid=${u_id}&kpamount=${pay}`)
+        Axios.get(`http://localhost:8070/kakaopay/ready?kpamount=${pay}`,{
+            headers : {
+                'Authorization': `Bearer ${jwtToken}`
+            }
+        })
         .then((res)=>{
             const win = window.open(res.data.nextRedirectPcUrl, '_blank');
             win.focus();

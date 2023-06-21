@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react';
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Profile from '../components/Profile';
 import { ProgressBar } from "react-bootstrap";
 import Axios from "axios";
@@ -9,6 +9,7 @@ import $ from 'jquery';
 function MyChallenge(props){
     const uid = JSON.parse(Cookies.get('userInfo')).u_id;
     const [mychallenge,setMychallenge] = useState([]);
+    const navigate = useNavigate();
     const now = 30;
     const now2 = 40;
     const now3 = 70;
@@ -50,15 +51,23 @@ function MyChallenge(props){
 												>
 													<img src={`http://localhost:8070${challenge.cthumbnails}`} alt="morning"/>
                                                     <div>
-                                                        {challenge.cname}
+                                                        <p>{challenge.cname}</p>
                                                         <button class="myPageBtn">참가취소</button>
-                                                        <button onClick={()=>window.location.href=`/challenge/${challenge.cid}/verify`} class="myPageBtn">인증하기</button>
+                                                        <button onClick={()=>navigate(`/challenge/${challenge.cid}/verify`, { state: { challenge } })} class="myPageBtn">인증하기</button>
                                                     </div>
 												</div>
 												))
 										) : (
 											<p>Loading...</p>
 										)}
+                                        {/* <div>
+                                            <img src={`http://localhost:8070/img/challengeimg/hi.jpg`} alt="morning"/>
+                                            <div>
+                                                <p></p>
+                                                <button class="myPageBtn">참가취소</button>
+                                                <button class="myPageBtn">인증하기</button>
+                                            </div>
+                                        </div> */}
                                         {/* <div>
                                             <img src="/img/morning_sun.png" alt="morning"/>
                                             <div>

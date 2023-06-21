@@ -9,6 +9,10 @@ function ChallengeVerify(props){
     const userInfo = JSON.parse(Cookies.get('userInfo'));
     const location = useLocation();
     const challenge = location.state?.challenge;
+    console.log(challenge);
+    if(!challenge.c_id){
+        challenge.c_id = challenge.cid;
+    }
     const navigate = useNavigate();
     const [challengeverify, setChallengeverify] = useState({
         c_id : challenge.c_id,
@@ -28,13 +32,20 @@ function ChallengeVerify(props){
     }
     const verify = () =>{
         const formData = new FormData();
-        formData.append('c_id',challengeverify.c_id);
-        formData.append('u_id',challengeverify.u_id);
+        formData.append('cid',challengeverify.c_id);
+        formData.append('uid',challengeverify.u_id);
         formData.append('verifyPhoto',challengeverify.verifyPhoto);
         console.log(challengeverify);
-        // Axios.post('url')
-		// .then(response => console.log(response.data))
-		// .catch(error => console.log(error));
+        Axios.post('http://localhost:8070/challenge/verify',formData,{
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+		.then((res) => {
+            console.log(res.data);
+            navigate(`/profile/${userInfo.u_id}/myChallenge`);
+        })
+		.catch(error => console.log(error));
     }; 
     useEffect(()=>{
         $("#verifyImg").click(function() {
@@ -61,7 +72,7 @@ function ChallengeVerify(props){
                             <li class="challenge_read">
                                 <div class="read_title">
                                     <img src="/img/flag.png" alt="flag" />
-                                    <p>Miracle Morning</p>
+                                    <p>{challenge.c_name}</p>
                                 </div>
                                 <div class="read_info">
                                     <div class="verify_title">
@@ -83,7 +94,7 @@ function ChallengeVerify(props){
                                     </div>
                                 </div>
                                 <div class="read_content">
-                                    <p>아침에 일어나서 사진 찍는게 어려운 일 일까요?! 일단 저는 어렵습니다...</p>
+                                    <p>{challenge.c_content}</p>
                                 </div>
                                 <div class="read_btn">
                                     <button class="toListBtn" onClick={MbChallenge}>이전</button>

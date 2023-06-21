@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import Axios from "axios";
 import Cookies from 'js-cookie';
 
+
+// 현재 KakaoLogin.js 사용하지 않고있음 Loginpage 에서 바로 SignUp.js 로 넘어감
 function KakaoLogin(){
 
     const history = useNavigate();
@@ -11,7 +13,8 @@ function KakaoLogin(){
         const url = new URL(window.location.href);
         
         const code = url.searchParams.get("code");
-        console.log(url);
+        
+        // console.log(url);
         Axios.get(`http://localhost:8070/login?code=${code}`).then((res)=>{
             console.log(res.data);
             Axios.get(`http://localhost:8070/user/listuser?uid=${res.data.userId}`).

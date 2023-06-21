@@ -11,7 +11,7 @@ function AdminChallenge(props){
     
     const [challengeList, setChallengeList] = useState([]);
     useEffect(() => {
-      Axios.get("http://localhost:8070/admin/challengelist")
+      Axios.get("/admin/challengelist")
       .then((res)=>{
         setChallengeList(res.data);
         console.log(res.data);

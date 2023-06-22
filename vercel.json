@@ -2,11 +2,11 @@
     "rewrites": [
         {
         "source": "/admin/:path*",
-        "destination": "https://localhost:8070/:path*"
+        "destination": "http://13.125.99.177:8070/:path*"
         },
         {
         "source": "/admin/:path*/",
-        "destination": "https://localhost:8070/:path*/"
+        "destination": "http://13.125.99.177:8070/:path*/"
         }
         
     ]

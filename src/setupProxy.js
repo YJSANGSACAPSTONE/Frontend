@@ -12,7 +12,7 @@ module.exports = function(app) {
      '/uploadAjax',
      '/save',
      '/search',
-     '/api/v1/token'
+     '/api'
     ],//proxy가 필요한 path prameter를 입력합니다. 프론트에서 Axios.get("/admin/challengelist")이와 같이 요청할 수 있음
     createProxyMiddleware({
       target: 'http://13.125.99.177:8070', //타겟이 되는 api url를 입력합니다.

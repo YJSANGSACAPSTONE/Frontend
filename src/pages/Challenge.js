@@ -91,7 +91,7 @@ function Challenge(props){
                                         </ul>
                                     </div>
                                 </div>
-                                {/* <div class="success_challenge ch_lists">
+                                <div class="success_challenge ch_lists">
                                     <div class="title">
                                         <p>성공 챌린지</p>
                                         <button>+</button>
@@ -104,7 +104,7 @@ function Challenge(props){
                                             <li><Link to="/challenge/4"><div></div></Link></li>
                                         </ul>
                                     </div>
-                                </div> */}
+                                </div>
                                 <div class="ch_list">
                                     <Link to="/challengeWrite"><button>새로운 챌린지 생성</button></Link>
                                 </div>

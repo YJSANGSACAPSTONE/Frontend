@@ -49,7 +49,7 @@ function BoardEdit(props){
     const handleRemoveImage = (index, fileName) => {
         setRemoveFileName(fileName);
         console.log(fileName);
-        Axios.post('http://localhost:8070/removeFile', {
+        Axios.post('/api/removeFile', {
             fileName : fileName
         })
         .then((res)=>{
@@ -75,7 +75,7 @@ function BoardEdit(props){
             for (let i = 0; i < read.uploadFiles.length; i++) {
               formData.append("uploadFiles", read.uploadFiles[i]);
             }
-            Axios.post('http://localhost:8070/uploadAjax',formData)
+            Axios.post('/api/uploadAjax',formData)
             .then((res)=>{
                 console.log(res);
                 const path = "/img/boardimgtemp/" + res.data[0].folderPath;
@@ -102,7 +102,7 @@ function BoardEdit(props){
     }
 
     useEffect(()=>{
-        Axios.get(`http://localhost:8070/post/read?poid=${id}`)
+        Axios.get(`/api/post/read?poid=${id}`)
         .then((res)=>{
             setRead(res.data);
             console.log(res.data);
@@ -118,7 +118,7 @@ function BoardEdit(props){
             console.log(read);
            
             // 게시물 수정 요청
-            Axios.put(`http://localhost:8070/post/modify/${read.po_id}`, read)
+            Axios.put(`/api/post/modify/${read.po_id}`, read)
             .then((res) => {
                 console.log(res.data);
                 navigate(`/board/${read.po_id}`, { state: { board: read } });

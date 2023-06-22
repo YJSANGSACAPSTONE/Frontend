@@ -12,7 +12,7 @@ function ChallengeAll(props){
         navigate(`/challenge/${challenge.c_id}`, { state: { challenge } });
     }
     useEffect(()=>{
-        Axios.get(`http://localhost:8070/challenge/list`).then((res)=>{
+        Axios.get(`/api/challenge/list`).then((res)=>{
             console.log(res);
             setRecentlist(res.data.recentlist);
         })

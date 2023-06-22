@@ -11,7 +11,7 @@ function PointPayList(props){
     console.log(u_id);
     useEffect(()=>{        
 
-        Axios.get(`http://localhost:8070/Usage/search?uid=${u_id}`)
+        Axios.get(`/api/Usage/search?uid=${u_id}`)
         .then((res)=>{
             console.log(res);
             setPaylist(res.data);

@@ -24,7 +24,7 @@ function ChallengeRead(props){
     }
 
     const MvDelete = () => {
-        Axios.get(`http://localhost:8070/challenge/deletechallenge?c_id=${challenge.c_id}`)
+        Axios.get(`/api/challenge/deletechallenge?c_id=${challenge.c_id}`)
         .then((res)=>{
             console.log(res)
             // navigate(`/challenge`);

@@ -28,7 +28,7 @@ function ProfileInfo(props){
             u_content : u_content,
             profile_image : profile_image
         });
-        Axios.post('http://localhost:8070/user/updateuser',{
+        Axios.post('/api/user/updateuser',{
             u_id : u_id,
             u_nickname : u_nickname,
             u_zepid : u_zepid,
@@ -53,7 +53,7 @@ function ProfileInfo(props){
             window.location.href='https://kauth.kakao.com/oauth/logout?client_id=87c054c34eca4ca3541ab083e086cd12&logout_redirect_uri=http://localhost:3000/quit';
             const jwtToken = Cookies.get("accessTokenCookie");
             // 탈퇴는 현재 백엔드에서 준비중인 기능입니다
-            Axios.get(`http://localhost:8070/user/deleteuser`,{
+            Axios.get(`/api/user/deleteuser`,{
                 headers : {
                     'Authorization': `Bearer ${jwtToken}`
                 }

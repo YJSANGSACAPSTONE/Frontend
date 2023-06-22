@@ -14,7 +14,7 @@ function Quit(props){
     const {u_id, u_nickname, u_zepid, u_content, userImg, u_level, u_grade, u_img, u_successedchallenge,u_deposit} = u_info;
     useEffect(()=>{
         if(window.confirm('정말 삭제하시겠습니까?')){
-            Axios.get(`http://localhost:8070/user/deleteuser?uid=${u_id}`)
+            Axios.get(`/api/user/deleteuser?uid=${u_id}`)
             .then((res) => {
             Cookies.remove('userInfo');
             console.log(res.data); // 처리 결과 출력

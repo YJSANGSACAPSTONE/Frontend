@@ -17,7 +17,7 @@ function Challenge(props){
     }
 
     useEffect(()=>{
-        Axios.get(`http://localhost:8070/challenge/list?uid=${userInfo.u_id}`)
+        Axios.get(`/api/challenge/list?uid=${userInfo.u_id}`)
 		.then((res) => {
             console.log(res);
             setMylist(res.data.mylist);

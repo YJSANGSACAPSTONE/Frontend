@@ -14,7 +14,7 @@ function Point(props){
     const pointpay = () => {
         const u_id = userInfo.u_id;
         Cookies.set('payMoney', pay);
-        Axios.get(`http://localhost:8070/kakaopay/ready?kpamount=${pay}`,{
+        Axios.get(`/api/kakaopay/ready?kpamount=${pay}`,{
             headers : {
                 'Authorization': `Bearer ${jwtToken}`
             }

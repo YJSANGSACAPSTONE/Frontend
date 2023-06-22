@@ -38,7 +38,7 @@ function Header(){
     // }
 
     useEffect(()=>{
-        Axios.get(`http://localhost:8070/user/readuser`,{
+        Axios.get(`/api/user/readuser`,{
             headers : {
                 'Authorization': `Bearer ${jwtToken}`
             }

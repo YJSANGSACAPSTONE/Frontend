@@ -15,9 +15,9 @@ function KakaoLogin(){
         const code = url.searchParams.get("code");
         
         // console.log(url);
-        Axios.get(`http://localhost:8070/login?code=${code}`).then((res)=>{
+        Axios.get(`/api/login?code=${code}`).then((res)=>{
             console.log(res.data);
-            Axios.get(`http://localhost:8070/user/listuser?uid=${res.data.userId}`).
+            Axios.get(`/api/user/listuser?uid=${res.data.userId}`).
             then((resInner)=>{
                 console.log(resInner);
                 

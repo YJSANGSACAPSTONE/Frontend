@@ -11,7 +11,7 @@ function AdminChallenge(props){
     
     const [challengeList, setChallengeList] = useState([]);
     useEffect(() => {
-      Axios.get("http://localhost:8070/admin/challengelist")
+      Axios.get("/api/admin/challengelist")
       .then((res)=>{
         setChallengeList(res.data);
         console.log(res.data);
@@ -29,8 +29,10 @@ function AdminChallenge(props){
                         <ul>
                             <li className="admin_menu">
                                 <div className="menu_top">
-                                    <p>GODSAENG</p>
-                                    <img src="/img/logo.png" alt="logo" />
+                                    <Link to="/planner">
+                                        <p>GODSAENG</p>
+                                        <img src="/img/logo.png" alt="logo" />
+                                    </Link>
                                 </div>
                                 <hr />
                                 <div className="menu_middle">
@@ -112,13 +114,13 @@ function AdminChallenge(props){
                                         </div>
                                         <div className="list_middle">
 
-                                            {challengeList.length > 0 ? (
+                                            {/* {challengeList.length > 0 ? (
                                                 challengeList.map(challengeList => (
                                                     <ul key={challengeList.c_id}>
                                                         <li className="c_num">{challengeList.c_id}</li>
                                                         <li className="c_name">{challengeList.c_name}</li>
                                                         <li className="c_cnt">{challengeList.c_numberofparticipants}</li>
-                                                        <li className="c_type">{challengeList.c_typeofverify == 0 ? "메타버스 챌린지" : "일반 사진인증 챌린지"}</li>
+                                                        <li className="c_type">{challengeList.c_typeofverify == 1 ? "메타버스 챌린지" : "일반 사진인증 챌린지"}</li>
                                                         <li className="c_date">{challengeList.c_startdate} ~ {challengeList.c_enddate}</li>
                                                         <li>
                                                             <button onClick={()=>navigate(`/adminChallengeDetail/${challengeList.c_id}`)}>관리</button>
@@ -128,7 +130,7 @@ function AdminChallenge(props){
                                                     ))
                                             ) : (
                                                 <h3>새로운 일정을 만들어보세요!</h3>
-                                            )}
+                                            )} */}
                                             {/* <ul>
                                                 <li className="c_num">챌린지 번호</li>
                                                 <li className="c_name">챌린지명</li>

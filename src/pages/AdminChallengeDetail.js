@@ -12,16 +12,10 @@ function AdminChallengeDetail(props){
     const [selectedChallenge, setSelectedChallenge] = useState(null); // 선택된 챌린지
 
     const {id} = useParams();
-    
+
+
     useEffect(() => {
-      Axios.get(`http://localhost:8070/admin/verifylist/${id}`)
-      .then((res)=>{
-        setChallengeDetailList(res.data);
-        console.log(res.data);
-      })
-      .catch((err)=>{
-        console.log(err);
-      });
+        verifyList();
     }, []);
     
     // 팝업 열기
@@ -30,11 +24,24 @@ function AdminChallengeDetail(props){
         setShowPopup(true);
     };
     
+    const verifyList = () => {
+        Axios.get(`http://localhost:8070/admin/verifylist/${id}`)
+        .then((res)=>{
+            setChallengeDetailList(res.data);
+            console.log(res.data);
+        })
+        .catch((err)=>{
+            // 임시로 데이터가 없어 500에러 났을 때 리스트 비워주기
+            setChallengeDetailList([]);
+            console.log(err);
+        });
+    }
     const verifyButton = (cvid) => {
         Axios.get(`http://localhost:8070/admin/verifythischallenge/${cvid}`)
         .then((res)=>{
             console.log(res.data);
             setShowPopup(false);
+            verifyList();
         })
         .catch((err)=>{
             console.log(err);
@@ -55,8 +62,10 @@ function AdminChallengeDetail(props){
                         <ul>
                             <li className="admin_menu">
                                 <div className="menu_top">
-                                    <p>GODSAENG</p>
-                                    <img src="/img/logo.png" alt="logo" />
+                                    <Link to="/planner">
+                                        <p>GODSAENG</p>
+                                        <img src="/img/logo.png" alt="logo" />
+                                    </Link>
                                 </div>
                                 <hr />
                                 <div className="menu_middle">
@@ -156,7 +165,9 @@ function AdminChallengeDetail(props){
                                                     </ul>
                                                     ))
                                             ) : (
-                                                <h3>...</h3>
+                                                <ul>
+                                                    <li>...</li>
+                                                </ul>
                                             )}
                                             {/* <ul>
                                                 <li className="c_num">챌린지 번호</li>

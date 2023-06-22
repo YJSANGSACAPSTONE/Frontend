@@ -30,6 +30,7 @@ function UserProfile(props){
                         <ul>
                             <Profile/>
                             <li class="profile_info">
+                                <Link to="/adminPage"><div>관리자페이지</div></Link>
                                 <Link to="/profile/1/info"><div>계정 정보</div></Link>
                                 <Link to="/profile/1/zep"><div>ZEP ID 인증</div></Link>
                                 <Link to="/profile/1/myChallenge"><div>마이 챌린지</div></Link>

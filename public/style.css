@@ -95,7 +95,7 @@ body::-webkit-scrollbar-track {
 #sign_content .sign_form img{ width:100px; height: 100px; border-radius:50%; }
 #sign_content .sign_form input{ margin-bottom:10px;}
 
-#planner_content{ padding:50px 0; margin-bottom:200px; }
+#planner_content{ padding:50px 0; margin-bottom:100px; }
 #planner_content > div > div > ul{ display:flex; flex-wrap:wrap; }
 .planner_profile{ width:25%; position: relative; }
 .planner_profile > a > div{ display:flex; padding:10px; width:100%; justify-content:space-evenly; flex-wrap:wrap; }
@@ -632,7 +632,7 @@ body::-webkit-scrollbar-track {
   display: flex;
   align-items: center;
   grid-gap:80px;
-  font-size:20px;
+  font-size:22px;
 }
 
 .mainMenu > li {
@@ -773,6 +773,7 @@ i[class^=icon-chevron]{
 #adminPage > div > div > ul{ display:flex; flex-wrap:wrap; height:100%; }
 #adminPage .admin_menu{ width:15%; height:100%; background:#353535; color:#fff; display:flex; flex-direction:column; }
 #adminPage .admin_menu .menu_top{ font-size:40px; display:flex; padding:10px 30px; justify-content: space-between; }
+#adminPage .admin_menu .menu_top > a{ display:flex; justify-content: space-between; width:100%; }
 #adminPage .admin_menu .middle_main{ display:flex; flex-direction:column; padding:0 20px; }
 .admin_menu .menu_middle img{ width:21px; filter: brightness(0) invert(1); }
 .admin_menu .menu_middle .middle_top > div{ display:flex; align-items:center; padding:20px 20px; grid-gap:15px; font-size:22px; }

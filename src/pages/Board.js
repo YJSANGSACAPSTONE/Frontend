@@ -32,7 +32,7 @@ function Board(props){
     };
 
     const handlePageChange = (page) => {
-        Axios.get(`http://localhost:8070/post/list/${selectedCategory}?page=${page}`)
+        Axios.get(`/post/list/${selectedCategory}?page=${page}`)
         .then((res) => {
             console.log(res);
             setBoards(res.data.dtoList);
@@ -44,7 +44,7 @@ function Board(props){
   };
 
   useEffect(() => {
-    Axios.get(`http://localhost:8070/post/list/${selectedCategory}`)
+    Axios.get(`/post/list/${selectedCategory}`)
       .then((res) => {
         console.log(res);
         setBoards(res.data.dtoList);
@@ -92,7 +92,7 @@ function Board(props){
                                                     {/* <p>{boards.po_content}</p> */}
                                                     <div>1시간 전 &nbsp;&nbsp;&nbsp; 조회수 : {boards.po_hitcount}</div>
                                                     <div>
-                                                        <img src="./img/message-icon.png" alt=""/>31
+                                                        <img src="./img/message-icon.png" alt=""/> {boards.commentCnt}
                                                         &nbsp;&nbsp;&nbsp; 
                                                         {boards.u_id}
                                                     </div>

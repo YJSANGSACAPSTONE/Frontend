@@ -22,7 +22,7 @@ function ZepVerify(props){
         const jwtToken = Cookies.get("accessTokenCookie");
 		const decodedAccToken = jwt_decode(jwtToken);
 
-        Axios.get(`http://localhost:8070/user/zepidverify`,{
+        Axios.get(`/api/user/zepidverify`,{
             headers : {
                 'Authorization': `Bearer ${jwtToken}`
             }

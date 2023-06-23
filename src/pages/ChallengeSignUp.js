@@ -23,7 +23,7 @@ function ChallengeSignUp(props){
         const u_id = userInfo.u_id;
         if(window.confirm("정말 참가하시겠습니까?")){
 
-            Axios.post(`http://localhost:8070/challenge/participate?uid=${u_id}`,{
+            Axios.post(`/api/challenge/participate?uid=${u_id}`,{
                 c_name : challenge.c_name,
                 c_id : challenge.c_id,
                 c_fee : challenge.c_fee
@@ -31,7 +31,7 @@ function ChallengeSignUp(props){
             .then((res)=>{
                 if(res.data){
                     
-                    Axios.post('http://localhost:8070/Usage/save',{
+                    Axios.post('/api/Usage/save',{
                         uh_amount : challenge.c_fee,
                         uh_user : userInfo.u_id,
                         uh_challenge : challenge.c_id,

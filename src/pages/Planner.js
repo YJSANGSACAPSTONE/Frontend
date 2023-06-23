@@ -191,8 +191,8 @@ function Planner(props){
 	};
 	  
 	const deleteBtn = (e) => {
-		Axios.get(`http://localhost:8070/plan/deleteplan/${pid}`).then((res)=>{
-			Axios.get(`http://localhost:8070/plan/dailyplan`,{
+		Axios.get(`/api/plan/deleteplan/${pid}`).then((res)=>{
+			Axios.get(`/api/plan/dailyplan`,{
 				headers : {
 					'Authorization': `Bearer ${jwtToken}`
 				}
@@ -252,7 +252,7 @@ function Planner(props){
 		let u_remindornot = $("input[name=u_remindornot]").val() == "on" ? 1 : 0;
 
 		$("#listModal").css('display','none');
-			Axios.post("http://localhost:8070/plan/updateplan", 
+			Axios.post("/api/plan/updateplan", 
 			{
 				u_id : u_id,
 				p_id : pid,
@@ -267,7 +267,7 @@ function Planner(props){
 			})
 			.then(response=>{
 				console.log(response);
-				Axios.get(`http://localhost:8070/plan/dailyplan`,{
+				Axios.get(`/api/plan/dailyplan`,{
 					headers : {
 						'Authorization': `Bearer ${jwtToken}`
 					}
@@ -285,7 +285,7 @@ function Planner(props){
 		const decodedAccToken = jwt_decode(jwtToken);
 		let profile_image = decodedAccToken.profile_image;
 
-		Axios.get(`http://localhost:8070/user/readuser`,{
+		Axios.get(`/api/user/readuser`,{
 			headers : {
                 'Authorization': `Bearer ${jwtToken}`
             }
@@ -300,7 +300,7 @@ function Planner(props){
 			console.log(err);
 		});
 
-		Axios.get(`http://localhost:8070/challenge/mychallenge?uid=${u_id}`)
+		Axios.get(`/api/challenge/mychallenge?uid=${u_id}`)
         .then((res)=>{
             // console.log(res);
             setMychallenge(res.data);
@@ -443,7 +443,7 @@ function Planner(props){
 
 
 			$("#addTaskModal").css('display','none');
-			Axios.post("http://localhost:8070/plan/addplan", 
+			Axios.post("/api/plan/addplan", 
 			{
 				u_id : u_id,
 				p_title : p_title,
@@ -457,7 +457,7 @@ function Planner(props){
 			})
 			.then(response=>{
 				console.log(response);
-				Axios.get(`http://localhost:8070/plan/dailyplan`,{
+				Axios.get(`/api/plan/dailyplan`,{
 					headers : {
 						'Authorization': `Bearer ${jwtToken}`
 					}

@@ -16,7 +16,7 @@ function MyChallenge(props){
     const now4 = 10;
 
     useEffect(()=>{
-        Axios.get(`http://localhost:8070/challenge/mychallenge?uid=${uid}`)
+        Axios.get(`/api/challenge/mychallenge?uid=${uid}`)
         .then((res)=>{
             console.log(res);
             setMychallenge(res.data);

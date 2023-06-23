@@ -32,7 +32,7 @@ function Board(props){
     };
 
     const handlePageChange = (page) => {
-        Axios.get(`/post/list/${selectedCategory}?page=${page}`)
+        Axios.get(`/api/post/list/${selectedCategory}?page=${page}`)
         .then((res) => {
             console.log(res);
             setBoards(res.data.dtoList);
@@ -44,7 +44,7 @@ function Board(props){
   };
 
   useEffect(() => {
-    Axios.get(`/post/list/${selectedCategory}`)
+    Axios.get(`/api/post/list/${selectedCategory}`)
       .then((res) => {
         console.log(res);
         setBoards(res.data.dtoList);

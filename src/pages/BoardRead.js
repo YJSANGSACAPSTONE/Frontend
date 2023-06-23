@@ -36,7 +36,7 @@ function BoardRead(props){
 
 
     const readPost = () => {
-        Axios.get(`http://localhost:8070/post/read?poid=${board.po_id}`)
+        Axios.get(`/api/post/read?poid=${board.po_id}`)
         .then((res)=>{
             setRead(res.data);
             // console.log(res.data);
@@ -48,7 +48,7 @@ function BoardRead(props){
     
     useEffect(()=>{
         readPost();
-        Axios.get(`http://localhost:8070/post/liked/${board.po_id}/${userInfo.u_id}`)
+        Axios.get(`/api/post/liked/${board.po_id}/${userInfo.u_id}`)
         .then((res)=>{setLiked(res.data)})
         .catch((err)=>{console.log(err)});
 
@@ -57,7 +57,7 @@ function BoardRead(props){
     }, []);
 
     const commentLoading = () => {
-        Axios.get(`http://localhost:8070/comments/${board.po_id}/all`)
+        Axios.get(`/api/comments/${board.po_id}/all`)
         .then((res)=>{
             console.log(res.data);
             setCommentList(res.data);
@@ -69,7 +69,7 @@ function BoardRead(props){
 
     const commentWrite = (postId) => {
         console.log("post ID : " + postId + ", comm_text : " + commentText + ", u_id : " + userInfo.u_id);
-        Axios.post(`http://localhost:8070/comments/${postId}`, {
+        Axios.post(`/api/comments/${postId}`, {
             u_id : userInfo.u_id,
             comm_text : commentText,
             po_id: postId
@@ -87,7 +87,7 @@ function BoardRead(props){
 
     const deletePost = (postId) => {
         if(window.confirm("게시글을 삭제하시겠습니까?")){
-            Axios.delete(`http://localhost:8070/post/remove/${postId}`)
+            Axios.delete(`/api/post/remove/${postId}`)
             .then((res) => {
                 console.log(res);
                 navigate('/board');
@@ -101,7 +101,7 @@ function BoardRead(props){
 
     const likeBtn = (postId) => {
         console.log("postID : " + postId + " uid : " + userInfo.u_id);
-        Axios.post(`http://localhost:8070/post/like/${postId}`, {
+        Axios.post(`/api/post/like/${postId}`, {
             uid : userInfo.u_id
         })
         .then((res)=>{
@@ -133,7 +133,7 @@ function BoardRead(props){
 
     const commentDelete = (commId) => {
         if(window.confirm("정말 삭제하시겠습니까?")){
-            Axios.delete(`http://localhost:8070/comments/${board.po_id}/${commId}`)
+            Axios.delete(`/api/comments/${board.po_id}/${commId}`)
             .then((res)=>{
                 commentLoading();
                 readPost();
@@ -152,7 +152,7 @@ function BoardRead(props){
         // 완료 버튼을 클릭한 경우
         if (editedCommentText.trim() !== '') {
             // 수정된 댓글 내용이 비어 있지 않은 경우
-            Axios.put(`http://localhost:8070/comments/${board.po_id}/${commentId}`, {
+            Axios.put(`/api/comments/${board.po_id}/${commentId}`, {
             comm_text: editedCommentText
             })
             .then((res) => {

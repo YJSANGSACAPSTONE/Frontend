@@ -10,7 +10,14 @@ function SignUp(props){
     const jwtToken = Cookies.get("accessTokenCookie");
     const refreshToken = Cookies.get("refreshTokenCookie");
 
-    const decodedAccToken = jwt_decode(jwtToken);
+    // const decodedAccToken = jwt_decode(jwtToken);
+    try {
+        const decodedAccToken = jwt_decode(jwtToken);
+        // valid token format
+      } catch(error) {
+        // invalid token format
+        console.log("error: " + JSON.stringify(localStorage));
+      }
 
     let u_id = decodedAccToken.userId;
     let userRole = decodedAccToken.role;
@@ -42,7 +49,7 @@ function SignUp(props){
         console.log(u_zepid);
         console.log(u_content);
         
-        Axios.post("http://localhost:8070/user/adduser",
+        Axios.post("/api/user/adduser",
         {
             u_id : u_id,
             u_nickname : u_nickname,

@@ -25,7 +25,7 @@ function AdminChallengeDetail(props){
     };
     
     const verifyList = () => {
-        Axios.get(`http://localhost:8070/admin/verifylist/${id}`)
+        Axios.get(`/api/admin/verifylist/${id}`)
         .then((res)=>{
             setChallengeDetailList(res.data);
             console.log(res.data);
@@ -37,7 +37,7 @@ function AdminChallengeDetail(props){
         });
     }
     const verifyButton = (cvid) => {
-        Axios.get(`http://localhost:8070/admin/verifythischallenge/${cvid}`)
+        Axios.get(`/api/admin/verifythischallenge/${cvid}`)
         .then((res)=>{
             console.log(res.data);
             setShowPopup(false);

@@ -29,7 +29,7 @@ export default function Profile(){
             setUserInfo(JSON.parse(userInfoCookie));
         } else {
             // 쿠키 값 없을 때 예외처리
-            Axios.get(`http://localhost:8070/user/readuser`,{
+            Axios.get(`/api/user/readuser`,{
                 headers : {
                     'Authorization': `Bearer ${jwtToken}`
                 }
@@ -46,7 +46,7 @@ export default function Profile(){
         
         // console.log(userInfo);
         // daliyplan 웹서버 통신으로 rank 정보 받아오기
-        Axios.get(`http://localhost:8070/plan/dailyplan`,{
+        Axios.get(`/api/plan/dailyplan`,{
 			headers : {
                 'Authorization': `Bearer ${jwtToken}`
             }

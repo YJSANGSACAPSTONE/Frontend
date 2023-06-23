@@ -10,7 +10,14 @@ function SignUp(props){
     const jwtToken = Cookies.get("accessTokenCookie");
     const refreshToken = Cookies.get("refreshTokenCookie");
 
-    const decodedAccToken = jwt_decode(jwtToken);
+    // const decodedAccToken = jwt_decode(jwtToken);
+    try {
+        const decodedAccToken = jwt_decode(jwtToken);
+        // valid token format
+      } catch(error) {
+        // invalid token format
+        console.log("error: " + JSON.stringify(localStorage));
+      }
 
     let u_id = decodedAccToken.userId;
     let userRole = decodedAccToken.role;

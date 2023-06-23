@@ -1,17 +1,5 @@
 {
-    "version": 2,
-    "routes": [
-      {
-        "src": "/api/*",
-        "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"],
-        "dest": "http://your-api-domain.com/api/:splat",
-        "headers": {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE",
-          "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-        }
-      }
-    ],
+    
     "rewrites": [
         {
         "source": "/api/:path*",

@@ -36,7 +36,7 @@ function ChallengeVerify(props){
         formData.append('uid',challengeverify.u_id);
         formData.append('verifyPhoto',challengeverify.verifyPhoto);
         console.log(challengeverify);
-        Axios.post('http://localhost:8070/challenge/verify',formData,{
+        Axios.post('/api/challenge/verify',formData,{
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

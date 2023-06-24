@@ -41,7 +41,7 @@ function ChallengeUpdate(props){
 
         console.log(challengeData);
 
-        Axios.post('http://localhost:8070/challenge/updatechallenge',formData,{
+        Axios.post('/api/challenge/updatechallenge',formData,{
             headers : {
                 'Content-Type':'multipart/form-data'
             }

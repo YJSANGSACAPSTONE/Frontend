@@ -45,7 +45,7 @@ function BoardWrite(props){
             formData.append("uploadFiles", board.uploadFiles[i]);
           }
       
-          Axios.post('http://localhost:8070/uploadAjax', formData)
+          Axios.post('/api/uploadAjax', formData)
             .then((res) => {
               console.log(res);
               const path = "/img/boardimgtemp/" + res.data[0].folderPath;
@@ -82,7 +82,7 @@ const performAdditionalActions = (updatedImageDTOList) => {
       imageDTOList: updatedImageDTOList.length > 0 ? updatedImageDTOList : null
     };
   
-    Axios.post("http://localhost:8070/post/register", postData)
+    Axios.post("/api/post/register", postData)
       .then((res) => {
         navigate("/board");
       })

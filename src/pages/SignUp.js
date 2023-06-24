@@ -42,7 +42,7 @@ function SignUp(props){
         console.log(u_zepid);
         console.log(u_content);
         
-        Axios.post("http://localhost:8070/user/adduser",
+        Axios.post("/api/user/adduser",
         {
             u_id : u_id,
             u_nickname : u_nickname,

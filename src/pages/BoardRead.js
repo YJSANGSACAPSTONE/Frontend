@@ -238,7 +238,7 @@ function BoardRead(props){
                                                 {read.imageDTOList && read.imageDTOList.length > 0 ? (
                                                 <img
                                                     className="boardReadImg"
-                                                    src={`http://localhost:8070${read.imageDTOList[0]?.path}/${read.imageDTOList[0]?.imgName}`}
+                                                    src={`https://godsaengplanner.com${read.imageDTOList[0]?.path}/${read.imageDTOList[0]?.imgName}`}
                                                     alt=""
                                                 />
                                                 ) : null}

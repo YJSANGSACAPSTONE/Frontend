@@ -310,7 +310,7 @@ function Planner(props){
         });
 
 		// 첫 페이지 로딩 후 Axios를 통해서 오늘 날짜 plan 받아오는 것
-		Axios.get(`/plan/dailyplan`,{
+		Axios.get(`/api/plan/dailyplan`,{
 			headers : {
                 'Authorization': `Bearer ${jwtToken}`
             }

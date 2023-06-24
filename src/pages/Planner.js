@@ -281,6 +281,8 @@ function Planner(props){
 	}
 	
     useEffect(() => {
+		const domainAddress = process.env.REACT_APP_DOMAIN_ADDRESS;
+		console.log(domainAddress);
 		const jwtToken = Cookies.get("accessTokenCookie");
 		const decodedAccToken = jwt_decode(jwtToken);
 		let profile_image = decodedAccToken.profile_image;

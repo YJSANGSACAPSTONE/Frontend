@@ -560,7 +560,7 @@ function Planner(props){
 								</div>
 								<div class="planner_ls">
                                     <ul>
-										{plans.length > 0 ? (
+										{plans && plans.length > 0 ? (
 											plans.map(plan => (
 												<li 
 													key={plan.p_id} 

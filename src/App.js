@@ -42,6 +42,7 @@ function App() {
 	const [plans, setPlans]=useState([]);
 
 	useEffect(()=>{
+			//
 			// subFooter
 			// $(window).on('resize', updateSubFooterPosition);
 

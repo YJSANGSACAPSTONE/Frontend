@@ -48,8 +48,7 @@ function ChallengeWrite(props){
             const fileName = selectedFile.name;
             console.log(fileName);
             const res = await Axios.get('/api/s3upload/s3', {
-              params: { fileName : fileName },
-              withCredentials: true
+              params: { fileName : fileName }
             });
             console.log(res.data);
             const encodedFileName = res.data.encodedFileName;
@@ -58,6 +57,7 @@ function ChallengeWrite(props){
             console.log("encodedFileName : "+encodedFileName);
             console.log("presignedUrl : "+preSignedUrl);
             console.log("selectedFile type : "+selectedFile.type);
+
             
             await Axios.put(preSignedUrl, selectedFile, {
                 headers: {

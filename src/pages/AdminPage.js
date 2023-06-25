@@ -106,8 +106,8 @@ function AdminPage(props){
 
 
             setMonthCount(randData[randData.length - 1]);
-            const parsedRandData = randData.map(value => parseInt(value));
-            const average = parsedRandData.reduce((a, b) => a + b, 0) / (parsedRandData.length - 1);
+            const parsedRandData = randData.slice(1).map(value => parseInt(value));
+            const average = parsedRandData.reduce((a, b) => a + b, 0) / parsedRandData.length;
             const total = parsedRandData.reduce((a, b) => a + b, 0);
 
             setAverageCount(Math.round(average));

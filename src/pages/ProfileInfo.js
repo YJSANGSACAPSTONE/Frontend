@@ -20,33 +20,74 @@ function ProfileInfo(props){
     const [u_info, setU_info] = useState(JSON.parse(userInfo));
     const {u_id, u_nickname, u_zepid, u_content, userImg, u_level, u_grade, u_img, u_successedchallenge,u_deposit} = u_info;
 
-    const updateUser = () => {
-        console.log({
-            u_id : u_id,
-            u_nickname : u_nickname,
-            u_zepid : u_zepid,
-            u_content : u_content,
-            profile_image : profile_image
-        });
-        Axios.post('http://localhost:8070/user/updateuser',{
-            u_id : u_id,
-            u_nickname : u_nickname,
-            u_zepid : u_zepid,
-            u_content : u_content,
-            profile_image : profile_image
-        },{
-            headers : {
-                'Authorization': `Bearer ${jwtToken}`
+    // 오류 처리 및 액세스 토큰 재발급 함수
+    async function handleTokenExpiration(error, refreshToken) {
+        // 에러 메시지 확인
+        if (error.message === 'Invalid token specified') {
+        // 액세스 토큰 만료 오류인 경우
+    
+        // 리프레시 토큰을 사용하여 액세스 토큰 재발급
+        try {
+            const response = await Axios.post('/api/v1/token', null, {
+            headers: {
+                'Authorization-refresh': refreshToken
             }
-        })
-        .then((res)=>{
-            Cookies.set('userInfo', JSON.stringify(u_info));
-            history('/profile');
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-    };
+            });
+            const newAccessToken = response.data.accessToken;
+    
+            // 재발급된 액세스 토큰을 저장하고, 원래 요청을 재시도
+            // 예: localStorage에 액세스 토큰을 저장한 후 다시 API 요청 수행
+            // ...
+    
+        } catch (refreshError) {
+            // 액세스 토큰 재발급 실패 처리
+            console.error('Failed to refresh access token:', refreshError);
+            // 예: 로그인 페이지로 리디렉션 또는 오류 메시지 표시 등
+            // ...
+        }
+        } else {
+        // 다른 오류 처리
+        console.error('API request failed:', error);
+        // 예: 오류 메시지 표시 등
+        // ...
+        }
+    }
+
+    const updateUser = async () => {
+        console.log({
+          u_id: u_id,
+          u_nickname: u_nickname,
+          u_zepid: u_zepid,
+          u_content: u_content,
+          profile_image: profile_image
+        });
+      
+        try {
+          await Axios.post(
+            'http://localhost:8070/user/updateuser',
+            {
+              u_id: u_id,
+              u_nickname: u_nickname,
+              u_zepid: u_zepid,
+              u_content: u_content,
+              profile_image: profile_image
+            },
+            {
+              headers: {
+                'Authorization': `Bearer ${jwtToken}`
+              }
+            }
+          );
+      
+          Cookies.set('userInfo', JSON.stringify(u_info));
+          history('/profile');
+        } catch (error) {
+          // 오류 처리 및 액세스 토큰 재발급
+          await handleTokenExpiration(error, refreshToken);
+          // 재발급 후 원래 요청을 다시 시도
+          // ...
+        }
+      };
     
     const deleteUser = () =>{
         if(window.confirm("정말 탈퇴하시겠습니까?")){
@@ -73,56 +114,6 @@ function ProfileInfo(props){
 
     useEffect(() => {
         setProfile_image(decodedAccToken.profile_image);
-    
-        // axios 인터셉터를 사용하여 토큰 만료 오류 처리
-        const axiosInterceptor = Axios.interceptors.response.use(
-          response => response,
-          error => {
-            const originalRequest = error.config;
-    
-            // 에러 메시지 확인
-            if (error.message === 'Invalid token specified') {
-              // 액세스 토큰 만료 오류인 경우
-              const handleTokenExpiration = async () => {
-                try {
-                  const response = await Axios.post('/api/v1/token', null, {
-                    headers: {
-                      'Authorization-refresh': refreshToken
-                    }
-                  });
-                  const newAccessToken = response.data.accessToken;
-    
-                  // 재발급된 액세스 토큰을 저장하고, 원래 요청을 재시도
-                  // 예: localStorage에 액세스 토큰을 저장한 후 다시 API 요청 수행
-                  // ...
-    
-                  // 원래 요청을 재시도하기 위해 axios 설정 변경
-                  originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-                  return Axios(originalRequest);
-                } catch (refreshError) {
-                  // 액세스 토큰 재발급 실패 처리
-                  console.error('Failed to refresh access token:', refreshError);
-                  // 예: 로그인 페이지로 리디렉션 또는 오류 메시지 표시 등
-                  // ...
-                }
-              };
-    
-              return handleTokenExpiration();
-            } else {
-              // 다른 오류 처리
-              console.error('API request failed:', error);
-              // 예: 오류 메시지 표시 등
-              // ...
-            }
-    
-            return Promise.reject(error);
-          }
-        );
-    
-        return () => {
-          // 컴포넌트가 unmount될 때 axios 인터셉터 제거
-          Axios.interceptors.response.eject(axiosInterceptor);
-        };
       }, []);
 
     return(

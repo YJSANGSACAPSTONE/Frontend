@@ -18,7 +18,7 @@ function ChallengeVerify(props){
         c_id : challenge.c_id,
         u_id : userInfo.u_id,
         verifyPhotoFile : null,
-        verifyPhoto : ""
+        cvphoto : ""
       });
 
       const handleChange = (e) => {
@@ -55,7 +55,11 @@ function ChallengeVerify(props){
             console.log("encodedFileName : "+encodedFileName);
             console.log("presignedUrl : "+preSignedUrl);
             console.log("selectedFile type : "+selectedFile.type);
-            setChallengeverify(prevState=>({...prevState, ["verifyPhoto"] : encodedFileName}));
+
+            setChallengeverify((prevState) => ({
+                ...prevState,
+                ["cvphoto"]: encodedFileName,
+              }));
             
             await Axios.put(preSignedUrl, selectedFile, {
                 headers: {

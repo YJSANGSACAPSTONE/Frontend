@@ -9,7 +9,8 @@ import jwt_decode from 'jwt-decode';
 function SignUp(props){
     const jwtToken = Cookies.get("accessTokenCookie");
     const refreshToken = Cookies.get("refreshTokenCookie");
-
+    // accessTokenCookie 안에 담겨있는 권한 설정으로 admin이 아닐경우 "현재 테스트 모듈"
+    
     const decodedAccToken = jwt_decode(jwtToken);
 
     let u_id = decodedAccToken.userId;

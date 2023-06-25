@@ -4,10 +4,11 @@ import Profile from '../components/Profile';
 import $ from 'jquery';
 import c3 from 'c3';
 import Axios from "axios";
+import Cookies from 'js-cookie';
 
 function AdminPage(props){
     const [chartData, setChartData] = useState([]); // 차트 데이터 상태 변수
-    
+    const jwtToken = Cookies.get("accessTokenCookie");
     const [monthCount, setMonthCount] = useState("");
     const [averageCount, setAverageCount] = useState("");
     const [allCount, setAllCount] = useState("");
@@ -85,7 +86,11 @@ function AdminPage(props){
         const dateData = ['x'];
         const randData = ['data1'];
         
-        await Axios.get(`/api/admin/statistic`)
+        await Axios.get(`/api/admin/statistic`,{
+			headers : {
+				'Authorization': `Bearer ${jwtToken}`
+			}
+		})
         .then((res)=>{
             console.log(res.data.monthlyList);
 

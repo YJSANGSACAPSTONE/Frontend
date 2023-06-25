@@ -4,14 +4,19 @@ import Profile from '../components/Profile';
 import $ from 'jquery';
 import c3 from 'c3';
 import Axios from "axios";
+import Cookies from 'js-cookie';
 
 function AdminChallenge(props){
 
     const navigate = useNavigate();
-    
+    const jwtToken = Cookies.get("accessTokenCookie");
     const [challengeList, setChallengeList] = useState([]);
     useEffect(() => {
-      Axios.get("/api/admin/challengelist")
+      Axios.get("/api/admin/challengelist",{
+        headers : {
+            'Authorization': `Bearer ${jwtToken}`
+        }
+    })
       .then((res)=>{
         setChallengeList(res.data);
         console.log(res.data);

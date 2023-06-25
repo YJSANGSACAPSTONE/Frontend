@@ -4,9 +4,10 @@ import Profile from '../components/Profile';
 import $ from 'jquery';
 import c3 from 'c3';
 import Axios from "axios";
+import Cookies from 'js-cookie';
 
 function AdminChallengeDetail(props){
-    
+    const jwtToken = Cookies.get("accessTokenCookie");
     const [challengeDetailList, setChallengeDetailList] = useState([]);
     const [showPopup, setShowPopup] = useState(false); // 팝업 표시 여부
     const [selectedChallenge, setSelectedChallenge] = useState(null); // 선택된 챌린지
@@ -25,7 +26,11 @@ function AdminChallengeDetail(props){
     };
     
     const verifyList = () => {
-        Axios.get(`/api/admin/verifylist/${id}`)
+        Axios.get(`/api/admin/verifylist/${id}`,{
+			headers : {
+				'Authorization': `Bearer ${jwtToken}`
+			}
+		})
         .then((res)=>{
             setChallengeDetailList(res.data);
             console.log(res.data);
@@ -37,7 +42,11 @@ function AdminChallengeDetail(props){
         });
     }
     const verifyButton = (cvid) => {
-        Axios.get(`/api/admin/verifythischallenge/${cvid}`)
+        Axios.get(`/api/admin/verifythischallenge/${cvid}`,{
+			headers : {
+				'Authorization': `Bearer ${jwtToken}`
+			}
+		})
         .then((res)=>{
             console.log(res.data);
             setShowPopup(false);

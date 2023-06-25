@@ -53,7 +53,11 @@ function ChallengeWrite(props){
       
             const encodedFileName = res.data.encodedFileName;
             const presignedUrl = res.data.presignedUrl;
-      
+            
+            console.log("encodedFileName : "+encodedFileName);
+            console.log("presignedUrl : "+presignedUrl);
+            console.log("selectedFile : "+selectedFile);
+
             await Axios.put(presignedUrl, selectedFile);
             console.log('이미지 업로드 완료');
       

@@ -49,6 +49,7 @@ function ChallengeWrite(props){
             console.log(fileName);
             const res = await Axios.get('/api/s3upload/s3', {
               params: { fileName : fileName },
+              withCredentials: true
             });
             console.log(res.data);
             const encodedFileName = res.data.encodedFileName;
@@ -58,7 +59,7 @@ function ChallengeWrite(props){
             console.log("presignedUrl : "+preSignedUrl);
             console.log("selectedFile : "+selectedFile);
 
-            await Axios.put(preSignedUrl, selectedFile);
+            await Axios.put(preSignedUrl, selectedFile, { withCredentials: true });
             console.log('이미지 업로드 완료');
       
             // const formData = new FormData();

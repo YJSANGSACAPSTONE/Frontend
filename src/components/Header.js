@@ -84,16 +84,16 @@ function Header(){
                                     </ul>
                                 </li>
                                 <li>
-                                    <Link to="/services">서비스 소개</Link>
+                                    <Link to="/service">서비스 소개</Link>
                                     <ul class="subMenu">
                                         <li>
-                                            <Link to="/services/meta">메타버스 챌린지 소개</Link>
+                                            <Link to="/service/meta">메타버스 챌린지 소개</Link>
                                         </li>
                                         <li>
-                                            <Link to="/services/zepetto">제페토 소개</Link>
+                                            <Link to="/service/zepetto">제페토 소개</Link>
                                         </li>
                                         <li>
-                                            <Link to="/services/intro">서비스 소개</Link>
+                                            <Link to="/service/intro">서비스 소개</Link>
                                         </li>
                                     </ul>
                                 </li>

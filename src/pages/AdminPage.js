@@ -100,6 +100,7 @@ function AdminPage(props){
         const data = [];
         const dateData = ['x'];
         const randData = ['data1'];
+        const randData2 = ['data2'];
 
         // 더미데이터 테스트용
         const startDate = new Date('2023-01-01');
@@ -116,27 +117,21 @@ function AdminPage(props){
             randData.push(getRandomCount()); // 실제 차트 데이터에도 날짜와 랜덤한 인증 횟수를 push
         }
         
-        // Axios.get(`/api/admin/statistic`)
-        // .then((res)=>{
-        //     console.log(res.data.monthlyList);
+        Axios.get(`/api/admin/statistic`)
+        .then((res)=>{
+            console.log(res.data.monthlyList);
 
-        //     const monthlyList = res.data.monthlyList;
-        //     Object.values(monthlyList).forEach((value) => {
-        //         console.log(value);
-        //         randData.push(value);
-        //     });
+            const monthlyList = res.data.monthlyList;
+            Object.values(monthlyList).forEach((value) => {
+                console.log(value);
+                randData2.push(value);
+            });
 
-        //     data.push(dateData);
-        //     data.push(randData);
-        //     console.log(data);
-            
-            
-
-        //     return data;
-        // })
-        // .catch((err)=>{
-        //     console.log(err);
-        // });
+            console.log(randData2);
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
 
         data.push(dateData);
         data.push(randData);

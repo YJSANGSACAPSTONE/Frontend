@@ -7,9 +7,11 @@ import Axios from "axios";
 
 function AdminPage(props){
     const [chartData, setChartData] = useState([]); // 차트 데이터 상태 변수
-    const [monthCount, setMonthCount] = useState([]);
-    const [averageCount, setAverageCount] = useState([]);
-    const [allCount, setAllCount] = useState([]);
+    
+    const [monthCount, setMonthCount] = useState("");
+    const [averageCount, setAverageCount] = useState("");
+    const [allCount, setAllCount] = useState("");
+
     useEffect(() =>{
         getTotalData();
     }, []);
@@ -60,18 +62,6 @@ function AdminPage(props){
           },
         });
       };
-
-    
-//   오늘 날짜에서 시간별 인증 횟수 통계 차트
-  const drawChartToTime = (data) => {
-    c3.generate({
-      bindto: '#chart',
-      data: {
-        columns: data,
-        type:'spline'
-      },
-    });
-  };
   
     // 통계 요약 업데이트
     const updateSummary = (count) => {
@@ -127,6 +117,8 @@ function AdminPage(props){
                 dateData.push(formattedDate); // x축 데이터를 담는 배열에 날짜를 push
                 randData.push(parseInt(value));
             });
+
+            setMonthCount();
 
         })
         .catch((err)=>{

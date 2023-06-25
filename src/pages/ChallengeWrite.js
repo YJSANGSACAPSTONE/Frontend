@@ -47,7 +47,7 @@ function ChallengeWrite(props){
       
             const filename = selectedFile.name;
       
-            const res = await Axios.get('/api/s3', {
+            const res = await Axios.get('/api/api/s3', {
               params: { filename },
             });
       

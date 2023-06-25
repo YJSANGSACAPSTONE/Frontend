@@ -88,6 +88,8 @@ body::-webkit-scrollbar-track {
 #subHeader > div > div > ul .sub_logo > *{ display:inline-block; vertical-align: middle; }
 #subHeader > div > div > ul .sub_logo > p{ font-size:30px; color:#fff; font-weight:bold; }
 #subHeader > div > div > ul .sub_burger{ display:flex; flex-direction: column; justify-content: center; }
+#subHeader > div > div > ul .sub_burger button{ padding:15px 50px; background:none; border:solid 1px #fff; color:#fff; font-size:30px; border-radius:10px; transition:all .2s ease-in-out; }
+#subHeader > div > div > ul .sub_burger button:hover{ background:#fff; color:#4c6ef5; }
 
 #sign_content{ padding: 60px 0; }
 #sign_content ul li{ padding:20px 0;}

@@ -28,16 +28,10 @@ function Header(){
     // 현재 URL 이 planner 일 때만 이 axios 통신 해서 쿠키에 사용자 관련 정보들을 집어넣을 수 있게 if 문으로 설정
     const currentURL = window.location.pathname;
     const history = useNavigate();
-    // try {
-    //     userInfo = JSON.parse(Cookies.get('userInfo'));
-    // } catch (error) {
-    //     // 예외 처리 코드
-    //     console.error('userInfo가 존재하지 않거나 파싱할 수 없습니다.', error);
-    //     // userInfo를 기본값으로 설정하거나 다른 처리를 수행할 수 있습니다.
-    //     // 예를 들어, userInfo를 빈 객체로 초기화하려면 다음과 같이 할 수 있습니다.
-    //     userInfo = {};
-    // }
 
+    const handleButtonClick = () => {
+        window.open('https://zep.us/play/8J6PRM', '_blank');
+    };
     useEffect(()=>{
         console.log(userRole);
         if(userRole != "ADMIN"){
@@ -129,9 +123,10 @@ function Header(){
                         </li>
 
                         <li class="sub_burger">
+                            <button onClick={handleButtonClick}>메타버스로 이동</button>
+                            {/* <span></span>
                             <span></span>
-                            <span></span>
-                            <span></span>
+                            <span></span> */}
                         </li>
                     </ul>
                 </div>

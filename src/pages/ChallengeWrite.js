@@ -58,7 +58,7 @@ function ChallengeWrite(props){
             console.log("presignedUrl : "+preSignedUrl);
             console.log("selectedFile : "+selectedFile);
 
-            await Axios.put(presignedUrl, selectedFile);
+            await Axios.put(preSignedUrl, selectedFile);
             console.log('이미지 업로드 완료');
       
             const formData = new FormData();

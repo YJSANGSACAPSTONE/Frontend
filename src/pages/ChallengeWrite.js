@@ -58,7 +58,8 @@ function ChallengeWrite(props){
             console.log("encodedFileName : "+encodedFileName);
             console.log("presignedUrl : "+preSignedUrl);
             console.log("selectedFile type : "+selectedFile.type);
-
+            // setChallenge(prevState=>({...prevState, ["c_thumbnails"] : encodedFileName}));
+            challengeData.c_thumbnails = encodedFileName;
             
             await Axios.put(preSignedUrl, selectedFile, {
                 headers: {
@@ -67,7 +68,7 @@ function ChallengeWrite(props){
             });
             console.log('이미지 업로드 완료');
 
-            setChallenge(prevState=>({...prevState, ["c_thumbnails"] : encodedFileName}));
+            
       
             console.log(challengeData);
       

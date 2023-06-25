@@ -57,8 +57,8 @@ function ChallengeWrite(props){
             
             console.log("encodedFileName : "+encodedFileName);
             console.log("presignedUrl : "+preSignedUrl);
-            console.log("selectedFile : "+selectedFile);
-
+            console.log("selectedFile type : "+selectedFile.type);
+            
             await Axios.put(preSignedUrl, selectedFile, {
                 headers: {
                     'Content-Type': selectedFile.type

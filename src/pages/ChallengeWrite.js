@@ -45,10 +45,10 @@ function ChallengeWrite(props){
               return;
             }
       
-            const filename = selectedFile.name;
-      
+            const fileName = selectedFile.name;
+            
             const res = await Axios.get('/api/s3upload/s3', {
-              params: { filename },
+              params: { fileName },
             });
       
             const encodedFileName = res.data.encodedFileName;

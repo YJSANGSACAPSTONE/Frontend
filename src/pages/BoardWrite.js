@@ -37,41 +37,78 @@ function BoardWrite(props){
         navigate('/board');
     }
     
-    const boardSubmit = () => {
-        const formData = new FormData();
-      
-        if (board.uploadFiles != null) {
-          for (let i = 0; i < board.uploadFiles.length; i++) {
-            formData.append("uploadFiles", board.uploadFiles[i]);
-          }
-      
-          Axios.post('/api/uploadAjax', formData)
-            .then((res) => {
-              console.log(res);
-              const path = "/img/boardimgtemp/" + res.data[0].folderPath;
-              const unifiedPath = path.replace(/\\/g, "/");
-              const uuid = res.data[0].uuid;
-              const fileName = uuid + "_" + res.data[0].fileName;
-      
-              setBoard(prevState => {
-                const updatedImageDTOList = [...prevState.imageDTOList, { path: unifiedPath, imgName: fileName, uuid: uuid }];
-                
-                // 사진 업로드가 완료된 후에 아래 코드 실행
-                performAdditionalActions(updatedImageDTOList);
-      
-                return {
-                  ...prevState,
-                  imageDTOList: updatedImageDTOList
-                };
-              });
-            })
-            .catch((err) => {
-              console.log(err);
+    const boardSubmit = async () => {      
+
+        try {
+            const selectedFile = board.uploadFiles;
+
+            const res = await Axios.get('/api/s3upload/s3', {
+              params: { size : selectedFile.length }
             });
-        } else {
-          // 사진이 없는 경우 바로 아래 코드 실행
-          performAdditionalActions([]);
-        }
+            console.log(res.data);
+            const encodedFileName = res.data.encodedFileName;
+            const preSignedUrl = res.data.preSignedUrl;
+            
+            console.log("encodedFileName : "+encodedFileName);
+            console.log("presignedUrl : "+preSignedUrl);
+
+            
+            
+            // await Axios.put(preSignedUrl, selectedFile, {
+            //     headers: {
+            //         'Content-Type': selectedFile.type
+            //     }
+            // });
+            // console.log('이미지 업로드 완료');
+
+            
+      
+            // console.log(challengeData);
+      
+            // await Axios.post('/api/challenge/addchallenge', challengeData);
+      
+            // console.log('챌린지 등록 완료');
+            // history('/challenge');
+          } catch (error) {
+            console.error('이미지 업로드 오류:', error);
+          }
+
+
+
+        // if (board.uploadFiles != null) {
+        //   for (let i = 0; i < board.uploadFiles.length; i++) {
+        //     formData.append("uploadFiles", board.uploadFiles[i]);
+        //   }
+      
+        //   Axios.post('/api/uploadAjax', formData)
+        //     .then((res) => {
+        //       console.log(res);
+        //       const path = "/img/boardimgtemp/" + res.data[0].folderPath;
+        //       const unifiedPath = path.replace(/\\/g, "/");
+        //       const uuid = res.data[0].uuid;
+        //       const fileName = uuid + "_" + res.data[0].fileName;
+      
+        //       setBoard(prevState => {
+        //         const updatedImageDTOList = [...prevState.imageDTOList, { path: unifiedPath, imgName: fileName, uuid: uuid }];
+                
+        //         // 사진 업로드가 완료된 후에 아래 코드 실행
+        //         performAdditionalActions(updatedImageDTOList);
+      
+        //         return {
+        //           ...prevState,
+        //           imageDTOList: updatedImageDTOList
+        //         };
+        //       });
+        //     })
+        //     .catch((err) => {
+        //       console.log(err);
+        //     });
+
+        
+        // } else {
+        //   // 사진이 없는 경우 바로 아래 코드 실행
+        //   performAdditionalActions([]);
+        // }
       };
 
     // 사진 업로드 이후에 실행할 추가 작업을 수행하는 함수

@@ -12,7 +12,7 @@ function AdminChallenge(props){
     const [challengeList, setChallengeList] = useState([]);
     useEffect(() => {
         console.log(123);
-      Axios.get("/admin/challengelist")
+      Axios.get("http://localhost:8070/admin/challengelist")
       .then((res)=>{
         setChallengeList(res.data);
         console.log(res.data);
@@ -115,7 +115,7 @@ function AdminChallenge(props){
                                         </div>
                                         <div className="list_middle">
 
-                                            {/* {challengeList.length > 0 ? (
+                                            {challengeList.length > 0 ? (
                                                 challengeList.map(challengeList => (
                                                     <ul key={challengeList.c_id}>
                                                         <li className="c_num">{challengeList.c_id}</li>
@@ -131,7 +131,7 @@ function AdminChallenge(props){
                                                     ))
                                             ) : (
                                                 <h3>새로운 일정을 만들어보세요!</h3>
-                                            )} */}
+                                            )}
                                             {/* <ul>
                                                 <li className="c_num">챌린지 번호</li>
                                                 <li className="c_name">챌린지명</li>

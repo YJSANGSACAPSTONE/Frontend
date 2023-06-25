@@ -8,15 +8,21 @@ import Axios from "axios";
 function AdminPage(props){
     const [chartData, setChartData] = useState([]); // 차트 데이터 상태 변수
 
+    useEffect(() =>{
+        getTotalData();
+    }, []);
+    
+
     useEffect(() => {
       // 초기 차트 그리기
-      drawChart(getTotalData());
+      
+      drawChart(chartData);
   
       // 클릭 이벤트 핸들러 등록
       document.getElementById('today-btn').addEventListener('click', handleTodayClick);
       document.getElementById('weekly-btn').addEventListener('click', handleWeeklyClick);
       document.getElementById('total-btn').addEventListener('click', handleTotalClick);
-    }, []);
+    }, [chartData]);
   
     // 차트 그리기
 //   const drawChart = (data) => {
@@ -96,79 +102,39 @@ function AdminPage(props){
     };
 
     // 전체 데이터 반환
-    const getTotalData = () => {
+    const getTotalData = async () => {
         const data = [];
         const dateData = ['x'];
         const randData = ['data1'];
-
-        // 더미데이터 테스트용
-        const startDate = new Date('2023-01-01');
-        for (let i = 0; i < 12; i++) {
-            const date = new Date(startDate);
-            date.setMonth(date.getMonth() + i); // 한 달 뒤의 일자로 설정
-            date.setDate(1); // 해당 월의 첫째 날로 설정
-            const formattedDate = formatDate(date, 'YYYY-MM-DD'); // 날짜를 원하는 형식으로 포맷
-            dateData.push(formattedDate); // x축 데이터를 담는 배열에 날짜를 push
-            randData.push(getRandomCount()); // 실제 차트 데이터에도 날짜와 랜덤한 인증 횟수를 push
-        }
         
-        // await Axios.get(`http://localhost:8070/admin/statistic`)
-        // .then((res)=>{
-        //     console.log(res.data.monthlyList);
+        await Axios.get(`/api/admin/statistic`)
+        .then((res)=>{
+            console.log(res.data.monthlyList);
 
-        //     const monthlyList = res.data.monthlyList;
-        //     Object.values(monthlyList).forEach((value) => {
-        //         randData.push(value+5);
-        //     });
+            const monthlyList = res.data.monthlyList;
+            Object.values(monthlyList).forEach((value, i) => {
+                
+                const startDate = new Date('2023-01-01');
+                const date = new Date(startDate);
 
-        // })
-        // .catch((err)=>{
-        //     console.log(err);
-        // });
-        
-        data.push(dateData);
-        data.push(randData);
-        console.log(data);
+                date.setMonth(date.getMonth() + i); // 한 달 뒤의 일자로 설정
+                date.setDate(1); // 해당 월의 첫째 날로 설정
 
-        return data;
-        Axios.get(`http://localhost:8070/admin/statistic`).then((res)=>{
-            // console.log(res.data); 
-            
+                const formattedDate = formatDate(date, 'YYYY-MM-DD'); // 날짜를 원하는 형식으로 포맷
 
-            // const data = [];
-            // const dateData = ['x'];
-            // const randData = ['data1'];
+                dateData.push(formattedDate); // x축 데이터를 담는 배열에 날짜를 push
+                randData.push(parseInt(value));
+            });
 
-            // // 수정할 실제 사용 데이터가공
-            // // const monthlyList = res.data.monthlyList; // spring에서 받아온 월별 데이터
-            // // const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-            // // for (const month of months) {
-            // //     dateData.push(month);
-            // //     randData.push(monthlyList[month] || 0);
-            // // }
-
-            // // 더미데이터 테스트용
-            // const startDate = new Date('2023-01-01');
-            // for (let i = 0; i < 12; i++) {
-            //     const date = new Date(startDate);
-            //     date.setMonth(date.getMonth() + i); // 한 달 뒤의 일자로 설정
-            //     date.setDate(1); // 해당 월의 첫째 날로 설정
-            //     const formattedDate = formatDate(date, 'YYYY-MM-DD'); // 날짜를 원하는 형식으로 포맷
-            //     dateData.push(formattedDate); // x축 데이터를 담는 배열에 날짜를 push
-            //     randData.push(getRandomCount()); // 실제 차트 데이터에도 날짜와 랜덤한 인증 횟수를 push
-            // }
-            
-            // data.push(dateData);
-            // data.push(randData);
-            // console.log(data);
-
-            // return data;
         })
         .catch((err)=>{
             console.log(err);
         });
 
-        
+        data.push(dateData);
+        data.push(randData);
+
+        setChartData(data);   
     };
   
     // 오늘 데이터 반환

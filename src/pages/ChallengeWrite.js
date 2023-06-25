@@ -60,7 +60,6 @@ function ChallengeWrite(props){
 
             
             await Axios.put(preSignedUrl, selectedFile, {
-                withCredentials: true,
                 headers: {
                     'Content-Type': selectedFile.type
                 }

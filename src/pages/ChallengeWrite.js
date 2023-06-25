@@ -20,6 +20,7 @@ function ChallengeWrite(props){
         c_score: 0,
         c_content: "",
         thumbnail: null,
+        c_thumbnails:""
       });
       
       const handleChange = (e) => {
@@ -65,30 +66,12 @@ function ChallengeWrite(props){
                 }
             });
             console.log('이미지 업로드 완료');
-      
-            const formData = new FormData();
-            formData.append('c_thumbnails', encodedFileName);
-            formData.append('c_name', challengeData.c_name);
-            formData.append('c_content', challengeData.c_content);
-            formData.append('c_startdate', challengeData.c_startdate);
-            formData.append('c_enddate', challengeData.c_enddate);
-            formData.append('c_numberofparticipants', challengeData.c_numberofparticipants);
-            formData.append('c_category', challengeData.c_category);
-            formData.append('c_introduction', challengeData.c_introduction);
-            formData.append('c_fee', challengeData.c_fee);
-            formData.append('c_numberofphoto', challengeData.c_numberofphoto);
-            formData.append('c_typeofverify', challengeData.c_typeofverify);
-            formData.append('c_typeoffrequency', challengeData.c_typeoffrequency);
-            formData.append('c_frequency', challengeData.c_frequency);
-            formData.append('c_score', challengeData.c_score);
+
+            setChallenge(prevState=>({...prevState, ["c_thumbnails"] : encodedFileName}));
       
             console.log(challengeData);
       
-            await Axios.post('/api/challenge/addchallenge', formData, {
-              headers: {
-                'Content-Type': 'multipart/form-data'
-              }
-            });
+            await Axios.post('/api/challenge/addchallenge', challengeData);
       
             console.log('챌린지 등록 완료');
             history('/challenge');

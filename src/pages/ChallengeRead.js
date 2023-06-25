@@ -23,6 +23,7 @@ function ChallengeRead(props){
         // 2가 메타버스 챌린지
         if(challenge.c_typeoffrequence==2){
             navigate(`/challenge/${challenge.c_id}`, { state: { challenge } });
+            window.open('https://zep.us/play/8J6PRM', '_blank');
         }else{
             navigate(`/challenge/${challenge.c_id}/verify`, { state: { challenge } });
         }

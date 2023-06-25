@@ -15,7 +15,8 @@ function BoardWrite(props){
         po_content : "",
         po_secret : true,
         imageDTOList : [],
-        uploadFiles: null
+        uploadFiles: null,
+        postphotofiles : [],
     });
     
 
@@ -40,6 +41,8 @@ function BoardWrite(props){
     const boardSubmit = async () => {      
 
         try {
+
+            const postRequestData = board;
             const selectedFile = board.uploadFiles;
 
             const res = await Axios.get('/api/s3upload/s3', {
@@ -51,7 +54,29 @@ function BoardWrite(props){
             
             console.log("encodedFileName : "+encodedFileName);
             console.log("presignedUrl : "+preSignedUrl);
+            
+            selectedFile.map(async (file, i)=> {
+                postRequestData.postphotofiles.append(encodedFileName[i]);
+                await Axios.put(preSignedUrl[i], file, {
+                    headers: {
+                        'Content-Type': file.type
+                    }
+                }); 
+            });
 
+            console.log("이미지 업로드 성공");
+
+            Axios.post("/api/post/register", postRequestData)
+            .then((res) => {
+                navigate("/board");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
+            
+            
+            
             
             
             // await Axios.put(preSignedUrl, selectedFile, {

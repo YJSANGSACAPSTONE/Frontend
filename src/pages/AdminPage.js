@@ -7,7 +7,9 @@ import Axios from "axios";
 
 function AdminPage(props){
     const [chartData, setChartData] = useState([]); // 차트 데이터 상태 변수
-
+    const [monthCount, setMonthCount] = useState([]);
+    const [averageCount, setAverageCount] = useState([]);
+    const [allCount, setAllCount] = useState([]);
     useEffect(() =>{
         getTotalData();
     }, []);

@@ -20,7 +20,13 @@ function ChallengeRead(props){
     }
 
     const MvVerify = () => {
-        navigate(`/challenge/${challenge.c_id}/verify`, { state: { challenge } });
+        // 2가 메타버스 챌린지
+        if(challenge.c_typeoffrequence==2){
+            navigate(`/challenge/${challenge.c_id}`, { state: { challenge } });
+        }else{
+            navigate(`/challenge/${challenge.c_id}/verify`, { state: { challenge } });
+        }
+        
     }
 
     const MvDelete = () => {
@@ -79,8 +85,8 @@ function ChallengeRead(props){
                                 </div>
                                 <div class="read_btn">
                                     <button class="toListBtn" onClick={MvList}>목록</button>
-                                    <button onClick={MvUpdate}>수정하기</button>
-                                    <button onClick={MvDelete}>삭제하기</button>
+                                    {/* <button onClick={MvUpdate}>수정하기</button>
+                                    <button onClick={MvDelete}>삭제하기</button> */}
                                     <button onClick={MvSignUp}>참가신청</button>
                                     <button onClick={MvVerify}>인증하기</button>
                                 </div>

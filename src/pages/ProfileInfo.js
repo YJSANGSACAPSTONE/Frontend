@@ -71,11 +71,59 @@ function ProfileInfo(props){
     }
     
 
-    useEffect(()=>{
-        
+    useEffect(() => {
         setProfile_image(decodedAccToken.profile_image);
-
-    }, []);
+    
+        // axios 인터셉터를 사용하여 토큰 만료 오류 처리
+        const axiosInterceptor = Axios.interceptors.response.use(
+          response => response,
+          error => {
+            const originalRequest = error.config;
+    
+            // 에러 메시지 확인
+            if (error.message === 'Invalid token specified') {
+              // 액세스 토큰 만료 오류인 경우
+              const handleTokenExpiration = async () => {
+                try {
+                  const response = await Axios.post('/api/v1/token', null, {
+                    headers: {
+                      'Authorization-refresh': refreshToken
+                    }
+                  });
+                  const newAccessToken = response.data.accessToken;
+    
+                  // 재발급된 액세스 토큰을 저장하고, 원래 요청을 재시도
+                  // 예: localStorage에 액세스 토큰을 저장한 후 다시 API 요청 수행
+                  // ...
+    
+                  // 원래 요청을 재시도하기 위해 axios 설정 변경
+                  originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+                  return Axios(originalRequest);
+                } catch (refreshError) {
+                  // 액세스 토큰 재발급 실패 처리
+                  console.error('Failed to refresh access token:', refreshError);
+                  // 예: 로그인 페이지로 리디렉션 또는 오류 메시지 표시 등
+                  // ...
+                }
+              };
+    
+              return handleTokenExpiration();
+            } else {
+              // 다른 오류 처리
+              console.error('API request failed:', error);
+              // 예: 오류 메시지 표시 등
+              // ...
+            }
+    
+            return Promise.reject(error);
+          }
+        );
+    
+        return () => {
+          // 컴포넌트가 unmount될 때 axios 인터셉터 제거
+          Axios.interceptors.response.eject(axiosInterceptor);
+        };
+      }, []);
 
     return(
         <>

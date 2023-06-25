@@ -53,7 +53,7 @@ function ChallengeRead(props){
                                 </div>
                                 <div class="read_info">
                                     <div class="info_img">
-                                        <img src={`http://localhost:8070${challenge.c_thumbnails}`} alt="morning"/>
+                                        <img src={`${challenge.c_thumbnails}`} alt="morning"/>
                                     </div>
                                     <div class="info_text">
                                         <p>최대 참가 인원 : {challenge.c_numberofparticipants}</p>

@@ -281,6 +281,8 @@ function Planner(props){
 	}
 	
     useEffect(() => {
+		const domainAddress = process.env.REACT_APP_DOMAIN_ADDRESS;
+		console.log(domainAddress);
 		const jwtToken = Cookies.get("accessTokenCookie");
 		const decodedAccToken = jwt_decode(jwtToken);
 		let profile_image = decodedAccToken.profile_image;
@@ -310,7 +312,7 @@ function Planner(props){
         });
 
 		// 첫 페이지 로딩 후 Axios를 통해서 오늘 날짜 plan 받아오는 것
-		Axios.get(`/plan/dailyplan`,{
+		Axios.get(`/api/plan/dailyplan`,{
 			headers : {
                 'Authorization': `Bearer ${jwtToken}`
             }
@@ -560,7 +562,7 @@ function Planner(props){
 								</div>
 								<div class="planner_ls">
                                     <ul>
-										{plans.length > 0 ? (
+										{plans && plans.length > 0 ? (
 											plans.map(plan => (
 												<li 
 													key={plan.p_id} 

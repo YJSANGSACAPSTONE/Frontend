@@ -122,6 +122,7 @@ function AdminPage(props){
 
             const monthlyList = res.data.monthlyList;
             Object.values(monthlyList).forEach((value) => {
+                console.log(value);
                 randData.push(value);
             });
         })

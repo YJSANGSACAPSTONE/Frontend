@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import Profile from '../components/Profile';
 import $ from 'jquery';
 import c3 from 'c3';
@@ -8,6 +8,7 @@ import Cookies from 'js-cookie';
 
 function AdminChallengeDetail(props){
     const jwtToken = Cookies.get("accessTokenCookie");
+    const navigate = useNavigate();
     const [challengeDetailList, setChallengeDetailList] = useState([]);
     const [showPopup, setShowPopup] = useState(false); // 팝업 표시 여부
     const [selectedChallenge, setSelectedChallenge] = useState(null); // 선택된 챌린지
@@ -39,6 +40,14 @@ function AdminChallengeDetail(props){
             // 임시로 데이터가 없어 500에러 났을 때 리스트 비워주기
             setChallengeDetailList([]);
             console.log(err);
+            if (err.response && err.response.status === 403) {
+                console.error("Access denied");
+                alert("접근 권한이 없습니다.");
+                navigate.push('/');
+                // 특정 오류 처리 로직을 추가하세요.
+              } else {
+                console.error(err);
+              }
         });
     }
     const verifyButton = (cvid) => {
@@ -54,6 +63,14 @@ function AdminChallengeDetail(props){
         })
         .catch((err)=>{
             console.log(err);
+            if (err.response && err.response.status === 403) {
+                console.error("Access denied");
+                alert("접근 권한이 없습니다.");
+                navigate.push('/');
+                // 특정 오류 처리 로직을 추가하세요.
+              } else {
+                console.error(err);
+              }
         });
     }
 

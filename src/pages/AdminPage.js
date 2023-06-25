@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import Profile from '../components/Profile';
 import $ from 'jquery';
 import c3 from 'c3';
@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 function AdminPage(props){
     const [chartData, setChartData] = useState([]); // 차트 데이터 상태 변수
     const jwtToken = Cookies.get("accessTokenCookie");
+    const history = useNavigate();
     const [monthCount, setMonthCount] = useState("");
     const [averageCount, setAverageCount] = useState("");
     const [allCount, setAllCount] = useState("");
@@ -121,6 +122,14 @@ function AdminPage(props){
         })
         .catch((err)=>{
             console.log(err);
+            if (err.response && err.response.status === 403) {
+                console.error("Access denied");
+                alert("접근 권한이 없습니다.");
+                history.push('/');
+                // 특정 오류 처리 로직을 추가하세요.
+              } else {
+                console.error(err);
+              }
         });
 
         data.push(dateData);

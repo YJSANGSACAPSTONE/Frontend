@@ -112,9 +112,9 @@ function AdminPage(props){
             // randData.push(getRandomCount()); // 실제 차트 데이터에도 날짜와 랜덤한 인증 횟수를 push
         }
 
-        for (let i = 0; i < 3; i++) {
-            randData.push(getRandomCount()); // 실제 차트 데이터에도 날짜와 랜덤한 인증 횟수를 push
-        }
+        // for (let i = 0; i < 3; i++) {
+        //     randData.push(getRandomCount()); // 실제 차트 데이터에도 날짜와 랜덤한 인증 횟수를 push
+        // }
         
         Axios.get(`/api/admin/statistic`)
         .then((res)=>{
@@ -123,20 +123,22 @@ function AdminPage(props){
             const monthlyList = res.data.monthlyList;
             Object.values(monthlyList).forEach((value) => {
                 console.log(value);
-                // randData.push(value);
+                randData.push(value);
             });
+
+            data.push(dateData);
+            data.push(randData);
+            console.log(data);
+            
+            
+
+            return data;
         })
         .catch((err)=>{
             console.log(err);
         });
 
-        data.push(dateData);
-        data.push(randData);
-        console.log(data);
         
-        
-
-        return data;
         Axios.get(`/api/admin/statistic`).then((res)=>{
             // console.log(res.data); 
             

@@ -124,9 +124,6 @@ function Header(){
 
                         <li class="sub_burger">
                             <button onClick={handleButtonClick}>메타버스로 이동</button>
-                            {/* <span></span>
-                            <span></span>
-                            <span></span> */}
                         </li>
                     </ul>
                 </div>

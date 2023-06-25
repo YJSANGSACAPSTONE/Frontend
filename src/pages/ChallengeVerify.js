@@ -56,10 +56,11 @@ function ChallengeVerify(props){
             console.log("presignedUrl : "+preSignedUrl);
             console.log("selectedFile type : "+selectedFile.type);
 
-            setChallengeverify((prevState) => ({
-                ...prevState,
-                ["cvphoto"]: encodedFileName,
-              }));
+            const postChallengeVerify = {
+                c_id : challenge.c_id,
+                u_id : userInfo.u_id,
+                cvphoto : encodedFileName
+            };
             
             await Axios.put(preSignedUrl, selectedFile, {
                 headers: {
@@ -70,9 +71,9 @@ function ChallengeVerify(props){
 
             
       
-            console.log(challengeverify);
+            console.log(postChallengeVerify);
       
-            await Axios.post('/api/challenge/verify', challengeverify);
+            await Axios.post('/api/challenge/verify', postChallengeVerify);
       
             console.log('챌린지 등록 완료');
             navigate(`/profile/${userInfo.u_id}/myChallenge`);

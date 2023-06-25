@@ -106,8 +106,12 @@ function AdminPage(props){
 
 
             setMonthCount(randData[randData.length - 1]);
-            setAverageCount(Math.round(randData.reduce((a, b) => parseInt(a) + parseInt(b), 0) / (randData.length - 1)));
-            setAllCount(randData.reduce((a, b) => parseInt(a) + parseInt(b), 0));
+            const parsedRandData = randData.map(value => parseInt(value));
+            const average = parsedRandData.reduce((a, b) => a + b, 0) / (parsedRandData.length - 1);
+            const total = parsedRandData.reduce((a, b) => a + b, 0);
+
+            setAverageCount(Math.round(average));
+            setAllCount(total);
 
         })
         .catch((err)=>{
@@ -269,8 +273,8 @@ function AdminPage(props){
                                         </div>
                                         <div className="graph_info">
                                             <p className="info_title">통계 요약</p>
-                                            <p className="info_text">오늘 인증 수: <span>{monthCount}</span></p>
-                                            <p className="info_text">주간 평균 수: <span>{averageCount}</span></p>
+                                            <p className="info_text">이번 달 인증 수: <span>{monthCount}</span></p>
+                                            <p className="info_text">평균 인증 수: <span>{averageCount}</span></p>
                                             <p className="info_text">전체 인증 수: <span>{allCount}</span></p>
                                             <div className="graph_btn">
                                                 <button id="total-btn" onClick={() => handleTotalClick(chartData)}>

@@ -155,7 +155,7 @@ function AdminChallengeDetail(props){
                                                         <li className="c_cnt">{challengeDetailList.cvtime}</li>
                                                         <li className="c_type">{challengeDetailList.uid}</li>
                                                         <li className="c_date">
-                                                            <img src={`http://localhost:8070${challengeDetailList.cvphoto}`} alt="cvphoto"/>
+                                                            <img src={`${challengeDetailList.cvphoto}`} alt="cvphoto"/>
                                                         </li>
                                                         <li>
                                                             <button>인증</button>
@@ -200,7 +200,7 @@ function AdminChallengeDetail(props){
                                         <div className="popup_content">
                                             <h4>인증이름</h4>
                                             {/* <img src={selectedChallenge?.c_verificationphoto} alt="인증사진" /> */}
-                                            <img src={`http://localhost:8070${selectedChallenge?.cvphoto}`} alt="cvphoto"/>
+                                            <img src={`${selectedChallenge?.cvphoto}`} alt="cvphoto"/>
                                             {/* 기타 정보들 */}
                                         </div>
                                         <div className="popup_footer">

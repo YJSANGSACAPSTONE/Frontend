@@ -2,7 +2,9 @@ import React,{ useEffect } from 'react';
 import Axios from "axios";
 import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import Profile from '../components/Profile';
+import Cookies from 'js-cookie';
 function ChallengeRead(props){
+    const uid = JSON.parse(Cookies.get('userInfo')).u_id;
     const location = useLocation();
     const challenge = location.state.challenge;
     const navigate = useNavigate();
@@ -22,7 +24,7 @@ function ChallengeRead(props){
     const MvVerify = () => {
         // 2가 메타버스 챌린지
         if(challenge.c_typeofverify==2){
-            navigate(`/challenge/${challenge.c_id}`, { state: { challenge } });
+            navigate(`/profile/${uid}/myChallenge`, { state: { challenge } });
             window.open('https://zep.us/play/8J6PRM', '_blank');
         }else{
             navigate(`/challenge/${challenge.c_id}/verify`, { state: { challenge } });

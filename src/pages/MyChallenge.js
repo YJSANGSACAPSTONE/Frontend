@@ -17,7 +17,7 @@ function MyChallenge(props){
 
     const handleVerify = (challenge) => {
         if (challenge.ctypeofverify === 2) {
-            navigate(`/challenge/${challenge.cid}`, { state: { challenge } });
+            navigate(`/profile/${uid}/myChallenge`, { state: { challenge } });
             window.open('https://zep.us/play/8J6PRM', '_blank');
         } else {
             navigate(`/challenge/${challenge.cid}/verify`, { state: { challenge } });

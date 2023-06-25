@@ -63,33 +63,19 @@ function AdminPage(props){
         });
       };
   
-    // 통계 요약 업데이트
-    const updateSummary = (count) => {
-      const todayCountElement = document.getElementById('today-count');
-      const weekCountElement = document.getElementById('week-count');
-      const totalCountElement = document.getElementById('total-count');
-      todayCountElement.textContent = count;
-      
-    };
   
     // 오늘 인증 수 클릭 이벤트 핸들러
     const handleTodayClick = () => {
-      const todayCount = 10; // 오늘 인증 수 (실제 데이터로 대체해야 함)
-      updateSummary(todayCount);
       drawChart(getTodayData());
     };
   
     // 주간 평균 수 클릭 이벤트 핸들러
     const handleWeeklyClick = () => {
-      const weeklyAverageCount = 20; // 주간 평균 인증 수 (실제 데이터로 대체해야 함)
-      updateSummary(weeklyAverageCount);
       drawChart(getWeeklyData());
     };
   
     // 전체 인증 수 클릭 이벤트 핸들러
     const handleTotalClick = () => {
-      const totalCount = 100; // 전체 인증 수 (실제 데이터로 대체해야 함)
-      updateSummary(totalCount);
       drawChart(getTotalData());
     };
 
@@ -283,9 +269,9 @@ function AdminPage(props){
                                         </div>
                                         <div className="graph_info">
                                             <p className="info_title">통계 요약</p>
-                                            <p className="info_text">오늘 인증 수: <span id="today-count"></span></p>
-                                            <p className="info_text">주간 평균 수: </p>
-                                            <p className="info_text">전체 인증 수: </p>
+                                            <p className="info_text">오늘 인증 수: <span>{monthCount}</span></p>
+                                            <p className="info_text">주간 평균 수: <span>{averageCount}</span></p>
+                                            <p className="info_text">전체 인증 수: <span>{allCount}</span></p>
                                             <div className="graph_btn">
                                                 <button id="total-btn" onClick={() => handleTotalClick(chartData)}>
                                                     월별 인증 수

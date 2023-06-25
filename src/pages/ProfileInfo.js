@@ -53,7 +53,25 @@ function ProfileInfo(props){
         }
     }
 
-    const updateUser = async () => {
+    const updateRequest = async () => {
+        return Axios.post(
+          'http://localhost:8070/user/updateuser',
+          {
+            u_id: u_id,
+            u_nickname: u_nickname,
+            u_zepid: u_zepid,
+            u_content: u_content,
+            profile_image: profile_image
+          },
+          {
+            headers: {
+              'Authorization': `Bearer ${jwtToken}`
+            }
+          }
+        );
+      };
+
+      const updateUser = async () => {
         console.log({
           u_id: u_id,
           u_nickname: u_nickname,
@@ -63,29 +81,21 @@ function ProfileInfo(props){
         });
       
         try {
-          await Axios.post(
-            'http://localhost:8070/user/updateuser',
-            {
-              u_id: u_id,
-              u_nickname: u_nickname,
-              u_zepid: u_zepid,
-              u_content: u_content,
-              profile_image: profile_image
-            },
-            {
-              headers: {
-                'Authorization': `Bearer ${jwtToken}`
-              }
-            }
-          );
-      
+          await updateRequest();
           Cookies.set('userInfo', JSON.stringify(u_info));
           history('/profile');
         } catch (error) {
           // 오류 처리 및 액세스 토큰 재발급
           await handleTokenExpiration(error, refreshToken);
-          // 재발급 후 원래 요청을 다시 시도
-          // ...
+      
+          try {
+            await updateRequest();
+            Cookies.set('userInfo', JSON.stringify(u_info));
+            history('/profile');
+          } catch (error) {
+            // 재시도 실패 처리
+            // ...
+          }
         }
       };
     

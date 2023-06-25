@@ -58,7 +58,7 @@ function ChallengeWrite(props){
             console.log('이미지 업로드 완료');
       
             const formData = new FormData();
-            formData.append('thumbnail', encodedFileName);
+            formData.append('c_thumbnails', encodedFileName);
             formData.append('c_name', challengeData.c_name);
             formData.append('c_content', challengeData.c_content);
             formData.append('c_startdate', challengeData.c_startdate);

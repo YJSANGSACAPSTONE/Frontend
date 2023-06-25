@@ -96,7 +96,7 @@ function AdminPage(props){
     };
 
     // 전체 데이터 반환
-    const getTotalData = () => {
+    const getTotalData = async () => {
         const data = [];
         const dateData = ['x'];
         const randData = ['data1'];
@@ -117,27 +117,29 @@ function AdminPage(props){
         //     randData.push(getRandomCount()); // 실제 차트 데이터에도 날짜와 랜덤한 인증 횟수를 push
         // }
         
-        Axios.get(`/api/admin/statistic`)
+        await Axios.get(`/api/admin/statistic`)
         .then((res)=>{
             console.log(res.data.monthlyList);
 
             const monthlyList = res.data.monthlyList;
             Object.values(monthlyList).forEach((value) => {
-                console.log(value);
                 randData.push(value+5);
             });
 
-            data.push(dateData);
-            data.push(randData);
-            console.log(data);
-            
-            
-
-            return data;
         })
         .catch((err)=>{
             console.log(err);
         });
+
+        console.log(randData);
+
+        data.push(dateData);
+        data.push(randData);
+        console.log(data);
+        
+        
+
+        return data;
 
         
 

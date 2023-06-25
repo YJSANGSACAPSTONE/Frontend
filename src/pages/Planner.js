@@ -464,6 +464,10 @@ function Planner(props){
 				p_starttime : p_starttime,
 				p_endtime : p_endtime,
 				p_remindornot : p_remindornot
+			},{
+				headers : {
+					'Authorization': `Bearer ${jwtToken}`
+				}
 			})
 			.then(response=>{
 				console.log(response);

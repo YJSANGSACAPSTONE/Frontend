@@ -38,6 +38,7 @@ function BoardWrite(props){
     }
     
     const boardSubmit = () => {
+        console.log("boardSubmit 함수 실행됨");
         const formData = new FormData();
       
         if (board.uploadFiles != null) {
@@ -76,7 +77,7 @@ function BoardWrite(props){
 
     // 사진 업로드 이후에 실행할 추가 작업을 수행하는 함수
 const performAdditionalActions = (updatedImageDTOList) => {
-  
+    console.log("performAdditionalActions 함수 실행됨");
     const postData = {
       ...board,
       imageDTOList: updatedImageDTOList.length > 0 ? updatedImageDTOList : null

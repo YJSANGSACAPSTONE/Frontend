@@ -59,7 +59,7 @@ function ChallengeWrite(props){
             console.log("selectedFile type : "+selectedFile.type);
 
             
-            await Axios.put(preSignedUrl, selectedFile, {
+            await Axios.put('https://s3.ap-northeast-2.amazonaws.com/godsaengbucket/2023-06-25T14:54:29.448711_link.png', selectedFile, {
                 headers: {
                     'Content-Type': selectedFile.type
                 }

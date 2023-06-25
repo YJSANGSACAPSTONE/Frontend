@@ -26,7 +26,7 @@ function AdminChallenge(props){
         if (err.response && err.response.status === 403) {
             console.error("Access denied");
             alert("접근 권한이 없습니다.");
-            navigate.push('/');
+            navigate('/');
             // 특정 오류 처리 로직을 추가하세요.
           } else {
             console.error(err);

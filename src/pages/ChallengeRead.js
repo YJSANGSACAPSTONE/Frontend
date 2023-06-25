@@ -70,7 +70,7 @@ function ChallengeRead(props){
                                         </p>
                                         <p>참가금 : {challenge.c_fee}</p>
                                         <p>필수 등록 사진 개수 : {challenge.c_numberofphoto}개</p>
-                                        <p>인증 타입(사진 or 챌린지) : {challenge.c_typeofverify==1?"사진":"챌린지"}</p>
+                                        <p>인증 타입(사진 or 챌린지) : {challenge.c_typeofverify==1?"사진":"메타버스"}</p>
                                         <p>빈도 타입 : {challenge.c_typeoffrequence==1?"하루에"+challenge.c_frequency+"번": challenge.c_frequency+"일에 한번"}</p>
                                     </div>
                                 </div>

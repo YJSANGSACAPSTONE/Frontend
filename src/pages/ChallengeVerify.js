@@ -17,12 +17,13 @@ function ChallengeVerify(props){
     const [challengeverify, setChallengeverify] = useState({
         c_id : challenge.c_id,
         u_id : userInfo.u_id,
-        verifyPhoto : null
+        verifyPhotoFile : null,
+        verifyPhoto : ""
       });
 
       const handleChange = (e) => {
         const { name, value } = e.target;
-        if (name === "verifyPhoto") {
+        if (name === "verifyPhotoFile") {
           setChallengeverify(prevState => ({ ...prevState, [name]: e.target.files[0] }));
         }
       };
@@ -33,7 +34,7 @@ function ChallengeVerify(props){
     const verify = async () =>{
 
         try {
-            const selectedFile = challengeverify.verifyPhoto;
+            const selectedFile = challengeverify.verifyPhotoFile;
             const maxSize = 5 * 1024 * 1024;
             const fileSize = selectedFile.size;
       
@@ -112,8 +113,8 @@ function ChallengeVerify(props){
                                         </h3>
                                     </div>
                                     <div class="verify_img">
-                                        <img src={challengeverify.verifyPhoto ? URL.createObjectURL(challengeverify.verifyPhoto) : "/img/camera.png"} alt="camera" id="verifyImg"/>
-                                        <input id="verifyInput" name="verifyPhoto" type="file" onChange={handleChange} />
+                                        <img src={challengeverify.verifyPhotoFile ? URL.createObjectURL(challengeverify.verifyPhotoFile) : "/img/camera.png"} alt="camera" id="verifyImg"/>
+                                        <input id="verifyInput" name="verifyPhotoFile" type="file" onChange={handleChange} />
                                     </div>
                                     <div class="verify_text">
                                         <h3>올바른 촬영 Tip</h3>

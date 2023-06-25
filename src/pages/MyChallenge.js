@@ -49,7 +49,7 @@ function MyChallenge(props){
 													data-cstartdate={challenge.cstartdate}
 													data-cenddate={challenge.cendate}
 												>
-													<img src={`http://localhost:8070${challenge.cthumbnails}`} alt="morning"/>
+													<img src={`${challenge.cthumbnails}`} alt="morning"/>
                                                     <div>
                                                         <p>{challenge.cname}</p>
                                                         <button class="myPageBtn">참가취소</button>

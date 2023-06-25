@@ -1,5 +1,5 @@
 import React,{ useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import $ from 'jquery';
 import jwt_decode from 'jwt-decode';
@@ -21,12 +21,13 @@ function Header(){
     const decodedAccToken = jwt_decode(jwtToken);
 
     let u_id = decodedAccToken.userId;
+    let userRole = decodedAccToken.role;
     // let userRole = decodedAccToken.role;
     // let profile_image = decodedAccToken.profile_image;
 
     // 현재 URL 이 planner 일 때만 이 axios 통신 해서 쿠키에 사용자 관련 정보들을 집어넣을 수 있게 if 문으로 설정
     const currentURL = window.location.pathname;
-    
+    const history = useNavigate();
     // try {
     //     userInfo = JSON.parse(Cookies.get('userInfo'));
     // } catch (error) {
@@ -38,6 +39,11 @@ function Header(){
     // }
 
     useEffect(()=>{
+
+        if(userRole != "ADMIN"){
+            history('/TestModule');
+        }
+
         Axios.get(`http://localhost:8070/user/readuser`,{
             headers : {
                 'Authorization': `Bearer ${jwtToken}`

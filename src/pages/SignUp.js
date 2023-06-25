@@ -9,15 +9,18 @@ import jwt_decode from 'jwt-decode';
 function SignUp(props){
     const jwtToken = Cookies.get("accessTokenCookie");
     const refreshToken = Cookies.get("refreshTokenCookie");
-
+    // accessTokenCookie 안에 담겨있는 권한 설정으로 admin이 아닐경우 "현재 테스트 모듈"
+    
     const decodedAccToken = jwt_decode(jwtToken);
-
+    
+    
     let u_id = decodedAccToken.userId;
     let userRole = decodedAccToken.role;
+
     let profile_image = decodedAccToken.profile_image;
 
-    Cookies.set("userId",u_id);
-    Cookies.set("userRole",userRole);
+    Cookies.set("userId", u_id);
+    Cookies.set("userRole", userRole);
     Cookies.set("profile_image", profile_image);
 
     const history = useNavigate();
@@ -76,6 +79,10 @@ function SignUp(props){
     };
     // addUser
     useEffect(()=>{
+
+        if(userRole != "ADMIN"){
+            history('/TestModule');
+        }
         // console.log(userData);
         function updateSubFooterPosition() {
 			var subFooter = $('#subFooter');

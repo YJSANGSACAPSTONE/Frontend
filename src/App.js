@@ -31,6 +31,7 @@ import AdminPage from './pages/AdminPage';
 import AdminChallenge from './pages/AdminChallenge';
 import AdminChallengeDetail from './pages/AdminChallengeDetail';
 
+import TestModule from './components/TestModule';
 import NotFound from './components/NotFound';
 
 
@@ -111,7 +112,7 @@ function App() {
 			<Route path="/board/:id/edit" element={<BoardEdit header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/board/write" element={<BoardWrite header={<Header/>} footer={<Footer/>} />} />
 
-
+			<Route path="/testModule" element={<TestModule />} />
 			<Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

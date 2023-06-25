@@ -57,9 +57,9 @@ function ChallengeVerify(props){
             console.log("selectedFile type : "+selectedFile.type);
 
             const postChallengeVerify = {
-                c_id : challenge.c_id,
-                u_id : userInfo.u_id,
-                cvphoto : encodedFileName
+                cid : challenge.c_id,
+                uid : userInfo.u_id,
+                cvphoto : "https://godsaengbucket.s3.ap-northeast-2.amazonaws.com/"+encodedFileName
             };
             
             await Axios.put(preSignedUrl, selectedFile, {

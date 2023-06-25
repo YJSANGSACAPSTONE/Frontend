@@ -59,7 +59,7 @@ function ChallengeWrite(props){
             console.log("presignedUrl : "+preSignedUrl);
             console.log("selectedFile type : "+selectedFile.type);
             // setChallenge(prevState=>({...prevState, ["c_thumbnails"] : encodedFileName}));
-            challengeData.c_thumbnails = encodedFileName;
+            challengeData.c_thumbnails = "https://godsaengbucket.s3.ap-northeast-2.amazonaws.com/"+encodedFileName;
             
             await Axios.put(preSignedUrl, selectedFile, {
                 headers: {

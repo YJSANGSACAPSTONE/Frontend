@@ -921,4 +921,6 @@ i[class^=icon-chevron]{
     margin-left: 10px;
     cursor: pointer;
   }
+
+  .service_area img{ width:100%; }
 /* admin page */

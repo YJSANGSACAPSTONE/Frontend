@@ -39,7 +39,7 @@ function Header(){
     // }
 
     useEffect(()=>{
-
+        console.log(userRole);
         if(userRole != "ADMIN"){
             history('/TestModule');
         }

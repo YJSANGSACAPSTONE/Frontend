@@ -118,7 +118,10 @@ function AdminPage(props){
                 randData.push(parseInt(value));
             });
 
-            setMonthCount();
+
+            setMonthCount(randData[randData.length - 1]);
+            setAverageCount(Math.round(randData.reduce((a, b) => parseInt(a) + parseInt(b), 0) / (randData.length - 1)));
+            setAllCount(randData.reduce((a, b) => parseInt(a) + parseInt(b), 0));
 
         })
         .catch((err)=>{

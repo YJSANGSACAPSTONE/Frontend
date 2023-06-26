@@ -1,12 +1,14 @@
 import React,{useEffect, useState} from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import Profile from '../components/Profile';
 import $ from 'jquery';
 import c3 from 'c3';
 import Axios from "axios";
+import Cookies from 'js-cookie';
 
 function AdminChallengeDetail(props){
-    
+    const jwtToken = Cookies.get("accessTokenCookie");
+    const navigate = useNavigate();
     const [challengeDetailList, setChallengeDetailList] = useState([]);
     const [showPopup, setShowPopup] = useState(false); // 팝업 표시 여부
     const [selectedChallenge, setSelectedChallenge] = useState(null); // 선택된 챌린지
@@ -25,7 +27,11 @@ function AdminChallengeDetail(props){
     };
     
     const verifyList = () => {
-        Axios.get(`/api/admin/verifylist/${id}`)
+        Axios.get(`/api/admin/verifylist/${id}`,{
+			headers : {
+				'Authorization': `Bearer ${jwtToken}`
+			}
+		})
         .then((res)=>{
             setChallengeDetailList(res.data);
             console.log(res.data);
@@ -34,10 +40,22 @@ function AdminChallengeDetail(props){
             // 임시로 데이터가 없어 500에러 났을 때 리스트 비워주기
             setChallengeDetailList([]);
             console.log(err);
+            if (err.response && err.response.status === 403) {
+                console.error("Access denied");
+                alert("접근 권한이 없습니다.");
+                navigate('/');
+                // 특정 오류 처리 로직을 추가하세요.
+              } else {
+                console.error(err);
+              }
         });
     }
     const verifyButton = (cvid) => {
-        Axios.get(`/api/admin/verifythischallenge/${cvid}`)
+        Axios.get(`/api/admin/verifythischallenge/${cvid}`,{
+			headers : {
+				'Authorization': `Bearer ${jwtToken}`
+			}
+		})
         .then((res)=>{
             console.log(res.data);
             setShowPopup(false);
@@ -45,6 +63,14 @@ function AdminChallengeDetail(props){
         })
         .catch((err)=>{
             console.log(err);
+            if (err.response && err.response.status === 403) {
+                console.error("Access denied");
+                alert("접근 권한이 없습니다.");
+                navigate('/');
+                // 특정 오류 처리 로직을 추가하세요.
+              } else {
+                console.error(err);
+              }
         });
     }
 
@@ -155,7 +181,7 @@ function AdminChallengeDetail(props){
                                                         <li className="c_cnt">{challengeDetailList.cvtime}</li>
                                                         <li className="c_type">{challengeDetailList.uid}</li>
                                                         <li className="c_date">
-                                                            <img src={`http://localhost:8070${challengeDetailList.cvphoto}`} alt="cvphoto"/>
+                                                            <img src={`${challengeDetailList.cvphoto}`} alt="cvphoto"/>
                                                         </li>
                                                         <li>
                                                             <button>인증</button>
@@ -200,7 +226,7 @@ function AdminChallengeDetail(props){
                                         <div className="popup_content">
                                             <h4>인증이름</h4>
                                             {/* <img src={selectedChallenge?.c_verificationphoto} alt="인증사진" /> */}
-                                            <img src={`http://localhost:8070${selectedChallenge?.cvphoto}`} alt="cvphoto"/>
+                                            <img src={`${selectedChallenge?.cvphoto}`} alt="cvphoto"/>
                                             {/* 기타 정보들 */}
                                         </div>
                                         <div className="popup_footer">

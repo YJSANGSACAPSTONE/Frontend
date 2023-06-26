@@ -75,7 +75,7 @@ function ChallengeSignUp(props){
                             <li class="challenge_pay">
                                 <div class="challenge_info">
                                     <h1>{challenge.c_name}</h1>
-                                    <img src={`http://localhost:8070${challenge.c_thumbnails}`} alt="morning" />
+                                    <img src={`${challenge.c_thumbnails}`} alt="morning" />
                                     <div>
                                         <p>{challenge.c_content}</p>
                                         <p>시작일 : {challenge.c_startdate}</p>

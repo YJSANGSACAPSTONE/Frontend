@@ -26,7 +26,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 module.exports = function(app) {
   app.use(
     createProxyMiddleware('/api', { // "/api" 경로에 대해서만 프록시를 적용합니다.
-      target: 'http://13.125.99.177:8070', // 프록시할 API 서버의 URL을 입력합니다.
+      target: 'https://godsaengplanner.com', // 프록시할 API 서버의 URL을 입력합니다.
       changeOrigin: true,
       pathRewrite: { '^/api': '' } // 요청 경로에서 "/api"를 제거합니다.
     })

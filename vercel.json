@@ -2,11 +2,11 @@
     "rewrites": [
         {
         "source": "/api/:path*",
-        "destination": "http://13.125.99.177:8070/:path*"
+        "destination": "https://godsaengplanner.com/:path*"
         },
         {
         "source": "/api/:path*/",
-        "destination": "http://13.125.99.177:8070/:path*/"
+        "destination": "https://godsaengplanner.com/:path*/"
         }
         
     ]

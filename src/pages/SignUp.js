@@ -5,11 +5,11 @@ import Axios from "axios";
 import Cookies from 'js-cookie';
 import jwt_decode from 'jwt-decode';
 
-
 function SignUp(props){
     const jwtToken = Cookies.get("accessTokenCookie");
     const refreshToken = Cookies.get("refreshTokenCookie");
-
+    // accessTokenCookie 안에 담겨있는 권한 설정으로 admin이 아닐경우 "현재 테스트 모듈"
+    
     const decodedAccToken = jwt_decode(jwtToken);
 
     let u_id = decodedAccToken.userId;
@@ -92,7 +92,7 @@ function SignUp(props){
     return(
         <>
             {props.header}
-            <div id="sign_content" class="container">
+            {/* <div id="sign_content" class="container">
                 <div class="container_inner">
                     <div>
                         <ul>
@@ -101,11 +101,11 @@ function SignUp(props){
                             </li>
                             <li class="sign_form">
                                 <form action="">
-                                    {/* <img src={userData.profileImageUrl} alt="" /> */}
-                                    {/* <label htmlFor="signId">카카오아이디</label>
-                                    <input type="text" id="signId" placeHolder="@abcdefg.com"  name="u_id" /> */}
-                                    {/* <label htmlFor="signZep">ZEP 아이디</label>
-                                    <input type="name" id="signZep" name="u_zepid" /> */}
+                                    <img src={userData.profileImageUrl} alt="" />
+                                    <label htmlFor="signId">카카오아이디</label>
+                                    <input type="text" id="signId" placeHolder="@abcdefg.com"  name="u_id" />
+                                    <label htmlFor="signZep">ZEP 아이디</label>
+                                    <input type="name" id="signZep" name="u_zepid" />
                                     <label htmlFor="signName">닉네임</label>
                                     <input type="name" id="signName" name="u_nickname" />
                                     <label htmlFor="signContent">소개</label>
@@ -115,6 +115,25 @@ function SignUp(props){
                                 </form>
                             </li>
                         </ul>                      
+                    </div>
+                </div>
+            </div> */}
+            <div className="page">
+                <div className="page_container">
+                    <div className="left">
+                    <div className="login">Sign Up</div>
+                    <div className="eula">갓생플래너 이용을 위한 추가정보 입력 페이지 입니다.</div>
+                    </div>
+                    <div className="right">
+                    <div className="form">
+                        
+
+                        <label htmlFor="signName">닉네임</label>
+                        <input type="name" id="signName" name="u_nickname" />
+                        <label htmlFor="signContent">소개</label>
+                        <input type="text" id="signContent" name="u_content" />
+                        <input type="submit" onClick={addUser} id="submit" value="Submit" />
+                    </div>
                     </div>
                 </div>
             </div>

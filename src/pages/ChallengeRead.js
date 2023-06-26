@@ -2,7 +2,9 @@ import React,{ useEffect } from 'react';
 import Axios from "axios";
 import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
 import Profile from '../components/Profile';
+import Cookies from 'js-cookie';
 function ChallengeRead(props){
+    const uid = JSON.parse(Cookies.get('userInfo')).u_id;
     const location = useLocation();
     const challenge = location.state.challenge;
     const navigate = useNavigate();
@@ -20,7 +22,14 @@ function ChallengeRead(props){
     }
 
     const MvVerify = () => {
-        navigate(`/challenge/${challenge.c_id}/verify`, { state: { challenge } });
+        // 2가 메타버스 챌린지
+        if(challenge.c_typeofverify==2){
+            navigate(`/profile/${uid}/myChallenge`, { state: { challenge } });
+            window.open('https://zep.us/play/8J6PRM', '_blank');
+        }else{
+            navigate(`/challenge/${challenge.c_id}/verify`, { state: { challenge } });
+        }
+        
     }
 
     const MvDelete = () => {
@@ -53,7 +62,7 @@ function ChallengeRead(props){
                                 </div>
                                 <div class="read_info">
                                     <div class="info_img">
-                                        <img src={`http://localhost:8070${challenge.c_thumbnails}`} alt="morning"/>
+                                        <img src={`${challenge.c_thumbnails}`} alt="morning"/>
                                     </div>
                                     <div class="info_text">
                                         <p>최대 참가 인원 : {challenge.c_numberofparticipants}</p>
@@ -70,7 +79,7 @@ function ChallengeRead(props){
                                         </p>
                                         <p>참가금 : {challenge.c_fee}</p>
                                         <p>필수 등록 사진 개수 : {challenge.c_numberofphoto}개</p>
-                                        <p>인증 타입(사진 or 챌린지) : {challenge.c_typeofverify==1?"사진":"챌린지"}</p>
+                                        <p>인증 타입(사진 or 챌린지) : {challenge.c_typeofverify==1?"사진":"메타버스"}</p>
                                         <p>빈도 타입 : {challenge.c_typeoffrequence==1?"하루에"+challenge.c_frequency+"번": challenge.c_frequency+"일에 한번"}</p>
                                     </div>
                                 </div>
@@ -79,8 +88,8 @@ function ChallengeRead(props){
                                 </div>
                                 <div class="read_btn">
                                     <button class="toListBtn" onClick={MvList}>목록</button>
-                                    <button onClick={MvUpdate}>수정하기</button>
-                                    <button onClick={MvDelete}>삭제하기</button>
+                                    {/* <button onClick={MvUpdate}>수정하기</button>
+                                    <button onClick={MvDelete}>삭제하기</button> */}
                                     <button onClick={MvSignUp}>참가신청</button>
                                     <button onClick={MvVerify}>인증하기</button>
                                 </div>

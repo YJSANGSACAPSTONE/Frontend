@@ -191,7 +191,11 @@ function Planner(props){
 	};
 	  
 	const deleteBtn = (e) => {
-		Axios.get(`/api/plan/deleteplan/${pid}`).then((res)=>{
+		Axios.get(`/api/plan/deleteplan/${pid}`,{
+			headers : {
+				'Authorization': `Bearer ${jwtToken}`
+			}
+		}).then((res)=>{
 			Axios.get(`/api/plan/dailyplan`,{
 				headers : {
 					'Authorization': `Bearer ${jwtToken}`
@@ -264,6 +268,10 @@ function Planner(props){
 				p_starttime : u_starttime,
 				p_endtime : u_endtime,
 				p_remindornot : u_remindornot
+			},{
+				headers : {
+					'Authorization': `Bearer ${jwtToken}`
+				}
 			})
 			.then(response=>{
 				console.log(response);
@@ -281,6 +289,8 @@ function Planner(props){
 	}
 	
     useEffect(() => {
+		const domainAddress = process.env.REACT_APP_DOMAIN_ADDRESS;
+		console.log(domainAddress);
 		const jwtToken = Cookies.get("accessTokenCookie");
 		const decodedAccToken = jwt_decode(jwtToken);
 		let profile_image = decodedAccToken.profile_image;
@@ -310,7 +320,7 @@ function Planner(props){
         });
 
 		// 첫 페이지 로딩 후 Axios를 통해서 오늘 날짜 plan 받아오는 것
-		Axios.get(`/plan/dailyplan`,{
+		Axios.get(`/api/plan/dailyplan`,{
 			headers : {
                 'Authorization': `Bearer ${jwtToken}`
             }
@@ -454,6 +464,10 @@ function Planner(props){
 				p_starttime : p_starttime,
 				p_endtime : p_endtime,
 				p_remindornot : p_remindornot
+			},{
+				headers : {
+					'Authorization': `Bearer ${jwtToken}`
+				}
 			})
 			.then(response=>{
 				console.log(response);
@@ -560,7 +574,7 @@ function Planner(props){
 								</div>
 								<div class="planner_ls">
                                     <ul>
-										{plans.length > 0 ? (
+										{plans && plans.length > 0 ? (
 											plans.map(plan => (
 												<li 
 													key={plan.p_id} 

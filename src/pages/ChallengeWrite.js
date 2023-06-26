@@ -20,6 +20,7 @@ function ChallengeWrite(props){
         c_score: 0,
         c_content: "",
         thumbnail: null,
+        c_thumbnails:""
       });
       
       const handleChange = (e) => {
@@ -34,38 +35,50 @@ function ChallengeWrite(props){
       };
 
       
-    const addChallenge = (challengeData) =>{
-        const formData = new FormData();
-        
-        formData.append('thumbnail', challengeData.thumbnail);
-        formData.append('c_name', challengeData.c_name);
-        formData.append('c_content', challengeData.c_content);
-        formData.append('c_startdate', challengeData.c_startdate);
-        formData.append('c_enddate', challengeData.c_enddate);
-        formData.append('c_numberofparticipants', challengeData.c_numberofparticipants);
-        formData.append('c_category', challengeData.c_category);
-        formData.append('c_introduction', challengeData.c_introduction);
-        formData.append('c_fee', challengeData.c_fee);
-        formData.append('c_numberofphoto', challengeData.c_numberofphoto);
-        formData.append('c_typeofverify', challengeData.c_typeofverify);
-        formData.append('c_typeoffrequency', challengeData.c_typeoffrequency);
-        formData.append('c_frequency', challengeData.c_frequency);
-        formData.append('c_score', challengeData.c_score);
-
-        console.log(challengeData);
-
-        Axios.post('/api/challenge/addchallenge',formData,{
-            headers : {
-                'Content-Type':'multipart/form-data'
+    const addChallenge = async (challengeData) =>{
+        try {
+            const selectedFile = challengeData.thumbnail;
+            const maxSize = 5 * 1024 * 1024;
+            const fileSize = selectedFile.size;
+      
+            if (fileSize > maxSize) {
+              alert("첨부파일 사이즈는 5MB 이내로 등록 가능합니다.");
+              return;
             }
-        })
-        .then((res)=>{
-            console.log(res);
+      
+            const fileName = selectedFile.name;
+            console.log(fileName);
+            const res = await Axios.get('/api/s3upload/s3', {
+              params: { fileName : fileName }
+            });
+            console.log(res.data);
+            const encodedFileName = res.data.encodedFileName;
+            const preSignedUrl = res.data.preSignedUrl;
+            
+            console.log("encodedFileName : "+encodedFileName);
+            console.log("presignedUrl : "+preSignedUrl);
+            console.log("selectedFile type : "+selectedFile.type);
+            // setChallenge(prevState=>({...prevState, ["c_thumbnails"] : encodedFileName}));
+            challengeData.c_thumbnails = "https://godsaengbucket.s3.ap-northeast-2.amazonaws.com/"+encodedFileName;
+            
+            await Axios.put(preSignedUrl, selectedFile, {
+                headers: {
+                    'Content-Type': selectedFile.type
+                }
+            });
+            console.log('이미지 업로드 완료');
+
+            
+      
+            console.log(challengeData);
+      
+            await Axios.post('/api/challenge/addchallenge', challengeData);
+      
+            console.log('챌린지 등록 완료');
             history('/challenge');
-        })
-        .catch((error)=>{
-            console.log(error)
-        });
+          } catch (error) {
+            console.error('이미지 업로드 오류:', error);
+          }
     }
 
     useEffect(()=>{

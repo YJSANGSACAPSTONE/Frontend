@@ -88,6 +88,8 @@ body::-webkit-scrollbar-track {
 #subHeader > div > div > ul .sub_logo > *{ display:inline-block; vertical-align: middle; }
 #subHeader > div > div > ul .sub_logo > p{ font-size:30px; color:#fff; font-weight:bold; }
 #subHeader > div > div > ul .sub_burger{ display:flex; flex-direction: column; justify-content: center; }
+#subHeader > div > div > ul .sub_burger button{ padding:15px 50px; background:none; border:solid 1px #fff; color:#fff; font-size:30px; border-radius:10px; transition:all .2s ease-in-out; }
+#subHeader > div > div > ul .sub_burger button:hover{ background:#fff; color:#4c6ef5; }
 
 #sign_content{ padding: 60px 0; }
 #sign_content ul li{ padding:20px 0;}
@@ -767,6 +769,7 @@ i[class^=icon-chevron]{
 /* point pay list */
 
 /* admin page */
+#adminPage .info_text span{ font-weight:bold; }
 #adminPage{ height: 120vh; background:#eeeeee; display:flex; }
 #adminPage > div{ width:100%; height:100%; display:flex; }
 #adminPage > div > div{ width:100%; height:100%; }
@@ -918,4 +921,148 @@ i[class^=icon-chevron]{
     margin-left: 10px;
     cursor: pointer;
   }
+
+  .service_area img{ width:100%; }
+
+  .profile_info_div{ width: 100%; font-size: 20px; border-bottom: 2px solid #d2d2d2; padding-left: 10px; padding-bottom: 10px; }
 /* admin page */
+
+/* sign up */
+
+@import url('https://rsms.me/inter/inter-ui.css');
+::selection {
+  background: #2D2F36;
+}
+::-webkit-selection {
+  background: #2D2F36;
+}
+::-moz-selection {
+  background: #2D2F36;
+}
+body {
+  background: white;
+  font-family: 'Inter UI', sans-serif;
+  margin: 0;
+  /* padding: 20px; */
+}
+.page {
+  background: #e2e2e5;
+  display: flex;
+  flex-direction: column;
+  height: calc(90% - 40px);
+  /* position: absolute; */
+  place-content: center;
+  width: calc(100%);
+}
+@media (max-width: 767px) {
+  .page {
+    height: auto;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+  }
+}
+.page_container {
+  display: flex;
+  height: 450px;
+  margin: 0 auto;
+  width: 900px;
+}
+@media (max-width: 767px) {
+  .container {
+    flex-direction: column;
+    height: 630px;
+    width: 320px;
+  }
+}
+.page .left {
+  background: white;
+  height: calc(100% - 40px);
+  top: 20px;
+  position: relative;
+  width: 50%;
+}
+@media (max-width: 767px) {
+  .page .left {
+    height: 100%;
+    left: 20px;
+    width: calc(100% - 40px);
+    max-height: 270px;
+  }
+}
+.page .login {
+  font-size: 50px;
+  font-weight: 900;
+  margin: 130px 40px 40px;
+}
+.page .eula {
+  color: #999;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 40px;
+}
+.page .right {
+  background: #4c6ef5;
+  box-shadow: 0px 0px 40px 16px rgba(0,0,0,0.22);
+  color: #F1F1F2;
+  position: relative;
+  width: 50%;
+}
+@media (max-width: 767px) {
+  .page .right {
+    flex-shrink: 0;
+    height: 100%;
+    width: 100%;
+    max-height: 350px;
+  }
+}
+.page svg {
+  position: absolute;
+  width: 320px;
+}
+.page path {
+  fill: none;
+  stroke: url(#linearGradient);;
+  stroke-width: 4;
+  stroke-dasharray: 240 1386;
+}
+.page .form {
+  margin: 120px 90px;
+  position: absolute;
+}
+.page .form #signName{ border-bottom:solid 1px #fff; }
+.page .form #signContent{ border-bottom:solid 1px #fff; }
+.page label {
+  color:  #fff;
+  display: block;
+  font-size: 20px;
+  height: 16px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.page input {
+  background: transparent;
+  border: 0;
+  color: #f2f2f2;
+  font-size: 20px;
+  height: 30px;
+  line-height: 30px;
+  outline: none !important;
+  width: 100%;
+}
+.page input::-moz-focus-inner { 
+  border: 0; 
+}
+.page #submit {
+  cursor:pointer;
+  color: #fff;
+  margin-top: 40px;
+  transition: color 300ms;
+}
+.page #submit:focus {
+  color: #f2f2f2;
+}
+.page #submit:active {
+  color: #d0d0d2;
+}
+
+/* sign up */

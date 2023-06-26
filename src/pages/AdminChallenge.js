@@ -4,20 +4,33 @@ import Profile from '../components/Profile';
 import $ from 'jquery';
 import c3 from 'c3';
 import Axios from "axios";
+import Cookies from 'js-cookie';
 
 function AdminChallenge(props){
 
     const navigate = useNavigate();
-    
+    const jwtToken = Cookies.get("accessTokenCookie");
     const [challengeList, setChallengeList] = useState([]);
     useEffect(() => {
-      Axios.get("/api/admin/challengelist")
+      Axios.get("/api/admin/challengelist",{
+        headers : {
+            'Authorization': `Bearer ${jwtToken}`
+        }
+    })
       .then((res)=>{
         setChallengeList(res.data);
         console.log(res.data);
       })
       .catch((err)=>{
         console.log(err);
+        if (err.response && err.response.status === 403) {
+            console.error("Access denied");
+            alert("접근 권한이 없습니다.");
+            navigate('/');
+            // 특정 오류 처리 로직을 추가하세요.
+          } else {
+            console.error(err);
+          }
       });
     }, []);
     return(
@@ -114,7 +127,7 @@ function AdminChallenge(props){
                                         </div>
                                         <div className="list_middle">
 
-                                            {/* {challengeList.length > 0 ? (
+                                            {challengeList.length > 0 ? (
                                                 challengeList.map(challengeList => (
                                                     <ul key={challengeList.c_id}>
                                                         <li className="c_num">{challengeList.c_id}</li>
@@ -130,7 +143,7 @@ function AdminChallenge(props){
                                                     ))
                                             ) : (
                                                 <h3>새로운 일정을 만들어보세요!</h3>
-                                            )} */}
+                                            )}
                                             {/* <ul>
                                                 <li className="c_num">챌린지 번호</li>
                                                 <li className="c_name">챌린지명</li>

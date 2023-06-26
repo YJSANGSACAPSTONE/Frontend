@@ -84,7 +84,7 @@ function ChallengeUpdate(props){
                                 </div>
                                 <div class="read_info">
                                     <div class="info_img">
-                                        <img id="thumbnail" src={challenge.c_thumbnails ? `http://localhost:8070${challenge.c_thumbnails}` : "./img/upload.png"} alt="morning"/>
+                                        <img id="thumbnail" src={`${challenge.c_thumbnails}`} alt="morning"/>
                                         <input type="file" id="uploadInput" name="thumbnail" onChange={handleChange} />
                                     </div>
                                     <div class="info_text">

@@ -17,12 +17,13 @@ function ChallengeVerify(props){
     const [challengeverify, setChallengeverify] = useState({
         c_id : challenge.c_id,
         u_id : userInfo.u_id,
-        verifyPhoto : null
+        verifyPhotoFile : null,
+        cvphoto : ""
       });
 
       const handleChange = (e) => {
         const { name, value } = e.target;
-        if (name === "verifyPhoto") {
+        if (name === "verifyPhotoFile") {
           setChallengeverify(prevState => ({ ...prevState, [name]: e.target.files[0] }));
         }
       };
@@ -30,22 +31,56 @@ function ChallengeVerify(props){
     const MbChallenge = () => {
         navigate(`/challenge/${challenge.c_id}`, { state: { challenge } });
     }
-    const verify = () =>{
-        const formData = new FormData();
-        formData.append('cid',challengeverify.c_id);
-        formData.append('uid',challengeverify.u_id);
-        formData.append('verifyPhoto',challengeverify.verifyPhoto);
-        console.log(challengeverify);
-        Axios.post('/api/challenge/verify',formData,{
-            headers: {
-                'Content-Type': 'multipart/form-data'
+    const verify = async () =>{
+
+        try {
+            const selectedFile = challengeverify.verifyPhotoFile;
+            const maxSize = 5 * 1024 * 1024;
+            const fileSize = selectedFile.size;
+      
+            if (fileSize > maxSize) {
+              alert("첨부파일 사이즈는 5MB 이내로 등록 가능합니다.");
+              return;
             }
-        })
-		.then((res) => {
+      
+            const fileName = selectedFile.name;
+            console.log(fileName);
+            const res = await Axios.get('/api/s3upload/s3', {
+              params: { fileName : fileName }
+            });
             console.log(res.data);
+            const encodedFileName = res.data.encodedFileName;
+            const preSignedUrl = res.data.preSignedUrl;
+            
+            console.log("encodedFileName : "+encodedFileName);
+            console.log("presignedUrl : "+preSignedUrl);
+            console.log("selectedFile type : "+selectedFile.type);
+
+            const postChallengeVerify = {
+                cid : challenge.c_id,
+                uid : userInfo.u_id,
+                cvphoto : "https://godsaengbucket.s3.ap-northeast-2.amazonaws.com/"+encodedFileName
+            };
+            
+            await Axios.put(preSignedUrl, selectedFile, {
+                headers: {
+                    'Content-Type': selectedFile.type
+                }
+            });
+            console.log('이미지 업로드 완료');
+
+            
+      
+            console.log(postChallengeVerify);
+      
+            await Axios.post('/api/challenge/verify', postChallengeVerify);
+      
+            console.log('챌린지 등록 완료');
             navigate(`/profile/${userInfo.u_id}/myChallenge`);
-        })
-		.catch(error => console.log(error));
+          } catch (error) {
+            console.error('이미지 업로드 오류:', error);
+          }
+        
     }; 
     useEffect(()=>{
         $("#verifyImg").click(function() {
@@ -83,8 +118,8 @@ function ChallengeVerify(props){
                                         </h3>
                                     </div>
                                     <div class="verify_img">
-                                        <img src={challengeverify.verifyPhoto ? URL.createObjectURL(challengeverify.verifyPhoto) : "/img/camera.png"} alt="camera" id="verifyImg"/>
-                                        <input id="verifyInput" name="verifyPhoto" type="file" onChange={handleChange} />
+                                        <img src={challengeverify.verifyPhotoFile ? URL.createObjectURL(challengeverify.verifyPhotoFile) : "/img/camera.png"} alt="camera" id="verifyImg"/>
+                                        <input id="verifyInput" name="verifyPhotoFile" type="file" onChange={handleChange} />
                                     </div>
                                     <div class="verify_text">
                                         <h3>올바른 촬영 Tip</h3>

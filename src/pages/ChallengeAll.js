@@ -41,7 +41,7 @@ function ChallengeAll(props){
                                         <ul>
                                             {Object.keys(recentlist).length > 0 ? (
                                                 recentlist.map(recentlist => (
-                                                    <li onClick={() => MvRead(recentlist)}><div><img src={`http://localhost:8070${recentlist.c_thumbnails}`} alt="morning"/><p>{recentlist.c_name}</p></div></li>
+                                                    <li onClick={() => MvRead(recentlist)}><div><img src={`${recentlist.c_thumbnails}`} alt="morning"/><p>{recentlist.c_name}</p></div></li>
                                                 ))
                                             ) : (
                                                 <li><div><p>등록된 챌린지가 없습니다.</p></div></li>

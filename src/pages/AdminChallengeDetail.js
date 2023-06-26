@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
 import Profile from '../components/Profile';
 import $ from 'jquery';
 import c3 from 'c3';
@@ -11,7 +11,9 @@ function AdminChallengeDetail(props){
     const navigate = useNavigate();
     const [challengeDetailList, setChallengeDetailList] = useState([]);
     const [showPopup, setShowPopup] = useState(false); // 팝업 표시 여부
-    const [selectedChallenge, setSelectedChallenge] = useState(null); // 선택된 챌린지
+    const [selectedChallenge, setSelectedChallenge] = useState(null); // 선택된 챌린지  
+    const location = useLocation();
+    const challenge = location.state.challenge;
 
     const {id} = useParams();
 
@@ -145,8 +147,8 @@ function AdminChallengeDetail(props){
                                 </div>
                                 <div className="main_challenge">
                                     <div className="challenge_title">
-                                        <p>미라클 모닝</p>
-                                        <p>미라클 모닝에 참가한 참가자들의 인증 정보를 확인 및 승인/반려 할 수 있습니다.</p>
+                                        <p>{challenge.c_name}</p>
+                                        <p>{challenge.c_name}에 참가한 참가자들의 인증 정보를 확인 및 승인/반려 할 수 있습니다.</p>
                                     </div>
 
                                     {/* <div className="challenge_search">

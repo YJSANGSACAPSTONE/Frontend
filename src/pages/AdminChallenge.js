@@ -133,10 +133,10 @@ function AdminChallenge(props){
                                                         <li className="c_num">{challengeList.c_id}</li>
                                                         <li className="c_name">{challengeList.c_name}</li>
                                                         <li className="c_cnt">{challengeList.c_numberofparticipants}</li>
-                                                        <li className="c_type">{challengeList.c_typeofverify == 1 ? "메타버스 챌린지" : "일반 사진인증 챌린지"}</li>
+                                                        <li className="c_type">{challengeList.c_typeofverify == 1 ? "일반 사진인증 챌린지" : "메타버스 챌린지"}</li>
                                                         <li className="c_date">{challengeList.c_startdate} ~ {challengeList.c_enddate}</li>
                                                         <li>
-                                                            <button onClick={()=>navigate(`/adminChallengeDetail/${challengeList.c_id}`)}>관리</button>
+                                                            <button onClick={()=>navigate(`/adminChallengeDetail/${challengeList.c_id}`,{ state: { challengeList } })}>관리</button>
                                                             <button>상세보기</button>
                                                         </li>
                                                     </ul>

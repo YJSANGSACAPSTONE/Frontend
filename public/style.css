@@ -923,4 +923,6 @@ i[class^=icon-chevron]{
   }
 
   .service_area img{ width:100%; }
+
+  .profile_info_div{ width: 100%; font-size: 20px; border-bottom: 2px solid #d2d2d2; padding-left: 10px; padding-bottom: 10px; }
 /* admin page */

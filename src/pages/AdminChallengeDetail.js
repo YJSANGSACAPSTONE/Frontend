@@ -13,7 +13,8 @@ function AdminChallengeDetail(props){
     const [showPopup, setShowPopup] = useState(false); // 팝업 표시 여부
     const [selectedChallenge, setSelectedChallenge] = useState(null); // 선택된 챌린지  
     const location = useLocation();
-    const challenge = location.state.challenge;
+    const challenge = location.state.challengeList;
+    
 
     const {id} = useParams();
 

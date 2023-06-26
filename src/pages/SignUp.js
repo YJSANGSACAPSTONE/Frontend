@@ -4,7 +4,7 @@ import $ from 'jquery';
 import Axios from "axios";
 import Cookies from 'js-cookie';
 import jwt_decode from 'jwt-decode';
-
+import anime from 'animejs'
 
 function SignUp(props){
     const jwtToken = Cookies.get("accessTokenCookie");
@@ -80,9 +80,9 @@ function SignUp(props){
     // addUser
     useEffect(()=>{
 
-        if(userRole != "ADMIN"){
-            history('/TestModule');
-        }
+        // if(userRole != "ADMIN"){
+        //     history('/TestModule');
+        // }
         // console.log(userData);
         function updateSubFooterPosition() {
 			var subFooter = $('#subFooter');
@@ -95,11 +95,63 @@ function SignUp(props){
 			}
 		}
 		updateSubFooterPosition();
+
+        var current = null;
+        document.querySelector('#signName').addEventListener('focus', function(e) {
+          if (current) current.pause();
+          current = anime({
+            targets: 'path',
+            strokeDashoffset: {
+              value: 0,
+              duration: 700,
+              easing: 'easeOutQuart'
+            },
+            strokeDasharray: {
+              value: '240 1386',
+              duration: 700,
+              easing: 'easeOutQuart'
+            }
+          });
+        });
+        document.querySelector('#signContent').addEventListener('focus', function(e) {
+          if (current) current.pause();
+          current = anime({
+            targets: 'path',
+            strokeDashoffset: {
+              value: -336,
+              duration: 700,
+              easing: 'easeOutQuart'
+            },
+            strokeDasharray: {
+              value: '240 1386',
+              duration: 700,
+              easing: 'easeOutQuart'
+            }
+          });
+        });
+        document.querySelector('#submit').addEventListener('focus', function(e) {
+          if (current) current.pause();
+          current = anime({
+            targets: 'path',
+            strokeDashoffset: {
+              value: -730,
+              duration: 700,
+              easing: 'easeOutQuart'
+            },
+            strokeDasharray: {
+              value: '530 1386',
+              duration: 700,
+              easing: 'easeOutQuart'
+            }
+          });
+        });
     }, []);
+
+
     return(
         <>
             {props.header}
-            <div id="sign_content" class="container">
+            {/* <div id="sign_content" class="container">
                 <div class="container_inner">
                     <div>
                         <ul>
@@ -108,11 +160,11 @@ function SignUp(props){
                             </li>
                             <li class="sign_form">
                                 <form action="">
-                                    {/* <img src={userData.profileImageUrl} alt="" /> */}
-                                    {/* <label htmlFor="signId">카카오아이디</label>
-                                    <input type="text" id="signId" placeHolder="@abcdefg.com"  name="u_id" /> */}
-                                    {/* <label htmlFor="signZep">ZEP 아이디</label>
-                                    <input type="name" id="signZep" name="u_zepid" /> */}
+                                    <img src={userData.profileImageUrl} alt="" />
+                                    <label htmlFor="signId">카카오아이디</label>
+                                    <input type="text" id="signId" placeHolder="@abcdefg.com"  name="u_id" />
+                                    <label htmlFor="signZep">ZEP 아이디</label>
+                                    <input type="name" id="signZep" name="u_zepid" />
                                     <label htmlFor="signName">닉네임</label>
                                     <input type="name" id="signName" name="u_nickname" />
                                     <label htmlFor="signContent">소개</label>
@@ -122,6 +174,25 @@ function SignUp(props){
                                 </form>
                             </li>
                         </ul>                      
+                    </div>
+                </div>
+            </div> */}
+            <div className="page">
+                <div className="page_container">
+                    <div className="left">
+                    <div className="login">Sign Up</div>
+                    <div className="eula">갓생플래너 이용을 위한 추가정보 입력 페이지 입니다.</div>
+                    </div>
+                    <div className="right">
+                    <div className="form">
+                        
+
+                        <label htmlFor="signName">닉네임</label>
+                        <input type="name" id="signName" name="u_nickname" />
+                        <label htmlFor="signContent">소개</label>
+                        <input type="text" id="signContent" name="u_content" />
+                        <input type="submit" onClick={addUser} id="submit" value="Submit" />
+                    </div>
                     </div>
                 </div>
             </div>

@@ -34,9 +34,9 @@ function Header(){
     };
     useEffect(()=>{
         console.log(userRole);
-        if(userRole != "ADMIN"){
-            history('/TestModule');
-        }
+        // if(userRole != "ADMIN"){
+        //     history('/TestModule');
+        // }
 
         Axios.get(`http://localhost:8070/user/readuser`,{
             headers : {

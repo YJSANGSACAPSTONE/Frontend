@@ -6,21 +6,8 @@ import Cookies from 'js-cookie';
 function UserProfile(props){
     const handleLogout = () => {
         Cookies.remove('userInfo');
-        window.location.href='https://kauth.kakao.com/oauth/logout?client_id=87c054c34eca4ca3541ab083e086cd12&logout_redirect_uri=http://localhost:3000';
+        window.location.href='https://kauth.kakao.com/oauth/logout?client_id=87c054c34eca4ca3541ab083e086cd12&logout_redirect_uri=https://web.godsaengplanner.com';
     }
-    useEffect(()=>{
-        // function updateSubFooterPosition() {
-        //     var subFooter = $('#subFooter');
-        //     if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-        //         // 스크롤이 없는 경우
-        //         subFooter.css('position', 'fixed');
-        //     } else {
-        //         // 스크롤이 있는 경우
-        //         subFooter.css('position', 'sticky');
-        //     }
-        // }
-        // updateSubFooterPosition();
-    }, []);
     return(
         <>
             {props.header}
@@ -38,7 +25,8 @@ function UserProfile(props){
                                 <Link to="/profile/1/point"><div>포인트 충전</div></Link>
                                 <Link to="/profile/1/PointPayList"><div>포인트 사용 내역</div></Link>
                                 <Link to="/profile/1/payList"><div>결제 내역</div></Link>
-                                <Link to="https://kauth.kakao.com/oauth/logout?client_id=87c054c34eca4ca3541ab083e086cd12&logout_redirect_uri=https://web.godsaengplanner.com"><div>로그아웃</div></Link>
+                                {/* <Link to="https://kauth.kakao.com/oauth/logout?client_id=87c054c34eca4ca3541ab083e086cd12&logout_redirect_uri=https://web.godsaengplanner.com"><div>로그아웃</div></Link> */}
+                                <button onClick={handleLogout}><div>로그아웃</div></button> {/* Modified logout button */}
                             </li>
                         </ul>
                     </div>

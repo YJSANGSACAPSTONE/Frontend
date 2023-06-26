@@ -180,7 +180,7 @@ function SignUp(props){
             <div className="page">
                 <div className="page_container">
                     <div className="left">
-                    <div className="login">Sign Up</div>
+                    <div className="login">추가정보 입력</div>
                     <div className="eula">갓생플래너 이용을 위한 추가정보 입력 페이지 입니다.</div>
                     </div>
                     <div className="right">

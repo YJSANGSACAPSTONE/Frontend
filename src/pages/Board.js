@@ -105,7 +105,7 @@ function Board(props){
                                                 <li onClick={() => MvRead(boards)}>
                                                     <p><h3>{boards.po_title}</h3></p>
                                                     {/* <p>{boards.po_content}</p> */}
-                                                    <div>{getTimeDifference(boards.po_date)} &nbsp;&nbsp;&nbsp; 조회수 : {boards.po_hitcount}</div>
+                                                    <div>{getTimeDifference(boards.po_regDate)} &nbsp;&nbsp;&nbsp; 조회수 : {boards.po_hitcount}</div>
                                                     <div>
                                                         <img src="./img/message-icon.png" alt=""/> {boards.commentCnt}
                                                         &nbsp;&nbsp;&nbsp; 

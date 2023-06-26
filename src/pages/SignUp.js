@@ -4,7 +4,7 @@ import $ from 'jquery';
 import Axios from "axios";
 import Cookies from 'js-cookie';
 import jwt_decode from 'jwt-decode';
-
+import anime from 'animejs';
 
 function SignUp(props){
     const jwtToken = Cookies.get("accessTokenCookie");

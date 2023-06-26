@@ -26,7 +26,7 @@ function UserProfile(props){
                                 <Link to="/profile/1/PointPayList"><div>포인트 사용 내역</div></Link>
                                 <Link to="/profile/1/payList"><div>결제 내역</div></Link>
                                 {/* <Link to="https://kauth.kakao.com/oauth/logout?client_id=87c054c34eca4ca3541ab083e086cd12&logout_redirect_uri=https://web.godsaengplanner.com"><div>로그아웃</div></Link> */}
-                                <button onClick={handleLogout}><div>로그아웃</div></button> {/* Modified logout button */}
+                                <div onClick={handleLogout}>로그아웃</div>
                             </li>
                         </ul>
                     </div>

@@ -39,7 +39,7 @@ function BoardRead(props){
         Axios.get(`/api/post/read?poid=${board.po_id}`)
         .then((res)=>{
             setRead(res.data);
-            // console.log(res.data);
+            console.log(res.data);
         })
         .catch((err)=>{
             console.log(err);

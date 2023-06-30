@@ -1,22 +1,34 @@
 import React,{useEffect, useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import Profile from '../components/Profile';
 import $ from 'jquery';
 import c3 from 'c3';
 import Axios from "axios";
+import Cookies from 'js-cookie';
 
 function AdminPage(props){
     const [chartData, setChartData] = useState([]); // 차트 데이터 상태 변수
+    const jwtToken = Cookies.get("accessTokenCookie");
+    const history = useNavigate();
+    const [monthCount, setMonthCount] = useState("");
+    const [averageCount, setAverageCount] = useState("");
+    const [allCount, setAllCount] = useState("");
+
+    useEffect(() =>{
+        getTotalData();
+    }, []);
+    
 
     useEffect(() => {
       // 초기 차트 그리기
-      drawChart(getTotalData());
+      
+      drawChart(chartData);
   
       // 클릭 이벤트 핸들러 등록
       document.getElementById('today-btn').addEventListener('click', handleTodayClick);
       document.getElementById('weekly-btn').addEventListener('click', handleWeeklyClick);
       document.getElementById('total-btn').addEventListener('click', handleTotalClick);
-    }, []);
+    }, [chartData]);
   
     // 차트 그리기
 //   const drawChart = (data) => {
@@ -52,109 +64,78 @@ function AdminPage(props){
           },
         });
       };
-
-    
-//   오늘 날짜에서 시간별 인증 횟수 통계 차트
-  const drawChartToTime = (data) => {
-    c3.generate({
-      bindto: '#chart',
-      data: {
-        columns: data,
-        type:'spline'
-      },
-    });
-  };
   
-    // 통계 요약 업데이트
-    const updateSummary = (count) => {
-      const todayCountElement = document.getElementById('today-count');
-      const weekCountElement = document.getElementById('week-count');
-      const totalCountElement = document.getElementById('total-count');
-      todayCountElement.textContent = count;
-      
-    };
   
     // 오늘 인증 수 클릭 이벤트 핸들러
     const handleTodayClick = () => {
-      const todayCount = 10; // 오늘 인증 수 (실제 데이터로 대체해야 함)
-      updateSummary(todayCount);
       drawChart(getTodayData());
     };
   
     // 주간 평균 수 클릭 이벤트 핸들러
     const handleWeeklyClick = () => {
-      const weeklyAverageCount = 20; // 주간 평균 인증 수 (실제 데이터로 대체해야 함)
-      updateSummary(weeklyAverageCount);
       drawChart(getWeeklyData());
     };
   
     // 전체 인증 수 클릭 이벤트 핸들러
     const handleTotalClick = () => {
-      const totalCount = 100; // 전체 인증 수 (실제 데이터로 대체해야 함)
-      updateSummary(totalCount);
       drawChart(getTotalData());
     };
 
     // 전체 데이터 반환
-    const getTotalData = () => {
+    const getTotalData = async () => {
         const data = [];
         const dateData = ['x'];
         const randData = ['data1'];
-
-        // 더미데이터 테스트용
-        const startDate = new Date('2023-01-01');
-        for (let i = 0; i < 12; i++) {
-            const date = new Date(startDate);
-            date.setMonth(date.getMonth() + i); // 한 달 뒤의 일자로 설정
-            date.setDate(1); // 해당 월의 첫째 날로 설정
-            const formattedDate = formatDate(date, 'YYYY-MM-DD'); // 날짜를 원하는 형식으로 포맷
-            dateData.push(formattedDate); // x축 데이터를 담는 배열에 날짜를 push
-            randData.push(getRandomCount()); // 실제 차트 데이터에도 날짜와 랜덤한 인증 횟수를 push
-        }
         
-        data.push(dateData);
-        data.push(randData);
-        console.log(data);
+        await Axios.get(`/api/admin/statistic`,{
+			headers : {
+				'Authorization': `Bearer ${jwtToken}`
+			}
+		})
+        .then((res)=>{
+            console.log(res.data.monthlyList);
 
-        return data;
-        Axios.get(`http://localhost:8070/admin/statistic`).then((res)=>{
-            // console.log(res.data); 
-            
+            const monthlyList = res.data.monthlyList;
+            Object.values(monthlyList).forEach((value, i) => {
+                
+                const startDate = new Date('2023-01-01');
+                const date = new Date(startDate);
 
-            // const data = [];
-            // const dateData = ['x'];
-            // const randData = ['data1'];
+                date.setMonth(date.getMonth() + i); // 한 달 뒤의 일자로 설정
+                date.setDate(1); // 해당 월의 첫째 날로 설정
 
-            // // 수정할 실제 사용 데이터가공
-            // // const monthlyList = res.data.monthlyList; // spring에서 받아온 월별 데이터
-            // // const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-            // // for (const month of months) {
-            // //     dateData.push(month);
-            // //     randData.push(monthlyList[month] || 0);
-            // // }
+                const formattedDate = formatDate(date, 'YYYY-MM-DD'); // 날짜를 원하는 형식으로 포맷
 
-            // // 더미데이터 테스트용
-            // const startDate = new Date('2023-01-01');
-            // for (let i = 0; i < 12; i++) {
-            //     const date = new Date(startDate);
-            //     date.setMonth(date.getMonth() + i); // 한 달 뒤의 일자로 설정
-            //     date.setDate(1); // 해당 월의 첫째 날로 설정
-            //     const formattedDate = formatDate(date, 'YYYY-MM-DD'); // 날짜를 원하는 형식으로 포맷
-            //     dateData.push(formattedDate); // x축 데이터를 담는 배열에 날짜를 push
-            //     randData.push(getRandomCount()); // 실제 차트 데이터에도 날짜와 랜덤한 인증 횟수를 push
-            // }
-            
-            // data.push(dateData);
-            // data.push(randData);
-            // console.log(data);
+                dateData.push(formattedDate); // x축 데이터를 담는 배열에 날짜를 push
+                randData.push(parseInt(value));
+            });
 
-            // return data;
+
+            setMonthCount(randData[randData.length - 1]);
+            const parsedRandData = randData.slice(1).map(value => parseInt(value));
+            const average = parsedRandData.reduce((a, b) => a + b, 0) / parsedRandData.length;
+            const total = parsedRandData.reduce((a, b) => a + b, 0);
+
+            setAverageCount(Math.round(average));
+            setAllCount(total);
+
         })
         .catch((err)=>{
             console.log(err);
+            if (err.response && err.response.status === 403) {
+                console.error("Access denied");
+                alert("접근 권한이 없습니다.");
+                history('/');
+                // 특정 오류 처리 로직을 추가하세요.
+              } else {
+                console.error(err);
+              }
         });
 
-        
+        data.push(dateData);
+        data.push(randData);
+
+        setChartData(data);   
     };
   
     // 오늘 데이터 반환
@@ -306,9 +287,9 @@ function AdminPage(props){
                                         </div>
                                         <div className="graph_info">
                                             <p className="info_title">통계 요약</p>
-                                            <p className="info_text">오늘 인증 수: <span id="today-count"></span></p>
-                                            <p className="info_text">주간 평균 수: </p>
-                                            <p className="info_text">전체 인증 수: </p>
+                                            <p className="info_text">이번 달 인증 수: <span>{monthCount}</span></p>
+                                            <p className="info_text">평균 인증 수: <span>{averageCount}</span></p>
+                                            <p className="info_text">전체 인증 수: <span>{allCount}</span></p>
                                             <div className="graph_btn">
                                                 <button id="total-btn" onClick={() => handleTotalClick(chartData)}>
                                                     월별 인증 수

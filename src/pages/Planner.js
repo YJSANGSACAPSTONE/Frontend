@@ -191,7 +191,11 @@ function Planner(props){
 	};
 	  
 	const deleteBtn = (e) => {
-		Axios.get(`/api/plan/deleteplan/${pid}`).then((res)=>{
+		Axios.get(`/api/plan/deleteplan/${pid}`,{
+			headers : {
+				'Authorization': `Bearer ${jwtToken}`
+			}
+		}).then((res)=>{
 			Axios.get(`/api/plan/dailyplan`,{
 				headers : {
 					'Authorization': `Bearer ${jwtToken}`
@@ -264,6 +268,10 @@ function Planner(props){
 				p_starttime : u_starttime,
 				p_endtime : u_endtime,
 				p_remindornot : u_remindornot
+			},{
+				headers : {
+					'Authorization': `Bearer ${jwtToken}`
+				}
 			})
 			.then(response=>{
 				console.log(response);
@@ -456,6 +464,10 @@ function Planner(props){
 				p_starttime : p_starttime,
 				p_endtime : p_endtime,
 				p_remindornot : p_remindornot
+			},{
+				headers : {
+					'Authorization': `Bearer ${jwtToken}`
+				}
 			})
 			.then(response=>{
 				console.log(response);

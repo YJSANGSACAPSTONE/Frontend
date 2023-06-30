@@ -53,7 +53,22 @@ function Board(props){
       .catch((err) => {
         console.log(err);
       });
+
   }, [selectedCategory]);
+
+  const getTimeDifference = (date) => {
+    const currentTime = new Date().getTime();
+    const postTime = new Date(date).getTime();
+    const diffInMinutes = Math.floor((currentTime - postTime) / 1000 / 60);
+
+    if (diffInMinutes < 60) {
+      return `${diffInMinutes}분 전`;
+    } else {
+      const diffInHours = Math.floor(diffInMinutes / 60);
+      return `${diffInHours}시간 전`;
+    }
+  };
+
     return(
         <>
             {props.header}
@@ -90,7 +105,7 @@ function Board(props){
                                                 <li onClick={() => MvRead(boards)}>
                                                     <p><h3>{boards.po_title}</h3></p>
                                                     {/* <p>{boards.po_content}</p> */}
-                                                    <div>1시간 전 &nbsp;&nbsp;&nbsp; 조회수 : {boards.po_hitcount}</div>
+                                                    <div>{getTimeDifference(boards.po_regDate)} &nbsp;&nbsp;&nbsp; 조회수 : {boards.po_hitcount}</div>
                                                     <div>
                                                         <img src="./img/message-icon.png" alt=""/> {boards.commentCnt}
                                                         &nbsp;&nbsp;&nbsp; 

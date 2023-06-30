@@ -15,6 +15,15 @@ function MyChallenge(props){
     const now3 = 70;
     const now4 = 10;
 
+    const handleVerify = (challenge) => {
+        if (challenge.ctypeofverify === 2) {
+            navigate(`/profile/${uid}/myChallenge`, { state: { challenge } });
+            window.open('https://zep.us/play/8J6PRM', '_blank');
+        } else {
+            navigate(`/challenge/${challenge.cid}/verify`, { state: { challenge } });
+        }
+    };
+
     useEffect(()=>{
         Axios.get(`/api/challenge/mychallenge?uid=${uid}`)
         .then((res)=>{
@@ -49,11 +58,11 @@ function MyChallenge(props){
 													data-cstartdate={challenge.cstartdate}
 													data-cenddate={challenge.cendate}
 												>
-													<img src={`http://localhost:8070${challenge.cthumbnails}`} alt="morning"/>
+													<img src={`${challenge.cthumbnails}`} alt="morning"/>
                                                     <div>
                                                         <p>{challenge.cname}</p>
                                                         <button class="myPageBtn">참가취소</button>
-                                                        <button onClick={()=>navigate(`/challenge/${challenge.cid}/verify`, { state: { challenge } })} class="myPageBtn">인증하기</button>
+                                                        <button onClick={()=>handleVerify(challenge)} className="myPageBtn">인증하기</button>
                                                     </div>
 												</div>
 												))

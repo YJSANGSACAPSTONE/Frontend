@@ -27,6 +27,8 @@ import JobComplete from './components/JobComplete';
 import ZepVerify from './pages/ZepVerify';
 import PointPayList from './pages/PointPayList';
 
+import ServiceIntro from './pages/ServiceIntro';
+
 import AdminPage from './pages/AdminPage';
 import AdminChallenge from './pages/AdminChallenge';
 import AdminChallengeDetail from './pages/AdminChallengeDetail';
@@ -111,6 +113,8 @@ function App() {
 			<Route path="/board/:id" element={<BoardRead header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/board/:id/edit" element={<BoardEdit header={<Header/>} footer={<Footer/>} />} />
 			<Route path="/board/write" element={<BoardWrite header={<Header/>} footer={<Footer/>} />} />
+
+			<Route path="/service" element={<ServiceIntro header={<Header/>} footer={<Footer/>} />} />
 
 
 			<Route path="*" element={<NotFound />} />

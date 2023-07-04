@@ -89,12 +89,12 @@ function Header(){
                                         <li>
                                             <Link to="/service/meta">메타버스 챌린지 소개</Link>
                                         </li>
-                                        <li>
+                                        {/* <li>
                                             <Link to="/service/zepetto">제페토 소개</Link>
                                         </li>
                                         <li>
                                             <Link to="/service/intro">서비스 소개</Link>
-                                        </li>
+                                        </li> */}
                                     </ul>
                                 </li>
                                 <li>
